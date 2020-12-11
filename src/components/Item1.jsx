@@ -1,0 +1,27 @@
+import { CaretRightFilled } from '@ant-design/icons'
+import React from 'react'
+function Item1({id, image, cat, name, chapter }) {
+    return (
+        <div className="c-item col-xs-12 col-md-6 col-lg-3">
+            <div className="gutter">
+                <img className="c-item__image" src={image ? image :`${process.env.PUBLIC_URL}/assets/img/no-img.jpg`} alt="" loading="lazy" />
+                <div className="c-item__content">
+                        <div className="is-hover">
+                            <span className="c-item__label">{cat}</span>
+                        </div>
+                        <p className="c-item__name">{name}</p>
+                        <div className="u-flex u-a-center">
+                            <a href={`single-movie?id=${id}`} className="c-item__play">
+                                <CaretRightFilled />
+                            </a>
+                            <span className="c-item__chapter">
+                                {chapter}
+                            </span>
+                        </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Item1

@@ -1,0 +1,33 @@
+.c-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    overflow: hidden;
+    background-color: #000;
+    display: none;
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+    &__line {
+        width: 90%;
+        height: 3px;
+        background-color: transparent;
+        display: block;
+        position: relative;
+        span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background-color: #fff;
+        }
+    }
+}
