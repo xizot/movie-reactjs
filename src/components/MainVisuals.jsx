@@ -1,8 +1,10 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
-
 function Mainvisuals() {
+    useEffect(() => {
+        if(window.customSlick) window.customSlick()
+    }, [])
     return (
         <div className="c-mainvisuals js-mainvisuals" data-anchor="1">
             <div className="c-mainvisuals__content u-fullheight">
@@ -17,7 +19,7 @@ function Mainvisuals() {
                     <div className="c-slide__border">
                     <span></span>
                     </div>
-                    <p className="c-slide__total"></p>
+                    <p className="c-slide__total">3</p>
                     <div className="c-slide__next">
                         <RightOutlined />
                     </div>

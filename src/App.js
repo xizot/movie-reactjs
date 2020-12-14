@@ -3,10 +3,14 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
+import Movie from "./pages/Movie";
 function App() {
     return (
         <div className="App">
             <Switch>
+                <Route path="/movie">
+                    <Movie/>
+                </Route>
                 <Route path="/account">
                     <Account/>
                 </Route>

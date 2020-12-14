@@ -1,23 +1,16 @@
 $('.js-loading').fadeIn()
 $('.js-line').stop().animate({width:"100%"}, 2000)
 
- $(window).on('load', function () {
-    $('.js-loading').fadeOut()
- });
-$(window).ready(() => {
-
-    setFullHeight('u-fullheight')
-    setFullWidth('u-fullwidth')
-
-    
-    if($('.home')){
+$(window).on('load', function () {
+$('.js-loading').fadeOut()
+});
+window.customSlick = () => {
+    if($('.c-slide')){
         $('.c-slide').on('init reInit beforeChange afterChange',function(event, slick,currentSlide, nextSlide){
-  	
             let current = currentSlide || 0;
-            let totalSlide = slick.slideCount;
+            let totalSlide = slick.slideCount || 3;
             let slideSpeed = slick.slickGetOption('autoplaySpeed');
             let border = $('.c-slide__border span');
-              
             //render number
             if(event.type === "init") {
                 for(let i = 0 ; i < totalSlide; i ++){
@@ -46,7 +39,6 @@ $(window).ready(() => {
                 border.stop().animate({width:"100%"}, slideSpeed)
             } 
         })
-    
         var slickOpts = {
             slidesToShow: 1,
             autoplay:true,
@@ -58,6 +50,18 @@ $(window).ready(() => {
         }
     
         $('.c-slide').slick(slickOpts)
+
+    }
+}
+ 
+$(window).ready(() => {
+
+    setFullHeight('u-fullheight')
+    setFullWidth('u-fullwidth')
+
+    
+    if($('.home')){
+        window.customSlick()
     }
     if($('.movie')){
         var slickOpts = {

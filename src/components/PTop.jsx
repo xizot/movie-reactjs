@@ -13,7 +13,6 @@ function PTop() {
         dispatch(getNewest())
         dispatch(getFavor())
     },[dispatch])
-
     return (
         <main style={{zIndex:'1'}} className="home">
             <div className="p-top">

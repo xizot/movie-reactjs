@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 function Item2({id, image, resolution = [], rated, minutes, cat, age, name}) {
 
     return (
@@ -34,7 +35,7 @@ function Item2({id, image, resolution = [], rated, minutes, cat, age, name}) {
                     }
                    
                 </div>
-                <a href={`single-movie?id=${id}`} className="c-item2__name">{name}</a>
+                <Link to={`movie/${id}`} className="c-item2__name">{name}</Link>
             </div>
         </div>
     )
