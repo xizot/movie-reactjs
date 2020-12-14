@@ -36,6 +36,7 @@ function Movie() {
     return (
         <>
             <Header/>
+            
             <Footer/>
         </>
     )
