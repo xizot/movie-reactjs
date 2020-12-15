@@ -1,0 +1,254 @@
+.p-detail {
+    &1 {
+        padding-top: 150px;
+        padding-bottom: 100px;
+        background: #1c212e;
+        .c-title1 {
+            color: white;
+            margin-bottom: 20px;
+            @include breakpoint(tab) {
+                margin-top: 40px;
+            }
+        }
+        .c-title4 {
+            color: white;
+        }
+        .c-paragraph {
+            margin-bottom: 50px;
+        }
+        .c-btn {
+            height: 50px;
+            border-radius: 999px;
+            max-width: 100%;
+            width: 300px;
+            @include breakpoint(sp) {
+                width: 100%;
+            }
+        }
+        &__right {
+            padding-left: 40px;
+            margin: 0 auto;
+            .gutter {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                @include breakpoint(tab) {
+                    padding: unset;
+                    padding-bottom: 20px;
+                }
+            }
+            @include breakpoint(tab) {
+                padding-left: unset;
+            }
+        }
+        &__cat {
+            margin-bottom: 20px;
+            p {
+                display: inline-block;
+            }
+            a {
+                color: $mainColor;
+                font-size: 1.4rem;
+                text-transform: capitalize;
+                position: relative;
+                margin-left: 7px;
+                &:not(:last-of-type) {
+                    &::after {
+                        content: ",";
+                        position: absolute;
+                        right: -4px;
+                        bottom: 0;
+                    }
+                }
+            }
+        }
+        &__image {
+            margin-bottom: 20px;
+            border-radius: 5px;
+
+            img {
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+        &__item {
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 10px;
+            @include breakpoint(tab) {
+                padding-left: 15px;
+            }
+            b {
+                width: 80px;
+                display: inline-block;
+            }
+        }
+        &__action {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            @include breakpoint(sp) {
+                justify-content: center;
+            }
+            .is-hover {
+                p {
+                    white-space: nowrap;
+                    display: none;
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    letter-spacing: 0.78px;
+                }
+            }
+            @media only screen and (min-width: 1000px) {
+                .is-hover {
+                    &:hover {
+                        border-radius: 999px;
+                        width: 300px;
+                        p {
+                            display: block;
+                        }
+                        svg {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .c-icon {
+                overflow: hidden;
+                margin-right: 20px;
+            }
+        }
+        &__txt {
+            display: inline-block;
+            font-size: 1.3rem;
+            color: white;
+            letter-spacing: 0.72px;
+            @include breakpoint(sp) {
+                margin-top: 20px;
+            }
+        }
+    }
+    &2 {
+        background-color: #000;
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    &3 {
+        padding-top: 70px;
+        padding-bottom: 70px;
+        background: $bgSmooth;
+        &__box {
+            margin-top: 50px;
+            textarea {
+                width: 100%;
+                height: 170px;
+                resize: none;
+                border-radius: 10px;
+                padding: 20px;
+                font-size: 1.6rem;
+                color: #333;
+                letter-spacing: 0.72px;
+            }
+            button {
+                margin-top: 20px;
+                width: 300px;
+                height: 50px;
+                font-size: 1.4rem;
+                border-radius: 999px;
+                margin-left: auto;
+                margin-bottom: 70px;
+                @include breakpoint(sp) {
+                    width: 100%;
+                }
+            }
+        }
+        &__item {
+            display: flex;
+            margin-top: 50px;
+        }
+        &__image {
+            width: 80px;
+            height: 80px;
+            display: block;
+            border-radius: 50%;
+            overflow: hidden;
+            @include breakpoint(tab) {
+                width: 60px;
+                height: 60px;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        &__info {
+            width: calc(100% - 80px);
+            padding-left: 20px;
+            padding-top: 15px;
+            @include breakpoint(tab) {
+                padding-top: 5px;
+                padding-left: 15px;
+            }
+        }
+        &__name {
+            font-size: 1.8rem;
+            color: $mainColor;
+            @include breakpoint(tab) {
+                font-size: 1.6rem;
+            }
+        }
+        &__text {
+            font-size: 1.6rem;
+            color: white;
+            margin-top: 10px;
+            line-height: 1.8;
+            @include breakpoint(tab) {
+                font-size: 1.4rem;
+                margin-top: 5px;
+            }
+        }
+        &__paginate {
+            margin-top: 100px;
+            @include breakpoint(tab) {
+                margin-top: 70px;
+            }
+            p {
+                font-size: 1.6rem;
+                color: white;
+                @include breakpoint(tab) {
+                    font-size: 1.4rem;
+                }
+            }
+            ul {
+                margin: 0 20px;
+                li {
+                    font-size: 1.6rem;
+                    color: white;
+                    margin: 0 7px;
+                    cursor: pointer;
+                    @include breakpoint(tab) {
+                        font-size: 1.4rem;
+                    }
+                    &.is-current {
+                        color: $mainColor;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    .p-top2 {
+        background: $bgBold;
+    }
+}

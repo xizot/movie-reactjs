@@ -71,16 +71,6 @@
             background-color: $mainColor;
         }
     }
-    &__title {
-        font-size: 10rem;
-        font-weight: bold;
-        @include breakpoint(pro) {
-            font-size: 8rem;
-        }
-        @include breakpoint(tab) {
-            font-size: 6rem;
-        }
-    }
     &__cat {
         margin-top: 10px;
         color: $mainColor;

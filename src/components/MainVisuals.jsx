@@ -31,7 +31,7 @@ function Mainvisuals() {
                         <div className="c-slide__info">
                             <div className="l-container">
                                 <span className="c-slide__label">NEW RELEASES</span>
-                                <h3 className="c-slide__title">The Rise Of Kingdoms</h3>
+                                <h3 className="c-title1">The Rise Of Kingdoms</h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
