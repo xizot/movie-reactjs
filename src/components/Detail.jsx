@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Detail1 from './Detail1'
 
-function Detail({title,cat,description}) {
+function Detail({ID = null}) {
     return (
         <>
             <section className="p-detail">

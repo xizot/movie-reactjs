@@ -1,4 +1,4 @@
-import { GET_FAVOR,GET_NEWEST, GET_POPULAR } from "./../types/filmTypes";
+import { GET_FAVOR,GET_NEWEST, GET_POPULAR , GET_EPISODE} from "./../types/filmTypes";
 
 export const getFavor = () => dispatch => {
     let data =[] // get data from api
@@ -137,6 +137,45 @@ export const getNewest = () => dispatch => {
     if(data.length){
         dispatch({
             type: GET_NEWEST,
+            payload: data
+        })
+    }
+}
+export const getEpisode = (id) => dispatch => {
+    let data = [] // get data from api
+    data = [
+        {
+          ep:"1",
+          image:"https://static.wikia.nocookie.net/marvelcinematicuniverse/images/3/35/IronMan-EndgameProfile.jpg/revision/latest/scale-to-width-down/310?cb=20190423175213",
+          content:"My armor, it was never a distraction or a hobby, it was a cocoon. And now, I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man."
+        },
+        {
+          ep:"2",
+          image:"https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+          content:"My armor, it was never a distraction or a hobby, it was a cocoon. And now, I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man."
+        },
+        {
+          ep:"3",
+          image:"https://www.sideshow.com/storage/product-images/904974/i-am-iron-man_marvel_feature.jpg",
+          content:"My armor, it was never a distraction or a hobby, it was a cocoon. And now, I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man."
+        },{
+          ep:"4",
+          image:"https://www.sideshow.com/storage/product-images/904974/i-am-iron-man_marvel_gallery_5ea86801a27ab.jpg",
+          content:"My armor, it was never a distraction or a hobby, it was a cocoon. And now, I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man."
+        },{
+          ep:"5",
+          image:"https://cdn.images.express.co.uk/img/dynamic/36/590x/Iron-Man-Robert-Downey-Jr-1205037.webp?r=1573841276098",
+          content:"My armor, it was never a distraction or a hobby, it was a cocoon. And now, I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man."
+        },{
+          ep:"6",
+          image:"https://cdn.images.express.co.uk/img/dynamic/36/590x/secondary/Iron-Man-Marvel-Robert-Downey-Jr-2167713.webp?r=1573841276136",
+          content:"My armor, it was never a distraction or a hobby, it was a cocoon. And now, I'm a changed man. You can take away my house, all my tricks and toys. But one thing you can't take away... I am Iron Man."
+        }
+    ]
+
+    if(data.length){
+        dispatch({
+            type: GET_EPISODE,
             payload: data
         })
     }

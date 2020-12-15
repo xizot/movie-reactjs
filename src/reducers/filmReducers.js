@@ -1,10 +1,11 @@
-import { GET_FAVOR,GET_POPULAR,GET_NEWEST } from "./../types/filmTypes";
+import { GET_FAVOR,GET_POPULAR,GET_NEWEST, GET_EPISODE } from "./../types/filmTypes";
 
 
 const initialState = {
     new: [],
     favor:[],
-    popular:[]
+    popular:[],
+    episode: []
 }
 
 const filmReducer = (state = initialState, action) =>{
@@ -24,6 +25,11 @@ const filmReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 popular: action.payload
+            }
+        case GET_EPISODE:
+            return {
+                ...state,
+                episode: action.payload
             }
         
         default:
