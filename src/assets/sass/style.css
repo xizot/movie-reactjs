@@ -1948,6 +1948,19 @@ img {
   width: 100%;
 }
 
+.p-detail2__content .l-container {
+  position: relative;
+}
+
+.p-detail2__content .c-title {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 99;
+  opacity: 0;
+  color: #e90101;
+}
+
 .p-detail2__content .c-btn--play {
   width: 80px;
   height: 80px;
@@ -1966,6 +1979,14 @@ img {
 .p-detail2__content:hover.is-play .c-icon--play {
   opacity: 0;
   pointer-events: none;
+}
+
+.p-detail2__content:hover .c-title {
+  opacity: 1;
+}
+
+.p-detail2__content.is-pause .c-title {
+  opacity: 1;
 }
 
 .p-detail2__content.is-pause .c-icon--play {

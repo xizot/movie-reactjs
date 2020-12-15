@@ -15,7 +15,10 @@ function Detail2({poster = `${process.env.PUBLIC_URL}/assets/img/films/movies07.
     return (
         <div className="p-detail2">
             <div className={isPlay? "p-detail2__content is-play": "p-detail2__content is-pause"}>
-                <video onClick={()=>handlePlay()} src={videoSrc} poster= {poster} id="trailer" preload = "true"  loop muted playsInline ></video>
+                <div className="l-container">
+                    <h3 className="c-title">Trailer</h3>
+                </div>
+                <video onClick={()=>handlePlay()} src={videoSrc} poster= {poster} id="trailer" preload = "true"  loop playsInline ></video>
                 <p to ="/" className="c-btn--play c-icon--play"  onClick={()=>handlePlay()}>
                     <CaretRightOutlined />
                 </p>

@@ -21,7 +21,7 @@ function Detail({ID = null}) {
                 <Detail2 />
                 <div className="p-detail3">
                     <div className="l-container">
-                        <h3 className="c-title2">Comments</h3>
+                        <h3 className="c-title">Comments</h3>
                         <div className="p-detail3__content">
                             <div className="p-detail3__box">
                                 <textarea name="" id="" className="" placeholder="Enter your comment"></textarea>
