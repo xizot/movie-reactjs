@@ -12,6 +12,9 @@
     &__content {
         padding: 15px 50px;
         min-height: 70px;
+        @include breakpoint(tab) {
+            padding: 15px;
+        }
     }
     &__logo {
         width: 60px;

@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
+import $ from "jquery";
 function Header({isHide = null}) {
+    useEffect(()=>{
+        $('.js-bars').click(function (e) { 
+            e.preventDefault();
+           
+            
+            $(this).parent().toggleClass('is-open')
+        });
+        $('.js-blank').click(function (e) { 
+            e.preventDefault();
+            $('.c-menusp').removeClass('is-open')
+        });
+    },[])
     return (
         <header className={isHide ? "c-header is-hide" : "c-header"}>
             <div className="p-header js-header">

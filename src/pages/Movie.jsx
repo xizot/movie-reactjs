@@ -54,7 +54,7 @@ function Movie() {
                 ? 
                     <List2
                         subtitle= ""
-                        title = "Your Favourite Movies"
+                        title = "Recommended"
                         list = {listNew}
                     />
                 : 

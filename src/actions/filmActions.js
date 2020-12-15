@@ -17,7 +17,7 @@ export const getPopular = () => dispatch => {
           "x": "1",
           "createdAt": "2020-12-10T10:04:34.419Z",
           "name": "Elian Hills",
-          "image": "http://lorempixel.com/640/480/technics",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "cat": "Salad",
           "chapter": "chapter 1",
           "id": "7f1b2195-1132-4954-8140-bcc6d4b4617a"
@@ -26,7 +26,7 @@ export const getPopular = () => dispatch => {
           "x": "2",
           "createdAt": "2020-12-10T12:20:32.632Z",
           "name": "London Bernier",
-          "image": "http://lorempixel.com/640/480/abstract",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "cat": "Sausages",
           "chapter": "chapter 2",
           "id": "d967547f-9f2f-4ecd-82dd-89f4f4970d7b"
@@ -35,7 +35,7 @@ export const getPopular = () => dispatch => {
           "x": "3",
           "createdAt": "2020-12-09T20:22:37.932Z",
           "name": "Casimer Howe",
-          "image": "http://lorempixel.com/640/480/technics",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "cat": "Mouse",
           "chapter": "chapter 3",
           "id": "b17f3114-0a65-46b8-ad7c-40917e4ea2c4"
@@ -44,7 +44,7 @@ export const getPopular = () => dispatch => {
           "x": "4",
           "createdAt": "2020-12-10T03:03:34.122Z",
           "name": "Jameson Strosin",
-          "image": "http://lorempixel.com/640/480/people",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "cat": "Tuna",
           "chapter": "chapter 4",
           "id": "9183804c-9e14-482d-8f48-ac5e2c5c2e30"
@@ -53,7 +53,7 @@ export const getPopular = () => dispatch => {
           "x": "5",
           "createdAt": "2020-12-09T18:36:10.300Z",
           "name": "Sophie Reilly",
-          "image": "http://lorempixel.com/640/480/city",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "cat": "Pants",
           "chapter": "chapter 5",
           "id": "8bf40c38-368f-48f5-ba6c-a6c510bf1fc6"
@@ -62,7 +62,7 @@ export const getPopular = () => dispatch => {
           "x": "6",
           "createdAt": "2020-12-09T22:59:24.170Z",
           "name": "Orpha Bartoletti",
-          "image": "http://lorempixel.com/640/480/people",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "cat": "Car",
           "chapter": "chapter 6",
           "id": "d21a91d5-1eda-446a-9bb3-d4e8dac3ec64"
@@ -84,7 +84,7 @@ export const getNewest = () => dispatch => {
           "x": "1",
           "createdAt": "2020-12-10T11:47:24.547Z",
           "name": "Lead Identity Officer",
-          "image": "http://lorempixel.com/640/480/people",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "minutes": 5,
           "resolution": [
             
@@ -98,7 +98,7 @@ export const getNewest = () => dispatch => {
           "x": "2",
           "createdAt": "2020-12-10T14:42:06.819Z",
           "name": "Senior Program Analyst",
-          "image": "http://lorempixel.com/640/480/food",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "minutes": 12,
           "resolution": [
             
@@ -112,7 +112,7 @@ export const getNewest = () => dispatch => {
           "x": "3",
           "createdAt": "2020-12-10T02:22:26.894Z",
           "name": "Customer Assurance Administrator",
-          "image": "http://lorempixel.com/640/480/nature",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "minutes": 48,
           "resolution": [
             
@@ -126,7 +126,7 @@ export const getNewest = () => dispatch => {
           "x": "4",
           "createdAt": "2020-12-10T14:40:55.402Z",
           "name": "Senior Usability Agent",
-          "image": "http://lorempixel.com/640/480/nightlife",
+          "image": "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
           "minutes": 5,
           "resolution": [
             

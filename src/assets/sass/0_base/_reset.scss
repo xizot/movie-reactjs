@@ -30,10 +30,16 @@ main {
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+    // @include breakpoint(sp) {
+    //     overflow: hidden;
+    // }
 }
 
 body {
     -webkit-text-size-adjust: 100%;
+    // @include breakpoint(sp) {
+    //     overflow: hidden;
+    // }
 }
 main {
     position: relative;

@@ -63,27 +63,8 @@ $(window).ready(() => {
     if($('.home')){
         window.customSlick()
     }
-    if($('.movie')){
-        var slickOpts = {
-            slidesToShow: 4,
-            autoplay:true,
-            autoplaySpeed:3e3,
-            speed: 1e3,
-            prevArrow: $('.js-related__next'),
-            nextArrow: $('.js-related__prev'),
-        }
-        $('.js-related').slick(slickOpts)
-    }
-    $('.js-bars').click(function (e) { 
-        e.preventDefault();
-       
-        
-        $(this).parent().toggleClass('is-open')
-    });
-    $('.js-blank').click(function (e) { 
-        e.preventDefault();
-        $('.c-menusp').removeClass('is-open')
-    });
+   
+   
 
 });
 $(window).on('resize', function() {
