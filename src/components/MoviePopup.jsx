@@ -28,6 +28,7 @@ function MoviePopup({ID, title, handlePopup}) {
                             { listEpisode.length && listEpisode.map((item,index)=>(
 
                                 <Episode 
+                                    key = {index}
                                     index = {index}
                                     ep = {item.ep}
                                     image={item.image}

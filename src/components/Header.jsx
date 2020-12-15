@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import $ from "jquery";
-function Header({isHide = null}) {
+function Header({isDark = null}) {
     useEffect(()=>{
         $('.js-bars').click(function (e) { 
             e.preventDefault();
@@ -15,8 +15,8 @@ function Header({isHide = null}) {
         });
     },[])
     return (
-        <header className={isHide ? "c-header is-hide" : "c-header"}>
-            <div className="p-header js-header">
+        <header className="c-header">
+            <div className={ isDark ? "p-header js-header is-dark-2" : "p-header js-header " }>
                 <div className="p-header__content u-flex u-a-center u-between">
                     <a href="/" className="p-header__logo">
                         <img src="https://themezinho.net/digiflex/images/logo.png" alt="" />

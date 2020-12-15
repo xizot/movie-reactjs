@@ -8,6 +8,9 @@
 
     &.is-dark {
         background-color: #131722;
+        &-2 {
+            background-color: $bgSmooth;
+        }
     }
     &__content {
         padding: 15px 50px;

@@ -2,6 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Detail1 from './Detail1'
+import Detail2 from './Detail2'
 
 function Detail({ID = null}) {
     return (
@@ -17,9 +18,7 @@ function Detail({ID = null}) {
                     year= "2022"
                     nation ="LAOs"
                 />
-                <div className="p-detail2">
-                    <video src="https://storage.whitefoo.workers.dev/Encodes/Mama_2013_1080p.mp4" poster={`${process.env.PUBLIC_URL}/assets/img/films/movies07.png`} preload = "true" autoPlay loop muted playsInline></video>
-                </div>
+                <Detail2 />
                 <div className="p-detail3">
                     <div className="l-container">
                         <h3 className="c-title2">Comments</h3>
@@ -66,7 +65,8 @@ function Detail({ID = null}) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="p-detail3__paginate u-flex u-a-center u-between">
+                            
+                            <div className="c-paginate u-flex u-a-center u-between">
                                 <p>Previous</p>
                                 <ul className="u-flex u-a-center">
                                     <li className="is-current">1</li>

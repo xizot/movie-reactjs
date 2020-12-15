@@ -43,7 +43,9 @@ function Movie() {
     },[])
     return (
         <div className="pages-movie">
-            <Header/>
+            <Header
+                isDark = {true}
+            />
             <Detail
                 title ="The Rise of Kingdom"
                 cat = {["action", "romance"]}
