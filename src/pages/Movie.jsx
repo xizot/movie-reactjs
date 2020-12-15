@@ -18,7 +18,7 @@ function Movie() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-
+        window.scrollTo(0, 0)
         dispatch(getNewest())
 
         const parsed = queryString.parse(window.location.search)

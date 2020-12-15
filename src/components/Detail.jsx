@@ -1,56 +1,22 @@
-import { DislikeOutlined, LikeOutlined, PlusOutlined } from '@ant-design/icons'
+
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Detail1 from './Detail1'
 
 function Detail({title,cat,description}) {
     return (
         <>
             <section className="p-detail">
-                <div className="p-detail1">
-                    <div className="l-container">
-                        <div className="p-detail1__content">
-                            <div className="row row-reverse">
-                                <div className="col-sm-12 col-lg-8 p-detail1__left">
-                                    <h3 className="c-title1">
-                                        {title}
-                                    </h3>
-                                    <div className="p-detail1__cat">
-                                        <p className="c-title4">Genre:</p>
-                                        {cat.length && cat.map(item=>(
-                                            <Link key={item} to={`/category/${item}`}>{item} </Link>
-                                        ))}
-                                    </div>
-                                    <p className="p-detail1__des c-paragraph">
-                                        {description}
-                                    </p>
-                                
-                                    <div className="p-detail1__action ">
-                                        <Link to="" className="c-icon is-hover">
-                                            <PlusOutlined className="c-icon--plus"/>
-                                            <p>Add To Favourite</p>
-                                        </Link>
-                                        <Link to="" className="c-icon"><LikeOutlined className="c-icon--like" /></Link>
-                                        <Link to="" className="c-icon"><DislikeOutlined className="c-icon--dislike" /></Link>
-                                        <span className="p-detail1__txt">99% liked this movie</span>
-                                    </div>
-                                    <Link to="" className="c-btn c-btn--primary">Play</Link>
-                                </div>
-                               
-                                <div className="col-sm-12 col-lg-4 p-detail1__right">
-                                    <div className="gutter">
-                                        <div className="p-detail1__image">
-                                            <img src={`${process.env.PUBLIC_URL}/assets/img/films/movies02.jpg`} alt=""/>
-                                        </div>
-                                        <span className="p-detail1__item"><b>Actor:</b> SOTN </span>
-                                        <span className="p-detail1__item"><b>Drirector:</b> SOTN </span>
-                                        <span className="p-detail1__item"><b>Year:</b> SOTN </span>
-                                        <span className="p-detail1__item"><b>Actor:</b> SOTN </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Detail1 
+                    title ="The rise of KingDom"
+                    cat = {["Action", "Romance"]}
+                    description = "She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim."
+                    poster = "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
+                    actors ="SOTN"
+                    directors = "SOTN"
+                    year= "2022"
+                    nation ="LAOs"
+                />
                 <div className="p-detail2">
                     <video src="https://storage.whitefoo.workers.dev/Encodes/Mama_2013_1080p.mp4" poster={`${process.env.PUBLIC_URL}/assets/img/films/movies07.png`} preload = "true" autoPlay loop muted playsInline></video>
                 </div>

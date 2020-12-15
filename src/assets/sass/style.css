@@ -359,7 +359,7 @@ img {
 
 @media only screen and (max-width: 812px) {
   .p-header__content {
-    padding: 15px;
+    padding: 15px 0 15px 15px;
   }
 }
 
@@ -1855,6 +1855,10 @@ img {
   display: inline-block;
 }
 
+.p-detail1__item span {
+  width: calc(100% - 80px);
+}
+
 .p-detail1__action {
   margin-bottom: 30px;
   display: -webkit-box;
@@ -1899,6 +1903,18 @@ img {
 .p-detail1__action .c-icon {
   overflow: hidden;
   margin-right: 20px;
+}
+
+.p-detail1__action button {
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.p-detail1__action button:hover {
+  opacity: 0.8;
 }
 
 .p-detail1__txt {
