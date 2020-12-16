@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import errorReducer from "./errorReducers";
-import filmReducer from "./filmReducers";
+import { combineReducers } from 'redux';
+import errorReducer from './errorReducers';
+import filmReducer from './filmReducers';
+import watchReducer from './watchReducers';
 
+const reducer = combineReducers({ errorReducer, filmReducer, watchReducer });
 
-const reducer = combineReducers({errorReducer, filmReducer})
-
-export default reducer
+export default reducer;
