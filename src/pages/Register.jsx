@@ -1,14 +1,15 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-function Register() {
+import Register from '../components/Register'
+function pRegister() {
     return (
         <div>
             <Header />
-
+            <Register />
             <Footer />
         </div>
     )
 }
 
-export default Register
+export default pRegister

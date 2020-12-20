@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react'
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import $ from "jquery";
-function Header({isDark = null}) {
-    useEffect(()=>{
-        $('.js-bars').click(function (e) { 
+function Header({ isDark = null }) {
+    useEffect(() => {
+        $('.js-bars').click(function (e) {
             e.preventDefault();
-           
-            
+
+
             $(this).parent().toggleClass('is-open')
         });
-        $('.js-blank').click(function (e) { 
+        $('.js-blank').click(function (e) {
             e.preventDefault();
             $('.c-menusp').removeClass('is-open')
         });
-    },[])
+    }, [])
     return (
         <header className="c-header">
-            <div className={ isDark ? "p-header js-header is-dark-2" : "p-header js-header " }>
+            <div className={isDark ? "p-header js-header is-dark-2" : "p-header js-header "}>
                 <div className="p-header__content u-flex u-a-center u-between">
                     <a href="/" className="p-header__logo">
                         <img src="https://themezinho.net/digiflex/images/logo.png" alt="" />
@@ -32,7 +32,7 @@ function Header({isDark = null}) {
                             <a href="/tv">TV SHOWS</a>
                         </li>
                         <li>
-                            <a href="/tips">TIPS</a>
+                            <a href="/tips">ABOUT</a>
                         </li>
                     </ul>
                     <div className="p-header__actions u-flex u-a-center">
@@ -42,7 +42,7 @@ function Header({isDark = null}) {
                         <a href="/account" className="p-header__account u-flex u-a-center ">
                             <p>ACCOUNT</p>
                             <div className="icon-circle">
-                            <UserOutlined />
+                                <UserOutlined />
                             </div>
                         </a>
                     </div>
@@ -70,23 +70,23 @@ function Header({isDark = null}) {
                                     <a href="/">TV SHOWS</a>
                                 </li>
                                 <li>
-                                    <a href="/">TIPS</a>
+                                    <a href="/">ABOUT</a>
                                 </li>
                             </ul>
                             <div className="c-menusp__actions">
                                 <a href="/" className="p-header__search">
                                     LOGIN
                                 </a>
-                                <a href="/" className="p-header__account u-flex u-a-center ">
+                                <a href="/register" className="p-header__account u-flex u-a-center ">
                                     SIGN UP
                                 </a>
                             </div>
                             <div className="c-menusp__footer u-flex u-a-center">
                                 <a href="/">
-                                    <img src="./assets/img/icons/instagram@2x.png" alt=""/>
+                                    <img src="./assets/img/icons/instagram@2x.png" alt="" />
                                 </a>
                                 <a href="/">
-                                    <img src="./assets/img/icons/instagram@2x.png" alt=""/>
+                                    <img src="./assets/img/icons/instagram@2x.png" alt="" />
                                 </a>
                                 <p>@hambuger </p>
                             </div>
