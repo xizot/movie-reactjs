@@ -17,40 +17,40 @@ function Register() {
     return (
         <>
             <div className='register'>
-                <div className='c-overlayer'></div>
+                <div className='c-overlayer'> </div>
                 <div className='register__content'>
                     <div className='c-form'>
                         <h3 className='c-form__title'>Register</h3>
                         <form action=''>
                             <div className='c-form__group'>
                                 <label className='c-form__label'>
-                                    Email or username
+                                    Username
                                 </label>
                                 <input className='c-form__input' type='text' />
                             </div>
                             <div className='c-form__group'>
                                 <label className='c-form__label'>
-                                    Email or username
+                                    Email
                                 </label>
-                                <input className='c-form__input' type='text' />
+                                <input className='c-form__input' type='email' />
+                            </div>
+                            <div className='c-form__group is-focus'>
+                                <label className='c-form__label'>
+                                    Birthday
+                                </label>
+                                <input className='c-form__input_date' type='date' value="2000-01-01" min="1920-01-01" max="2021-12-12" />
                             </div>
                             <div className='c-form__group'>
                                 <label className='c-form__label'>
-                                    Email or username
+                                    Password
                                 </label>
-                                <input className='c-form__input' type='text' />
+                                <input className='c-form__input' type='password' />
                             </div>
                             <div className='c-form__group'>
                                 <label className='c-form__label'>
-                                    Email or username
+                                    Retype password
                                 </label>
-                                <input className='c-form__input' type='text' />
-                            </div>
-                            <div className='c-form__group'>
-                                <label className='c-form__label'>
-                                    Email or username
-                                </label>
-                                <input className='c-form__input' type='text' />
+                                <input className='c-form__input' type='password' />
                             </div>
                             <div className='c-form__actions'>
                                 <button

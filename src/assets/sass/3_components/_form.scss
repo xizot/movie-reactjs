@@ -22,7 +22,7 @@
         position: relative;
         &.is-focus {
             label {
-                font-size: 1rem;
+                font-size: 1.2rem;
                 top: 12px;
             }
         }
@@ -37,7 +37,7 @@
         left: 20px;
         transform: translateY(-50%);
         @include breakpoint(tab) {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
     }
     &__input {
@@ -48,9 +48,23 @@
         outline: none;
         border: none;
         background: transparent;
-        font-weight: bold;
-        font-size: 1.5rem;
+        font-weight: 600;
+        font-size: 1.7rem;
         letter-spacing: 0.72px;
+        color: #f1f1f1;
+    }
+    &__input_date{
+        height: 50px;
+        width: 100%;
+        padding: 20px 20px 2px;
+        border-radius: 2px;
+        outline: none;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-size: 1.8rem;
+        letter-spacing: 0.72px;
+        color: #f1f1f1;
     }
     &__below {
         display: block;
