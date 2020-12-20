@@ -1,0 +1,32 @@
+.register {
+    background-image: url(https://www.wallpapertip.com/wmimgs/251-2513441_fast-and-furious-presents-hobbs-and-shaw-4k.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 100px 0;
+    @include breakpoint(tab) {
+        padding: 100px 30px;
+    }
+    @include breakpoint(tab) {
+        padding: 100px 15px;
+    }
+    position: relative;
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba($color: #000000, $alpha: 0.7);
+    }
+}

@@ -1,40 +1,74 @@
-import React from 'react'
-
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import $ from 'jquery';
 function Register() {
+    useEffect(() => {
+        let $input = $('.c-form__input');
+        $input
+            .blur(function () {
+                if (!$(this).val()) {
+                    $(this).parent().removeClass('is-focus');
+                }
+            })
+            .focus(function () {
+                $(this).parent().addClass('is-focus');
+            });
+    }, []);
     return (
         <>
-            <div class="register__background">
-                <div class="register">
-                    <h1 class="register__title">Register</h1>
-                    <div class="register__group">
-                        <input class="register__group__input" type="text" required="true" />
-                        <label class="register__group__label">Email or username</label>
-                    </div>
-                    <div class="register__group"><input class="register__group__input" type="text" required="true" />
-                        <label class="register__group__label">Display Name</label>
-                    </div>
-                    <div class="register__group">
-                        <input class="register__group__input" type="date" required="true" />
-                        <label class="register__group__label__date">Birthday</label>
-                    </div>
-                    <div class="register__group">
-                        <input class="register__group__input" type="password" required="true" />
-                        <label class="register__group__label">Password</label>
-                    </div>
-                    <div class="register__group">
-                        <input class="register__group__input" type="password" required="true" />
-                        <label class="register__group__label">Retype Password</label>
-                    </div>
-                    <button class="register__button" type="button">Register</button>
-                    <div class="register__below">
-                        <a class="register__below-cta__text register__below-cta__text--need-help" href="/login">
-                            Already have a account?
-                        </a>
+            <div className='register'>
+                <div className='c-overlayer'></div>
+                <div className='register__content'>
+                    <div className='c-form'>
+                        <h3 className='c-form__title'>Register</h3>
+                        <form action=''>
+                            <div className='c-form__group'>
+                                <label className='c-form__label'>
+                                    Email or username
+                                </label>
+                                <input className='c-form__input' type='text' />
+                            </div>
+                            <div className='c-form__group'>
+                                <label className='c-form__label'>
+                                    Email or username
+                                </label>
+                                <input className='c-form__input' type='text' />
+                            </div>
+                            <div className='c-form__group'>
+                                <label className='c-form__label'>
+                                    Email or username
+                                </label>
+                                <input className='c-form__input' type='text' />
+                            </div>
+                            <div className='c-form__group'>
+                                <label className='c-form__label'>
+                                    Email or username
+                                </label>
+                                <input className='c-form__input' type='text' />
+                            </div>
+                            <div className='c-form__group'>
+                                <label className='c-form__label'>
+                                    Email or username
+                                </label>
+                                <input className='c-form__input' type='text' />
+                            </div>
+                            <div className='c-form__actions'>
+                                <button
+                                    className='c-btn c-btn--primary'
+                                    type='button'
+                                >
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+                        <div className='c-form__below'>
+                            <Link to='/login'>Already have a account?</Link>
+                        </div>
                     </div>
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Register
+export default Register;
