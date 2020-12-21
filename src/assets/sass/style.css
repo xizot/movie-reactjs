@@ -2619,6 +2619,53 @@ img {
   margin-top: 30px;
 }
 
+.login {
+  background-image: url(../img/login-background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  padding: 100px 0;
+  position: relative;
+}
+
+@media only screen and (max-width: 812px) {
+  .login {
+    padding: 100px 30px;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .login {
+    padding: 150px 15px;
+  }
+}
+
+.login__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
 .pages-movie .p-top2 {
   background: #131722;
 }
