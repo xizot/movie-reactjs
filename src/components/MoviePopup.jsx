@@ -11,7 +11,7 @@ function MoviePopup({ ID, title, handlePopup }) {
     };
     useEffect(() => {
         dispatch(getEpisode(ID));
-    }, []);
+    }, [ID,dispatch]);
 
     return (
         <div>

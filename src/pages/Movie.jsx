@@ -8,18 +8,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNewest } from '../actions/filmActions';
 import Watch from '../components/Watch';
 import { openWatch } from '../actions/watchActions';
+import axios from "./../axios";
 function Movie() {
+    window.scrollTo(0, 0);
+    
     const isWatch = useSelector((state) => state.watchReducer.isWatch);
     const [episode, setEpisode] = useState(1);
-    const [isMovie, setIsMovie] = useState(false);
-    const [isTV, setIsTV] = useState(false);
+    // const [isMovie, setIsMovie] = useState(false);
+    // const [isTV, setIsTV] = useState(false);
     const [ID, setID] = useState(null);
 
-    //demo get new
+
     const listNew = useSelector((state) => state.filmReducer.new);
     const dispatch = useDispatch();
 
-    window.scrollTo(0, 0);
+
     useEffect(() => {
         dispatch(getNewest());
 
@@ -27,7 +30,7 @@ function Movie() {
         let ep = parsed.ep || 1;
         if (ep) setEpisode(ep);
         let pathName = window.location.pathname.split('/');
-        let type = pathName[pathName.length - 2];
+        // let type = pathName[pathName.length - 2];
         let id = pathName[pathName.length - 1];
         if (id) {
             setID(id);
@@ -35,14 +38,14 @@ function Movie() {
         if (parsed.watch === null) {
             dispatch(openWatch());
         }
-        if (type === 'movie') {
-            setIsMovie(true);
-            setIsTV(false);
-        } else {
-            setIsMovie(false);
-            setIsTV(true);
-        }
-    }, []);
+        // if (type === 'movie') {
+        //     setIsMovie(true);
+        //     setIsTV(false);
+        // } else {
+        //     setIsMovie(false);
+        //     setIsTV(true);
+        // }
+    }, [dispatch]);
     return (
         <div className='pages-movie'>
             {isWatch ? (

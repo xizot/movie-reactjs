@@ -1,5 +1,5 @@
 import { DislikeOutlined, LikeOutlined, PlusOutlined } from '@ant-design/icons';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import MoviePopup from './MoviePopup';
 import $ from 'jquery';
@@ -14,7 +14,7 @@ function Detail1({
     nation = 'Viet Nam',
     openWatch,
 }) {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
 
     const openPopUp = () => {
         // setIsOpen(true)
