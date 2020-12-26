@@ -32,7 +32,7 @@
         font-size: 1.6rem;
         color: #8c8c8c;
         position: absolute;
-        transition: all 0.6s;
+        transition: all 0.2s;
         top: 50%;
         left: 20px;
         transform: translateY(-50%);
@@ -75,7 +75,7 @@
             margin-top: 20px;
             display: block;
             text-align: right;
-            transition: all 0.6s;
+            transition: all 0.2s;
 
             @include breakpoint(tab) {
                 margin-top: 10px;

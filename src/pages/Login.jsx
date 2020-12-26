@@ -1,16 +1,16 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import Login from '../components/Login'
+import LoginComponent from '../components/Login'
 
-function pLogin() {
+function Login() {
     return (
         <div>
-            <Header/>
-            <Login/>
-            <Footer/>  
+            <Header />
+            <LoginComponent />
+            <Footer />
         </div>
     )
 }
 
-export default pLogin
+export default Login

@@ -8,10 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNewest } from '../actions/filmActions';
 import Watch from '../components/Watch';
 import { openWatch } from '../actions/watchActions';
-import axios from "./../axios";
+// import axios from "./../axios";
 function Movie() {
     window.scrollTo(0, 0);
-    
+
     const isWatch = useSelector((state) => state.watchReducer.isWatch);
     const [episode, setEpisode] = useState(1);
     // const [isMovie, setIsMovie] = useState(false);
@@ -53,26 +53,26 @@ function Movie() {
                     <Watch ID={ID} ep={episode} />
                 </>
             ) : (
-                <>
-                    <Header isDark={true} />
-                    <Detail
-                        title='The Rise of Kingdom'
-                        cat={['action', 'romance']}
-                        description="She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim."
-                    />
-                    {listNew.length ? (
-                        <List2
-                            subtitle=''
-                            title='Recommended'
-                            list={listNew}
-                            className='u-fade'
+                    <>
+                        <Header isDark={true} />
+                        <Detail
+                            title='The Rise of Kingdom'
+                            cat={['action', 'romance']}
+                            description="She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim."
                         />
-                    ) : (
-                        <></>
-                    )}
-                    <Footer />
-                </>
-            )}
+                        {listNew.length ? (
+                            <List2
+                                subtitle=''
+                                title='Recommended'
+                                list={listNew}
+                                className='u-fade'
+                            />
+                        ) : (
+                                <></>
+                            )}
+                        <Footer />
+                    </>
+                )}
         </div>
     );
 }

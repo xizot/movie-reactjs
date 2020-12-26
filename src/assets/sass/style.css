@@ -2545,8 +2545,8 @@ img {
   font-size: 1.6rem;
   color: #8c8c8c;
   position: absolute;
-  -webkit-transition: all 0.6s;
-  transition: all 0.6s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   top: 50%;
   left: 20px;
   -webkit-transform: translateY(-50%);
@@ -2598,8 +2598,8 @@ img {
   margin-top: 20px;
   display: block;
   text-align: right;
-  -webkit-transition: all 0.6s;
-  transition: all 0.6s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 @media only screen and (max-width: 812px) {

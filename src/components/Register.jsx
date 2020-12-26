@@ -38,7 +38,7 @@ function Register() {
                                 <label className='c-form__label'>
                                     Birthday
                                 </label>
-                                <input className='c-form__input_date' type='date' value="2000-01-01" min="1920-01-01" max="2021-12-12" />
+                                <input className='c-form__input_date' type='date' min="1920-01-01" max="2021-12-12" />
                             </div>
                             <div className='c-form__group'>
                                 <label className='c-form__label'>

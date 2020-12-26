@@ -1,15 +1,16 @@
-export const isLogin = () => next => action =>{
-    if(action.needLogin){
+export const isLogin = () => next => action => {
+    if (action.needLogin) {
         const token = localStorage.getItem('token')
         // check token here
-        
+        // console.log(token)
+        // thoi cai nay de sau, gio chua can thiet
         // end check
-        if(token){
+        if (token) {
             return next(action)
         }
-        window.location.href="/login"
+        window.location.href = "/login"
     }
-    else{
+    else {
         return next(action)
     }
 }
