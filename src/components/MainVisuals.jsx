@@ -1,11 +1,13 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import React, { useEffect } from 'react'
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 function Mainvisuals() {
     useEffect(() => {
-        
-        if(window.customSlick) window.customSlick()
-    }, [])
+        if ($(".c-slide").length) {
+            if (window.customSlick) window.customSlick();
+        }
+    }, []);
     return (
         <div className="c-mainvisuals js-mainvisuals" data-anchor="1">
             <div className="c-mainvisuals__content u-fullheight">
@@ -14,11 +16,9 @@ function Mainvisuals() {
                     <div className="c-slide__prev">
                         <LeftOutlined />
                     </div>
-                    <div className="c-slide__number">
-
-                    </div>
+                    <div className="c-slide__number"></div>
                     <div className="c-slide__border">
-                    <span></span>
+                        <span></span>
                     </div>
                     <p className="c-slide__total">3</p>
                     <div className="c-slide__next">
@@ -28,67 +28,118 @@ function Mainvisuals() {
                 {/* <!-- ▲ Slide Controller ▲ --> */}
                 <div className="c-slide">
                     <div className="c-slide__item">
-                        <img className="c-slide__image" src={`${process.env.PUBLIC_URL}/assets/img/mainvisual/slide01.jpg`} alt="" loading="lazy" />
+                        <img
+                            className="c-slide__image"
+                            src={`${process.env.PUBLIC_URL}/assets/img/mainvisual/slide01.jpg`}
+                            alt=""
+                            loading="lazy"
+                        />
                         <div className="c-slide__info">
                             <div className="l-container">
-                                <span className="c-slide__label">NEW RELEASES</span>
-                                <h3 className="c-title1">The Rise Of Kingdoms</h3>
+                                <span className="c-slide__label">
+                                    NEW RELEASES
+                                </span>
+                                <h3 className="c-title1">
+                                    The Rise Of Kingdoms
+                                </h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim.
+                                    She can truly celebrate who shie is.
+                                    Directed by Ryan Murphu 'The Mando' is the
+                                    spectacular, big-hearted flim.
                                 </p>
                                 <div className="c-slide__actions">
-                                    <button className="c-btn c-btn--primary">PLAY TRAILER</button>
-                                    <Link to="/single-movie?id=xxx" className="c-btn">PLAY FILM</Link>
+                                    <button className="c-btn c-btn--primary">
+                                        PLAY TRAILER
+                                    </button>
+                                    <Link
+                                        to="/single-movie?id=xxx"
+                                        className="c-btn"
+                                    >
+                                        PLAY FILM
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="c-slide__item">
-                        <img className="c-slide__image" src={`${process.env.PUBLIC_URL}/assets/img/mainvisual/slide02.jpg`} alt="" loading="lazy" />
+                        <img
+                            className="c-slide__image"
+                            src={`${process.env.PUBLIC_URL}/assets/img/mainvisual/slide02.jpg`}
+                            alt=""
+                            loading="lazy"
+                        />
                         <div className="c-slide__info">
-                        <div className="l-container">
-                                <span className="c-slide__label">NEW RELEASES</span>
-                                <h3 className="c-title1">The Rise Of Football</h3>
+                            <div className="l-container">
+                                <span className="c-slide__label">
+                                    NEW RELEASES
+                                </span>
+                                <h3 className="c-title1">
+                                    The Rise Of Football
+                                </h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim.
+                                    She can truly celebrate who shie is.
+                                    Directed by Ryan Murphu 'The Mando' is the
+                                    spectacular, big-hearted flim.
                                 </p>
                                 <div className="c-slide__actions">
-                                    <button className="c-btn c-btn--primary">PLAY TRAILER</button>
-                                    <Link to="/single-movie?id=xxx" className="c-btn">PLAY FILM</Link>
+                                    <button className="c-btn c-btn--primary">
+                                        PLAY TRAILER
+                                    </button>
+                                    <Link
+                                        to="/single-movie?id=xxx"
+                                        className="c-btn"
+                                    >
+                                        PLAY FILM
+                                    </Link>
                                 </div>
-                        </div>
+                            </div>
                         </div>
                     </div>
                     <div className="c-slide__item">
-                        <img className="c-slide__image" src={`${process.env.PUBLIC_URL}/assets/img/mainvisual/slide03.jpg`} alt="" loading="lazy" />
+                        <img
+                            className="c-slide__image"
+                            src={`${process.env.PUBLIC_URL}/assets/img/mainvisual/slide03.jpg`}
+                            alt=""
+                            loading="lazy"
+                        />
                         <div className="c-slide__info">
                             <div className="l-container">
-                                <span className="c-slide__label">NEW RELEASES</span>
+                                <span className="c-slide__label">
+                                    NEW RELEASES
+                                </span>
                                 <h3 className="c-title1">The Rise Of Mandou</h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim.
+                                    She can truly celebrate who shie is.
+                                    Directed by Ryan Murphu 'The Mando' is the
+                                    spectacular, big-hearted flim.
                                 </p>
                                 <div className="c-slide__actions">
-                                    <button className="c-btn c-btn--primary">PLAY TRAILER</button>
-                                    <Link to="/single-movie?id=xxx" className="c-btn">PLAY FILM</Link>
+                                    <button className="c-btn c-btn--primary">
+                                        PLAY TRAILER
+                                    </button>
+                                    <Link
+                                        to="/single-movie?id=xxx"
+                                        className="c-btn"
+                                    >
+                                        PLAY FILM
+                                    </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    )
+    );
 }
 
-export default Mainvisuals
+export default Mainvisuals;

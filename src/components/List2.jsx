@@ -6,11 +6,11 @@ function List2({ subtitle, title, list }) {
     return (
         <section className='p-top2 '>
             <div className='l-container'>
-                <div className='p-top2__title '>
+                <div className='p-top2__title u-fade'>
                     <h4 className='c-subtitle'>{subtitle}</h4>
                     <h3 className='c-title'>{title}</h3>
                 </div>
-                <div className='p-top2__content row '>
+                <div className='p-top2__content row u-fade'>
                     {list.length &&
                         list.map((f, idx) => (
                             <Item2
@@ -26,7 +26,7 @@ function List2({ subtitle, title, list }) {
                             />
                         ))}
                 </div>
-                <Link to='/movie' className='c-btn c-btn--primary c-more'>
+                <Link to='/movie' className='c-btn c-btn--primary c-more u-fade'>
                     BROWSE ALL MOVIES
                 </Link>
             </div>
