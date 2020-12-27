@@ -1,29 +1,107 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "../types/authenType";
-// import axios from "./../axios";
+import {
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    REGISTER_FAIL,
+    REGISTER_SUCCESS,
+    USER_LOADING,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGOUT_SUCCESS,
+} from "../types/authenType";
+import axios from "./../axios";
+import { getError } from "./errorActions";
 
-export const login = (username, password) => async dispatch => {
-    // ko call api duoc, keu server xai cors di, ty keu data truyen vao dung chua
-    // const data = await axios.post('/auth/login/', { username, password })
-    // if (data) {
-    //     console.log(data)
-    // }
-    // toi kiem tra lai sau, cai nay luu local storage a? gio luu ne
-    if (username === "abc" && password === "123") {
-        dispatch({
-            type: LOGIN_SUCCESS,
-            payload: {
-                token: "12321321321312",
-                refreshToken: "sotn"
-            }
+//login
+export const login = (username, password) => (dispatch) => {
+    axios
+        .post("/auth/login/", { username, password })
+        .then((res) => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: {
+                    token: res.data.accessToken,
+                    refreshToken: res.data.refreshToken,
+                },
+            });
         })
-    }
-    else {
-        dispatch({
-            type: LOGIN_FAIL,
-            payload: {
-                token: null,
-                refreshToken: null
-            }
+        .catch((err) => {
+            dispatch(
+                getError(err.response.data, err.response.status, LOGIN_FAIL)
+            );
+            dispatch({
+                type: LOGIN_FAIL,
+            });
+        });
+};
+//register
+export const register = ({
+    username,
+    displayName,
+    email,
+    password,
+    confirmPassword,
+    dateOfBirth,
+}) => (dispatch) => {
+    const body = JSON.stringify({
+        username,
+        displayName,
+        email,
+        password,
+        confirmPassword,
+        dateOfBirth,
+    });
+    axios
+        .post("/auth/register/", body)
+        .then((res) => {
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: res.data,
+            });
         })
+        .catch((err) => {
+            dispatch(
+                getError(err.response.data, err.response.status, REGISTER_FAIL)
+            );
+            dispatch({
+                type: REGISTER_FAIL,
+            });
+        });
+};
+
+// token
+export const loadUser = () => (dispatch, getState) => {
+    const token = getState().auth.token;
+    dispatch({
+        type: USER_LOADING,
+    });
+
+    const config = {
+        headers: {
+            "Content-type": "application/json",
+        },
+    };
+    if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+        axios
+            .get("/user", config)
+            .then((res) => {
+                dispatch({
+                    type: USER_LOADED,
+                    payload: res.data,
+                });
+            })
+            .catch((err) => {
+                dispatch(
+                    getError(err.response.data, err.response.status, AUTH_ERROR)
+                );
+                dispatch({
+                    type: AUTH_ERROR,
+                });
+            });
     }
-}
+};
+
+//logout
+export const logout = () => ({
+    type: LOGOUT_SUCCESS,
+});

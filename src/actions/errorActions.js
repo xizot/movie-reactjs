@@ -1,10 +1,15 @@
-import { GET_ERRORS } from "../types/errorTypes";
+import { CLEAR_ERROR, GET_ERRORS } from "../types/errorTypes";
 
 
-export const getError = payload => dispatch =>{
+export const getError = (msg,status,id) => dispatch =>{
     dispatch({
         type: GET_ERRORS,
-        payload,
+        payload:{msg,status,id}
         
+    })
+}
+export const clearError = () => dispatch =>{
+    dispatch({
+        type: CLEAR_ERROR
     })
 }

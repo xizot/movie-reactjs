@@ -1,78 +1,87 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import $ from 'jquery';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import $ from "jquery";
 import { login } from "./../actions/authen";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 function Login() {
-    // cu phap vai l the, 1 dong file :v
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const dispath = useDispatch()
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispath = useDispatch();
 
     const handleLogin = () => {
-        dispath(login(username, password))
-    }
-
+        dispath(login(username, password));
+    };
 
     const handleUsername = (e) => {
-        let value = e.target.value
+        let value = e.target.value;
         if (value.length >= 0) {
-            setUsername(value)
+            setUsername(value);
         }
-    }
+    };
     const handlePassword = (e) => {
-        let value = e.target.value
+        let value = e.target.value;
         if (value.length >= 0) {
-            setPassword(value)
+            setPassword(value);
         }
-    }
+    };
     useEffect(() => {
-        let $input = $('.c-form__input');
+        let $input = $(".c-form__input");
         $input
             .blur(function () {
                 if (!$(this).val()) {
-                    $(this).parent().removeClass('is-focus');
+                    $(this).parent().removeClass("is-focus");
                 }
             })
             .focus(function () {
-                $(this).parent().addClass('is-focus');
+                $(this).parent().addClass("is-focus");
             });
     }, []);
     return (
         <>
-            <div className='login'>
-                <div className='c-overlayer'> </div>
-                <div className='login__content'>
-                    <div className='c-form'>
-                        <h3 className='c-form__title'>Login</h3>
-                        <form action=''>
-                            <div className='c-form__group'>
-                                <label className='c-form__label'>
+            <div className="login">
+                <div className="c-overlayer"> </div>
+                <div className="login__content">
+                    <div className="c-form">
+                        <h3 className="c-form__title">Login</h3>
+                        <form action="">
+                            <div className="c-form__group">
+                                <label className="c-form__label">
                                     Username
                                 </label>
-                                <input className='c-form__input' type='text' value={username} onChange={(e) => handleUsername(e)} />
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => handleUsername(e)}
+                                />
                             </div>
-                            <div className='c-form__group'>
-                                <label className='c-form__label'>
+                            <div className="c-form__group">
+                                <label className="c-form__label">
                                     Password
                                 </label>
-                                <input className='c-form__input' type='password' value={password} onChange={(e) => handlePassword(e)} />
+                                <input
+                                    className="c-form__input"
+                                    type="password"
+                                    value={password}
+                                    autoComplete="new-password"
+                                    onChange={(e) => handlePassword(e)}
+                                />
                             </div>
-                            <div className='c-form__actions'>
+                            <div className="c-form__actions">
                                 <button
-                                    className='c-btn c-btn--primary'
-                                    type='button'
+                                    className="c-btn c-btn--primary"
+                                    type="button"
                                     onClick={() => handleLogin()}
                                 >
                                     Login
                                 </button>
                             </div>
                         </form>
-                        <div className='c-form__below'>
-                            <Link to='/register'>Need help?</Link>
+                        <div className="c-form__below">
+                            <Link to="/register">Need help?</Link>
                         </div>
-                        <div className='c-form__below'>
-                            <Link to='/register'>Need an account?</Link>
+                        <div className="c-form__below">
+                            <Link to="/register">Need an account?</Link>
                         </div>
                     </div>
                 </div>

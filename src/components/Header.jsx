@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import $ from "jquery";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Header({ isDark = null }) {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     useEffect(() => {
-        $('.js-bars').click(function (e) {
-            e.preventDefault()
-            $(this).parent().toggleClass('is-open')
-        });
-        $('.js-blank').click(function (e) {
+        $(".js-bars").click(function (e) {
             e.preventDefault();
-            $('.c-menusp').removeClass('is-open')
+            $(this).parent().toggleClass("is-open");
         });
-    }, [])
+        $(".js-blank").click(function (e) {
+            e.preventDefault();
+            $(".c-menusp").removeClass("is-open");
+        });
+    }, []);
+
     return (
         <header className="c-header">
-            <div className={isDark ? "p-header js-header is-dark-2" : "p-header js-header "}>
+            <div
+                className={
+                    isDark
+                        ? "p-header js-header is-dark-2"
+                        : "p-header js-header "
+                }
+            >
                 <div className="p-header__content u-flex u-a-center u-between">
                     <Link to="/" className="p-header__logo">
-                        <img src="https://themezinho.net/digiflex/images/logo.png" alt="" />
+                        <img
+                            src="https://themezinho.net/digiflex/images/logo.png"
+                            alt=""
+                        />
                     </Link>
                     <ul className="p-header__cgnav u-flex">
                         <li>
@@ -38,12 +50,35 @@ function Header({ isDark = null }) {
                         <Link to="/" className="p-header__search">
                             <SearchOutlined />
                         </Link>
-                        <Link to="/account" className="p-header__account u-flex u-a-center ">
-                            <p>ACCOUNT</p>
-                            <div className="icon-circle">
-                                <UserOutlined />
-                            </div>
-                        </Link>
+                        {isAuthenticated ? (
+                            <>
+                                <Link
+                                    to="/logout"
+                                    className="p-header__account u-flex u-a-center "
+                                >
+                                    <p>LOGOUT</p>
+                                </Link>
+                                <Link
+                                    to="/account"
+                                    className="p-header__account u-flex u-a-center "
+                                >
+                                    <p>ACCOUNT</p>
+                                    <div className="icon-circle">
+                                        <UserOutlined />
+                                    </div>
+                                </Link>
+                            </>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="p-header__account u-flex u-a-center "
+                            >
+                                <p>LOGIN</p>
+                                <div className="icon-circle">
+                                    <UserOutlined />
+                                </div>
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <div className="c-menusp">
@@ -56,7 +91,10 @@ function Header({ isDark = null }) {
                         <div className="c-menusp__sidebar">
                             <div className="c-menusp__search">
                                 <SearchOutlined />
-                                <input type="text" placeholder="Films, Actors" />
+                                <input
+                                    type="text"
+                                    placeholder="Films, Actors"
+                                />
                             </div>
                             <ul className="c-menusp__cgnav">
                                 <li>
@@ -76,16 +114,25 @@ function Header({ isDark = null }) {
                                 <Link to="/login" className="p-header__search">
                                     LOGIN
                                 </Link>
-                                <Link to="/register" className="p-header__account u-flex u-a-center ">
+                                <Link
+                                    to="/register"
+                                    className="p-header__account u-flex u-a-center "
+                                >
                                     SIGN UP
                                 </Link>
                             </div>
                             <div className="c-menusp__footer u-flex u-a-center">
                                 <Link to="/">
-                                    <img src="./assets/img/icons/instagram@2x.png" alt="" />
+                                    <img
+                                        src="./assets/img/icons/instagram@2x.png"
+                                        alt=""
+                                    />
                                 </Link>
                                 <Link to="/">
-                                    <img src="./assets/img/icons/instagram@2x.png" alt="" />
+                                    <img
+                                        src="./assets/img/icons/instagram@2x.png"
+                                        alt=""
+                                    />
                                 </Link>
                                 <p>@hambuger </p>
                             </div>
@@ -94,7 +141,7 @@ function Header({ isDark = null }) {
                 </div>
             </div>
         </header>
-    )
+    );
 }
 
-export default Header
+export default Header;

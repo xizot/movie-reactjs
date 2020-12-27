@@ -1,20 +1,6 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-
+import React from "react";
 function Account() {
-    const user = null
-    return (
-        <>
-            {
-                user ?
-                    'Account Works'
-                :
-                <Redirect to="/login" />
-            
-            }
-            
-        </>
-    )
+    return <>'Account Works</>;
 }
 
-export default Account
+export default Account;
