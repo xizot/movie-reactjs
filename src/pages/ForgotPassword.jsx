@@ -3,7 +3,7 @@ import Footer from '../components/Footer'
 import Header from '../components/Header'
 import InfoUser from '../components/InfoUser'
 
-function Info() {
+function ForgotPassword() {
     return (
         <div>
             <Header />
@@ -13,4 +13,4 @@ function Info() {
     )
 }
 
-export default Info
+export default ForgotPassword

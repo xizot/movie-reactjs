@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./actions/authen";
 import { useEffect } from "react";
 import Logout from "./components/Logout";
+import Info from "./pages/Info";
+import ForgotPassword from "./pages/ForgotPassword";
 function App() {
     const dispath = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -31,6 +33,12 @@ function App() {
                 </Route>
                 <Route path="/logout">
                     {!isAuthenticated ? <Redirect to="/login" /> : <Logout />}
+                </Route>
+		<Route path="/info">
+                    <Info/>
+                </Route>
+                <Route path="/forgotpassword">
+                    <ForgotPassword/>
                 </Route>
                 <Route exact path="/">
                     <Home />
