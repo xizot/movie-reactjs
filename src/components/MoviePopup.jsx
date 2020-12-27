@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEpisode } from '../actions/filmActions';
 function MoviePopup({ ID, title, handlePopup }) {
     const dispatch = useDispatch();
-    const listEpisode = useSelector((state) => state.filmReducer.episode);
+    const listEpisode = useSelector((state) => state.film.episode);
     const focus = (e) => {
         e.stopPropagation();
     };

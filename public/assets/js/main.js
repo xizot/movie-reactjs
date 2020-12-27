@@ -5,7 +5,7 @@ $(window).on('load', function () {
 $('.js-loading').fadeOut()
 });
 window.customSlick = () => {
-    if($('.c-slide')){
+    if($('.c-slide').length){
         $('.c-slide').on('init reInit beforeChange afterChange',function(event, slick,currentSlide, nextSlide){
             let current = currentSlide || 0;
             let totalSlide = slick.slideCount || 3;

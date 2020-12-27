@@ -5,9 +5,9 @@ import List1 from "./List1";
 import List2 from "./List2";
 function PTop() {
     const dispatch = useDispatch()
-    const listNew = useSelector(state => state.filmReducer.new)
-    const listPopular = useSelector(state => state.filmReducer.popular)
-    const listFavor = useSelector(state => state.filmReducer.favor)
+    const listNew = useSelector(state => state.film.new)
+    const listPopular = useSelector(state => state.film.popular)
+    const listFavor = useSelector(state => state.film.favor)
     useEffect(()=>{
         dispatch(getPopular())
         dispatch(getNewest())

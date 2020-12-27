@@ -11,28 +11,17 @@ function Detail1({
     actors = [],
     directors = 'SOTN',
     year = 2020,
-    nation = 'Viet Nam',
-    openWatch,
+    nation = 'Viet Nam'
 }) {
-    // const [isOpen, setIsOpen] = useState(false);
-
     const openPopUp = () => {
-        // setIsOpen(true)
         $('.p-popup').fadeIn(500);
     };
     const closePopup = () => {
-        // setIsOpen(false)
         $('.p-popup').fadeOut(500);
     };
     return (
         <div className='p-detail1'>
             <div className='l-container'>
-                {/* { isOpen == true ?  
-                <MoviePopup
-                    title = "The rise of kingdom"
-                    handlePopup = {()=>closePopup()}
-                 /> : <></>
-                 } */}
                 <MoviePopup
                     title='The rise of kingdom'
                     handlePopup={() => closePopup()}

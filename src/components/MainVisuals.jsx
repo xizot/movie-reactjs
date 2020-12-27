@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 function Mainvisuals() {
     useEffect(() => {
+        
         if(window.customSlick) window.customSlick()
     }, [])
     return (

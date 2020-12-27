@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import $ from "jquery";
+import { Link } from 'react-router-dom';
 function Header({ isDark = null }) {
     useEffect(() => {
         $('.js-bars').click(function (e) {
-            e.preventDefault();
-
-
+            e.preventDefault()
             $(this).parent().toggleClass('is-open')
         });
         $('.js-blank').click(function (e) {
@@ -18,33 +17,33 @@ function Header({ isDark = null }) {
         <header className="c-header">
             <div className={isDark ? "p-header js-header is-dark-2" : "p-header js-header "}>
                 <div className="p-header__content u-flex u-a-center u-between">
-                    <a href="/" className="p-header__logo">
+                    <Link to="/" className="p-header__logo">
                         <img src="https://themezinho.net/digiflex/images/logo.png" alt="" />
-                    </a>
+                    </Link>
                     <ul className="p-header__cgnav u-flex">
                         <li>
-                            <a href="/">HOME</a>
+                            <Link to="/">HOME</Link>
                         </li>
                         <li>
-                            <a href="/movie">MOVIES</a>
+                            <Link to="/movie">MOVIES</Link>
                         </li>
                         <li>
-                            <a href="/tv">TV SHOWS</a>
+                            <Link to="/tv">TV SHOWS</Link>
                         </li>
                         <li>
-                            <a href="/tips">ABOUT</a>
+                            <Link to="/tips">ABOUT</Link>
                         </li>
                     </ul>
                     <div className="p-header__actions u-flex u-a-center">
-                        <a href="/" className="p-header__search">
+                        <Link to="/" className="p-header__search">
                             <SearchOutlined />
-                        </a>
-                        <a href="/account" className="p-header__account u-flex u-a-center ">
+                        </Link>
+                        <Link to="/account" className="p-header__account u-flex u-a-center ">
                             <p>ACCOUNT</p>
                             <div className="icon-circle">
                                 <UserOutlined />
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="c-menusp">
@@ -61,33 +60,33 @@ function Header({ isDark = null }) {
                             </div>
                             <ul className="c-menusp__cgnav">
                                 <li>
-                                    <a href="/">HOME</a>
+                                    <Link to="/">HOME</Link>
                                 </li>
                                 <li>
-                                    <a href="/">MOVIES</a>
+                                    <Link to="/">MOVIES</Link>
                                 </li>
                                 <li>
-                                    <a href="/">TV SHOWS</a>
+                                    <Link to="/">TV SHOWS</Link>
                                 </li>
                                 <li>
-                                    <a href="/">ABOUT</a>
+                                    <Link to="/">ABOUT</Link>
                                 </li>
                             </ul>
                             <div className="c-menusp__actions">
-                                <a href="/" className="p-header__search">
+                                <Link to="/login" className="p-header__search">
                                     LOGIN
-                                </a>
-                                <a href="/register" className="p-header__account u-flex u-a-center ">
+                                </Link>
+                                <Link to="/register" className="p-header__account u-flex u-a-center ">
                                     SIGN UP
-                                </a>
+                                </Link>
                             </div>
                             <div className="c-menusp__footer u-flex u-a-center">
-                                <a href="/">
+                                <Link to="/">
                                     <img src="./assets/img/icons/instagram@2x.png" alt="" />
-                                </a>
-                                <a href="/">
+                                </Link>
+                                <Link to="/">
                                     <img src="./assets/img/icons/instagram@2x.png" alt="" />
-                                </a>
+                                </Link>
                                 <p>@hambuger </p>
                             </div>
                         </div>

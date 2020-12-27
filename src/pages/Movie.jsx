@@ -12,14 +12,14 @@ import { openWatch } from '../actions/watchActions';
 function Movie() {
     window.scrollTo(0, 0);
 
-    const isWatch = useSelector((state) => state.watchReducer.isWatch);
+    const isWatch = useSelector((state) => state.watch.isWatch);
     const [episode, setEpisode] = useState(1);
     // const [isMovie, setIsMovie] = useState(false);
     // const [isTV, setIsTV] = useState(false);
     const [ID, setID] = useState(null);
 
 
-    const listNew = useSelector((state) => state.filmReducer.new);
+    const listNew = useSelector((state) => state.film.new);
     const dispatch = useDispatch();
 
 
