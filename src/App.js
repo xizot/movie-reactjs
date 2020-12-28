@@ -11,6 +11,8 @@ import Logout from "./components/Logout";
 import Info from "./pages/Info";
 import ForgotPassword from "./pages/ForgotPassword";
 import Recovery from "./pages/Recovery";
+import VerifyEmail from "./pages/VerifyEmail";
+
 function App() {
     const dispath = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -35,11 +37,14 @@ function App() {
                 <Route path="/logout">
                     {!isAuthenticated ? <Redirect to="/login" /> : <Logout />}
                 </Route>
-		<Route path="/info">
-                    <Info/>
+                <Route path="/info">
+                    <Info />
                 </Route>
                 <Route path="/forgotpassword">
-                    <ForgotPassword/>
+                    {!isAuthenticated ? <ForgotPassword /> : <Redirect to="/" />}
+                </Route>
+                <Route path="/verifyemail">
+                    {!isAuthenticated ? <VerifyEmail /> : <Redirect to="/" />}
                 </Route>
                 <Route path="/recovery">
                     <Recovery/>

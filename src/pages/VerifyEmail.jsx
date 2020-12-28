@@ -1,15 +1,16 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import RegisterComponent from '../components/Register'
-function Register() {
+import VerifyEmailComponent from '../components/VerifyEmail'
+
+function VerifyEmail() {
     return (
         <div>
             <Header />
-            <RegisterComponent />
+            <VerifyEmailComponent />
             <Footer />
         </div>
     )
 }
 
-export default Register
+export default VerifyEmail;

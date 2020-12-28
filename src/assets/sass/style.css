@@ -2483,6 +2483,19 @@ img {
   color: #fff;
 }
 
+.c-form__title-mid {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+}
+
+.c-form__text {
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  color: #fff;
+}
+
 .c-form__group {
   height: 50px;
   width: 100%;
@@ -2567,6 +2580,14 @@ img {
 
 .c-form__below a:hover {
   text-decoration: underline;
+}
+
+.c-form__warning {
+  display: block;
+  font-size: 1.2rem;
+  color: orangered;
+  padding-bottom: 20px;
+  margin-top: -15px;
 }
 
 .c-form .c-btn {
