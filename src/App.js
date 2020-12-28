@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import Logout from "./components/Logout";
 import Info from "./pages/Info";
 import ForgotPassword from "./pages/ForgotPassword";
+import Recovery from "./pages/Recovery";
 function App() {
     const dispath = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -39,6 +40,9 @@ function App() {
                 </Route>
                 <Route path="/forgotpassword">
                     <ForgotPassword/>
+                </Route>
+                <Route path="/recovery">
+                    <Recovery/>
                 </Route>
                 <Route exact path="/">
                     <Home />

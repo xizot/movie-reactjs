@@ -1,16 +1,16 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import ForgotPasswordCom from '../components/ForgotPassword'
+import RecoveryCom from '../components/Recovery'
 
-function ForgotPassword() {
+function RecoveryPassword() {
     return (
         <div>
             <Header />
-            <ForgotPasswordCom />
+            <RecoveryCom />
             <Footer />
         </div>
     )
 }
 
-export default ForgotPassword
+export default RecoveryPassword

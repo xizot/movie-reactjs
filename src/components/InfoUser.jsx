@@ -16,31 +16,55 @@ function InfoUser() {
                                 <label className='d-form__label'>
                                     Username
                                 </label>
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                />
                             </div>
                             <div className='d-form__group'>
                                 <label className='d-form__label'>
                                     Fullname
                                 </label>
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                />
                             </div>
                             <div className='d-form__group'>
                                 <label className='d-form__label'>
                                    Date of Birth
                                 </label>
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                />
                             </div>
                             <div className='d-form__group'>
                                 <label className='d-form__label'>
                                     Phonenumber
                                 </label>
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                />
                             </div>
                             <div className='d-form__group'>
                                 <label className='d-form__label'>
                                     Address
                                 </label>
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                />
                             </div>
                             <div className='d-form__group'>
                                 <label className='d-form__label'>
                                     Usertype
                                 </label>
+                                <input
+                                    className="c-form__input"
+                                    type="text"
+                                />
                             </div>
                             <div className='d-form__actions'>
                                 <button
