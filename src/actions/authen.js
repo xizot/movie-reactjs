@@ -25,31 +25,34 @@ export const login = (username, password) => (dispatch) => {
             });
         })
         .catch((err) => {
-            dispatch(
-                getError(err.response.data, err.response.status, LOGIN_FAIL)
-            );
+            if (err.response) {
+                dispatch(
+                    getError(err.response.data, err.response.status, LOGIN_FAIL)
+                );
+            }
             dispatch({
                 type: LOGIN_FAIL,
             });
         });
 };
 //register
-export const register = ({
+export const register = (
     username,
     displayName,
     email,
     password,
     confirmPassword,
     dateOfBirth,
-}) => (dispatch) => {
-    const body = JSON.stringify({
+) => (dispatch) => {
+
+    const body = {
         username,
         displayName,
         email,
         password,
         confirmPassword,
         dateOfBirth,
-    });
+    };
     axios
         .post("/auth/register/", body)
         .then((res) => {
@@ -57,14 +60,19 @@ export const register = ({
                 type: REGISTER_SUCCESS,
                 payload: res.data,
             });
+            alert("success, please check your mail box")
         })
         .catch((err) => {
-            dispatch(
-                getError(err.response.data, err.response.status, REGISTER_FAIL)
-            );
+            if (err.response) {
+                dispatch(
+                    getError(err.response.data, err.response.status, REGISTER_FAIL)
+                );
+            }
             dispatch({
                 type: REGISTER_FAIL,
             });
+            let errList = err.response.data.errors.map(i => i['msg']).join('\n')
+            alert(errList)
         });
 };
 

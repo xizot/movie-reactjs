@@ -78,7 +78,7 @@ function Login() {
                             </div>
                         </form>
                         <div className="c-form__below">
-                            <Link to="/register">Need help?</Link>
+                            <Link to="/forgotpassword">Forgot password?</Link>
                         </div>
                         <div className="c-form__below">
                             <Link to="/register">Need an account?</Link>
