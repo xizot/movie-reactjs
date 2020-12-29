@@ -1,4 +1,4 @@
-import { OPEN_WATCH, CLOSE_WATCH } from '../types/watch';
+import { OPEN_WATCH, CLOSE_WATCH } from "../types/watch.type";
 
 const initialState = {
     isWatch: false,

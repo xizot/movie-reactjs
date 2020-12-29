@@ -1,19 +1,19 @@
-import React from 'react';
-import Plyr from 'plyr-react';
-import 'plyr-react/dist/plyr.css';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { closeWatch } from '../actions/watchActions';
+import React from "react";
+import Plyr from "plyr-react";
+import "plyr-react/dist/plyr.css";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { closeWatch } from "../actions/watch.action";
 
 function Watch({
-    videoSrc = 'https://storage.whitefoo.workers.dev/Encodes/Mama_2013_1080p.mp4',
+    videoSrc = "https://storage.whitefoo.workers.dev/Encodes/Mama_2013_1080p.mp4",
     listEpisode = [],
     ID,
     ep,
 }) {
     const dispatch = useDispatch();
     const videoSettings = {
-        type: 'video',
+        type: "video",
         sources: [
             {
                 src: videoSrc,

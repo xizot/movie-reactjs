@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-import { register } from "./../actions/authen";
+import { register } from "./../actions/user.action";
 import { useDispatch } from "react-redux";
+import FormError from "./FormError";
 function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -10,20 +11,39 @@ function Register() {
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
     const dispath = useDispatch();
+    const [errorValidator, setErrorValidator] = useState({
+        confirmPassword: false,
+        username: false,
+        name: false,
+        email: false,
+        password: false,
+        birth: false,
+    });
 
     //this function should be in HELPERS PUBLIC
     const convertDate = (YYYYMMDD) => {
         let year = YYYYMMDD[0] + YYYYMMDD[1] + YYYYMMDD[2] + YYYYMMDD[3];
         let month = YYYYMMDD[5] + YYYYMMDD[6];
         let day = YYYYMMDD[8] + YYYYMMDD[9];
-        return day + '-' + month + '-' + year;
+        return day + "-" + month + "-" + year;
     };
 
     const handleRegister = () => {
-        let newDateOfBirth = convertDate(dateOfBirth) //need format to DD-MM-YYYY
-        dispath(register(username, displayName, email, password, confirmPassword, newDateOfBirth));
+        let newDateOfBirth = convertDate(dateOfBirth);
+        // please check before
+        setErrorValidator({ ...errorValidator });
+        //need format to DD-MM-YYYY
+        dispath(
+            register(
+                username,
+                displayName,
+                email,
+                password,
+                confirmPassword,
+                newDateOfBirth
+            )
+        );
     };
 
     const handleUsername = (e) => {
@@ -62,7 +82,6 @@ function Register() {
             setConfirmPassword(value);
         }
     };
-
     useEffect(() => {
         let $input = $(".c-form__input");
         $input
@@ -74,7 +93,8 @@ function Register() {
             .focus(function () {
                 $(this).parent().addClass("is-focus");
             });
-    }, []);
+    }, [errorValidator]);
+
     return (
         <>
             <div className="register">
@@ -94,28 +114,35 @@ function Register() {
                                     onChange={(e) => handleUsername(e)}
                                 />
                             </div>
-                            <div className='c-form__warning'> ✤ Username must be alphanumeric, between 3 and 32 characters long </div>
+                            {errorValidator && errorValidator.username && (
+                                <FormError text="Username must be alphanumeric, between 3 and 32 characters long" />
+                            )}
                             <div className="c-form__group">
                                 <label className="c-form__label">Email</label>
                                 <input
                                     className="c-form__input"
                                     type="email"
                                     value={email}
-                                    onChange={(e) => handleEmail(e)} />
+                                    onChange={(e) => handleEmail(e)}
+                                />
                             </div>
-                            <div className='c-form__warning'> ✤ Email must be valid</div>
-                            <div className='c-form__group'>
-                                <label className='c-form__label'>
+                            {errorValidator && errorValidator.email && (
+                                <FormError text="Email must be valid" />
+                            )}
+                            <div className="c-form__group">
+                                <label className="c-form__label">
                                     Display name
                                 </label>
                                 <input
-                                    className='c-form__input'
-                                    type='text'
+                                    className="c-form__input"
+                                    type="text"
                                     value={displayName}
                                     onChange={(e) => handleDisplayName(e)}
                                 />
                             </div>
-                            <div className='c-form__warning'> ✤ Display name must be less than 32 characters long</div>
+                            {errorValidator && errorValidator.name && (
+                                <FormError text="Display name must be less than 32 characters long" />
+                            )}
                             <div className="c-form__group is-focus">
                                 <label className="c-form__label">
                                     Birthday
@@ -129,7 +156,9 @@ function Register() {
                                     onChange={(e) => handleDateOfBirth(e)}
                                 />
                             </div>
-                            <div className='c-form__warning'> ✤ Date of birth must not be after the current date</div>
+                            {errorValidator && errorValidator.birth && (
+                                <FormError text="Date of birth must not be after the current date" />
+                            )}
                             <div className="c-form__group">
                                 <label className="c-form__label">
                                     Password
@@ -142,7 +171,10 @@ function Register() {
                                     onChange={(e) => handlePassword(e)}
                                 />
                             </div>
-                            <div className='c-form__warning'> ✤ Password must be between 8 and 128 characters long</div>
+                            {errorValidator && errorValidator.password && (
+                                <FormError text="Password must be between 8 and 128 characters long" />
+                            )}
+
                             <div className="c-form__group">
                                 <label className="c-form__label">
                                     Retype password
@@ -154,7 +186,11 @@ function Register() {
                                     onChange={(e) => handleConfirmPassword(e)}
                                 />
                             </div>
-                            <div className='c-form__warning'> ✤ Passwords and confirm passwords do not match</div>
+
+                            {errorValidator &&
+                                errorValidator.confirmPassword && (
+                                    <FormError text="Passwords and confirm passwords do not match" />
+                                )}
                             <div className="c-form__actions">
                                 <button
                                     className="c-btn c-btn--primary"

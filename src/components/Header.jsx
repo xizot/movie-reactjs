@@ -53,7 +53,7 @@ function Header({ isDark = null }) {
                         {isAuthenticated ? (
                             <>
                                 <Link
-                                    to="/logout"
+                                    to="/login"
                                     className="p-header__account u-flex u-a-center "
                                 >
                                     <p>LOGOUT</p>
@@ -69,16 +69,16 @@ function Header({ isDark = null }) {
                                 </Link>
                             </>
                         ) : (
-                                <Link
-                                    to="/login"
-                                    className="p-header__account u-flex u-a-center "
-                                >
-                                    <p>LOGIN</p>
-                                    <div className="icon-circle">
-                                        <UserOutlined />
-                                    </div>
-                                </Link>
-                            )}
+                            <Link
+                                to="/login"
+                                className="p-header__account u-flex u-a-center "
+                            >
+                                <p>LOGIN</p>
+                                <div className="icon-circle">
+                                    <UserOutlined />
+                                </div>
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <div className="c-menusp">

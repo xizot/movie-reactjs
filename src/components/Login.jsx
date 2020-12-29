@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-import { login } from "./../actions/authen";
+import { login, logout } from "./../actions/user.action";
 import { useDispatch } from "react-redux";
 function Login() {
     const [username, setUsername] = useState("");
@@ -25,6 +25,8 @@ function Login() {
         }
     };
     useEffect(() => {
+        dispath(logout());
+
         let $input = $(".c-form__input");
         $input
             .blur(function () {
@@ -35,7 +37,7 @@ function Login() {
             .focus(function () {
                 $(this).parent().addClass("is-focus");
             });
-    }, []);
+    }, [dispath]);
     return (
         <>
             <div className="login">

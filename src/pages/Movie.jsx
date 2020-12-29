@@ -5,9 +5,9 @@ import queryString from "query-string";
 import Detail from "../components/Detail";
 import List2 from "../components/List2";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewest } from "../actions/filmActions";
+import { getNewest } from "../actions/film.action";
 import Watch from "../components/Watch";
-import { openWatch } from "../actions/watchActions";
+import { openWatch } from "../actions/watch.action";
 import Loading from "../components/Loading";
 // import axios from "./../axios";
 function Movie() {
@@ -25,7 +25,6 @@ function Movie() {
 
     useEffect(() => {
         dispatch(getNewest());
-      
         const parsed = queryString.parse(window.location.search);
         let ep = parsed.ep || 1;
         if (ep) setEpisode(ep);

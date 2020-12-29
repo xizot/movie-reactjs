@@ -8,15 +8,15 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     VERIFY_SUCCESS,
-    VERIFY_FAIL
-} from "../types/authenType";
+    VERIFY_FAIL,
+} from "../types/auth.type";
 
 const initialState = {
     token: localStorage.getItem("token"),
     refreshToken: null,
     isAuthenticated: false,
     isLoading: false,
-    user: null,
+    user: localStorage.getItem("user"),
     register: false,
 };
 
@@ -28,6 +28,8 @@ const authenReducer = (state = initialState, action) => {
                 isLoading: true,
             };
         case USER_LOADED:
+            localStorage.setItem("user", JSON.stringify(action.payload));
+
             return {
                 ...state,
                 isAuthenticated: true,
@@ -58,6 +60,7 @@ const authenReducer = (state = initialState, action) => {
         case LOGOUT_SUCCESS:
             localStorage.removeItem("token");
             localStorage.removeItem("refreshToken");
+            localStorage.removeItem("user");
             return {
                 token: null,
                 refreshToken: null,

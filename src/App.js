@@ -1,59 +1,39 @@
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
-import Movie from "./pages/Movie";
-import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "./actions/authen";
+import { useDispatch } from "react-redux";
+import { loadUser } from "./actions/user.action";
 import { useEffect } from "react";
-import Logout from "./components/Logout";
 import Info from "./pages/Info";
 import ForgotPassword from "./pages/ForgotPassword";
 import Recovery from "./pages/Recovery";
 import VerifyEmail from "./pages/VerifyEmail";
-
+import { PrivateRoute } from "./components/common/ProtectedRoute";
+import { history } from "./helper";
 function App() {
     const dispath = useDispatch();
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
     useEffect(() => {
         dispath(loadUser());
-    }, [dispath, isAuthenticated]);
+    }, [dispath]);
+
     return (
         <div className="App">
-            <Switch>
-                <Route path="/movie">
-                    <Movie />
-                </Route>
-                <Route path="/account">
-                    {!isAuthenticated ? <Redirect to="/login" /> : <Account />}
-                </Route>
-                <Route path="/register">
-                    {!isAuthenticated ? <Register /> : <Redirect to="/" />}
-                </Route>
-                <Route path="/login">
-                    {!isAuthenticated ? <Login /> : <Redirect to="/" />}
-                </Route>
-                <Route path="/logout">
-                    {!isAuthenticated ? <Redirect to="/login" /> : <Logout />}
-                </Route>
-                <Route path="/info">
-                    <Info />
-                </Route>
-                <Route path="/forgotpassword">
-                    {!isAuthenticated ? <ForgotPassword /> : <Redirect to="/" />}
-                </Route>
-                <Route path="/verifyemail">
-                    <VerifyEmail />
-                </Route>
-                <Route path="/recovery">
-                    <Recovery />
-                </Route>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route>404 Not Found</Route>
-            </Switch>
+            <Router history={history}>
+                <PrivateRoute path="/account" component={Account} />
+                <PrivateRoute path="/info" component={Info} />
+                <PrivateRoute
+                    path="/forgotpassword"
+                    component={ForgotPassword}
+                />
+                <Route path="/verifyemail" component={VerifyEmail} />
+                <Route path="/recovery" component={Recovery} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route exact path="/" component={Home} />
+            </Router>
         </div>
     );
 }
