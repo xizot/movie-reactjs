@@ -13,7 +13,7 @@ function VerifyEmail() {
     useEffect(() => {
         let code = getCode()
         console.log("code", code)
-        if (code && code.length >= 0) {
+        if (code && code.length > 0) {
             dispath(verifyEmail(code));
         }
     }, []);
