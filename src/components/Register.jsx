@@ -13,9 +13,17 @@ function Register() {
 
     const dispath = useDispatch();
 
+    //this function should be in HELPERS PUBLIC
+    const convertDate = (YYYYMMDD) => {
+        let year = YYYYMMDD[0] + YYYYMMDD[1] + YYYYMMDD[2] + YYYYMMDD[3];
+        let month = YYYYMMDD[5] + YYYYMMDD[6];
+        let day = YYYYMMDD[8] + YYYYMMDD[9];
+        return day + '-' + month + '-' + year;
+    };
+
     const handleRegister = () => {
-        let newDateOfBirth = dateOfBirth //need format to DD-MM-YYYY
-        dispath(register(username, displayName, email, password, confirmPassword, dateOfBirth));
+        let newDateOfBirth = convertDate(dateOfBirth) //need format to DD-MM-YYYY
+        dispath(register(username, displayName, email, password, confirmPassword, newDateOfBirth));
     };
 
     const handleUsername = (e) => {

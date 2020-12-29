@@ -1,6 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { verifyEmail } from "./../actions/authen";
+import queryString from 'query-string';
 
 function VerifyEmail() {
+    const dispath = useDispatch();
+
+    const getCode = () => {
+        const val = queryString.parse(window.location.search)
+        return val.code; // CurrentURL?code=value    return value
+    }
+    useEffect(() => {
+        let code = getCode()
+        console.log("code", code)
+        if (code && code.length >= 0) {
+            dispath(verifyEmail(code));
+        }
+    }, []);
+
     return (
         <>
             <div className="login">

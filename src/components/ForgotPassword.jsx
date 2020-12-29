@@ -1,6 +1,18 @@
-import React from "react";
-//import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import $ from "jquery";
 function ForgotPassword() {
+    useEffect(() => {
+        let $input = $(".c-form__input");
+        $input
+            .blur(function () {
+                if (!$(this).val()) {
+                    $(this).parent().removeClass("is-focus");
+                }
+            })
+            .focus(function () {
+                $(this).parent().addClass("is-focus");
+            });
+    }, []);
     return (
         <>
             <div className="login">
@@ -15,9 +27,9 @@ function ForgotPassword() {
                                 </label>
                                 <input
                                     className="c-form__input"
-                                    type="text"
+                                    type="email"
                                 />
-                            </div>                           
+                            </div>
                             <div className="c-form__actions">
                                 <button
                                     className="c-btn c-btn--primary"

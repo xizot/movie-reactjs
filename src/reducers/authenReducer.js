@@ -7,6 +7,8 @@ import {
     USER_LOADING,
     USER_LOADED,
     AUTH_ERROR,
+    VERIFY_SUCCESS,
+    VERIFY_FAIL
 } from "../types/authenType";
 
 const initialState = {
@@ -49,6 +51,8 @@ const authenReducer = (state = initialState, action) => {
                 isLoading: false,
             };
         case LOGIN_FAIL:
+        case VERIFY_FAIL:
+        case VERIFY_SUCCESS:
         case AUTH_ERROR:
         case REGISTER_FAIL:
         case LOGOUT_SUCCESS:

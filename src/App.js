@@ -44,10 +44,10 @@ function App() {
                     {!isAuthenticated ? <ForgotPassword /> : <Redirect to="/" />}
                 </Route>
                 <Route path="/verifyemail">
-                    {!isAuthenticated ? <VerifyEmail /> : <Redirect to="/" />}
+                    <VerifyEmail />
                 </Route>
                 <Route path="/recovery">
-                    <Recovery/>
+                    <Recovery />
                 </Route>
                 <Route exact path="/">
                     <Home />

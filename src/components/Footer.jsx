@@ -9,7 +9,7 @@ function Footer() {
                 <div className="l-container">
                     <div className="p-footer__top u-flex u-between u-a-center">
                         <a href="/" className="p-footer__logo">
-                            <img src="https://themezinho.net/digiflex/images/logo.png" alt=""/>
+                            <img src="https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png" alt="" />
                         </a>
                         <div className="p-footer__cgnav u-flex u-a-center">
                             <a href="/" className="p-footer__socials">
@@ -95,7 +95,7 @@ function Footer() {
                     </div>
                 </div>
                 <p className="p-footer__copyright">
-                    Copyright © 2019, SOTN. All Rights Reserved
+                    Copyright © 2020, HAMBURGER. All Rights Reserved
                 </p>
             </div>
         </footer>

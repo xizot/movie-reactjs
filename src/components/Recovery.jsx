@@ -1,6 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import $ from "jquery";
 function Recovery() {
+    useEffect(() => {
+        let $input = $(".c-form__input");
+        $input
+            .blur(function () {
+                if (!$(this).val()) {
+                    $(this).parent().removeClass("is-focus");
+                }
+            })
+            .focus(function () {
+                $(this).parent().addClass("is-focus");
+            });
+    }, []);
     return (
         <>
             <div className="login">
@@ -11,22 +23,22 @@ function Recovery() {
                         <form action="">
                             <div className="c-form__group">
                                 <label className="c-form__label">
-                                    Password
+                                    New password
                                 </label>
                                 <input
                                     className="c-form__input"
-                                    type="text"
+                                    type="password"
                                 />
                             </div>
                             <div className="c-form__group">
                                 <label className="c-form__label">
-                                    Re-password
+                                    Retype new password
                                 </label>
                                 <input
                                     className="c-form__input"
-                                    type="text"
+                                    type="password"
                                 />
-                            </div>                            
+                            </div>
                             <div className="c-form__actions">
                                 <button
                                     className="c-btn c-btn--primary"

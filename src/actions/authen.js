@@ -7,6 +7,8 @@ import {
     USER_LOADED,
     AUTH_ERROR,
     LOGOUT_SUCCESS,
+    VERIFY_SUCCESS,
+    VERIFY_FAIL
 } from "../types/authenType";
 import axios from "./../axios";
 import { getError } from "./errorActions";
@@ -67,12 +69,38 @@ export const register = (
                 dispatch(
                     getError(err.response.data, err.response.status, REGISTER_FAIL)
                 );
+                let errList = err.response.data.errors.map(i => i['msg']).join('\n')
+                alert(errList)
             }
             dispatch({
                 type: REGISTER_FAIL,
             });
-            let errList = err.response.data.errors.map(i => i['msg']).join('\n')
-            alert(errList)
+
+        });
+};
+
+//verify Email
+export const verifyEmail = (activationCode) => (dispatch) => {
+    axios
+        .post("/auth/confirmemail/", { activationCode })
+        .then((res) => {
+            dispatch({
+                type: VERIFY_SUCCESS,
+                payload: res.data,
+            });
+            alert("Email confirmed!")
+        })
+        .catch((err) => {
+            if (err.response) {
+                dispatch(
+                    getError(err.response.data, err.response.status, VERIFY_FAIL)
+                );
+
+                alert("Failed to confirm email!")
+            }
+            dispatch({
+                type: VERIFY_FAIL,
+            });
         });
 };
 

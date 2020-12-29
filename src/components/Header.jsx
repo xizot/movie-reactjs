@@ -28,7 +28,7 @@ function Header({ isDark = null }) {
                 <div className="p-header__content u-flex u-a-center u-between">
                     <Link to="/" className="p-header__logo">
                         <img
-                            src="https://themezinho.net/digiflex/images/logo.png"
+                            src="https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png"
                             alt=""
                         />
                     </Link>
@@ -69,16 +69,16 @@ function Header({ isDark = null }) {
                                 </Link>
                             </>
                         ) : (
-                            <Link
-                                to="/login"
-                                className="p-header__account u-flex u-a-center "
-                            >
-                                <p>LOGIN</p>
-                                <div className="icon-circle">
-                                    <UserOutlined />
-                                </div>
-                            </Link>
-                        )}
+                                <Link
+                                    to="/login"
+                                    className="p-header__account u-flex u-a-center "
+                                >
+                                    <p>LOGIN</p>
+                                    <div className="icon-circle">
+                                        <UserOutlined />
+                                    </div>
+                                </Link>
+                            )}
                     </div>
                 </div>
                 <div className="c-menusp">
