@@ -10,6 +10,7 @@ import Info from './pages/Info';
 import ForgotPassword from './pages/ForgotPassword';
 import Recovery from './pages/Recovery';
 import VerifyEmail from './pages/VerifyEmail';
+import Movie from './pages/Movie';
 import { PrivateRoute } from './components/common/ProtectedRoute';
 import { history } from './helper';
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path='/verifyemail' component={VerifyEmail} />
                 <Route path='/recovery' component={Recovery} />
                 <Route path='/login' component={Login} />
+                <Route path='/movie' component={Movie} />
                 <Route path='/register' component={Register} />
                 <Route exact path='/' component={Home} />
             </Router>
