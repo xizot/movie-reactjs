@@ -46,7 +46,7 @@
     }
     .index_form{
         display: flex;
-        background-image: url('../img/background-info.png');
+        background-color: #000;
     }
     .title_form{
         display:flex;
@@ -65,7 +65,7 @@
         border:none;
         background-color: #FF0000;
         color:white;
-        border-radius: 30px / 20px;
+        border-radius: 20px / 30px;
     }
     &__left{
         display: unset;

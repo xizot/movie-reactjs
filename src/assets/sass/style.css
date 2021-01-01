@@ -2823,7 +2823,7 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-image: url("../img/background-info.png");
+  background-color: #000;
 }
 
 .infouser .title_form {
@@ -2844,7 +2844,7 @@ img {
   border: none;
   background-color: #FF0000;
   color: white;
-  border-radius: 30px / 20px;
+  border-radius: 20px / 30px;
 }
 
 .infouser__left {
