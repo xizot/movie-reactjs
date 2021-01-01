@@ -61,3 +61,10 @@
 .is-hide {
     display: none;
 }
+.is-fade {
+    opacity: 1;
+    transition: opacity 1s ease;
+    &--show {
+        opacity: 0;
+    }
+}

@@ -1717,7 +1717,13 @@ img {
   height: 100%;
   z-index: 999999;
   overflow: hidden;
-  background-color: #131722;
+  background-color: #000;
+  pointer-events: none;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+  -webkit-transition-delay: 0.7s;
+          transition-delay: 0.7s;
 }
 
 .c-loading__content {
@@ -1737,8 +1743,13 @@ img {
 .c-loading__line {
   width: 250px;
   height: 1px;
-  background-color: white;
+  background-color: transparent;
   position: relative;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+  -webkit-transition-delay: 0.2s;
+          transition-delay: 0.2s;
 }
 
 .c-loading__line::before {
@@ -1746,11 +1757,19 @@ img {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #e90101;
+  background-color: #fff;
   height: 100%;
   width: 0%;
   -webkit-animation: right 1s linear forwards;
           animation: right 1s linear forwards;
+}
+
+.c-loading.is-fadeout {
+  opacity: 0;
+}
+
+.c-loading.is-fadeout .c-loading__line {
+  opacity: 0;
 }
 
 @-webkit-keyframes right {
@@ -2542,6 +2561,16 @@ img {
   color: #f1f1f1;
 }
 
+.c-form__input:focus + .c-form__label {
+  font-size: 1.2rem;
+  top: 12px;
+}
+
+.c-form__input:valid + .c-form__label {
+  font-size: 1.2rem;
+  top: 12px;
+}
+
 .c-form__input_date {
   height: 50px;
   width: 100%;
@@ -2935,5 +2964,15 @@ img {
 
 .is-hide {
   display: none;
+}
+
+.is-fade {
+  opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+}
+
+.is-fade--show {
+  opacity: 0;
 }
 /*# sourceMappingURL=style.css.map */

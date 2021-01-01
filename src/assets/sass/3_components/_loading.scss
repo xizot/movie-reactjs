@@ -6,7 +6,11 @@
     height: 100%;
     z-index: 999999;
     overflow: hidden;
-    background-color: $bgBold;
+    background-color: #000;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    transition-delay: 0.7s;
     &__content {
         display: flex;
         justify-content: center;
@@ -17,18 +21,27 @@
     &__line {
         width: 250px;
         height: 1px;
-        background-color: white;
+        background-color: transparent;
         position: relative;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+        transition-delay: 0.2s;
         &::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
-            background-color: $mainColor;
+            background-color: #fff;
             height: 100%;
             width: 0%;
             animation: right 1s linear forwards;
         }
+    }
+    &.is-fadeout {
+        opacity: 0;
+    }
+    &.is-fadeout &__line {
+        opacity: 0;
     }
 }
 

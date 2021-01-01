@@ -29,11 +29,9 @@
         margin-bottom: 20px;
         background: #333;
         position: relative;
-        &.is-focus {
-            label {
-                font-size: 1.2rem;
-                top: 12px;
-            }
+        &.is-focus label {
+            font-size: 1.2rem;
+            top: 12px;
         }
     }
     &__label {
@@ -62,7 +60,15 @@
         letter-spacing: 0.72px;
         color: #f1f1f1;
     }
-    &__input_date{
+    &__input:focus + &__label {
+        font-size: 1.2rem;
+        top: 12px;
+    }
+    &__input:valid + &__label {
+        font-size: 1.2rem;
+        top: 12px;
+    }
+    &__input_date {
         height: 50px;
         width: 100%;
         padding: 20px 20px 2px;
@@ -95,7 +101,7 @@
             }
         }
     }
-    &__warning{
+    &__warning {
         display: block;
         font-size: 1.2rem;
         color: orangered;
