@@ -23,7 +23,7 @@ function App() {
         <div className="App">
             <Router history={history}>
                 <PrivateRoute path="/account" component={Account} />
-                <PrivateRoute path="/info" component={Info} />
+                <Route path="/info" component={Info} />
                 <PrivateRoute
                     path="/forgotpassword"
                     component={ForgotPassword}

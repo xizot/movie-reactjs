@@ -1,5 +1,18 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import $ from "jquery";
 function InfoUser() {
+    useEffect(() => {
+        let $input = $(".c-form__input");
+        $input
+            .blur(function () {
+                if (!$(this).val()) {
+                    $(this).parent().removeClass("is-focus");
+                }
+            })
+            .focus(function () {
+                $(this).parent().addClass("is-focus");
+            });
+    }, []);
     return (
         <>
             <div className='infouser'>
@@ -11,15 +24,6 @@ function InfoUser() {
                             <div >
                                 <image className='d-form__image'>
                                 </image>
-                            </div>
-                            <div className='d-form__group'>
-                                <label className='d-form__label'>
-                                    Username
-                                </label>
-                                <input
-                                    className="c-form__input"
-                                    type="text"
-                                />
                             </div>
                             <div className='d-form__group'>
                                 <label className='d-form__label'>
@@ -61,14 +65,10 @@ function InfoUser() {
                                 <label className='d-form__label'>
                                     Usertype
                                 </label>
-                                <input
-                                    className="c-form__input"
-                                    type="text"
-                                />
                             </div>
                             <div className='d-form__actions'>
                                 <button
-                                    className='d-btn c-btn--info'
+                                    className='d-btn c-btn--primary'
                                     type='button'
                                 >
                                   Update
