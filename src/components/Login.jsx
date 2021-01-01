@@ -10,7 +10,11 @@ function Login() {
     const handleLogin = () => {
         dispath(login(username, password));
     };
-
+    const onKeyPress = (e) => {
+        if(e.which === 13) {
+            handleLogin()
+        }
+      }
     const handleUsername = (e) => {
         let value = e.target.value;
         if (value.length >= 0) {
@@ -39,6 +43,7 @@ function Login() {
                                     className='c-form__input'
                                     type='text'
                                     value={username}
+                                    onKeyPress={(e)=>onKeyPress(e)}
                                     onChange={(e) => handleUsername(e)}
                                     required
                                 />
@@ -52,6 +57,8 @@ function Login() {
                                     type='password'
                                     value={password}
                                     autoComplete='new-password'
+                                    onKeyPress={(e)=>onKeyPress(e)}
+
                                     onChange={(e) => handlePassword(e)}
                                     required
                                 />

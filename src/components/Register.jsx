@@ -201,6 +201,7 @@ function Register() {
                             <Link to='/login'>Already have a account?</Link>
                         </div>
                     </div>
+                
                 </div>
             </div>
         </>

@@ -6,6 +6,18 @@
     position: relative;
     z-index: 1;
     border-radius: 5px;
+   .row{
+    margin-right: -5px;
+    margin-left: -5px;
+   }
+    div[class^="col-"]{
+        position: relative;
+        padding: 0 5px;
+    }
+
+    @include breakpoint(tab) {
+        width: 100%;
+    }
     @include breakpoint(sp) {
         padding: 30px 20px;
     }

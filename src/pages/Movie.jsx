@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNewest } from "../actions/film.action";
 import Watch from "../components/Watch";
 import { openWatch } from "../actions/watch.action";
-import Loading from "../components/Loading";
 // import axios from "./../axios";
 function Movie() {
     window.scrollTo(0, 0);
@@ -18,8 +17,7 @@ function Movie() {
     const [ID, setID] = useState(null);
     // const [isMovie, setIsMovie] = useState(false);
     // const [isTV, setIsTV] = useState(false);
-    const [isloading, setIsLoading] = useState(false);
-
+  
     const listNew = useSelector((state) => state.film.new);
     const dispatch = useDispatch();
 
@@ -44,11 +42,9 @@ function Movie() {
         //     setIsMovie(false);
         //     setIsTV(true);
         // }
-        setIsLoading(true);
-    }, [dispatch, isloading]);
+    }, [dispatch]);
     return (
         <div className="pages-movie">
-            {!isloading && <Loading />}
             {isWatch ? (
                 <>
                     <Watch ID={ID} ep={episode} />

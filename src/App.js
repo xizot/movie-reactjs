@@ -33,7 +33,8 @@ function App() {
                 <Route path='/login' component={Login} />
                 <Route path='/movie' component={Movie} />
                 <Route path='/register' component={Register} />
-                <Route exact path='/' component={Home} />
+                {/* <Route exact path='/' component={Home} /> */}
+                <Route exact path='/' component={Info} />
             </Router>
         </div>
     );
