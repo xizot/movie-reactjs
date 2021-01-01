@@ -22,8 +22,9 @@ function App() {
     return (
         <div className='App'>
             <Router history={history}>
-                <PrivateRoute path='/account' component={Account} />
-                <PrivateRoute path='/info' component={Info} />
+
+                <PrivateRoute path="/account" component={Account} />
+                <Route path="/info" component={Info} />
                 <PrivateRoute
                     path='/forgotpassword'
                     component={ForgotPassword}
