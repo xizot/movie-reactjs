@@ -2823,7 +2823,7 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #000;
+  background-image: url("../img/background-Huy.jpg");
 }
 
 .infouser .title_form {

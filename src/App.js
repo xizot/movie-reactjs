@@ -25,7 +25,7 @@ function App() {
 
                 <PrivateRoute path="/account" component={Account} />
                 <Route path="/info" component={Info} />
-                <PrivateRoute
+                <Route
                     path='/forgotpassword'
                     component={ForgotPassword}
                 />

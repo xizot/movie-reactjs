@@ -1,18 +1,8 @@
 import React, { useEffect } from "react";
-import $ from "jquery";
+
+
 function Recovery() {
-    useEffect(() => {
-        let $input = $(".c-form__input");
-        $input
-            .blur(function () {
-                if (!$(this).val()) {
-                    $(this).parent().removeClass("is-focus");
-                }
-            })
-            .focus(function () {
-                $(this).parent().addClass("is-focus");
-            });
-    }, []);
+    
     return (
         <>
             <div className="login">
@@ -43,6 +33,7 @@ function Recovery() {
                                 <button
                                     className="c-btn c-btn--primary"
                                     type="button"
+                                    
                                 >
                                     Send
                                 </button>
