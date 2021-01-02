@@ -1,5 +1,5 @@
 import { Router, Route } from 'react-router-dom';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Account from './pages/Account';
@@ -22,13 +22,9 @@ function App() {
     return (
         <div className='App'>
             <Router history={history}>
-
-                <PrivateRoute path="/account" component={Account} />
-                <Route path="/info" component={Info} />
-                <Route
-                    path='/forgotpassword'
-                    component={ForgotPassword}
-                />
+                <PrivateRoute path='/account' component={Account} />
+                <Route path='/info' component={Info} />
+                <Route path='/forgotpassword' component={ForgotPassword} />
                 <Route path='/verifyemail' component={VerifyEmail} />
                 <Route path='/recovery' component={Recovery} />
                 <Route path='/login' component={Login} />

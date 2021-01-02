@@ -1,14 +1,11 @@
-import { history } from "../helper";
-import {
-    FORGOT_SUCCESS,
-    FORGOT_FAIL,
-} from "../types/forgot.type";
-import axios from "./../axios";
-import { getError } from "./error.action";
+// import { history } from "../helper";
+import { FORGOT_SUCCESS, FORGOT_FAIL } from '../types/forgot.type';
+import axios from './../axios';
+import { getError } from './error.action';
 
 export const recoveryEmail = (email) => (dispatch) => {
     axios
-        .post("/auth/sendrecoveryemail/", { email })
+        .post('/auth/sendrecoveryemail/', { email })
         .then((res) => {
             dispatch({
                 type: FORGOT_SUCCESS,
@@ -25,7 +22,7 @@ export const recoveryEmail = (email) => (dispatch) => {
                     )
                 );
 
-                alert("Failed to send email!");
+                alert('Failed to send email!');
             }
             dispatch({
                 type: FORGOT_FAIL,

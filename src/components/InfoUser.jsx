@@ -1,35 +1,43 @@
-import React from "react";
+import React from 'react';
 function InfoUser() {
     return (
-        <div className="infouser">
-            <div className="c-overlayer"> </div>
-            <div className="infouser__content">
-                <div className="content_form">
-                    <div className="title_form">
-                        <div className="title_form__left">
-                            <h3 className='content_form__title'>Your Profile</h3>
-                            <h5 className='content_form__son'>Edit your name, avatar, etc..</h5>
+        <div className='infouser'>
+            <div className='c-overlayer'> </div>
+            <div className='infouser__content'>
+                <div className='content_form'>
+                    <div className='title_form'>
+                        <div className='title_form__left'>
+                            <h3 className='content_form__title'>
+                                Your Profile
+                            </h3>
+                            <h5 className='content_form__son'>
+                                Edit your name, avatar, etc..
+                            </h5>
                         </div>
                         <div className='title_form__right'>
-                            <button
-                                className="x-btn c-btn"
-                                type='button'>
-                                X DISCARD CHANGES
-                            </button> 
-                        </div>             
-                    </div>     
-                    <div className="index_form">
-                        <div className="infouser__left">
-                            <label htmlFor="upload-avatar">
+                            <button className='x-btn c-btn' type='button'>
+                                <p>X</p>
+                                <span>DISCARD CHANGES</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div className='index_form'>
+                        <div className='infouser__left'>
+                            <label htmlFor='upload-avatar'>
                                 <img
                                     src={`${process.env.PUBLIC_URL}/assets/img/avata.jpg`}
                                     alt=''
                                 />
                             </label>
-                            <input type="file" name="" id="upload-avatar" style={{display:'none'}}/>
+                            <input
+                                type='file'
+                                name=''
+                                id='upload-avatar'
+                                style={{ display: 'none' }}
+                            />
                         </div>
-                        <div className="infouser__right">
-                            <div className='c-form'>                            
+                        <div className='infouser__right'>
+                            <div className='c-form'>
                                 <form action=''>
                                     <div className='c-form__group'>
                                         <input
@@ -57,9 +65,11 @@ function InfoUser() {
                                             type='text'
                                             required
                                         />
-                                        <label className='c-form__label'>EMAIL</label>
+                                        <label className='c-form__label'>
+                                            EMAIL
+                                        </label>
                                     </div>
-                                
+
                                     <div className='c-form__group is-focus'>
                                         <input
                                             className='c-form__input_date'
@@ -95,14 +105,15 @@ function InfoUser() {
                                     </div>
                                     <button
                                         className='c-btn c-btn'
-                                        type='button'>
+                                        type='button'
+                                    >
                                         SAVE CHANGES
-                                    </button> 
+                                    </button>
                                 </form>
                             </div>
                         </div>
-                    </div>                           
-                </div>            
+                    </div>
+                </div>
             </div>
         </div>
     );
