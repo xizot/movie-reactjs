@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { logout, register } from './../actions/user.action';
 import { useDispatch } from 'react-redux';
+import { convertDateTime } from '../helper/converter'
+import {validateEmail, validateUsername, validateDisplayName, validateDateOfBirth} from '../helper/validator'
 import FormError from './FormError';
 function Register() {
     const [username, setUsername] = useState('');
@@ -14,22 +16,14 @@ function Register() {
     const [errorValidator, setErrorValidator] = useState({
         confirmPassword: false,
         username: false,
-        name: false,
+        displayName: false,
         email: false,
         password: false,
-        birth: false,
+        dateOfBirth: false,
     });
 
-    //this function should be in HELPERS PUBLIC
-    const convertDate = (YYYYMMDD) => {
-        let year = YYYYMMDD[0] + YYYYMMDD[1] + YYYYMMDD[2] + YYYYMMDD[3];
-        let month = YYYYMMDD[5] + YYYYMMDD[6];
-        let day = YYYYMMDD[8] + YYYYMMDD[9];
-        return day + '-' + month + '-' + year;
-    };
-
     const handleRegister = () => {
-        let newDateOfBirth = convertDate(dateOfBirth);
+        let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
         // please check before
         setErrorValidator({ ...errorValidator });
         //need format to DD-MM-YYYY
@@ -49,24 +43,50 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setUsername(value);
+            if(validateUsername(value) === true) {
+                setErrorValidator({username:false})
+            }
+            else { 
+                //set true = appear
+                setErrorValidator({username:true})
+            }
+
         }
     };
     const handleEmail = (e) => {
         let value = e.target.value;
         if (value.length >= 0) {
             setEmail(value);
+            if(validateEmail(value) === true) {
+                setErrorValidator({email: false})
+            }
+            else {
+                setErrorValidator({email: true})
+            }
         }
     };
     const handleDisplayName = (e) => {
         let value = e.target.value;
         if (value.length >= 0) {
             setDisplayName(value);
+            if(validateDisplayName(value) === true) {
+                setErrorValidator({displayName: false})
+            }
+            else {
+                setErrorValidator({displayName: true})
+            }
         }
     };
     const handleDateOfBirth = (e) => {
         let value = e.target.value;
         if (value.length >= 0) {
             setDateOfBirth(value);
+            if(validateDateOfBirth(value) === true) {
+                setErrorValidator({dateOfBirth: false})
+            }
+            else {
+                setErrorValidator({dateOfBirth: true})
+            }
         }
     };
     const handlePassword = (e) => {
@@ -105,20 +125,20 @@ function Register() {
                                     Username
                                 </label>
                             </div>
-                            {errorValidator && errorValidator.username && (
+                            {errorValidator.username && (
                                 <FormError text='Username must be alphanumeric, between 3 and 32 characters long' />
                             )}
                             <div className='c-form__group'>
                                 <input
                                     className='c-form__input'
-                                    type='email'
+                                    type='text'
                                     value={email}
                                     onChange={(e) => handleEmail(e)}
                                     required
                                 />
                                 <label className='c-form__label'>Email</label>
                             </div>
-                            {errorValidator && errorValidator.email && (
+                            {errorValidator.email && (
                                 <FormError text='Email must be valid' />
                             )}
                             <div className='c-form__group'>
@@ -133,7 +153,7 @@ function Register() {
                                     Display name
                                 </label>
                             </div>
-                            {errorValidator && errorValidator.name && (
+                            {errorValidator && errorValidator.displayName && (
                                 <FormError text='Display name must be less than 32 characters long' />
                             )}
                             <div className='c-form__group is-focus'>
@@ -150,7 +170,7 @@ function Register() {
                                     Birthday
                                 </label>
                             </div>
-                            {errorValidator && errorValidator.birth && (
+                            {errorValidator && errorValidator.dateOfBirth && (
                                 <FormError text='Date of birth must not be after the current date' />
                             )}
                             <div className='c-form__group'>
