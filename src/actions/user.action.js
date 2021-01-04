@@ -77,7 +77,7 @@ export const register = (
                 let errList = err.response.data.errors
                     .map((i) => i["msg"])
                     .join("\n");
-                alert(errList);
+                console.log('errList: ', errList);
             }
             dispatch({
                 type: REGISTER_FAIL,

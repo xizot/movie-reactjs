@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { logout, register } from './../actions/user.action';
 import { useDispatch } from 'react-redux';
 import { convertDateTime } from '../helper/converter'
-import {validateEmail, validateUsername, validateDisplayName, validateDateOfBirth} from '../helper/validator'
 import FormError from './FormError';
+import { validateEmail, validateUsername, validateDisplayName, validateDateOfBirth, validatePassword, validateConfirmPassword } from '../helper/validator'
+
 function Register() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -12,31 +13,44 @@ function Register() {
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
     const dispath = useDispatch();
-    const [errorValidator, setErrorValidator] = useState({
-        confirmPassword: false,
-        username: false,
-        displayName: false,
-        email: false,
-        password: false,
-        dateOfBirth: false,
-    });
+
+    //can not use all with 1 state included json properties.
+    const [errorUsername, setErrorUsername] = useState(false);
+    const [errorEmail, setErrorEmail] = useState(false);
+    const [errorDisplayName, setErrorDisplayName] = useState(false);
+    const [errorDateOfBirth, setErrorDateOfBirth] = useState(false);
+    const [errorPassword, setErrorPassword] = useState(false);
+    const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
+
+    const [errorServer, setErrorServer] = useState('');
+
+    const onKeyPress = (e) => {
+        if(e.which === 13) {
+            handleRegister()
+        }
+    }
 
     const handleRegister = () => {
         let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
+        
         // please check before
-        setErrorValidator({ ...errorValidator });
-        //need format to DD-MM-YYYY
-        dispath(
-            register(
-                username,
-                displayName,
-                email,
-                password,
-                confirmPassword,
-                newDateOfBirth
-            )
-        );
+        //setErrorValidator({ ...errorValidator });
+        //if all error status are false = mean all are ok
+        if(!errorUsername && !errorEmail && !errorDisplayName && !errorDateOfBirth && !errorPassword && !errorConfirmPassword) {
+             dispath(
+                register(
+                    username,
+                    displayName,
+                    email,
+                    password,
+                    confirmPassword,
+                    newDateOfBirth,
+                )
+            );
+        }
+        
     };
 
     const handleUsername = (e) => {
@@ -44,13 +58,11 @@ function Register() {
         if (value.length >= 0) {
             setUsername(value);
             if(validateUsername(value) === true) {
-                setErrorValidator({username:false})
+                setErrorUsername(false)
             }
-            else { 
-                //set true = appear
-                setErrorValidator({username:true})
+            else {
+                setErrorUsername(true)
             }
-
         }
     };
     const handleEmail = (e) => {
@@ -58,10 +70,10 @@ function Register() {
         if (value.length >= 0) {
             setEmail(value);
             if(validateEmail(value) === true) {
-                setErrorValidator({email: false})
+                setErrorEmail(false)
             }
             else {
-                setErrorValidator({email: true})
+                setErrorEmail(true)
             }
         }
     };
@@ -69,11 +81,11 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setDisplayName(value);
-            if(validateDisplayName(value) === true) {
-                setErrorValidator({displayName: false})
+            if(validateDisplayName(value) === true){
+                setErrorDisplayName(false)
             }
             else {
-                setErrorValidator({displayName: true})
+                setErrorDisplayName(true)
             }
         }
     };
@@ -82,10 +94,10 @@ function Register() {
         if (value.length >= 0) {
             setDateOfBirth(value);
             if(validateDateOfBirth(value) === true) {
-                setErrorValidator({dateOfBirth: false})
+                setErrorDateOfBirth(false)
             }
             else {
-                setErrorValidator({dateOfBirth: true})
+                setErrorDateOfBirth(true)
             }
         }
     };
@@ -93,12 +105,24 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setPassword(value);
+            if(validatePassword(value) === true) {
+                setErrorPassword(false)
+            }
+            else {
+                setErrorPassword(true)
+            }
         }
     };
     const handleConfirmPassword = (e) => {
         let value = e.target.value;
         if (value.length >= 0) {
             setConfirmPassword(value);
+            if(validateConfirmPassword(password, value) === true) {
+                setErrorConfirmPassword(false)
+            }
+            else {
+                setErrorConfirmPassword(true)
+            }
         }
     };
     useEffect(() => {
@@ -119,13 +143,14 @@ function Register() {
                                     type='text'
                                     value={username}
                                     onChange={(e) => handleUsername(e)}
+                                    onKeyPress={(e)=> onKeyPress(e)}
                                     required
                                 />
                                 <label className='c-form__label'>
                                     Username
                                 </label>
                             </div>
-                            {errorValidator.username && (
+                            { errorUsername && (
                                 <FormError text='Username must be alphanumeric, between 3 and 32 characters long' />
                             )}
                             <div className='c-form__group'>
@@ -134,11 +159,12 @@ function Register() {
                                     type='text'
                                     value={email}
                                     onChange={(e) => handleEmail(e)}
+                                    onKeyPress={(e)=> onKeyPress(e)}
                                     required
                                 />
                                 <label className='c-form__label'>Email</label>
                             </div>
-                            {errorValidator.email && (
+                            { errorEmail && (
                                 <FormError text='Email must be valid' />
                             )}
                             <div className='c-form__group'>
@@ -147,13 +173,14 @@ function Register() {
                                     type='text'
                                     value={displayName}
                                     onChange={(e) => handleDisplayName(e)}
+                                    onKeyPress={(e)=> onKeyPress(e)}
                                     required
                                 />
                                 <label className='c-form__label'>
                                     Display name
                                 </label>
                             </div>
-                            {errorValidator && errorValidator.displayName && (
+                            { errorDisplayName && (
                                 <FormError text='Display name must be less than 32 characters long' />
                             )}
                             <div className='c-form__group is-focus'>
@@ -164,13 +191,14 @@ function Register() {
                                     max='2021-12-12'
                                     value={dateOfBirth}
                                     onChange={(e) => handleDateOfBirth(e)}
+                                    onKeyPress={(e)=> onKeyPress(e)}
                                     required
                                 />
                                 <label className='c-form__label'>
                                     Birthday
                                 </label>
                             </div>
-                            {errorValidator && errorValidator.dateOfBirth && (
+                            { errorDateOfBirth && (
                                 <FormError text='Date of birth must not be after the current date' />
                             )}
                             <div className='c-form__group'>
@@ -180,13 +208,14 @@ function Register() {
                                     type='password'
                                     value={password}
                                     onChange={(e) => handlePassword(e)}
+                                    onKeyPress={(e)=> onKeyPress(e)}
                                     required
                                 />
                                 <label className='c-form__label'>
                                     Password
                                 </label>
                             </div>
-                            {errorValidator && errorValidator.password && (
+                            { errorPassword && (
                                 <FormError text='Password must be between 8 and 128 characters long' />
                             )}
 
@@ -196,6 +225,7 @@ function Register() {
                                     type='password'
                                     value={confirmPassword}
                                     onChange={(e) => handleConfirmPassword(e)}
+                                    onKeyPress={(e)=> onKeyPress(e)}
                                     required
                                 />
                                 <label className='c-form__label'>
@@ -203,10 +233,12 @@ function Register() {
                                 </label>
                             </div>
 
-                            {errorValidator &&
-                                errorValidator.confirmPassword && (
+                            { errorConfirmPassword && (
                                     <FormError text='Passwords and confirm passwords do not match' />
-                                )}
+                            )}
+                            { errorServer !== '' && (
+                                    <FormError text= {errorServer} />
+                            )}
                             <div className='c-form__actions'>
                                 <button
                                     className='c-btn c-btn--primary'
