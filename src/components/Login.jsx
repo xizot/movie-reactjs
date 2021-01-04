@@ -4,6 +4,7 @@ import { login, logout } from "./../actions/user.action";
 import { useDispatch, useSelector } from "react-redux";
 import FormError from "./FormError";
 import { validateUsernameLogin, validatePassword } from "../helper/validator";
+import { clearError } from "../actions/error.action";
 
 function Login() {
     const dispath = useDispatch();
@@ -15,6 +16,7 @@ function Login() {
     const errorServer = useSelector((state) => state.error);
 
     const handleLogin = () => {
+        
         if (!errorUsername && !errorPassword && username !== "") {
             dispath(login(username, password));
         }
@@ -25,6 +27,9 @@ function Login() {
         }
     };
     const handleUsername = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setUsername(value);
@@ -36,6 +41,9 @@ function Login() {
         }
     };
     const handlePassword = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setPassword(value);
@@ -90,7 +98,7 @@ function Login() {
                             {errorPassword && (
                                 <FormError text="Password must be at least 8 characters long." />
                             )}
-                            {errorServer && errorServer.id === "LOGIN_FAIL" &&(
+                            {errorServer.id === "LOGIN_FAIL" &&(
                                 Array.isArray(errorServer.msg)?
                                 errorServer.msg.map(item=>(
                                     <FormError text={item.msg} />
