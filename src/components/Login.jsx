@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { login, logout } from './../actions/user.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FormError from './FormError';
 import { validateUsernameLogin, validatePassword } from '../helper/validator'
 
@@ -12,7 +12,7 @@ function Login() {
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
 
-    const [errorServer, setErrorServer] = useState('');
+    const errorServer= useSelector(state => state.error) ;
 
     const handleLogin = () => {
         if(!errorUsername && !errorPassword && username !== '') {
@@ -50,13 +50,14 @@ function Login() {
     };
     useEffect(() => {
         dispath(logout());
-    }, [dispath]);
+    }, [dispath,errorServer ]);
     return (
         <>
             <div className='login'>
                 <div className='c-overlayer'> </div>
                 <div className='login__content'>
                     <div className='c-form'>
+{errorServer &&errorServer.id="LOGIN_FAIL" && "SOTN"}
                         <h3 className='c-form__title'>Login</h3>
                         <form action=''>
                             <div className='c-form__group'>
