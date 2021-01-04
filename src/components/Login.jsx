@@ -57,7 +57,7 @@ function Login() {
                 <div className='c-overlayer'> </div>
                 <div className='login__content'>
                     <div className='c-form'>
-{errorServer &&errorServer.id="LOGIN_FAIL" && "SOTN"}
+{errorServer && errorServer.id == "LOGIN_FAIL" && <>"SOTN"</>}
                         <h3 className='c-form__title'>Login</h3>
                         <form action=''>
                             <div className='c-form__group'>
