@@ -38,7 +38,7 @@ function Register() {
         // please check before
         //setErrorValidator({ ...errorValidator });
         //if all error status are false = mean all are ok
-        if(!errorUsername && !errorEmail && !errorDisplayName && !errorDateOfBirth && !errorPassword && !errorConfirmPassword) {
+        if(!errorUsername && !errorEmail && !errorDisplayName && !errorDateOfBirth && !errorPassword && !errorConfirmPassword && username !== '') {
              dispath(
                 register(
                     username,

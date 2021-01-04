@@ -15,7 +15,7 @@ function Login() {
     const [errorServer, setErrorServer] = useState('');
 
     const handleLogin = () => {
-        if(!errorUsername && !errorPassword) {
+        if(!errorUsername && !errorPassword && username !== '') {
             dispath(login(username, password));
         }
     };

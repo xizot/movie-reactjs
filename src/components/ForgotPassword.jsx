@@ -11,7 +11,7 @@ function ForgotPassword() {
     const [errorEmail, setErrorEmail] = useState(false);
 
     const handleSend = () => {
-        if(!errorEmail) {
+        if(!errorEmail && email !== '') {
             dispath(recoveryEmail(email));
         }
     };
