@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { recoveryEmail } from './../actions/forgot.action';
+import { validateEmail } from '../helper/validator'
 import queryString from 'query-string';
+import FormError from './FormError';
 
 function ForgotPassword() {
     const [email, setEmail] = useState('');
     const dispath = useDispatch();
+    const [errorEmail, setErrorEmail] = useState(false);
 
     const handleSend = () => {
-        dispath(recoveryEmail(email));
+        if(!errorEmail && email !== '') {
+            dispath(recoveryEmail(email));
+        }
     };
     const onKeyPress = (e) => {
         if (e.which === 13) {
@@ -19,6 +24,12 @@ function ForgotPassword() {
         let value = e.target.value;
         if (value.length >= 0) {
             setEmail(value);
+            if(validateEmail(value) === true) {
+                setErrorEmail(false)
+            }
+            else {
+                setErrorEmail(true)
+            }
         }
     };
     const getCode = () => {
@@ -41,16 +52,21 @@ function ForgotPassword() {
                         <h3 className='c-form__title'>Forgot Password</h3>
                         <form action=''>
                             <div className='c-form__group'>
-                                <label className='c-form__label'>Email</label>
+                                                    
                                 <input
                                     className='c-form__input'
-                                    type='email'
+                                    type='text'
                                     value={email}
                                     onKeyPress={(e) => onKeyPress(e)}
                                     onChange={(e) => handleEmail(e)}
                                     required
                                 />
+                                 <label className='c-form__label'>Email
+                                </label>      
                             </div>
+                            { errorEmail && (
+                                <FormError text='Email must be valid' />
+                            )}
                             <div className='c-form__actions'>
                                 <button
                                     className='c-btn c-btn--primary'

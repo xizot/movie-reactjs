@@ -12,7 +12,7 @@ import {
     VERIFY_FAIL,
 } from "../types/auth.type";
 import axios from "./../axios";
-import { getError } from "./error.action";
+import { clearError, getError } from "./error.action";
 
 //login
 export const login = (username, password) => (dispatch) => {
@@ -20,6 +20,7 @@ export const login = (username, password) => (dispatch) => {
         .post("/auth/login/", { username, password })
         .then((res) => {
             history.push("/");
+           
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {
@@ -27,14 +28,16 @@ export const login = (username, password) => (dispatch) => {
                     refreshToken: res.data.refreshToken,
                 },
             });
+            dispatch(clearError())
         })
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(err.response.data, err.response.status, LOGIN_FAIL)
+                    getError(err.response.data.error || err.response.data.errors, err.response.status, LOGIN_FAIL)
                 );
             }
             dispatch({
+                payload:{msg:"Server error!!!", status:500,id: LOGIN_FAIL},
                 type: LOGIN_FAIL,
             });
         });
@@ -77,7 +80,7 @@ export const register = (
                 let errList = err.response.data.errors
                     .map((i) => i["msg"])
                     .join("\n");
-                alert(errList);
+                console.log('errList: ', errList);
             }
             dispatch({
                 type: REGISTER_FAIL,
