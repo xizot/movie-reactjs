@@ -2766,18 +2766,6 @@ img {
   position: relative;
 }
 
-@media only screen and (max-width: 1200px) {
-  .infouser {
-    padding: 100px 30px;
-  }
-}
-
-@media only screen and (max-width: 812px) {
-  .infouser {
-    padding: 150px 15px;
-  }
-}
-
 .infouser__content {
   position: relative;
   display: -webkit-box;
@@ -2821,8 +2809,9 @@ img {
 
 @media only screen and (max-width: 450px) {
   .infouser .content_form {
+    width: 300px;
     height: 1150px;
-    padding: 100px 10px;
+    padding: 100px 10px 0 10px;
   }
 }
 
@@ -2873,8 +2862,15 @@ img {
   }
 }
 
+@media only screen and (max-width: 450px) {
+  .infouser .index_form {
+    width: 50%;
+    padding: 10px 10px 0 10px;
+  }
+}
+
 .infouser .title_form {
-  padding: 0 30px;
+  padding: 0 20px;
   margin-bottom: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2884,6 +2880,19 @@ img {
           justify-content: space-between;
   position: relative;
   z-index: 1;
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .title_form {
+    padding: 0 1px 0 10px;
+    font-size: 0.2rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .title_form__left {
+    font-size: 1rem;
+  }
 }
 
 .infouser .x-btn {
@@ -2920,17 +2929,16 @@ img {
   background-color: #e90101;
 }
 
-@media only screen and (max-width: 812px) {
-  .infouser .x-btn:hover {
-    pointer-events: none;
-  }
-}
-
 @media only screen and (max-width: 450px) {
   .infouser .x-btn:hover {
-    pointer-events: none;
-    opacity: 0.2;
+    width: 110px;
+  }
+  .infouser .x-btn:hover p {
     display: block;
+  }
+  .infouser .x-btn:hover span {
+    display: none;
+    font-size: 0.1rem;
   }
 }
 
@@ -2943,24 +2951,24 @@ img {
 }
 
 .infouser__left {
-  display: unset;
   width: 330px;
   height: 330px;
-  margin-right: 50px;
 }
 
 @media only screen and (max-width: 812px) {
   .infouser__left {
     margin-right: unset;
-    padding-right: 5px;
-    padding-left: 10px;
+    width: 330px;
+    height: 330px;
   }
 }
 
 @media only screen and (max-width: 450px) {
   .infouser__left {
-    padding-right: 5px;
-    padding-left: 0px;
+    width: 250px;
+    padding-left: 10px;
+    height: 250px;
+    margin: unset;
   }
 }
 
@@ -2972,14 +2980,14 @@ img {
      object-fit: cover;
 }
 
-@media only screen and (max-width: 812px) {
-  .infouser__left img {
-    padding-left: 10px;
-  }
-}
-
 .infouser__right {
   margin-top: 15px;
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser__right {
+    margin-top: 0px;
+  }
 }
 
 .infouser::before {

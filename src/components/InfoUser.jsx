@@ -7,9 +7,9 @@ function InfoUser() {
                 <div className='content_form'>
                     <div className='title_form'>
                         <div className='title_form__left'>
-                            <h3 className='content_form__title'>
+                            <p className='content_form__title'>
                                 Your Profile
-                            </h3>
+                            </p>
                             <h5 className='content_form__son'>
                                 Edit your name, avatar, etc..
                             </h5>
