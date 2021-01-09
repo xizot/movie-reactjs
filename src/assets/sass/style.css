@@ -2814,16 +2814,14 @@ img {
 
 @media only screen and (max-width: 812px) {
   .infouser .content_form {
-    width: 450px;
-    height: 1250px;
-    padding: 100px 10px;
+    height: 1450px;
+    padding: 100px 30px 0px 30px;
   }
 }
 
 @media only screen and (max-width: 450px) {
   .infouser .content_form {
-    width: 300px;
-    height: 1100px;
+    height: 1150px;
     padding: 100px 10px;
   }
 }
@@ -2870,14 +2868,8 @@ img {
 
 @media only screen and (max-width: 812px) {
   .infouser .index_form {
-    width: 430px;
+    width: 90%;
     display: block;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .infouser .index_form {
-    width: 280px;
   }
 }
 
@@ -2928,6 +2920,20 @@ img {
   background-color: #e90101;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .x-btn:hover {
+    pointer-events: none;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .x-btn:hover {
+    pointer-events: none;
+    opacity: 0.2;
+    display: block;
+  }
+}
+
 .infouser .x-btn:hover p {
   display: none;
 }
@@ -2945,9 +2951,16 @@ img {
 
 @media only screen and (max-width: 812px) {
   .infouser__left {
-    width: 150px;
-    height: 150px;
-    margin-right: 10px;
+    margin-right: unset;
+    padding-right: 5px;
+    padding-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser__left {
+    padding-right: 5px;
+    padding-left: 0px;
   }
 }
 
@@ -2957,6 +2970,12 @@ img {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser__left img {
+    padding-left: 10px;
+  }
 }
 
 .infouser__right {
@@ -2981,7 +3000,7 @@ img {
 
 @media only screen and (max-width: 812px) {
   .infouser .c-form {
-    width: 250px;
+    width: 80%;
     padding: 100px 10px;
   }
 }

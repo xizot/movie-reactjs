@@ -22,6 +22,7 @@
         width: 100%;
         @include breakpoint(tab) {
             flex-wrap: wrap;
+            
         }
     }
     .content_form {
@@ -35,13 +36,13 @@
             padding: 100px 10px;
         }
         @include breakpoint(tab) {
-            width: 450px;
-            height: 1250px;
-            padding: 100px 10px;
+            //width: 90%;
+            height: 1450px;
+            padding: 100px 30px 0px 30px;
         }
         @include breakpoint(sp) {
-            width: 300px;
-            height:1100px;
+            //width: 300px;
+            height:1150px;
             padding: 100px 10px;
         }
         &::before {
@@ -72,12 +73,12 @@
             width: 800px
         }
         @include breakpoint(tab) {
-            width: 430px;
+            width: 90%;
             
             display: block;
         }
         @include breakpoint(sp) {
-            width: 280px
+            //width: 50%;
         }
         display: flex;
         justify-content: center;
@@ -120,6 +121,14 @@
             font-size: 1.3rem;
         }
         &:hover {
+            @include breakpoint(tab) {
+               pointer-events:none;
+            }
+            @include breakpoint(sp) {
+                pointer-events:none;
+                opacity: 0.2;
+                display: block;
+             }
             width: 200px;
             border-radius: 999px;
             background-color: $mainColor;
@@ -138,11 +147,18 @@
         height: 330px;
         margin-right: 50px;
         @include breakpoint(tab) {
-            width: 150px;
-            height: 150px;
-            margin-right: 10px;
+            margin-right: unset;
+            padding-right: 5px;
+            padding-left: 10px;
         }
-        img {      
+        @include breakpoint(sp) {
+            padding-right: 5px;
+            padding-left: 0px;
+        }
+        img {   
+            @include breakpoint(tab) {
+                padding-left: 10px;
+            }   
             border-radius: 30px / 30px;
             width: 100%;
             height: 100%;
@@ -167,7 +183,7 @@
         background-color: transparent;
         padding: 0px;
         @include breakpoint(tab) {
-            width: 250px;
+            width: 80%;
             padding: 100px 10px;
         }
         @include breakpoint(sp) {
