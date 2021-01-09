@@ -119,7 +119,7 @@
         transition: width 0.8s ease;
         height: 30px;
         width: 30px;
-        background-color: $mainColor;
+        background-color: $bgBold;
         border-radius: 999px;
         @include breakpoint(sp){
             height: 25px;
@@ -127,7 +127,7 @@
         }
         p {
             border-radius: 50%;
-            background-color: $mainColor;
+            background-color: $bgBold;
             color: white;
             font-size: 1.2rem;
             width: 30px;

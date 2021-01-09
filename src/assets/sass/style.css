@@ -2940,7 +2940,7 @@ img {
   transition: width 0.8s ease;
   height: 30px;
   width: 30px;
-  background-color: #e90101;
+  background-color: #131722;
   border-radius: 999px;
 }
 
@@ -2953,7 +2953,7 @@ img {
 
 .infouser .x-btn p {
   border-radius: 50%;
-  background-color: #e90101;
+  background-color: #131722;
   color: white;
   font-size: 1.2rem;
   width: 30px;
