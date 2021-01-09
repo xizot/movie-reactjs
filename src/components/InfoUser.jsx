@@ -16,7 +16,7 @@ function InfoUser() {
                         </div>
                         <div className='title_form__right'>
                             <button className='x-btn c-btn' type='button'>
-                                <p>X</p>
+                                <p>&#10006;</p>
                                 <span>DISCARD CHANGES</span>
                             </button>
                         </div>

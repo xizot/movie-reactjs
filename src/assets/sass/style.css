@@ -2762,8 +2762,20 @@ img {
   background-size: cover;
   height: 100%;
   width: 100%;
-  padding: 100px 0;
+  padding: 150px 0 100px;
   position: relative;
+}
+
+@media only screen and (max-width: 1200px) {
+  .infouser {
+    padding: 150px 0 80px;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser {
+    padding: 120px 0 70px;
+  }
 }
 
 .infouser__content {
@@ -2786,8 +2798,10 @@ img {
 }
 
 .infouser .content_form {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.7) 0px 60px 40px -7px;
+          box-shadow: rgba(0, 0, 0, 0.7) 0px 60px 40px -7px;
   width: 1000px;
-  padding: 50px 0;
+  padding: 100px 50px;
   border-radius: 20px;
   background-image: url("../img/background-Huy.jpg");
   position: relative;
@@ -2796,27 +2810,28 @@ img {
 @media only screen and (max-width: 1200px) {
   .infouser .content_form {
     width: 900px;
-    padding: 100px 10px;
+    max-width: calc(100% - 100px);
   }
 }
 
 @media only screen and (max-width: 812px) {
   .infouser .content_form {
-    height: 1450px;
-    padding: 100px 30px 0px 30px;
+    width: 90%;
+    padding: 80px 45px;
+    max-width: unset;
+    border-radius: 10px;
   }
 }
 
 @media only screen and (max-width: 450px) {
   .infouser .content_form {
-    width: 300px;
-    height: 1150px;
-    padding: 100px 10px 0 10px;
+    width: calc(100% - 30px);
+    padding: 40px 15px;
   }
 }
 
 .infouser .content_form::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -2826,51 +2841,69 @@ img {
   border-radius: 20px;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .content_form::before {
+    border-radius: 10px;
+  }
+}
+
 .infouser .content_form__title {
   font-size: 2.6rem;
   color: #fff;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .content_form__title {
+    font-size: 2.2rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .content_form__title {
+    font-size: 2rem;
+  }
+}
+
 .infouser .content_form__son {
   margin-left: 5px;
-  margin-bottom: 10px;
+  margin-top: 5px;
   font-size: 1.6rem;
   color: #d3d3d3;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .content_form__son {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .content_form__son {
+    font-size: 1rem;
+  }
 }
 
 .infouser .index_form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   position: relative;
   z-index: 1;
 }
 
-@media only screen and (max-width: 1200px) {
-  .infouser .index_form {
-    width: 800px;
-  }
-}
-
 @media only screen and (max-width: 812px) {
   .infouser .index_form {
-    width: 90%;
-    display: block;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .infouser .index_form {
-    width: 50%;
-    padding: 10px 10px 0 10px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
 }
 
 .infouser .title_form {
-  padding: 0 20px;
   margin-bottom: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2882,10 +2915,15 @@ img {
   z-index: 1;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .title_form {
+    margin-bottom: 45px;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .infouser .title_form {
-    padding: 0 1px 0 10px;
-    font-size: 0.2rem;
+    margin-bottom: 30px;
   }
 }
 
@@ -2898,23 +2936,38 @@ img {
 .infouser .x-btn {
   border: none;
   overflow: hidden;
-  -webkit-transition: width 0.6s ease;
-  transition: width 0.6s ease;
+  -webkit-transition: width 0.8s ease;
+  transition: width 0.8s ease;
   height: 30px;
-  background-color: #e90101;
   width: 30px;
+  background-color: #e90101;
   border-radius: 999px;
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .x-btn {
+    height: 25px;
+    width: 25px;
+  }
 }
 
 .infouser .x-btn p {
   border-radius: 50%;
   background-color: #e90101;
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   width: 30px;
   height: 30px;
   line-height: 30px;
   text-align: center;
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .x-btn p {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+  }
 }
 
 .infouser .x-btn span {
@@ -2923,22 +2976,31 @@ img {
   font-size: 1.3rem;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .x-btn span {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .x-btn span {
+    font-size: 0.8rem;
+  }
+}
+
 .infouser .x-btn:hover {
   width: 200px;
-  border-radius: 999px;
-  background-color: #e90101;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .x-btn:hover {
+    width: 150px;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   .infouser .x-btn:hover {
-    width: 110px;
-  }
-  .infouser .x-btn:hover p {
-    display: block;
-  }
-  .infouser .x-btn:hover span {
-    display: none;
-    font-size: 0.1rem;
+    width: 25px;
   }
 }
 
@@ -2946,8 +3008,20 @@ img {
   display: none;
 }
 
+@media only screen and (max-width: 450px) {
+  .infouser .x-btn:hover p {
+    display: block;
+  }
+}
+
 .infouser .x-btn:hover span {
   display: block;
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .x-btn:hover span {
+    display: none;
+  }
 }
 
 .infouser__left {
@@ -2955,25 +3029,57 @@ img {
   height: 330px;
 }
 
+@media only screen and (max-width: 1200px) {
+  .infouser__left {
+    width: 275px;
+    height: 275px;
+  }
+}
+
 @media only screen and (max-width: 812px) {
   .infouser__left {
-    margin-right: unset;
-    width: 330px;
-    height: 330px;
+    width: 100%;
+    height: 280px;
+    margin: 0 auto 20px;
   }
 }
 
 @media only screen and (max-width: 450px) {
   .infouser__left {
-    width: 250px;
-    padding-left: 10px;
-    height: 250px;
-    margin: unset;
+    height: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.infouser__left label {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser__left label {
+    width: 280px;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser__left label {
+    height: auto;
+    width: 100%;
+    max-height: 100%;
+    max-width: 280px;
   }
 }
 
 .infouser__left img {
-  border-radius: 30px / 30px;
+  border-radius: 20px;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -2981,17 +3087,26 @@ img {
 }
 
 .infouser__right {
-  margin-top: 15px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-left: 50px;
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 1200px) {
   .infouser__right {
-    margin-top: 0px;
+    margin-left: 35px;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser__right {
+    margin-left: unset;
   }
 }
 
 .infouser::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -3001,23 +3116,9 @@ img {
 }
 
 .infouser .c-form {
-  width: 500px;
+  width: 100%;
   background-color: transparent;
-  padding: 0px;
-}
-
-@media only screen and (max-width: 812px) {
-  .infouser .c-form {
-    width: 80%;
-    padding: 100px 10px;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .infouser .c-form {
-    width: 280px;
-    padding: 100px 10px;
-  }
+  padding: unset;
 }
 
 .infouser .c-form__group {
@@ -3035,6 +3136,14 @@ img {
 .infouser .c-form__label {
   font-size: 1.4rem;
   color: white;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .c-form__label {
+    font-size: 1.2rem;
+  }
 }
 
 .infouser .c-form__input {
@@ -3045,32 +3154,44 @@ img {
   font-size: 1.1rem;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .c-form__input:focus + .c-form__label {
+    font-size: 1rem;
+  }
+}
+
 .infouser .c-form__input:valid + .c-form__label {
   font-size: 1.1rem;
 }
 
+@media only screen and (max-width: 812px) {
+  .infouser .c-form__input:valid + .c-form__label {
+    font-size: 1rem;
+  }
+}
+
 .infouser .c-form .c-btn {
+  width: 100%;
   border: none;
   background-color: #131722;
   color: white;
   border-radius: 30px / 30px;
   -webkit-transition: background-color 0.8s ease;
   transition: background-color 0.8s ease;
+  letter-spacing: 0.54px;
+  margin-top: 45px;
 }
 
 @media only screen and (max-width: 812px) {
   .infouser .c-form .c-btn {
-    width: 250px;
     height: 40px;
-    margin-right: 2px;
+    margin-top: 30px;
   }
 }
 
 @media only screen and (max-width: 450px) {
   .infouser .c-form .c-btn {
-    width: 250px;
-    height: 40px;
-    margin-top: unset;
+    font-size: 1.2rem;
   }
 }
 
