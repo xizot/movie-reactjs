@@ -2805,6 +2805,29 @@ img {
   position: relative;
 }
 
+@media only screen and (max-width: 1200px) {
+  .infouser .content_form {
+    width: 900px;
+    padding: 100px 10px;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .content_form {
+    width: 450px;
+    height: 1250px;
+    padding: 100px 10px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .content_form {
+    width: 300px;
+    height: 1100px;
+    padding: 100px 10px;
+  }
+}
+
 .infouser .content_form::before {
   content: '';
   position: absolute;
@@ -2837,6 +2860,25 @@ img {
           justify-content: center;
   position: relative;
   z-index: 1;
+}
+
+@media only screen and (max-width: 1200px) {
+  .infouser .index_form {
+    width: 800px;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .index_form {
+    width: 430px;
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .index_form {
+    width: 280px;
+  }
 }
 
 .infouser .title_form {
@@ -2903,8 +2945,9 @@ img {
 
 @media only screen and (max-width: 812px) {
   .infouser__left {
-    width: 100%;
-    margin-right: unset;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
   }
 }
 
@@ -2934,6 +2977,20 @@ img {
   width: 500px;
   background-color: transparent;
   padding: 0px;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .c-form {
+    width: 250px;
+    padding: 100px 10px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .c-form {
+    width: 280px;
+    padding: 100px 10px;
+  }
 }
 
 .infouser .c-form__group {
@@ -2972,6 +3029,22 @@ img {
   border-radius: 30px / 30px;
   -webkit-transition: background-color 0.8s ease;
   transition: background-color 0.8s ease;
+}
+
+@media only screen and (max-width: 812px) {
+  .infouser .c-form .c-btn {
+    width: 250px;
+    height: 40px;
+    margin-right: 2px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .infouser .c-form .c-btn {
+    width: 250px;
+    height: 40px;
+    margin-top: unset;
+  }
 }
 
 .infouser .c-form .c-btn:hover {

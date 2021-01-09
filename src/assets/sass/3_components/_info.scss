@@ -30,6 +30,20 @@
         border-radius: 20px;
         background-image: url('../img/background-Huy.jpg');
         position: relative;
+        @include breakpoint(pro) {
+            width: 900px;
+            padding: 100px 10px;
+        }
+        @include breakpoint(tab) {
+            width: 450px;
+            height: 1250px;
+            padding: 100px 10px;
+        }
+        @include breakpoint(sp) {
+            width: 300px;
+            height:1100px;
+            padding: 100px 10px;
+        }
         &::before {
             content: '';
             position: absolute;
@@ -54,6 +68,17 @@
         }
     }
     .index_form {
+        @include breakpoint(pro) {
+            width: 800px
+        }
+        @include breakpoint(tab) {
+            width: 430px;
+            
+            display: block;
+        }
+        @include breakpoint(sp) {
+            width: 280px
+        }
         display: flex;
         justify-content: center;
         position: relative;
@@ -113,10 +138,11 @@
         height: 330px;
         margin-right: 50px;
         @include breakpoint(tab) {
-            width: 100%;
-            margin-right: unset;
+            width: 150px;
+            height: 150px;
+            margin-right: 10px;
         }
-        img {
+        img {      
             border-radius: 30px / 30px;
             width: 100%;
             height: 100%;
@@ -125,6 +151,7 @@
     }
     &__right {
         margin-top: 15px;
+        
     }
     &::before {
         content: '';
@@ -139,6 +166,14 @@
         width: 500px;
         background-color: transparent;
         padding: 0px;
+        @include breakpoint(tab) {
+            width: 250px;
+            padding: 100px 10px;
+        }
+        @include breakpoint(sp) {
+            width: 280px;
+            padding: 100px 10px;
+        }
         &__group {
             background: transparent;
             border-bottom: 1px solid #fff;
@@ -166,6 +201,16 @@
             font-size: 1.1rem;
         }
         .c-btn {
+            @include breakpoint(tab) {
+                width:250px;
+                height: 40px;
+                margin-right: 2px;
+            }
+            @include breakpoint(sp) {
+                width:250px;
+                height: 40px;
+                margin-top: unset;
+            }
             border: none;
             background-color: $bgBold;
             color: white;
