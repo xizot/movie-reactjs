@@ -23,18 +23,26 @@ function InfoUser() {
                     </div>
                     <div className='index_form'>
                         <div className='infouser__left'>
-                            <label htmlFor='upload-avatar'>
+                            <div className="infouser__img">
                                 <img
                                     src={`${process.env.PUBLIC_URL}/assets/img/avata.jpg`}
                                     alt=''
                                 />
-                            </label>
-                            <input
-                                type='file'
-                                name=''
-                                id='upload-avatar'
-                                style={{ display: 'none' }}
-                            />
+                                <div className="is-hover">
+                                    <label  class="is-hover__handle" htmlFor="upload-avatar">Upload Avatar</label>
+                                    <span class="is-hover__handle" >
+                                        Delete Avatar
+                                    </span>
+
+                                    <input
+                                    type='file'
+                                    name=''
+                                    id='upload-avatar'
+                                    style={{ display: 'none' }}
+                                    />
+                                </div>
+                            </div>
+                            
                         </div>
                         <div className='infouser__right'>
                             <div className='c-form'>
