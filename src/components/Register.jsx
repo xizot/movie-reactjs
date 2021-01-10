@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { logout, register } from './../actions/user.action';
-import { useDispatch } from 'react-redux';
+import { resetRegister, register } from './../actions/user.action';
+import { useDispatch, useSelector } from "react-redux";
 import { convertDateTime } from '../helper/converter'
 import FormError from './FormError';
-import { validateEmail, validateUsername, validateDisplayName, validateDateOfBirth, validatePassword, validateConfirmPassword } from '../helper/validator'
+import { validateEmail, validateUsername, validateDisplayName, validateDateOfBirth, validatePassword, validateConfirmPassword } from '../helper/validator';
+import { clearError } from "../actions/error.action";
 
 function Register() {
+
+    const isRegister = useSelector((state) => state.auth.register);
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [displayName, setDisplayName] = useState('');
@@ -24,8 +28,8 @@ function Register() {
     const [errorPassword, setErrorPassword] = useState(false);
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
 
-    const [errorServer, setErrorServer] = useState('');
-
+    const errorServer = useSelector((state) => state.error);
+    
     const onKeyPress = (e) => {
         if(e.which === 13) {
             handleRegister()
@@ -34,26 +38,31 @@ function Register() {
 
     const handleRegister = () => {
         let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
-        
+
         // please check before
         //setErrorValidator({ ...errorValidator });
         //if all error status are false = mean all are ok
-        if(!errorUsername && !errorEmail && !errorDisplayName && !errorDateOfBirth && !errorPassword && !errorConfirmPassword && username !== '') {
-             dispath(
-                register(
-                    username,
-                    displayName,
-                    email,
-                    password,
-                    confirmPassword,
-                    newDateOfBirth,
-                )
-            );
+        if(!errorUsername && !errorEmail && !errorDisplayName && !errorDateOfBirth && !errorPassword && !errorConfirmPassword ) {
+            if(username !== '' && email !== '' && displayName !== '' && password !== '' && confirmPassword !== '') {
+                dispath(
+                    register(
+                        username,
+                        displayName,
+                        email,
+                        password,
+                        confirmPassword,
+                        newDateOfBirth,
+                    )
+                );
+            }
         }
         
     };
 
     const handleUsername = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setUsername(value);
@@ -66,6 +75,9 @@ function Register() {
         }
     };
     const handleEmail = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setEmail(value);
@@ -78,6 +90,9 @@ function Register() {
         }
     };
     const handleDisplayName = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setDisplayName(value);
@@ -90,6 +105,9 @@ function Register() {
         }
     };
     const handleDateOfBirth = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setDateOfBirth(value);
@@ -102,6 +120,9 @@ function Register() {
         }
     };
     const handlePassword = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setPassword(value);
@@ -114,6 +135,9 @@ function Register() {
         }
     };
     const handleConfirmPassword = (e) => {
+        if(errorServer.id){
+            dispath(clearError())
+        }
         let value = e.target.value;
         if (value.length >= 0) {
             setConfirmPassword(value);
@@ -126,8 +150,10 @@ function Register() {
         }
     };
     useEffect(() => {
-        dispath(logout());
-    }, [dispath]);
+        setTimeout(() => {
+            dispath(resetRegister());
+        }, 4000);
+    }, [dispath, errorServer]);
 
     return (
         <>
@@ -236,8 +262,18 @@ function Register() {
                             { errorConfirmPassword && (
                                     <FormError text='Passwords and confirm passwords do not match' />
                             )}
-                            { errorServer !== '' && (
-                                    <FormError text= {errorServer} />
+                            { errorServer.id === "REGISTER_FAIL" &&(
+                                Array.isArray(errorServer.msg)?
+                                errorServer.msg.map(item => (
+                                    <FormError text={ item.msg } />
+                                ))
+                                :
+                                <FormError text= { errorServer.msg } />
+                            )
+                            }
+                            {
+                               isRegister && (
+                                <FormError text='Register successfully, Please check your mail box!' />
                             )}
                             <div className='c-form__actions'>
                                 <button
