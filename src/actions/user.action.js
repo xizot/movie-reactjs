@@ -18,8 +18,9 @@ import { clearError, getError } from "./error.action";
 //login
 export const login = (username, password) => (dispatch) => {
     axios
-        .post("/auth/login/", { username, password })
-        .then((res) => {       
+        .post("/auth/login/", { username, password }, {headers:{ Authorization:""}})
+        .then((res) => {     
+            history.push("/");  
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {
@@ -29,7 +30,7 @@ export const login = (username, password) => (dispatch) => {
             });
             
             dispatch(clearError());
-            history.push("/");
+           
         })
         .catch((err) => {
             if (err.response) {
@@ -129,7 +130,6 @@ export const customRedirect = (to) => (dispatch) => {
 // token
 export const loadUser = () => (dispatch, getState) => {
     const token = localStorage.getItem("token");
-    alert('dmmm')
     dispatch({
         type: USER_LOADING,
     });
