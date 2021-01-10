@@ -21,24 +21,29 @@ function InfoUser() {
                             </button>
                         </div>
                     </div>
-                    <div className='index_form'>
-                        <div className='infouser__left'>                        
-                            <label htmlFor='upload-avatar'>
-                                <p>Upload</p>                                                                                                                     
+                    <div className='index_form'>                       
+                        <div className='infouser__left'>
+                            <div className="infouser__img">
                                 <img
                                     src={`${process.env.PUBLIC_URL}/assets/img/avata.jpg`}
                                     alt=''
-                                />                                                                                         
-                            </label>
-                                              
-                            <input
-                                type='file'
-                                name=''
-                                id='upload-avatar'
-                                value="" 
-                                title=" "
-                                
-                            />
+                                />
+                                <div className="is-hover">
+                                    <label  class="is-hover__handle" htmlFor="upload-avatar">Upload Avatar</label>
+                                    <span class="is-hover__handle" >
+                                        Delete Avatar
+                                    </span>
+
+                                    <input
+                                    type='file'
+                                    name=''
+                                    id='upload-avatar'
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    />
+                                </div>
+                            </div>
+                            
                         </div>
                         <div className='infouser__right'>
                             <div className='c-form'>
