@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { verifyEmail } from "./../actions/user.action";
+import { useDispatch, useSelector } from "react-redux";
+import { verifyEmail, customRedirect } from "./../actions/user.action";
 import queryString from "query-string";
 
 function VerifyEmail() {
     const dispath = useDispatch();
+
+    const isVerify = useSelector((state) => state.auth.verify);
 
     const getCode = () => {
         const val = queryString.parse(window.location.search);
@@ -12,9 +14,12 @@ function VerifyEmail() {
     };
     useEffect(() => {
         let code = getCode();
-        console.log("code", code);
+
         if (code && code.length > 0) {
             dispath(verifyEmail(code));
+        }
+        else {
+            dispath(customRedirect('/'));
         }
     }, [dispath]);
 
@@ -27,10 +32,20 @@ function VerifyEmail() {
                         <h2 className="c-form__title c-form__title-mid">
                             Verify Email
                         </h2>
-                        <h3 className="c-form__text">
-                            Please wait while we verifying your email...
-                        </h3>
-                        {/* <h3 className="c-form__title c-form__title-mid"></h3> */}
+                        { 
+                            !isVerify && (
+                            <h3 className="c-form__text">
+                                Please wait while we verifying your email...
+                            </h3>) 
+                        }
+                        {
+                            isVerify && (
+                                <h3 className="c-form__text">
+                            Email confirmation was successful! We will take you to the login page !
+                            </h3>) 
+                        }
+                        
+                        { }
                     </div>
                 </div>
             </div>
