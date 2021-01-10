@@ -3,6 +3,7 @@ import {
     LOGIN_FAIL,
     REGISTER_FAIL,
     REGISTER_SUCCESS,
+    REGISTER_RESET,
     LOGOUT_SUCCESS,
     USER_LOADING,
     USER_LOADED,
@@ -18,6 +19,7 @@ const initialState = {
     isLoading: false,
     user: localStorage.getItem("user"),
     register: false,
+    verify: true,
 };
 
 const authenReducer = (state = initialState, action) => {
@@ -54,9 +56,25 @@ const authenReducer = (state = initialState, action) => {
             };
         case LOGIN_FAIL:
         case VERIFY_FAIL:
+            return {
+                ...state,
+                verify: false,
+            };
+
         case VERIFY_SUCCESS:
+            return {
+                ...state,
+                verify: true,
+            };
+
         case AUTH_ERROR:
         case REGISTER_FAIL:
+        case REGISTER_RESET:
+            return {
+                ...state,
+                register: false,
+            }
+
         case LOGOUT_SUCCESS:
             localStorage.removeItem("token");
             localStorage.removeItem("refreshToken");

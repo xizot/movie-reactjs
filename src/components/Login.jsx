@@ -17,7 +17,7 @@ function Login() {
 
     const handleLogin = () => {
         
-        if (!errorUsername && !errorPassword && username !== "") {
+        if (!errorUsername && !errorPassword && username !== "" && password !== "") {
             dispath(login(username, password));
         }
     };

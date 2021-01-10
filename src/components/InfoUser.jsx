@@ -21,7 +21,7 @@ function InfoUser() {
                             </button>
                         </div>
                     </div>
-                    <div className='index_form'>
+                    <div className='index_form'>                       
                         <div className='infouser__left'>
                             <div className="infouser__img">
                                 <img
@@ -38,6 +38,7 @@ function InfoUser() {
                                     type='file'
                                     name=''
                                     id='upload-avatar'
+                                    accept="image/*"
                                     style={{ display: 'none' }}
                                     />
                                 </div>

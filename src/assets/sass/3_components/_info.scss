@@ -176,8 +176,29 @@
     }
     &__left {
         width: 330px;
-        height: 330px;
-
+        height: 330px;      
+        input{
+            display: none;
+        }      
+        p{
+            text-align:center;  
+            top:20%;
+            left: 8%;
+            padding-top: 1px;
+            position: absolute;
+            width: 20%;
+            height: 5%;
+            border-radius: 30px / 30px;
+            background-color:#FF0000;
+            display: none;
+            font-size: medium;
+            color: #fff; 
+        }
+        &:hover {
+            p{
+                display: block;
+            }
+        }
         @include breakpoint(pro) {
             width: 275px;
             height: 275px;
@@ -207,6 +228,28 @@
         @include breakpoint(sp) {
             height: auto;
             width: 100%;
+            height: 100%;
+            display: block;
+            &::before {
+                content: "Upload Avatar";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+            }
+            &:hover {
+                opacity: 1;
+            }
+            @include breakpoint(tab) {
+                width: 280px;
+                max-width: 100%;
+            }
+            @include breakpoint(sp) {
+                height: auto;
+                width: 100%;
+                max-height: 100%;
+                max-width: 280px;
+            }
             max-height: 100%;
             max-width: 280px;
         }
@@ -214,7 +257,7 @@
            
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover;          
         }
         .is-hover {
             position: absolute;
@@ -230,6 +273,7 @@
             opacity: 0;
             transition: opacity .7s;
             &__handle {
+                background-color: #FF0000;
                 cursor: pointer;
                 height: 30px;
                 width: 120px;
@@ -275,7 +319,7 @@
         padding: unset;
         &__group {
             background: transparent;
-            border-bottom: 1px solid #fff;
+            border-bottom: 1px solid #8B4513;
             padding: 0;
             position: relative;
             // background-color: rgba($color: $bgBold, $alpha: 0.5);
@@ -318,7 +362,7 @@
             border-radius: 30px / 30px;
             transition: background-color 0.8s ease;
             letter-spacing: 0.54px;
-            margin-top: 45px;
+            margin-top: 40px;
             @include breakpoint(tab) {
                 height: 40px;
                 margin-top: 30px;

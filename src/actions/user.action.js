@@ -10,6 +10,7 @@ import {
     LOGOUT_SUCCESS,
     VERIFY_SUCCESS,
     VERIFY_FAIL,
+    REGISTER_RESET,
 } from "../types/auth.type";
 import axios from "./../axios";
 import { clearError, getError } from "./error.action";
@@ -18,9 +19,7 @@ import { clearError, getError } from "./error.action";
 export const login = (username, password) => (dispatch) => {
     axios
         .post("/auth/login/", { username, password })
-        .then((res) => {
-            history.push("/");
-           
+        .then((res) => {       
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {
@@ -28,7 +27,10 @@ export const login = (username, password) => (dispatch) => {
                     refreshToken: res.data.refreshToken,
                 },
             });
-            dispatch(clearError())
+            
+            dispatch(clearError());
+
+            history.push("/");
         })
         .catch((err) => {
             if (err.response) {
@@ -37,7 +39,7 @@ export const login = (username, password) => (dispatch) => {
                 );
             }
             dispatch({
-                payload:{msg:"Server error!!!", status:500,id: LOGIN_FAIL},
+                payload: { msg:"Server error!!!", status: 500, id: LOGIN_FAIL },
                 type: LOGIN_FAIL,
             });
         });
@@ -66,23 +68,17 @@ export const register = (
                 type: REGISTER_SUCCESS,
                 payload: res.data,
             });
-            alert("success, please check your mail box");
+            // alert("success, please check your mail box");
+            dispatch(clearError());
         })
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(
-                        err.response.data,
-                        err.response.status,
-                        REGISTER_FAIL
-                    )
+                    getError(err.response.data.error || err.response.data.errors, err.response.status, REGISTER_FAIL)
                 );
-                let errList = err.response.data.errors
-                    .map((i) => i["msg"])
-                    .join("\n");
-                console.log('errList: ', errList);
             }
             dispatch({
+                payload: { msg:"Server error!!!", status: 500, id: REGISTER_FAIL },
                 type: REGISTER_FAIL,
             });
         });
@@ -97,24 +93,38 @@ export const verifyEmail = (activationCode) => (dispatch) => {
                 type: VERIFY_SUCCESS,
                 payload: res.data,
             });
-            alert("Email confirmed!");
+            // alert("Email confirmed!");
+
+            dispatch(clearError());
+            
+            setTimeout(()=>{ 
+                history.push("/login"); 
+                dispatch({
+                    type: VERIFY_FAIL,
+                    payload: res.data,
+                })
+            }, 5000)       
         })
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(
-                        err.response.data,
-                        err.response.status,
-                        VERIFY_FAIL
-                    )
+                    getError(err.response.data.error || err.response.data.errors, err.response.status, VERIFY_FAIL)
                 );
 
-                alert("Failed to confirm email!");
+                //alert("Failed to confirm email!");
             }
             dispatch({
+                payload:{ msg:"Server error!!!", status:500,id: VERIFY_FAIL},
                 type: VERIFY_FAIL,
             });
+
+            setTimeout(()=>{history.push("/login");}, 2000)       
         });
+};
+
+//redirect
+export const customRedirect = (to) => (dispatch) => {
+    history.push(to);
 };
 
 // token
@@ -152,4 +162,9 @@ export const loadUser = () => (dispatch, getState) => {
 //logout
 export const logout = () => ({
     type: LOGOUT_SUCCESS,
+});
+
+//reset register status
+export const resetRegister = () => ({
+    type: REGISTER_RESET,
 });
