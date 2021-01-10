@@ -181,8 +181,29 @@
     }
     &__left {
         width: 330px;
-        height: 330px;
-
+        height: 330px;      
+        input{
+            display: none;
+        }      
+        p{
+            text-align:center;  
+            top:20%;
+            left: 8%;
+            padding-top: 1px;
+            position: absolute;
+            width: 20%;
+            height: 5%;
+            border-radius: 30px / 30px;
+            background-color:#FF0000;
+            display: none;
+            font-size: medium;
+            color: #fff; 
+        }
+        &:hover {
+            p{
+                display: block;
+            }
+        }
         @include breakpoint(pro) {
             width: 275px;
             height: 275px;
@@ -201,6 +222,16 @@
             width: 100%;
             height: 100%;
             display: block;
+            &::before {
+                content: "Upload Avatar";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+            }
+            &:hover {
+                opacity: 1;
+            }
             @include breakpoint(tab) {
                 width: 280px;
                 max-width: 100%;
@@ -217,7 +248,7 @@
             border-radius: 20px;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover;          
         }
     }
     &__right {

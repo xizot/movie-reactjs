@@ -22,18 +22,22 @@ function InfoUser() {
                         </div>
                     </div>
                     <div className='index_form'>
-                        <div className='infouser__left'>
+                        <div className='infouser__left'>                        
                             <label htmlFor='upload-avatar'>
+                                <p>Upload</p>                                                                                                                     
                                 <img
                                     src={`${process.env.PUBLIC_URL}/assets/img/avata.jpg`}
                                     alt=''
-                                />
+                                />                                                                                         
                             </label>
+                                              
                             <input
                                 type='file'
                                 name=''
                                 id='upload-avatar'
-                                style={{ display: 'none' }}
+                                value="" 
+                                title=" "
+                                
                             />
                         </div>
                         <div className='infouser__right'>
