@@ -13,7 +13,6 @@ const inforReducer = (state = initialState, action) => {
         case GETINFORUSER_SUCCESS:
             return {
                 ...state,
-                data,
                 isLoading: false,
             };
         case GETINFORUSER_FAIL:

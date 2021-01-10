@@ -7,7 +7,6 @@ export const getError = (msg, status, id) => (dispatch) => {
     });
 };
 export const clearError = () => (dispatch) => {
-    
     dispatch({
         type: CLEAR_ERROR,
     });

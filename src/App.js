@@ -6,6 +6,7 @@ import Account from './pages/Account';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/user.action';
 import { useEffect } from 'react';
+import Home from './pages/Home';
 import Info from './pages/Info';
 import ForgotPassword from './pages/ForgotPassword';
 import Recovery from './pages/Recovery';
@@ -31,7 +32,7 @@ function App() {
                 <Route path='/movie' component={Movie} />
                 <Route path='/register' component={Register} />
                 {/* <Route exact path='/' component={Home} /> */}
-                <Route exact path='/' component={Info} />
+                <Route exact path='/' component={Home} />
             </Router>
         </div>
     );

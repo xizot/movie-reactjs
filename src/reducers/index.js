@@ -4,7 +4,7 @@ import filmReducer from "./film";
 import watchReducer from "./watch";
 import authenReducer from "./auth";
 import forgotReducer from "./forgot";
-import inforReducer from "./infor";
+// import inforReducer from "./infor";
 
 const reducer = combineReducers({
     error: errorReducer,
@@ -12,7 +12,6 @@ const reducer = combineReducers({
     watch: watchReducer,
     auth: authenReducer,
     forgot:forgotReducer,
-    infor:inforReducer,
 });
 
 export default reducer;

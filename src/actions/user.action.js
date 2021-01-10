@@ -29,7 +29,6 @@ export const login = (username, password) => (dispatch) => {
             });
             
             dispatch(clearError());
-
             history.push("/");
         })
         .catch((err) => {
@@ -130,6 +129,7 @@ export const customRedirect = (to) => (dispatch) => {
 // token
 export const loadUser = () => (dispatch, getState) => {
     const token = localStorage.getItem("token");
+    alert('dmmm')
     dispatch({
         type: USER_LOADING,
     });
