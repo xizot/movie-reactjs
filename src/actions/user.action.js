@@ -123,16 +123,9 @@ export const loadUser = () => (dispatch, getState) => {
     dispatch({
         type: USER_LOADING,
     });
-
-    const config = {
-        headers: {
-            "Content-type": "application/json",
-        },
-    };
     if (token) {
-        config.headers["Authorization"] = "Bearer " + token;
         axios
-            .get("/user", config)
+            .get("/user")
             .then((res) => {
                 dispatch({
                     type: USER_LOADED,
@@ -140,12 +133,14 @@ export const loadUser = () => (dispatch, getState) => {
                 });
             })
             .catch((err) => {
-                dispatch(
-                    getError(err.response.data, err.response.status, AUTH_ERROR)
-                );
-                dispatch({
-                    type: AUTH_ERROR,
-                });
+                if(err){
+                    dispatch(
+                        getError(err.response.data, err.response.status, AUTH_ERROR)
+                    );
+                    dispatch({
+                        type: AUTH_ERROR,
+                    });
+                }
             });
     } else {
         dispatch({
