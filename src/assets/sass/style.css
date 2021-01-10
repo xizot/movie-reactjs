@@ -3056,21 +3056,24 @@ img {
   }
 }
 
-.infouser__left label {
+.infouser__img {
   width: 100%;
   height: 100%;
   display: block;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 812px) {
-  .infouser__left label {
+  .infouser__img {
     width: 280px;
     max-width: 100%;
   }
 }
 
 @media only screen and (max-width: 450px) {
-  .infouser__left label {
+  .infouser__img {
     height: auto;
     width: 100%;
     max-height: 100%;
@@ -3078,12 +3081,55 @@ img {
   }
 }
 
-.infouser__left img {
-  border-radius: 20px;
+.infouser__img img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.infouser__img .is-hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0;
+  -webkit-transition: opacity .7s;
+  transition: opacity .7s;
+}
+
+.infouser__img .is-hover__handle {
+  cursor: pointer;
+  height: 30px;
+  width: 120px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  display: block;
+  line-height: 30px;
+  color: #fff;
+  text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 0.54px;
+  margin-bottom: 15px;
+}
+
+.infouser__img:hover .is-hover {
+  opacity: 1;
 }
 
 .infouser__right {
