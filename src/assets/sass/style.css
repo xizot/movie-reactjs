@@ -2440,7 +2440,7 @@ img {
   background-size: cover;
   height: 100%;
   width: 100%;
-  padding: 100px 0;
+  padding: 150px 0 100px;
   position: relative;
 }
 
@@ -2648,7 +2648,7 @@ img {
   background-size: cover;
   height: 100%;
   width: 100%;
-  padding: 100px 0;
+  padding: 150px 0 100px;
   position: relative;
 }
 
@@ -3165,12 +3165,10 @@ img {
 }
 
 .infouser__img .is-hover__handle {
-  background-color: #FF0000;
   cursor: pointer;
   height: 30px;
-  width: 120px;
+  padding: 0 15px;
   border-radius: 5px;
-  border: 1px solid #ddd;
   display: block;
   line-height: 30px;
   color: #fff;
@@ -3178,6 +3176,15 @@ img {
   font-size: 1.4rem;
   letter-spacing: 0.54px;
   margin-bottom: 15px;
+  outline: none;
+}
+
+.infouser__img .is-hover__handle__delete {
+  background-color: #c70039;
+}
+
+.infouser__img .is-hover__handle__upload {
+  background-color: #00917c;
 }
 
 .infouser__img:hover .is-hover {
@@ -3221,7 +3228,7 @@ img {
 
 .infouser .c-form__group {
   background: transparent;
-  border-bottom: 1px solid #8B4513;
+  border-bottom: 1px solid gray;
   padding: 0;
   position: relative;
 }

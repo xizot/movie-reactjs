@@ -5,7 +5,7 @@
     background-size: cover;
     height: 100%;
     width: 100%;
-    padding: 100px 0;
+    padding: 150px 0 100px;
     @include breakpoint(tab) {
         padding: 100px 30px;
     }

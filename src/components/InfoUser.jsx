@@ -1,4 +1,5 @@
 import React from 'react';
+import { PlusOutlined , DeleteOutlined} from "@ant-design/icons";
 function InfoUser() {
     return (
         <div className='infouser'>
@@ -29,10 +30,10 @@ function InfoUser() {
                                     alt=''
                                 />
                                 <div className="is-hover">
-                                    <label  class="is-hover__handle" htmlFor="upload-avatar">Upload Avatar</label>
-                                    <span class="is-hover__handle" >
-                                        Delete Avatar
-                                    </span>
+                                    <label  className="is-hover__handle is-hover__handle__upload" htmlFor="upload-avatar"><PlusOutlined /> Upload Avatar</label>
+                                    <button className="is-hover__handle is-hover__handle__delete" >
+                                    <DeleteOutlined /> Delete Avatar
+                                    </button>
 
                                     <input
                                     type='file'

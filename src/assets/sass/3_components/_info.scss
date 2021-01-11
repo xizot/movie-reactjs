@@ -273,12 +273,12 @@
             opacity: 0;
             transition: opacity .7s;
             &__handle {
-                background-color: #FF0000;
+                // background-color: #FF0000;
                 cursor: pointer;
                 height: 30px;
-                width: 120px;
+                // width: 120px;
+                padding: 0 15px;
                 border-radius: 5px;
-                border: 1px solid #ddd;
                 display: block;
                 line-height: 30px;
                 color: #fff;
@@ -286,6 +286,13 @@
                 font-size: 1.4rem;
                 letter-spacing: 0.54px;
                 margin-bottom: 15px;
+                outline: none;
+                &__delete{
+                    background-color: #c70039;
+                }
+                &__upload{
+                    background-color: #00917c;
+                }
             }
         }
         &:hover{
@@ -319,7 +326,7 @@
         padding: unset;
         &__group {
             background: transparent;
-            border-bottom: 1px solid #8B4513;
+            border-bottom: 1px solid gray;
             padding: 0;
             position: relative;
             // background-color: rgba($color: $bgBold, $alpha: 0.5);
