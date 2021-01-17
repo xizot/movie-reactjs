@@ -5,7 +5,7 @@ import {
 
 const initialState = {
     isLoading: false,
-    data:[],
+    data:'',
     code: localStorage.getItem("code"),
 };
 const inforReducer = (state = initialState, action) => {
@@ -13,6 +13,7 @@ const inforReducer = (state = initialState, action) => {
         case GETINFORUSER_SUCCESS:
             return {
                 ...state,
+                data: action.payload,
                 isLoading: false,
             };
         case GETINFORUSER_FAIL:

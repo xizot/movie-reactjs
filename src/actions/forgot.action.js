@@ -1,7 +1,7 @@
-// import { history } from "../helper";
-import { FORGOT_SUCCESS, FORGOT_FAIL } from '../types/forgot.type';
+import { history } from "../helper";
+import { FORGOT_SUCCESS, FORGOT_FAIL,SENDPASSWORD_SUCCESS,SENDPASSWORD_FAIL } from '../types/forgot.type';
 import axios from './../axios';
-import { getError } from './error.action';
+import { clearError, getError } from "./error.action";
 
 export const recoveryEmail = (email) => (dispatch) => {
     axios
@@ -11,21 +11,48 @@ export const recoveryEmail = (email) => (dispatch) => {
                 type: FORGOT_SUCCESS,
                 payload: res.data,
             });
+            dispatch(clearError());
         })
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(
-                        err.response.data,
-                        err.response.status,
-                        FORGOT_FAIL
-                    )
+                    getError(err.response.data.error || err.response.data.errors, err.response.status, FORGOT_FAIL)
                 );
-
-                alert('Failed to send email!');
             }
             dispatch({
+                payload: { msg:"Server error!!!", status: 500, id: FORGOT_FAIL },
                 type: FORGOT_FAIL,
             });
         });
+};
+export const forgotPassword = (recoveryCode,password,confirmPassword) => (dispatch) => {
+    const body = {
+        recoveryCode,
+        password,
+        confirmPassword,
+    };
+    axios
+        .post("/auth/resetpassword/", body)
+        .then((res) => {
+            dispatch({
+                type: SENDPASSWORD_SUCCESS,
+                payload: res.data,
+            });
+            dispatch(clearError());
+        })
+        .catch((err) => {
+            if (err.response) {
+                dispatch(
+                    getError(err.response.data.error || err.response.data.errors, err.response.status, SENDPASSWORD_FAIL)
+                );
+            }
+            dispatch({
+                payload: { msg:"Server error!!!", status: 500, id: SENDPASSWORD_FAIL },
+                type: SENDPASSWORD_FAIL,
+            });
+        });
+}
+//redirect
+export const customRedirect = (to) => (dispatch) => {
+    history.push(to);
 };

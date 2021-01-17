@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector  } from 'react-redux';
 import { recoveryEmail } from './../actions/forgot.action';
 import { validateEmail } from '../helper/validator'
-import queryString from 'query-string';
 import FormError from './FormError';
 
 function ForgotPassword() {
@@ -10,15 +9,16 @@ function ForgotPassword() {
     const dispath = useDispatch();
     const [errorEmail, setErrorEmail] = useState(false);
 
+    const isForgot = useSelector((state) => state.forgot.sendRecovery);
+    console.log(isForgot) 
+    console.log("isForgot") 
     const handleSend = () => {
         if(!errorEmail && email !== '') {
             dispath(recoveryEmail(email));
         }
     };
     const onKeyPress = (e) => {
-        if (e.which === 13) {
-            handleSend();
-        }
+         handleSend();
     };
     const handleEmail = (e) => {
         let value = e.target.value;
@@ -32,19 +32,10 @@ function ForgotPassword() {
             }
         }
     };
-    const getCode = () => {
-        const val = queryString.parse(window.location.search);
-        return val.code; // CurrentURL?code=value    return value
-        // alert(val.code)
-    };
-    useEffect(() => {
-        let code = getCode();
-        if (code && code.length > 0) {
-            console.log('email confirm');
-        }
-    }, [dispath]);
     return (
         <>
+        {console.log("-------------")}
+        {console.log(isForgot)}
             <div className='login'>
                 <div className='c-overlayer'> </div>
                 <div className='login__content'>
@@ -77,6 +68,19 @@ function ForgotPassword() {
                                 </button>
                             </div>
                         </form>
+                        { 
+                            // !isForgot && (
+                            // <h3 className="c-form__text">
+                            //     Please wait while we sending reset password to your email...
+                            // </h3>) 
+                        }
+                        {
+                            isForgot && (
+                                <h3 className="c-form__text">
+                            Email was send successful, Click the link on email to reset password !
+                            </h3>) 
+                        }                       
+                        { }
                     </div>
                 </div>
             </div>
