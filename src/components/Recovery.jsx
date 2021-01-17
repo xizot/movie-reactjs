@@ -4,6 +4,7 @@ import { forgotPassword, customRedirect } from './../actions/forgot.action';
 import FormError from './FormError';
 import { clearError } from "../actions/error.action";
 import queryString from "query-string";
+import { validateConfirmPassword, validatePassword } from '../helper/validator';
 
 function Recovery() {
     const dispath = useDispatch();
@@ -59,7 +60,7 @@ function Recovery() {
         else {
             dispath(customRedirect('/'));
         }
-    }, [dispath, errorServer]);
+    }, [dispath, errorServer,confirmPassword,password]);
 
     return (
         <>

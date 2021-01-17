@@ -3,7 +3,7 @@ import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../actions/user.action";
-import { history } from "./../helper";
+// import { history } from "./../helper";
 import { Link } from "react-router-dom";
 import { HomeOutlined } from "@ant-design/icons";
 function AddFilm() {

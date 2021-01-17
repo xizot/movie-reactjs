@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusOutlined , DeleteOutlined} from "@ant-design/icons";
-import { convertDateTime } from '../helper/converter'
+// import { convertDateTime } from '../helper/converter'
 import { clearError } from "../actions/error.action";
 import FormError from './FormError'
 import { validateEmail, validateUsername, validateDisplayName, validateDateOfBirth, validatePassword, validateConfirmPassword } from '../helper/validator';
@@ -126,7 +126,7 @@ function InfoUser() {
         }
     };
     
-    let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
+    // let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
     return (
         <div className='infouser'>
             <div className='c-overlayer'> </div>
@@ -271,7 +271,7 @@ function InfoUser() {
                                     <button
                                         className='c-btn c-btn'
                                         type='button'
-                                        onClick={() => handleGetInfo()}
+                                        // onClick={() => handleGetInfo()}
                                     >
                                         SAVE CHANGES
                                     </button>

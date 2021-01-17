@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useDispatch,useSelector  } from 'react-redux';
 import { recoveryEmail } from './../actions/forgot.action';
 import { validateEmail } from '../helper/validator'
