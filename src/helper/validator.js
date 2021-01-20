@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { convertDateTime } from './converter';
+
 // Document : https://www.npmjs.com/package/validator
 
 export const validateEmail = (email = '') => {
@@ -21,9 +21,7 @@ export const validateDisplayName = (displayName = '') => {
 
 export const validateDateOfBirth = (dateOfBirth = '') => {
 	const newD = new Date(dateOfBirth);
-	alert('input: ' + dateOfBirth);
-	alert('after converted: ' + convertDateTime(dateOfBirth, 'DD-MM-YYYY'));
-	return validator.isDate(dateOfBirth, 'YYYY-MM-DD') && new Date(newD) < new Date();
+	return validator.isDate(dateOfBirth, 'YYYY-MM-DD') && newD < new Date();
 };
 
 export const validatePassword = (password = '') => {

@@ -16,15 +16,15 @@
 @import "0_base/resuable";
 
 .sp-only {
-    display: none;
+	display: none;
 }
 @include breakpoint(sp) {
-    .pc-only {
-        display: none !important;
-    }
-    .sp-only {
-        display: block;
-    }
+	.pc-only {
+		display: none !important;
+	}
+	.sp-only {
+		display: block;
+	}
 }
 
 /*≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
@@ -60,6 +60,7 @@
 @import "./3_components/paginate";
 @import "./3_components/utility";
 @import "./3_components/register";
+@import "./3_components/watchlater";
 @import "./3_components/form";
 @import "./3_components/login";
 @import "./3_components/comment";

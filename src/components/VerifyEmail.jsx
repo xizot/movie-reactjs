@@ -44,8 +44,6 @@ function VerifyEmail() {
                             Email confirmation was successful! We will take you to the login page !
                             </h3>) 
                         }
-                        
-                        { }
                     </div>
                 </div>
             </div>

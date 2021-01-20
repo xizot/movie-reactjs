@@ -1,4 +1,8 @@
-export const convertDateTime = (data = '1970-12-30', toType = 'DD-MM-YYYY') => {
+export const convertDateTime = (data = '1970-12-30', fromType = 'YYYY-MM-DD', toType = 'DD-MM-YYYY') => {
+	if (fromType === 'DD-MM-YYYY') {
+		data = data.split('-').reverse().join('-');
+	}
+
 	let year = new Date(data).getFullYear();
 	let month = new Date(data).getMonth() + 1;
 	let date = new Date(data).getDate();

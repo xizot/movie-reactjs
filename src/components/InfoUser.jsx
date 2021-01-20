@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusOutlined , DeleteOutlined} from "@ant-design/icons";
-// import { convertDateTime } from '../helper/converter'
 import { clearError } from "../actions/error.action";
 import FormError from './FormError'
+import { convertDateTime } from '../helper/converter';
 import { validateEmail, validateUsername, validateDisplayName, validateDateOfBirth, validatePassword, validateConfirmPassword } from '../helper/validator';
 
 function InfoUser() {
@@ -11,8 +11,8 @@ function InfoUser() {
     const dispath = useDispatch();
     const user = localStorage.getItem('user')
     var obj = JSON.parse(user);
+    obj.dateOfBirth = convertDateTime(obj.dateOfBirth, 'DD-MM-YYYY', 'YYYY-MM-DD');
 
-    
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [displayName, setDisplayName] = useState('');
@@ -85,8 +85,9 @@ function InfoUser() {
         }
         let value = e.target.value;
         if (value.length >= 0) {
+            if(value.length === 0) value = obj.dateOfBirth;
             setDateOfBirth(value);
-            if(validateDateOfBirth(value) === true) {
+            if(validateDateOfBirth(value)) {
                 setErrorDateOfBirth(false)
             }
             else {
@@ -223,11 +224,12 @@ function InfoUser() {
                                     )}
                                     <div className='c-form__group is-focus'>
                                         <input
-                                            className='c-form__input_date'                                            
+                                            className = 'c-form__input_date'
                                             min='1920-01-01'
                                             max='2021-12-12'
+                                            type='date'
                                             required
-                                            value={dateOfBirth || obj.dateOfBirth}
+                                            value = { dateOfBirth || obj.dateOfBirth }
                                             onChange={(e) => handleDateOfBirth(e)}
                                         />
                                         <label className='c-form__label'>
