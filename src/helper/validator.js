@@ -21,11 +21,9 @@ export const validateDisplayName = (displayName = '') => {
 
 export const validateDateOfBirth = (dateOfBirth = '') => {
 	const newD = new Date(dateOfBirth);
-	if (validator.isDate(dateOfBirth, 'YYYY-MM-DD') && newD.getFullYear() > 1000) {
-		alert('input: ' + dateOfBirth);
-		alert('after converted: ' + convertDateTime(dateOfBirth, 'DD-MM-YYYY'));
-	}
-	return validator.isDate(dateOfBirth, 'YYYY-MM-DD') && new Date(dateOfBirth) < new Date();
+	alert('input: ' + dateOfBirth);
+	alert('after converted: ' + convertDateTime(dateOfBirth, 'DD-MM-YYYY'));
+	return validator.isDate(dateOfBirth, 'YYYY-MM-DD') && new Date(newD) < new Date();
 };
 
 export const validatePassword = (password = '') => {
