@@ -1,23 +1,16 @@
-export const convertDateTime = (data ,fromType ="YYYY-MM-DD", toType="DD-MM-YYYY")=>{
-    let year = (new Date()).getFullYear();
-    let month = (new Date()).getMonth();
-    let date = (new Date()).getDate();
-    if(fromType === "YYYY-MM-DD") {
-        year = data[0]+data[1]+data[2]+data[3];
-        month = data[5]+data[6];
-        date = data[8]+data[9]
-    }
+export const convertDateTime = (data = '1970-12-30', toType = 'DD-MM-YYYY') => {
+	let year = new Date(data).getFullYear();
+	let month = new Date(data).getMonth() + 1;
+	let date = new Date(data).getDate();
 
-    return date + '-' + month + '-' + year;
-}
+	if (month < 10) month = '0' + month.toString();
+	if (date < 10) date = '0' + date.toString();
 
-export const formatDate = (date, format) => {
-    const map = {
-        MM: date.getMonth() + 1,
-        DD: date.getDate(),
-        //YY: date.getFullYear().toString().slice(-2),
-        YYYY: date.getFullYear()
-    }
+	const map = {
+		DD: date,
+		MM: month,
+		YYYY: year
+	};
 
-    return format.replace(/MM|DD|YYYY/gi, matched => map[matched])
-}
+	return toType.replace(/MM|DD|YYYY/gi, (matched) => map[matched]);
+};

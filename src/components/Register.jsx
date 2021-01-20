@@ -66,7 +66,7 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setUsername(value);
-            if(validateUsername(value) === true) {
+            if(validateUsername(value)) {
                 setErrorUsername(false)
             }
             else {
@@ -81,7 +81,7 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setEmail(value);
-            if(validateEmail(value) === true) {
+            if(validateEmail(value)) {
                 setErrorEmail(false)
             }
             else {
@@ -96,7 +96,7 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setDisplayName(value);
-            if(validateDisplayName(value) === true){
+            if(validateDisplayName(value)){
                 setErrorDisplayName(false)
             }
             else {
@@ -111,7 +111,7 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setDateOfBirth(value);
-            if(validateDateOfBirth(value) === true) {
+            if(validateDateOfBirth(value)) {
                 setErrorDateOfBirth(false)
             }
             else {
@@ -126,7 +126,7 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setPassword(value);
-            if(validatePassword(value) === true) {
+            if(validatePassword(value)) {
                 setErrorPassword(false)
             }
             else {
@@ -141,7 +141,7 @@ function Register() {
         let value = e.target.value;
         if (value.length >= 0) {
             setConfirmPassword(value);
-            if(validateConfirmPassword(password, value) === true) {
+            if(validateConfirmPassword(password, value)) {
                 setErrorConfirmPassword(false)
             }
             else {
@@ -225,7 +225,7 @@ function Register() {
                                 </label>
                             </div>
                             { errorDateOfBirth && (
-                                <FormError text='Date of birth must not be after the current date' />
+                                <FormError text='Date of birth must be valid date and must not be after the current date' />
                             )}
                             <div className='c-form__group'>
                                 <input
