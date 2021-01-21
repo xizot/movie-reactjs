@@ -19,11 +19,6 @@ function Info() {
     const user = useSelector((state) => state.auth.user);
     // var obj = JSON.parse(user);
     var obj = user;
-    obj.dateOfBirth = convertDateTime(
-        obj.dateOfBirth,
-        "DD-MM-YYYY",
-        "YYYY-MM-DD"
-    );
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -135,7 +130,7 @@ function Info() {
 
     useEffect(() => {
         dispath(loadUser());
-    }, [user, dispath]);
+    }, [dispath]);
 
     // let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
     return (
@@ -263,7 +258,11 @@ function Info() {
                                                     required
                                                     value={
                                                         dateOfBirth ||
-                                                        obj.dateOfBirth
+                                                        convertDateTime(
+                                                            obj.dateOfBirth,
+                                                            "DD-MM-YYYY",
+                                                            "YYYY-MM-DD"
+                                                        )
                                                     }
                                                     onChange={(e) =>
                                                         handleDateOfBirth(e)
