@@ -75,16 +75,16 @@ window.customSlick = () => {
 };
 
 $(window).ready(() => {
-    setFullHeight("u-fullheight");
-    setFullWidth("u-fullwidth");
+    setFullHeight(".js-fullheight");
+    setFullWidth(".js-fullwidth");
 
     if ($(".home")) {
         window.customSlick();
     }
 });
 $(window).on("resize", function () {
-    setFullHeight("u-fullheight");
-    setFullWidth("u-fullwidth");
+    setFullHeight(".js-fullheight");
+    setFullWidth(".js-fullwidth");
     removeMenuSP();
 });
 $(window).on("scroll", onScroll);

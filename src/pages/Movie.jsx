@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import queryString from "query-string";
 import Detail from "../components/Detail";
 import List2 from "../components/List2";
@@ -17,7 +15,7 @@ function Movie() {
     const [ID, setID] = useState(null);
     // const [isMovie, setIsMovie] = useState(false);
     // const [isTV, setIsTV] = useState(false);
-  
+
     const listNew = useSelector((state) => state.film.new);
     const dispatch = useDispatch();
 
@@ -46,12 +44,9 @@ function Movie() {
     return (
         <div className="pages-movie">
             {isWatch ? (
-                <>
-                    <Watch ID={ID} ep={episode} />
-                </>
+                <Watch ID={ID} ep={episode} />
             ) : (
                 <>
-                    <Header isDark={true} />
                     <Detail
                         title="The Rise of Kingdom"
                         cat={["action", "romance"]}
@@ -67,7 +62,6 @@ function Movie() {
                     ) : (
                         <></>
                     )}
-                    <Footer />
                 </>
             )}
         </div>

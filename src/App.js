@@ -1,22 +1,28 @@
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 // import Home from './pages/Home';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Account from './pages/Account';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/user.action';
 import { useEffect } from 'react';
-import Home from './pages/Home';
-import Info from './pages/Info';
+import { history } from './helper';
+
+// Pages
 import Search from './pages/Search';
+import Register from './pages/Register';
+import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import Recovery from './pages/Recovery';
 import VerifyEmail from './pages/VerifyEmail';
-import Movie from './pages/Movie';
 import WatchLater from './pages/WatchLater';
+import Home from './pages/Home';
+import Info from './pages/Info';
+import Movie from './pages/Movie';
+import AddFilm from './pages/AddFilm';
+
+
+// Components
 import { PrivateRoute } from './components/common/ProtectedRoute';
-import { history } from './helper';
-import AddFilm from './components/AddFilm';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
 	const dispath = useDispatch();
@@ -24,26 +30,30 @@ function App() {
 		() => {
 			dispath(loadUser());
 		},
-		[ dispath ]
+		[dispath]
 	);
 
 	return (
 		<div className="App">
 			<Router history={history}>
-				<PrivateRoute path="/account" component={Account} />
-				<PrivateRoute path="/admin" component={AddFilm} />
-				<Route path="/info" component={Info} />
-				<Route path="/forgotpassword" component={ForgotPassword} />
-				<Route path="/verifyemail" component={VerifyEmail} />
-				<Route path="/recovery" component={Recovery} />
-				<Route path="/login" component={Login} />
-				<Route path="/movie" component={Movie} />
-				<Route path="/search" component={Search} />
-				<Route path="/register" component={Register} />
-				<Route path="/watchlater" component={WatchLater} />
-				{/* <Route exact path='/' component={Home} /> */}
-				<Route exact path="/" component={Home} />
+				<Header />
+				<Switch>
+					<PrivateRoute path="/admin" component={AddFilm} />
+					<Route path="/account" component={Info} />
+					<Route path="/forgotpassword" component={ForgotPassword} />
+					<Route path="/verifyemail" component={VerifyEmail} />
+					<Route path="/recovery" component={Recovery} />
+					<Route path="/login" component={Login} />
+					<Route path="/movie" component={Movie} />
+					<Route path="/search" component={Search} />
+					<Route path="/register" component={Register} />
+					<Route path="/watchlater" component={WatchLater} />
+					{/* <Route exact path='/' component={Home} /> */}
+					<Route exact path="/" component={Home} />
+				</Switch>
+				<Footer />
 			</Router>
+
 		</div>
 	);
 }

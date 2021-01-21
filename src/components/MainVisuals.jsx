@@ -10,7 +10,7 @@ function Mainvisuals() {
     }, []);
     return (
         <div className="c-mainvisuals js-mainvisuals" data-anchor="1">
-            <div className="c-mainvisuals__content u-fullheight">
+            <div className="c-mainvisuals__content js-fullheight">
                 {/* <!-- ▼ Slide Controller ▼ --> */}
                 <div className="c-slide__controller">
                     <div className="c-slide__prev">
