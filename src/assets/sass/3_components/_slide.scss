@@ -10,6 +10,12 @@
             height: 100%;
         }
     }
+    &__prev.slick-arrow{
+        margin: 0 30px 0 0;
+    }
+    &__next.slick-arrow{
+        margin: 0 0 0 30px;
+    }
     &__controller {
         display: -webkit-box;
         display: flex;
@@ -18,11 +24,14 @@
         position: absolute;
         bottom: 30px;
 
-        right: 20px;
+        right: 50px;
         z-index: 2;
         @include breakpoint(tab) {
             right: unset;
-            left: 0;
+            left: 45px;
+        }
+        @include breakpoint(sp) {
+            left: 15px;
         }
     }
     &__item {
@@ -43,15 +52,24 @@
         width: 100%;
         display: flex;
         align-items: flex-end;
-        @include breakpoint(tab) {
-            bottom: 90px;
-        }
-        .l-container {
-            padding-right: 40%;
-            @include breakpoint(tab) {
-                padding-right: unset;
+        &__content{
+            padding-left: 200px;
+            width: 100%;
+            @include breakpoint(pro){
+                padding:0 70px;
+            }
+            @include breakpoint(tab){
+                padding: 0 40px;
+            }
+            @include breakpoint(sp){
+                padding: 0 15px;
             }
         }
+        @include breakpoint(tab) {
+            bottom: 90px;
+            
+        }
+       
     }
 
     &__label {

@@ -35,18 +35,19 @@ function Mainvisuals() {
                             loading="lazy"
                         />
                         <div className="c-slide__info">
-                            <div className="l-container">
+                            <div className="c-slide__info__content">
                                 <span className="c-slide__label">
                                     NEW RELEASES
                                 </span>
                                 <h3 className="c-title1">
-                                    The Rise Of Kingdoms
+                                    The Rise <br />
+                                    Of <br /> Kingdoms
                                 </h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is.
+                                    She can truly celebrate who shie is.<br/>
                                     Directed by Ryan Murphu 'The Mando' is the
                                     spectacular, big-hearted flim.
                                 </p>
@@ -72,18 +73,19 @@ function Mainvisuals() {
                             loading="lazy"
                         />
                         <div className="c-slide__info">
-                            <div className="l-container">
+                            <div className="c-slide__info__content">
                                 <span className="c-slide__label">
                                     NEW RELEASES
                                 </span>
                                 <h3 className="c-title1">
-                                    The Rise Of Football
+                                    The Rise
+                                    <br /> Of <br /> Football
                                 </h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is.
+                                    She can truly celebrate who shie is.<br/>
                                     Directed by Ryan Murphu 'The Mando' is the
                                     spectacular, big-hearted flim.
                                 </p>
@@ -109,16 +111,18 @@ function Mainvisuals() {
                             loading="lazy"
                         />
                         <div className="c-slide__info">
-                            <div className="l-container">
+                            <div className="c-slide__info__content">
                                 <span className="c-slide__label">
                                     NEW RELEASES
                                 </span>
-                                <h3 className="c-title1">The Rise Of Mandou</h3>
+                                <h3 className="c-title1">
+                                    The Rise <br /> Of <br /> Mandou
+                                </h3>
                                 <div className="c-slide__cat">
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is.
+                                    She can truly celebrate who shie is.<br/>
                                     Directed by Ryan Murphu 'The Mando' is the
                                     spectacular, big-hearted flim.
                                 </p>
