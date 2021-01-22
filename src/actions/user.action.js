@@ -28,7 +28,7 @@ export const login = (username, password) => (dispatch) => {
                     refreshToken: res.data.refreshToken,
                 },
             });
-            
+            dispatch(loadUser())
             dispatch(clearError());
            
         })

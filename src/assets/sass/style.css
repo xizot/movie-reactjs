@@ -3876,6 +3876,7 @@ img {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 100px 0;
 }
 
 .p-admin .c-btn {

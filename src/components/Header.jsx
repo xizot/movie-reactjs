@@ -3,14 +3,19 @@ import { SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Loading from './Loading';
+import $ from "jquery";
 function Header({ isDark = null }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state) => state.auth.user);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setisOpen] = useState(false);
     const handleMenu = () => {
         setisOpen(!isOpen);
     };
     useEffect(() => {
+        $(".c-menusp a").on("click",function(){
+            setisOpen(false);
+        })
         setIsLoading(true);
     }, [isLoading]);
 
@@ -45,6 +50,10 @@ function Header({ isDark = null }) {
                             <li>
                                 <Link to='/tips'>ABOUT</Link>
                             </li>
+                            {(user && user.role === "admin") &&  <li>
+                                <Link to='/admin'>ADMIN PAGE</Link>
+                            </li>}
+                           
                         </ul>
                         <div className='p-header__actions u-flex u-a-center'>
                             <Link to='/' className='p-header__search'>
@@ -107,14 +116,17 @@ function Header({ isDark = null }) {
                                         <Link to='/'>HOME</Link>
                                     </li>
                                     <li>
-                                        <Link to='/'>MOVIES</Link>
+                                        <Link to='/movie'>MOVIES</Link>
                                     </li>
                                     <li>
-                                        <Link to='/'>TV SHOWS</Link>
+                                        <Link to='/tv'>TV SHOWS</Link>
                                     </li>
                                     <li>
-                                        <Link to='/'>ABOUT</Link>
+                                        <Link to='/tips'>ABOUT</Link>
                                     </li>
+                                        {(user && user.role === "admin") &&  <li>
+                                        <Link to='/admin'>ADMIN PAGE</Link>
+                                    </li>}
                                 </ul>
                                 <div className='c-menusp__actions'>
                                     {isAuthenticated ? (
