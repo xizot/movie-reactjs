@@ -16,7 +16,7 @@ import WatchLater from './pages/WatchLater';
 import Home from './pages/Home';
 import Info from './pages/Info';
 import Movie from './pages/Movie';
-import AddFilm from './pages/AddFilm';
+import Admin from './pages/Admin';
 
 
 // Components
@@ -38,7 +38,7 @@ function App() {
 			<Router history={history}>
 				<Header />
 				<Switch>
-					<PrivateRoute path="/admin" component={AddFilm} />
+					<PrivateRoute path="/admin" component={Admin} />
 					<Route path="/account" component={Info} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
 					<Route path="/verifyemail" component={VerifyEmail} />
@@ -48,8 +48,11 @@ function App() {
 					<Route path="/search" component={Search} />
 					<Route path="/register" component={Register} />
 					<Route path="/watchlater" component={WatchLater} />
-					{/* <Route exact path='/' component={Home} /> */}
 					<Route exact path="/" component={Home} />
+					<Route> 
+						<>404 Not Found</>
+
+					</Route>
 				</Switch>
 				<Footer />
 			</Router>
