@@ -5,6 +5,7 @@ import { clearError } from "../actions/error.action";
 import { loadUser } from "../actions/user.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
+import {update} from "../actions/infor.action";
 import {
     validateEmail,
     validateUsername,
@@ -16,17 +17,15 @@ import {
 
 function Info() {
     const dispath = useDispatch();
-    const user = useSelector((state) => state.auth.user);
-    // var obj = JSON.parse(user);
-    var obj = user;
+    let user = useSelector((state) => state.auth.user);
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [displayName, setDisplayName] = useState("");
     const [dateOfBirth, setDateOfBirth] = useState("");
-    const [password, setPassword] = useState("");
+    const [currentPassword, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
+    const [newPassword,setNewPassword]=useState("");
     //error
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
@@ -34,7 +33,7 @@ function Info() {
     const [errorDateOfBirth, setErrorDateOfBirth] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
-
+    const [errorNewPassword,setErrorNewPassword] = useState(false);
     const errorServer = useSelector((state) => state.error);
 
     const handleUsername = (e) => {
@@ -42,7 +41,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
-        setUsername(obj.username);
+        setUsername(user.username);
         if (value.length >= 0) {
             setUsername(value);
             if (validateUsername(value) === true) {
@@ -53,11 +52,43 @@ function Info() {
         }
     };
 
+    const handleUpdate = () => {
+        if (
+            !errorUsername &&
+            !errorEmail &&
+            !errorDisplayName &&
+            !errorDateOfBirth &&
+            !errorPassword &&
+            !errorConfirmPassword
+        ) {
+            if (
+                username !== "" &&
+                email !== "" &&
+                displayName !== "" &&
+                currentPassword !== "" &&
+                confirmPassword !== ""&&
+                newPassword !== ""
+            ) {
+                dispath(
+                    update(
+                        username,
+                        displayName,
+                        email,
+                        currentPassword,
+                        confirmPassword,
+                        dateOfBirth,
+                        newPassword,
+                    )
+                );
+            }
+        }
+    }
     const handleEmail = (e) => {
         if (errorServer.id) {
             dispath(clearError());
         }
         let value = e.target.value;
+        setEmail(user.email)
         if (value.length >= 0) {
             setEmail(value);
             if (validateEmail(value) === true) {
@@ -66,6 +97,7 @@ function Info() {
                 setErrorEmail(true);
             }
         }
+        
     };
 
     const handleDisplayName = (e) => {
@@ -89,7 +121,7 @@ function Info() {
         }
         let value = e.target.value;
         if (value.length >= 0) {
-            if (value.length === 0) value = obj.dateOfBirth;
+            if (value.length === 0) value = user.dateOfBirth;
             setDateOfBirth(value);
             if (validateDateOfBirth(value)) {
                 setErrorDateOfBirth(false);
@@ -120,7 +152,7 @@ function Info() {
         let value = e.target.value;
         if (value.length >= 0) {
             setConfirmPassword(value);
-            if (validateConfirmPassword(password, value) === true) {
+            if (validateConfirmPassword(newPassword, value) === true) {
                 setErrorConfirmPassword(false);
             } else {
                 setErrorConfirmPassword(true);
@@ -128,8 +160,30 @@ function Info() {
         }
     };
 
+    const handleNewPassword = (e) => {
+        if (errorServer.id) {
+            dispath(clearError());
+        }
+        let value = e.target.value;
+        if (value.length >= 0) {
+            setNewPassword(value);
+            if (validatePassword(value) === true) {
+                setErrorNewPassword(false);
+            } else {
+                setErrorNewPassword(true);
+            }
+        }
+    };
+
     useEffect(() => {
         dispath(loadUser());
+
+        if(user){
+            setUsername(user.username);
+            setDateOfBirth(user.dateOfBirth);
+            setEmail(user.email)
+            setDisplayName(user.displayName);
+        }
     }, [dispath]);
 
     // let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
@@ -198,7 +252,7 @@ function Info() {
                                                     type="text"
                                                     required
                                                     value={
-                                                        username || obj.username
+                                                        username
                                                     }
                                                     onChange={(e) =>
                                                         handleUsername(e)
@@ -217,8 +271,7 @@ function Info() {
                                                     type="text"
                                                     name="displayName"
                                                     value={
-                                                        displayName ||
-                                                        obj.displayName
+                                                        displayName
                                                     }
                                                     onChange={(e) =>
                                                         handleDisplayName(e)
@@ -237,7 +290,7 @@ function Info() {
                                                     className="c-form__input"
                                                     type="text"
                                                     required
-                                                    value={email || obj.email}
+                                                    value={email} 
                                                     onChange={(e) =>
                                                         handleEmail(e)
                                                     }
@@ -257,9 +310,8 @@ function Info() {
                                                     type="date"
                                                     required
                                                     value={
-                                                        dateOfBirth ||
                                                         convertDateTime(
-                                                            obj.dateOfBirth,
+                                                            dateOfBirth,
                                                             "DD-MM-YYYY",
                                                             "YYYY-MM-DD"
                                                         )
@@ -282,7 +334,7 @@ function Info() {
                                                     type="password"
                                                     required
                                                     value={
-                                                        password || "********"
+                                                        currentPassword
                                                     }
                                                     onChange={(e) =>
                                                         handlePassword(e)
@@ -298,11 +350,30 @@ function Info() {
                                             <div className="c-form__group">
                                                 <input
                                                     className="c-form__input"
+                                                    autoComplete="new-password"
                                                     type="password"
                                                     required
                                                     value={
-                                                        confirmPassword ||
-                                                        "********"
+                                                        newPassword
+                                                    }
+                                                    onChange={(e) =>
+                                                        handleNewPassword(e)
+                                                    }
+                                                />
+                                                <label className="c-form__label">
+                                                    NEW PASSWORD
+                                                </label>
+                                            </div>
+                                            {errorNewPassword && (
+                                                <FormError text="Password must be between 8 and 128 characters long" />
+                                            )}
+                                            <div className="c-form__group">
+                                                <input
+                                                    className="c-form__input"
+                                                    type="password"
+                                                    required
+                                                    value={
+                                                        confirmPassword
                                                     }
                                                     onChange={(e) =>
                                                         handleConfirmPassword(e)
@@ -318,7 +389,7 @@ function Info() {
                                             <button
                                                 className="c-btn c-btn"
                                                 type="button"
-                                                // onClick={() => handleGetInfo()}
+                                                onClick={() => handleUpdate()}
                                             >
                                                 SAVE CHANGES
                                             </button>

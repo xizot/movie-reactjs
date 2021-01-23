@@ -1,11 +1,14 @@
 import {
     GETINFORUSER_SUCCESS,
     GETINFORUSER_FAIL,
+    UPDATE_SUCCESS,
+    UPDATE_FAIL,
 } from "../types/infor.type";
 
 const initialState = {
     isLoading: false,
     data:'',
+    update:false,
     code: localStorage.getItem("code"),
 };
 const inforReducer = (state = initialState, action) => {
@@ -18,8 +21,18 @@ const inforReducer = (state = initialState, action) => {
             };
         case GETINFORUSER_FAIL:
             return {
+                ...state,
                 isLoading: false,
+            };
+        case UPDATE_FAIL:
+            return {
+                ...state,
+                update: false,
             };            
+        case UPDATE_SUCCESS:
+            return {
+                update: true,
+            };                        
         default:
             return state;
     }

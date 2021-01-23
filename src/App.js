@@ -17,6 +17,7 @@ import Home from './pages/Home';
 import Info from './pages/Info';
 import Movie from './pages/Movie';
 import Admin from './pages/Admin';
+import History from './pages/History';
 
 
 // Components
@@ -46,6 +47,7 @@ function App() {
 					<Route path="/login" component={Login} />
 					<Route path="/movie" component={Movie} />
 					<Route path="/search" component={Search} />
+					<Route path="/history" component={History} />
 					<Route path="/register" component={Register} />
 					<Route path="/watchlater" component={WatchLater} />
 					<Route exact path="/" component={Home} />
