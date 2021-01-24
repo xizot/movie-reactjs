@@ -2,14 +2,14 @@ import { GETINFORUSER_SUCCESS,GETINFORUSER_FAIL,UPDATE_SUCCESS,UPDATE_FAIL } fro
 import axios from './../axios';
 import { getError } from './error.action';
 
-export const inforUser = () => (dispatch, getState) => {
+export const getInfor = () => (dispatch) => {
     const token = localStorage.getItem("token");
     dispatch({
         type: GETINFORUSER_SUCCESS,
     });
     if (token) {
         axios
-            .get("/user")
+            .get("/user/")
             .then((res) => {
                 dispatch({
                     type:  GETINFORUSER_SUCCESS,

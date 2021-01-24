@@ -5,7 +5,7 @@ import { clearError } from "../actions/error.action";
 import { loadUser } from "../actions/user.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
-import {update} from "../actions/infor.action";
+import {update,getInfor} from "../actions/infor.action";
 import {
     validateEmail,
     validateUsername,
@@ -69,6 +69,7 @@ function Info() {
                 confirmPassword !== ""&&
                 newPassword !== ""
             ) {
+                confirm("Are you sure you want to update?")
                 dispath(
                     update(
                         username,
@@ -80,6 +81,7 @@ function Info() {
                         newPassword,
                     )
                 );
+                //console.log(dispath(getInfor()))
             }
         }
     }
