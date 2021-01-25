@@ -139,6 +139,42 @@ export const getNewest = () => (dispatch) => {
             minutes: 5,
             resolution: [],
         },
+        {
+            x: "4",
+            createdAt: "2020-12-10T14:40:55.402Z",
+            name: "Senior Usability Agent",
+            image:
+                "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
+            minutes: 5,
+            resolution: [],
+        },
+        {
+            x: "4",
+            createdAt: "2020-12-10T14:40:55.402Z",
+            name: "Senior Usability Agent",
+            image:
+                "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
+            minutes: 5,
+            resolution: [],
+        },
+        {
+            x: "4",
+            createdAt: "2020-12-10T14:40:55.402Z",
+            name: "Senior Usability Agent",
+            image:
+                "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
+            minutes: 5,
+            resolution: [],
+        },
+        {
+            x: "4",
+            createdAt: "2020-12-10T14:40:55.402Z",
+            name: "Senior Usability Agent",
+            image:
+                "https://ftw.usatoday.com/wp-content/uploads/sites/90/2017/11/the-rock.jpg",
+            minutes: 5,
+            resolution: [],
+        },
     ];
 
     if (data.length) {

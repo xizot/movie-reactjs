@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 function Item1({id, image, cat, name, chapter}) {
     return (
-        <div className="c-item col-xs-12 col-md-6 col-lg-3 u-fade">
+        <div className="c-item ">
             <div className="gutter">
                 <img className="c-item__image" src={image ? image :`${process.env.PUBLIC_URL}/assets/img/no-img.jpg`} alt="" loading="lazy" />
                 <div className="c-item__content">
