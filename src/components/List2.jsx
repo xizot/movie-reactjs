@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Slider2 from "react-slick";
 
 function List2({ subtitle, title, list }) {
-    console.log(list);
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
         return <div className={className} onClick={onClick} />;
@@ -21,6 +20,8 @@ function List2({ subtitle, title, list }) {
         speed: 500,
         slidesToShow: 6,
         slidesToScroll: 1,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
         responsive: [
             {
               breakpoint: 1200,
