@@ -1,6 +1,7 @@
 .c-item {
     padding: 0 15px;
     margin-bottom: 30px;
+  
     .gutter {
         position: relative;
         height: 400px;
@@ -28,8 +29,6 @@
             opacity: 0;
         }
         &:hover {
-            box-shadow: 2px 2px 20px rgba($color: #fff, $alpha: 0.6);
-            transform: translateY(-8px);
             &::after {
                 opacity: 1;
             }

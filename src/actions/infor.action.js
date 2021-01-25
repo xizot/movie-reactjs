@@ -1,6 +1,6 @@
 import { GETINFORUSER_SUCCESS,GETINFORUSER_FAIL,UPDATE_SUCCESS,UPDATE_FAIL } from '../types/infor.type';
 import axios from './../axios';
-import { getError } from './error.action';
+import { clearError, getError } from './error.action';
 
 export const getInfor = () => (dispatch) => {
     const token = localStorage.getItem("token");
@@ -15,7 +15,7 @@ export const getInfor = () => (dispatch) => {
                     type:  GETINFORUSER_SUCCESS,
                     payload: res.data,
                 });
-                console.log(payload)
+                // console.log(payload)
             })
             .catch((err) => {
                 if(err){

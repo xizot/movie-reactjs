@@ -69,7 +69,7 @@ function Info() {
                 confirmPassword !== ""&&
                 newPassword !== ""
             ) {
-                confirm("Are you sure you want to update?")
+                window.confirm("Are you sure you want to update?")
                 dispath(
                     update(
                         username,
