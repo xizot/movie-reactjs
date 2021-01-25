@@ -1,65 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { MinusOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import SearchItem from "../components/SearchItem";
-import $ from "jquery";
 function Search() {
     const [searchKey, setSearchKey] = useState("");
-    const [date, setDate] = useState([]);
-    const [cat, setCat] = useState([]);
-
     const handleSearch = (e) => {
         const value = e.target.value;
         if (value && value.length) {
             setSearchKey(value);
         }
-    };
-    const handleDateChange = (e) => {
-        const value = e.target.value;
-        const isChecked = e.target.checked;
-        let allFlag = true;
-        setDate((state) => {
-            return state.map((item, length) => {
-                if (value === "all") {
-                    item.select = isChecked;
-                    return item;
-                }
-                if (item.value === value) {
-                    item.select = isChecked;
-                }
-
-                if (!item.select && item.value !== "all") allFlag = false;
-                if (item.value === "all" && allFlag) {
-                    item.select = true;
-                } else if (item.value === "all" && !allFlag) {
-                    item.select = false;
-                }
-                return item;
-            });
-        });
-    };
-    const handleCatChange = (e) => {
-        const value = e.target.value;
-        const isChecked = e.target.checked;
-        let allFlag = true;
-        setCat((state) => {
-            return state.map((item, length) => {
-                if (value === "all") {
-                    item.select = isChecked;
-                    return item;
-                }
-                if (item.value === value) {
-                    item.select = isChecked;
-                }
-
-                if (!item.select && item.value !== "all") allFlag = false;
-                if (item.value === "all" && allFlag) {
-                    item.select = true;
-                } else if (item.value === "all" && !allFlag) {
-                    item.select = false;
-                }
-                return item;
-            });
-        });
     };
     const submitSearch = (e) => {
         e.preventDefault();
