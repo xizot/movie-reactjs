@@ -3,6 +3,8 @@ import {
     GET_POPULAR,
     GET_NEWEST,
     GET_EPISODE,
+    GET_COMMENT,
+    LOAD_COMMENT
 } from "./../types/film.type";
 
 const initialState = {
@@ -10,10 +12,22 @@ const initialState = {
     favor: [],
     popular: [],
     episode: [],
+    comment: []
 };
 
 const filmReducer = (state = initialState, action) => {
     switch (action.type) {
+        case LOAD_COMMENT:
+            return {
+                ...state,
+                comment: [...action.payload]
+            };
+        case GET_COMMENT:
+            var newComments =[...state.comment, ...action.payload]
+            return {
+                ...state,
+                comment:  newComments.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
+            };
         case GET_NEWEST:
             return {
                 ...state,

@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getComment, loadComment } from "../actions/film.action";
 import CommentItem from "./CommentItem";
 import Detail1 from "./Detail1";
 import Detail2 from "./Detail2";
 
 function Detail({ ID = null }) {
+    const comments = useSelector((state) => state.film.comment);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
+
+    const loadMore = () => {
+        setPage((prevPage) => prevPage + 1);
+    };
+
+    useEffect(() => {
+        dispatch(loadComment(1));
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getComment(1, page));
+    }, [dispatch, page]);
     return (
         <>
             <section className="p-detail">
@@ -21,54 +40,49 @@ function Detail({ ID = null }) {
                 <div className="p-detail3 u-fade">
                     <div className="l-container">
                         <h3 className="c-title">Comments</h3>
-                        <div className="p-detail3__content">
-                            <div className="p-detail3__box">
-                                <textarea
-                                    name=""
-                                    id=""
-                                    className=""
-                                    placeholder="Enter your comment"
-                                ></textarea>
-                                <button className="c-btn c-btn--primary">
-                                    POST COMMENT
+                        {(isAuthenticated && (
+                            <div className="p-detail3__content">
+                                <div className="p-detail3__box">
+                                    <textarea
+                                        name=""
+                                        id=""
+                                        className=""
+                                        placeholder="Enter your comment"
+                                    ></textarea>
+                                    <button className="c-btn c-btn--primary">
+                                        POST COMMENT
+                                    </button>
+                                </div>
+                                <div className="p-detail3__comments">
+                                    {comments.length &&
+                                        comments.map((item, index) => (
+                                            <React.Fragment key={item.id}>
+                                                <CommentItem
+                                                    id={item.id}
+                                                    avatar={item.avatar}
+                                                    name={item.name}
+                                                    content={item.content}
+                                                />
+                                            </React.Fragment>
+                                        ))}
+                                </div>
+
+                                <button
+                                    className="c-btn c-btn--loadmore"
+                                    onClick={(e) => loadMore()}
+                                >
+                                    Load more
                                 </button>
                             </div>
-                            <div className="p-detail3__comments">
-                                <CommentItem
-                                    avatar={`${process.env.PUBLIC_URL}/assets/img/films/movies02.jpg`}
-                                    name="SOTN"
-                                    content="Lorem ipsum dolor, sit amet
-                                consectetur adipisicing elit. Sint,
-                                fugiat."
-                                />
-                                <CommentItem
-                                    avatar={`${process.env.PUBLIC_URL}/assets/img/films/movies02.jpg`}
-                                    name="SOTN"
-                                    content="Lorem ipsum dolor, sit amet
-                                consectetur adipisicing elit. Sint,
-                                fugiat."
-                                />
-                                <CommentItem
-                                    avatar={`${process.env.PUBLIC_URL}/assets/img/films/movies02.jpg`}
-                                    name="SOTN"
-                                    content="Lorem ipsum dolor, sit amet
-                                consectetur adipisicing elit. Sint,
-                                fugiat."
-                                />
+                        )) || (
+                            <div className="p-detail3__notlogin">
+                                <p>
+                                    You must be{" "}
+                                    <Link to="/login">logged in</Link> to see
+                                    comment
+                                </p>
                             </div>
-
-                            <div className="c-paginate u-flex u-a-center u-between">
-                                <p>Previous</p>
-                                <ul className="u-flex u-a-center">
-                                    <li className="is-current">1</li>
-                                    <li>2</li>
-                                    <li>3</li>
-                                    <li>...</li>
-                                    <li>99</li>
-                                </ul>
-                                <p>Next</p>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </section>

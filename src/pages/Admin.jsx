@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "../actions/user.action";
 import $ from "jquery";
 import { CloudUploadOutlined } from "@ant-design/icons";
+import Loading from "../components/Loading";
 
 function AddFilm() {
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
+
     // const use = useSelector(state => state.auth.user)
     useEffect(() => {
         // Event
@@ -34,9 +37,12 @@ function AddFilm() {
         });
 
         dispatch(loadUser());
+        setIsLoading(true);
     }, [dispatch]);
     return (
         <>
+            <Loading nameClass={isLoading ? "is-fadeout" : ""} />
+
             <div className="c-popup2 c-popup2-search js-close-search">
                 <div className="c-popup2__content js-priority">
                     <span className="c-popup2__close js-close-search">

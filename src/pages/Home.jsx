@@ -3,13 +3,13 @@ import Loading from "../components/Loading";
 import Mainvisuals from "../components/MainVisuals";
 import PTop from "../components/PTop";
 function Home() {
-    const [isloading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setIsLoading(true);
-    }, [isloading]);
+    }, [isLoading]);
     return (
         <>
-            {!isloading && <Loading />}
+            <Loading nameClass={isLoading ? "is-fadeout" : ""} />
             <Mainvisuals />
             <PTop />
         </>

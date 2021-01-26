@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNewest } from "../actions/film.action";
 import Watch from "../components/Watch";
 import { openWatch } from "../actions/watch.action";
+import Loading from "../components/Loading";
 // import axios from "./../axios";
 function Movie() {
     window.scrollTo(0, 0);
@@ -13,6 +14,8 @@ function Movie() {
     const isWatch = useSelector((state) => state.watch.isWatch);
     const [episode, setEpisode] = useState(1);
     const [ID, setID] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
     // const [isMovie, setIsMovie] = useState(false);
     // const [isTV, setIsTV] = useState(false);
 
@@ -40,31 +43,35 @@ function Movie() {
         //     setIsMovie(false);
         //     setIsTV(true);
         // }
+        setIsLoading(true);
     }, [dispatch]);
     return (
-        <div className="pages-movie">
-            {isWatch ? (
-                <Watch ID={ID} ep={episode} />
-            ) : (
-                <>
-                    <Detail
-                        title="The Rise of Kingdom"
-                        cat={["action", "romance"]}
-                        description="She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim."
-                    />
-                    {listNew.length ? (
-                        <List2
-                            subtitle=""
-                            title="Recommended"
-                            list={listNew}
-                            className="u-fade"
+        <>
+            <Loading nameClass={isLoading ? "is-fadeout" : ""} />
+            <div className="pages-movie">
+                {isWatch ? (
+                    <Watch ID={ID} ep={episode} />
+                ) : (
+                    <>
+                        <Detail
+                            title="The Rise of Kingdom"
+                            cat={["action", "romance"]}
+                            description="She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim."
                         />
-                    ) : (
-                        <></>
-                    )}
-                </>
-            )}
-        </div>
+                        {listNew.length ? (
+                            <List2
+                                subtitle=""
+                                title="Recommended"
+                                list={listNew}
+                                className="u-fade"
+                            />
+                        ) : (
+                            <></>
+                        )}
+                    </>
+                )}
+            </div>
+        </>
     );
 }
 

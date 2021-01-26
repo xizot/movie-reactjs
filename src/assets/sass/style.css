@@ -2247,6 +2247,28 @@ img {
   background: #1c212e;
 }
 
+.p-detail3__notlogin {
+  height: 450px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.p-detail3__notlogin p {
+  font-size: 1.6rem;
+  color: white;
+}
+
+.p-detail3__notlogin a {
+  color: #e90101;
+}
+
 .p-detail3__box {
   margin-top: 50px;
 }
@@ -2276,6 +2298,13 @@ img {
   .p-detail3__box button {
     width: 100%;
   }
+}
+
+.p-detail3 .c-btn--loadmore {
+  width: 300px;
+  height: 50px;
+  border-radius: 2px;
+  margin: 100px auto 0;
 }
 
 .p-detail .p-top2 {
@@ -2942,7 +2971,7 @@ img {
 }
 
 .login {
-  background-image: url(../img/login-background.jpg) no-repeat center/cover fixed;
+  background: url(../img/login-background.jpg) no-repeat center/cover fixed;
   height: 100%;
   width: 100%;
   padding: 150px 0 100px;
