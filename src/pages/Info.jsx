@@ -185,7 +185,7 @@ function Info() {
             setEmail(user.email);
             setDisplayName(user.displayName);
         }
-    }, [dispath, errorServer]);
+    }, [dispath, errorServer, user]);
 
     // let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
     return (
