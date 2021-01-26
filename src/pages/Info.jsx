@@ -5,7 +5,7 @@ import { clearError } from "../actions/error.action";
 import { loadUser } from "../actions/user.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
-import {update} from "../actions/infor.action";
+import { update } from "../actions/infor.action";
 import {
     validateEmail,
     validateUsername,
@@ -14,6 +14,7 @@ import {
     validatePassword,
     validateConfirmPassword,
 } from "../helper/validator";
+import Loading from "../components/Loading";
 
 function Info() {
     const dispath = useDispatch();
@@ -25,7 +26,7 @@ function Info() {
     const [dateOfBirth, setDateOfBirth] = useState("");
     const [currentPassword, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [newPassword,setNewPassword]=useState("");
+    const [newPassword, setNewPassword] = useState("");
     //error
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
@@ -33,7 +34,7 @@ function Info() {
     const [errorDateOfBirth, setErrorDateOfBirth] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
-    const [errorNewPassword,setErrorNewPassword] = useState(false);
+    const [errorNewPassword, setErrorNewPassword] = useState(false);
     const errorServer = useSelector((state) => state.error);
 
     const handleUsername = (e) => {
@@ -66,7 +67,7 @@ function Info() {
                 email !== "" &&
                 displayName !== "" &&
                 currentPassword !== "" &&
-                confirmPassword !== ""&&
+                confirmPassword !== "" &&
                 newPassword !== ""
             ) {
                 dispath(
@@ -77,19 +78,19 @@ function Info() {
                         currentPassword,
                         confirmPassword,
                         dateOfBirth,
-                        newPassword,
+                        newPassword
                     )
                 );
                 //console.log(dispath(getInfor()))
             }
         }
-    }
+    };
     const handleEmail = (e) => {
         if (errorServer.id) {
             dispath(clearError());
         }
         let value = e.target.value;
-        setEmail(user.email)
+        setEmail(user.email);
         if (value.length >= 0) {
             setEmail(value);
             if (validateEmail(value) === true) {
@@ -98,7 +99,6 @@ function Info() {
                 setErrorEmail(true);
             }
         }
-        
     };
 
     const handleDisplayName = (e) => {
@@ -179,10 +179,10 @@ function Info() {
     useEffect(() => {
         dispath(loadUser());
 
-        if(user){
+        if (user) {
             setUsername(user.username);
             setDateOfBirth(user.dateOfBirth);
-            setEmail(user.email)
+            setEmail(user.email);
             setDisplayName(user.displayName);
         }
     }, [dispath, errorServer]);
@@ -190,12 +190,11 @@ function Info() {
     // let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
     return (
         <div className="infouser">
-            {!user ? (
-                "Loading"
-            ) : (
+            <Loading nameClass={user ? "is-fadeout" : ""} />
+            {user && (
                 <>
                     <div className="c-overlayer"> </div>
-                    <div className="infouser__content">
+                    <div className="infouser__content js-dark-here">
                         <div className="content_form">
                             <div className="title_form">
                                 <div className="title_form__left">
@@ -252,9 +251,7 @@ function Info() {
                                                     className="c-form__input"
                                                     type="text"
                                                     required
-                                                    value={
-                                                        username
-                                                    }
+                                                    value={username}
                                                     onChange={(e) =>
                                                         handleUsername(e)
                                                     }
@@ -271,9 +268,7 @@ function Info() {
                                                     className="c-form__input"
                                                     type="text"
                                                     name="displayName"
-                                                    value={
-                                                        displayName
-                                                    }
+                                                    value={displayName}
                                                     onChange={(e) =>
                                                         handleDisplayName(e)
                                                     }
@@ -291,7 +286,7 @@ function Info() {
                                                     className="c-form__input"
                                                     type="text"
                                                     required
-                                                    value={email} 
+                                                    value={email}
                                                     onChange={(e) =>
                                                         handleEmail(e)
                                                     }
@@ -310,13 +305,11 @@ function Info() {
                                                     max="2021-12-12"
                                                     type="date"
                                                     required
-                                                    value={
-                                                        convertDateTime(
-                                                            dateOfBirth,
-                                                            "DD-MM-YYYY",
-                                                            "YYYY-MM-DD"
-                                                        )
-                                                    }
+                                                    value={convertDateTime(
+                                                        dateOfBirth,
+                                                        "DD-MM-YYYY",
+                                                        "YYYY-MM-DD"
+                                                    )}
                                                     onChange={(e) =>
                                                         handleDateOfBirth(e)
                                                     }
@@ -334,9 +327,7 @@ function Info() {
                                                     autoComplete="new-password"
                                                     type="password"
                                                     required
-                                                    value={
-                                                        currentPassword
-                                                    }
+                                                    value={currentPassword}
                                                     onChange={(e) =>
                                                         handlePassword(e)
                                                     }
@@ -354,9 +345,7 @@ function Info() {
                                                     autoComplete="new-password"
                                                     type="password"
                                                     required
-                                                    value={
-                                                        newPassword
-                                                    }
+                                                    value={newPassword}
                                                     onChange={(e) =>
                                                         handleNewPassword(e)
                                                     }
@@ -373,9 +362,7 @@ function Info() {
                                                     className="c-form__input"
                                                     type="password"
                                                     required
-                                                    value={
-                                                        confirmPassword
-                                                    }
+                                                    value={confirmPassword}
                                                     onChange={(e) =>
                                                         handleConfirmPassword(e)
                                                     }

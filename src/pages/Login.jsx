@@ -64,8 +64,8 @@ function Login() {
     return (
         <div className="login">
             <div className="c-overlayer"> </div>
-            <div className="login__content">
-                <div className="c-form">
+            <div className="login__content js-dark-here">
+                <div className="c-form ">
                     <h3 className="c-form__title">Login</h3>
                     <form action="">
                         <div className="c-form__group">

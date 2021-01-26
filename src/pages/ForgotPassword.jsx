@@ -38,7 +38,7 @@ function ForgotPassword() {
         {console.log(isForgot)}
             <div className='login'>
                 <div className='c-overlayer'> </div>
-                <div className='login__content'>
+                <div className='login__content js-dark-here'>
                     <div className='c-form'>
                         <h3 className='c-form__title'>Forgot Password</h3>
                         <form action=''>

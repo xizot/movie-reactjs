@@ -35,6 +35,9 @@
         display: flex;
         align-items: center;
         margin: 15px 0 5px;
+        @include breakpoint(tab){
+            font-size: 1.1rem;
+        }
     }
     &__age {
         border: 1px solid #ddd;
@@ -49,12 +52,18 @@
     &__name {
         font-size: 1.6rem;
         font-weight: bold;
+        @include breakpoint(tab){
+            font-size: 1.4rem;
+        }
         &:hover {
             text-decoration: underline;
         }
     }
     .gutter {
         padding: 0 15px;
+        @include breakpoint(sp){
+            padding: 0 7.5px;
+        }
         &:hover {
             .is-hover {
                 opacity: 1;

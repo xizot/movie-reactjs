@@ -20,13 +20,13 @@ function Detail1({
         $('.p-popup').fadeOut(500);
     };
     return (
-        <div className='p-detail1'>
+        <div className='p-detail1 '>
             <div className='l-container'>
                 <MoviePopup
                     title='The rise of kingdom'
                     handlePopup={() => closePopup()}
                 />
-                <div className='p-detail1__content'>
+                <div className='p-detail1__content js-dark-here'>
                     <div className='row row-reverse'>
                         <div className='col-sm-12 col-lg-8 p-detail1__left'>
                             <h3 className='c-title1'>{title}</h3>

@@ -348,12 +348,18 @@ img {
 }
 
 .p-header {
-  background: transparent;
+  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 999;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+.p-header .is-dark {
+  background-color: #131722;
 }
 
 .p-header.is-dark {
@@ -531,27 +537,54 @@ img {
 }
 
 .p-top .slick-arrow {
-  border-radius: 50%;
-  z-index: 1;
   margin: 0;
-  width: unset;
-  height: unset;
-  min-width: 20px;
-  min-width: 20px;
-}
-
-.p-top .slick-arrow::before {
-  width: 100%;
-  height: 100%;
-  font-size: 3rem;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: black;
   opacity: 0.5;
   -webkit-transition: opacity 0.6s;
   transition: opacity 0.6s;
-  border-radius: 50%;
 }
 
-.p-top .slick-arrow:hover::before {
-  opacity: 1;
+.p-top .slick-arrow.u-fade {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.p-top .slick-arrow.u-fade--show {
+  pointer-events: all;
+  opacity: 0.5;
+}
+
+.p-top .slick-arrow:hover {
+  opacity: 1 !important;
+}
+
+.p-top .slick-arrow svg {
+  font-size: 1.5rem;
+}
+
+.p-top .slick-arrow::before {
+  display: none;
+}
+
+.p-top .slick-next:focus,
+.p-top .slick-next:hover,
+.p-top .slick-prev:focus,
+.p-top .slick-prev:hover {
+  color: black;
 }
 
 .p-top1 {
@@ -567,6 +600,13 @@ img {
   margin-top: 60px;
   margin-left: -15px;
   margin-right: -15px;
+}
+
+@media only screen and (max-width: 450px) {
+  .p-top1__content {
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+  }
 }
 
 .p-top2 {
@@ -588,6 +628,13 @@ img {
   margin-top: 60px;
   margin-left: -15px;
   margin-right: -15px;
+}
+
+@media only screen and (max-width: 450px) {
+  .p-top2__content {
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+  }
 }
 
 .c-mainvisuals {
@@ -1314,6 +1361,12 @@ img {
   margin-bottom: 30px;
 }
 
+@media only screen and (max-width: 450px) {
+  .c-item {
+    padding: 0 7.5px;
+  }
+}
+
 .c-item .gutter {
   position: relative;
   height: 400px;
@@ -1321,7 +1374,6 @@ img {
   overflow: hidden;
   -webkit-transition: all 0.6s ease;
   transition: all 0.6s ease;
-  border: 1px solid #ddd;
 }
 
 @media only screen and (max-width: 812px) {
@@ -1347,6 +1399,8 @@ img {
   background: rgba(0, 0, 0, 0.4);
   pointer-events: none;
   opacity: 0;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
 }
 
 .c-item .gutter:hover::after {
@@ -1373,12 +1427,24 @@ img {
   margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-item__label {
+    font-size: 1.1rem;
+  }
+}
+
 .c-item__content {
   position: absolute;
   left: 0;
   bottom: 0;
   padding: 20px;
   z-index: 2;
+}
+
+@media only screen and (max-width: 450px) {
+  .c-item__content {
+    padding: 10px;
+  }
 }
 
 .c-item__content .u-flex {
@@ -1390,6 +1456,18 @@ img {
   font-weight: bold;
   letter-spacing: 0.78px;
   color: white;
+}
+
+@media only screen and (max-width: 812px) {
+  .c-item__name {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .c-item__name {
+    font-size: 1.8rem;
+  }
 }
 
 .c-item__play {
@@ -1411,10 +1489,36 @@ img {
   padding-left: 2px;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-item__play {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .c-item__play {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 .c-item__play svg {
   -webkit-transition: all 0.6s;
   transition: all 0.6s;
   font-size: 2.5rem;
+}
+
+@media only screen and (max-width: 812px) {
+  .c-item__play svg {
+    font-size: 2.3rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .c-item__play svg {
+    font-size: 2.1rem;
+  }
 }
 
 .c-item__play:hover {
@@ -1491,6 +1595,12 @@ img {
   margin: 15px 0 5px;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-item2__info {
+    font-size: 1.1rem;
+  }
+}
+
 .c-item2__age {
   border: 1px solid #ddd;
   padding: 2px;
@@ -1508,12 +1618,24 @@ img {
   font-weight: bold;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-item2__name {
+    font-size: 1.4rem;
+  }
+}
+
 .c-item2__name:hover {
   text-decoration: underline;
 }
 
 .c-item2 .gutter {
   padding: 0 15px;
+}
+
+@media only screen and (max-width: 450px) {
+  .c-item2 .gutter {
+    padding: 0 7.5px;
+  }
 }
 
 .c-item2 .gutter:hover .is-hover {
@@ -2448,6 +2570,12 @@ img {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-btn {
+    font-size: 1.4rem;
+  }
+}
+
 .c-btn:hover {
   background-color: #e90101;
   color: white;
@@ -2507,11 +2635,8 @@ img {
 }
 
 .register {
-  background-image: url(../img/register-background.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
+  background: url(../img/register-background.jpg) no-repeat center/cover fixed;
+  height: 100%;
   width: 100%;
   padding: 150px 0 100px;
   position: relative;
@@ -2729,6 +2854,7 @@ img {
   left: 20px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+  pointer-events: none;
 }
 
 @media only screen and (max-width: 812px) {
@@ -2753,12 +2879,12 @@ img {
 
 .c-form__input:focus + .c-form__label {
   font-size: 1.2rem;
-  top: 12px;
+  top: 12px !important;
 }
 
 .c-form__input:valid + .c-form__label {
   font-size: 1.2rem;
-  top: 12px;
+  top: 12px  !important;
 }
 
 .c-form__input_date {
@@ -2816,11 +2942,8 @@ img {
 }
 
 .login {
-  background-image: url(../img/login-background.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
+  background-image: url(../img/login-background.jpg) no-repeat center/cover fixed;
+  height: 100%;
   width: 100%;
   padding: 150px 0 100px;
   position: relative;
@@ -3933,7 +4056,7 @@ img {
 }
 
 .p-admin .c-btn:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .p-admin__top {
@@ -4460,7 +4583,7 @@ img {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  padding: 20px 0;
+  margin: 20px 0;
   /* Track */
   /* Handle */
   /* Handle on hover */
@@ -4600,13 +4723,34 @@ img {
   }
 }
 
-.c-addfilm .row {
-  margin-left: -20px;
-  margin-right: -20px;
+.c-addfilm__upload {
+  position: relative;
 }
 
-.c-addfilm .row .c-popup-addfilm__item {
-  padding: 0 20px;
+.c-addfilm__upload .c-form__input {
+  padding-right: 50px;
+}
+
+.c-addfilm__link {
+  position: absolute;
+  background-color: transparent;
+  color: white;
+  height: 50px;
+  width: 50px;
+  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.6rem;
+  opacity: 0.8;
+  top: 0;
+  right: 0;
 }
 
 .c-addfilm__content {
@@ -4669,6 +4813,7 @@ img {
   overflow: hidden auto;
   height: 100%;
   min-width: 400px;
+  margin-right: 20px;
 }
 
 @media only screen and (max-width: 450px) {
@@ -4845,6 +4990,41 @@ img {
   font-family: "Raleway", sans-serif;
 }
 
+.c-addfilm .c-form {
+  width: unset;
+  background-color: transparent;
+  padding: unset;
+}
+
+.c-addfilm .c-form .row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.c-addfilm .c-form .row div[class^="col-"] {
+  background: transparent;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.c-addfilm .c-form .row .gutter {
+  background-color: #212028;
+}
+
+.c-addfilm .c-form .row textarea {
+  height: 150px;
+  resize: none;
+  padding-top: 22px;
+}
+
+.c-addfilm .c-form .row label {
+  top: 25px;
+}
+
+.c-addfilm .c-form .row .height-150 {
+  height: 150px;
+}
+
 .c-popup2-search .c-popup2__content {
   top: -150%;
 }
@@ -4855,6 +5035,20 @@ img {
 
 .c-popup2-addfilm .c-popup2__content {
   right: -150%;
+  padding-right: 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .c-popup2-addfilm .c-popup2__content {
+    width: 100%;
+    padding-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .c-popup2-addfilm .c-popup2__content {
+    padding-right: 5px;
+  }
 }
 
 .c-popup2-addfilm.is-open .c-popup2__content {

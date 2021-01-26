@@ -55,6 +55,7 @@
 		top: 50%;
 		left: 20px;
 		transform: translateY(-50%);
+		pointer-events: none;
 		@include breakpoint(tab) {
 			font-size: 1.2rem;
 		}
@@ -73,12 +74,12 @@
 		color: #f1f1f1;
 	}
 	&__input:focus + &__label {
-		font-size: 1.2rem;
-		top: 12px;
+		font-size: 1.2rem ;
+		top: 12px !important;
 	}
 	&__input:valid + &__label {
 		font-size: 1.2rem;
-		top: 12px;
+		top: 12px  !important;
 	}
 	&__input_date {
 		height: 50px;

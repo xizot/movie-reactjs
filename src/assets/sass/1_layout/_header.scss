@@ -1,11 +1,14 @@
 .p-header {
-    background: transparent;
+    background-color: transparent;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
-
+    transition: background-color 0.5s;
+    .is-dark {
+        background-color: #131722;
+    }
     &.is-dark {
         background-color: #131722;
         &-2 {

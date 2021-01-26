@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "../actions/user.action";
 import $ from "jquery";
+import { CloudUploadOutlined } from "@ant-design/icons";
 
 function AddFilm() {
     const dispatch = useDispatch();
@@ -171,100 +172,128 @@ function AddFilm() {
                             />
                         </div>
                         <div className="c-addfilm__info">
-                            <div className="row">
-                                <div className="c-addfilm__item col-lg-12">
-                                    <div className="gutter">
-                                        <span>Title</span>
-                                        <input
-                                            type="text"
-                                            className="c-addfilm__title"
-                                        />
+                            <div className="c-form">
+                                <form action="">
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                            <div className="c-form__group ">
+                                                <div className="gutter">
+                                                    <input
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <label className="c-form__label">
+                                                        Title
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-12">
+                                            <div className=" c-form__group height-150">
+                                                <div className="gutter">
+                                                    <textarea
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    ></textarea>
+                                                    <label className="c-form__label">
+                                                        Description
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-6 col-sm-12">
+                                            <div className=" c-form__group ">
+                                                <div className="gutter">
+                                                    <input
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <label className="c-form__label">
+                                                        Release Date
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-6 col-sm-12">
+                                            <div className="c-form__group ">
+                                                <div className="gutter">
+                                                    <input
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <label className="c-form__label">
+                                                        Running timed in minute
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-6 col-sm-12">
+                                            <div className="c-form__group ">
+                                                <div className="gutter">
+                                                    <input
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <label className="c-form__label">
+                                                        Genre/ Genres
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 col-md-6 col-sm-12">
+                                            <div className="c-form__group ">
+                                                <div className="gutter">
+                                                    <input
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <label className="c-form__label">
+                                                        Age
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-8 col-md-12">
+                                            <div className=" c-form__group  c-addfilm__upload">
+                                                <div className="gutter">
+                                                    <input
+                                                        className="c-form__input"
+                                                        type="text"
+                                                        required
+                                                    />
+                                                    <label className="c-form__label">
+                                                        Video Link
+                                                    </label>
+                                                    <a
+                                                        className="c-addfilm__link"
+                                                        href="http://"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        <CloudUploadOutlined />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="c-addfilm__item col-lg-12 c-addfilm__item--big">
-                                    <div className="gutter">
-                                        <span>Description</span>
-                                        <textarea
-                                            name
-                                            id
-                                            cols={30}
-                                            rows={10}
-                                            className="c-addfilm__description"
-                                            defaultValue={
-                                                "        \n                                            "
-                                            }
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="c-addfilm__item col-lg-4 col-md-6 col-sm-12">
-                                    <div className="gutter">
-                                        <span>Release Date</span>
-                                        <input
-                                            type="text"
-                                            name
-                                            id
-                                            className="c-addfilm__release"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="c-addfilm__item col-lg-4  col-md-6  col-sm-12">
-                                    <div className="gutter">
-                                        <span>Running timed in minute</span>
-                                        <input
-                                            type="text"
-                                            name
-                                            id
-                                            className="c-addfilm__release"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="c-addfilm__item col-lg-4  col-md-6  col-sm-12">
-                                    <div className="gutter">
-                                        <span>Genre / Genres</span>
-                                        <input
-                                            type="text"
-                                            name
-                                            id
-                                            className="c-addfilm__release"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="c-addfilm__item col-lg-4  col-md-6  col-sm-12">
-                                    <div className="gutter">
-                                        <span>Age</span>
-                                        <input
-                                            type="text"
-                                            name
-                                            id
-                                            className="c-addfilm__release"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="c-addfilm__item col-lg-8 col-md-12">
-                                    <div className="gutter">
-                                        <span>Video Link</span>
-                                        <input
-                                            type="text"
-                                            name
-                                            id
-                                            className="c-addfilm__release"
-                                        />
-                                    </div>
-                                </div>
+                                </form>
                             </div>
-                            <div className="c-addfilm__type">
+                            <div class="c-addfilm__type">
                                 <span>Item type: </span>
-                                <div className="c-addfilm__type__item c-addfilm__tv">
-                                    <span className="c-radio is-check" />
-                                    TV Series
+                                <div class="c-addfilm__type__item c-addfilm__tv">
+                                    <span class="c-radio is-check"></span>TV
+                                    Series
                                 </div>
-                                <div className="c-addfilm__type__item c-addfilm__movie">
-                                    <span className="c-radio" />
-                                    Movies
+                                <div class="c-addfilm__type__item c-addfilm__movie">
+                                    <span class="c-radio"></span>Movies
                                 </div>
                             </div>
-
                             <div className="c-addfilm__handle">
                                 <div className="c-btn c-addfilm__publish">
                                     Publish
@@ -330,7 +359,7 @@ function AddFilm() {
                         </div>
                     </div>
                 </div>
-                <div className="p-admin__top">
+                <div className="p-admin__top js-dark-here">
                     <div className="l-container">
                         <div className="u-flex a-center">
                             <div className="p-admin__top__item p-admin__toggle js-toggle-option">

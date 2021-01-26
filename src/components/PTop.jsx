@@ -15,7 +15,7 @@ function PTop() {
     }, [dispatch]);
     return (
         <main style={{ zIndex: "1" }} className="home">
-            <div className="p-top">
+            <div className="p-top js-dark-here">
                 {listPopular.length ? (
                     <List1
                         subtitle="Most watched movies by days"

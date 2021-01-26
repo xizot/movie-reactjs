@@ -44,6 +44,9 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    @include breakpoint(tab){
+        font-size: 1.4rem;
+    }
     &:hover {
         background-color: $mainColor;
         color: white;

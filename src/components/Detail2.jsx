@@ -16,7 +16,7 @@ function Detail2({
         isPlay ? trailer.play() : trailer.pause();
     }, [isPlay]);
     return (
-        <div className='p-detail2 u-fade'>
+        <div className='p-detail2 u-fade '>
             <div
                 className={
                     isPlay

@@ -174,7 +174,7 @@ function Register() {
     return (
         <div className="register">
             <div className="c-overlayer"> </div>
-            <div className="register__content">
+            <div className="register__content js-dark-here">
                 <div className="c-form">
                     <h3 className="c-form__title">Register</h3>
                     <form action="">

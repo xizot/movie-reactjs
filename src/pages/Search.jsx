@@ -110,7 +110,7 @@ function Search() {
     return (
         <div className="p-search">
             <div className="l-container">
-                <div className="p-search__content">
+                <div className="p-search__content js-dark-here">
                     <div className="p-search__left">
                         <h3>Search</h3>
                         <div className="p-search__filter">
