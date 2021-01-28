@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { clearError } from "../actions/error.action";
-import { loadUser } from "../actions/user.action";
+//import { loadUser } from "../actions/user.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
 import { update } from "../actions/infor.action";
@@ -177,15 +177,14 @@ function Info() {
     };
 
     useEffect(() => {
-        dispath(loadUser());
-
+        //dispath(loadUser());
         if (user) {
             setUsername(user.username);
             setDateOfBirth(user.dateOfBirth);
             setEmail(user.email);
             setDisplayName(user.displayName);
         }
-    }, [dispath, errorServer, user]);
+    }, [dispath, errorServer,user]);
 
     // let newDateOfBirth = convertDateTime(dateOfBirth, "YYYY-MM-DD","DD-MM-YYYY");
     return (

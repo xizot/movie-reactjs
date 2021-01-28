@@ -1,37 +1,37 @@
-import { GETINFORUSER_SUCCESS,GETINFORUSER_FAIL,UPDATE_SUCCESS,UPDATE_FAIL } from '../types/infor.type';
+import { GETINFORUSER_SUCCESS,UPDATE_SUCCESS,UPDATE_FAIL } from '../types/infor.type';
 import axios from './../axios';
 import {clearError,getError } from './error.action';
 
-export const getInfor = () => (dispatch) => {
-    const token = localStorage.getItem("token");
-    dispatch({
-        type: GETINFORUSER_SUCCESS,
-    });
-    if (token) {
-        axios
-            .get("/user/")
-            .then((res) => {
-                dispatch({
-                    type:  GETINFORUSER_SUCCESS,
-                    payload: res.data
-                });
-            })
-            .catch((err) => {
-                if(err){
-                    dispatch(
-                        getError(err.response.data, err.response.status,GETINFORUSER_FAIL)
-                    );
-                    dispatch({
-                        type: GETINFORUSER_FAIL,
-                    });
-                }
-            });
-    } else {
-        dispatch({
-            type: GETINFORUSER_FAIL,
-        });
-    }
-};
+// export const getInfor = () => (dispatch) => {
+//     const token = localStorage.getItem("token");
+//     dispatch({
+//         type: GETINFORUSER_SUCCESS,
+//     });
+//     if (token) {
+//         axios
+//             .get("/user/")
+//             .then((res) => {
+//                 dispatch({
+//                     type:  GETINFORUSER_SUCCESS,
+//                     payload: res.data
+//                 });
+//             })
+//             .catch((err) => {
+//                 if(err){
+//                     dispatch(
+//                         getError(err.response.data, err.response.status,GETINFORUSER_FAIL)
+//                     );
+//                     dispatch({
+//                         type: GETINFORUSER_FAIL,
+//                     });
+//                 }
+//             });
+//     } else {
+//         dispatch({
+//             type: GETINFORUSER_FAIL,
+//         });
+//     }
+// };
 
 export const update = (
     username,
