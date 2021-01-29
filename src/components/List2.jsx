@@ -7,12 +7,19 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 function List2({ subtitle, title, list }) {
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
-        return <RightOutlined className={className +" u-fade"} onClick={onClick} />;
+        return (
+            <RightOutlined
+                className={className + " u-fade"}
+                onClick={onClick}
+            />
+        );
     };
 
     const SamplePrevArrow = (props) => {
         const { className, onClick } = props;
-        return <LeftOutlined className={className +" u-fade"} onClick={onClick} />;
+        return (
+            <LeftOutlined className={className + " u-fade"} onClick={onClick} />
+        );
     };
     var settings = {
         dots: true,
@@ -61,15 +68,23 @@ function List2({ subtitle, title, list }) {
                         <Slider2 {...settings}>
                             {list.map((f, idx) => (
                                 <Item2
+                                    // key={idx}
+                                    // id={f.id}
+                                    // image={f.image}
+                                    // resolution={f.resolution}
+                                    // rated={f.rated}
+                                    // minutes={f.minutes}
+                                    // name={f.name}
+                                    // age={f.age}
+                                    // cat={f.cat}
+
                                     key={idx}
-                                    id={f.id}
-                                    image={f.image}
-                                    resolution={f.resolution}
-                                    rated={f.rated}
-                                    minutes={f.minutes}
-                                    name={f.name}
-                                    age={f.age}
-                                    cat={f.cat}
+                                    id={f.imdbId}
+                                    image={f.posterPath}
+                                    cat="Action"
+                                    name={f.title}
+                                    minutes={f.movie.runtime}
+                                    rated={f.popularity}
                                 />
                             ))}
                         </Slider2>

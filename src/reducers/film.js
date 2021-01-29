@@ -1,18 +1,18 @@
 import {
-    GET_FAVOR,
-    GET_POPULAR,
-    GET_NEWEST,
     GET_EPISODE,
     GET_COMMENT,
-    LOAD_COMMENT
+    LOAD_COMMENT,
+    GET_MOVIE,
+    GET_TVSHOW,
+    GET_WATCHLATER
 } from "./../types/film.type";
 
 const initialState = {
-    new: [],
-    favor: [],
-    popular: [],
+    movie: [],
+    tv: [],
+    watchLater: [],
     episode: [],
-    comment: []
+    comment: [],
 };
 
 const filmReducer = (state = initialState, action) => {
@@ -23,26 +23,25 @@ const filmReducer = (state = initialState, action) => {
                 comment: [...action.payload]
             };
         case GET_COMMENT:
-            var newComments =[...state.comment, ...action.payload]
+            var newComments = [...state.comment, ...action.payload]
             return {
                 ...state,
-                comment:  newComments.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
+                comment: newComments.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i)
             };
-        case GET_NEWEST:
+        case GET_TVSHOW:
             return {
                 ...state,
-                new: action.payload,
+                tv: action.payload,
             };
-
-        case GET_FAVOR:
+        case GET_MOVIE:
             return {
                 ...state,
-                favor: action.payload,
+                movie: action.payload,
             };
-        case GET_POPULAR:
+        case GET_WATCHLATER:
             return {
                 ...state,
-                popular: action.payload,
+                watchLater: action.payload,
             };
         case GET_EPISODE:
             return {

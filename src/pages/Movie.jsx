@@ -3,7 +3,6 @@ import queryString from "query-string";
 import Detail from "../components/Detail";
 import List2 from "../components/List2";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewest } from "../actions/film.action";
 import Watch from "../components/Watch";
 import { openWatch } from "../actions/watch.action";
 import Loading from "../components/Loading";
@@ -19,11 +18,12 @@ function Movie() {
     // const [isMovie, setIsMovie] = useState(false);
     // const [isTV, setIsTV] = useState(false);
 
-    const listNew = useSelector((state) => state.film.new);
+    // const listNew = useSelector((state) => state.film.new);
+    const listNew = [];
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getNewest());
+        // dispatch(getNewest());
         const parsed = queryString.parse(window.location.search);
         let ep = parsed.ep || 1;
         if (ep) setEpisode(ep);

@@ -6,16 +6,23 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 function List1({ subtitle, title, list }) {
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
-        return <RightOutlined className={className +" u-fade"} onClick={onClick} />;
+        return (
+            <RightOutlined
+                className={className + " u-fade"}
+                onClick={onClick}
+            />
+        );
     };
 
     const SamplePrevArrow = (props) => {
         const { className, onClick } = props;
-        return <LeftOutlined className={className +" u-fade"} onClick={onClick} />;
+        return (
+            <LeftOutlined className={className + " u-fade"} onClick={onClick} />
+        );
     };
 
     var settings = {
-        dots:true,
+        dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
@@ -62,11 +69,10 @@ function List1({ subtitle, title, list }) {
                             list.map((f, idx) => (
                                 <Item1
                                     key={idx}
-                                    id={f.id}
-                                    image={f.image}
-                                    cat={f.cat}
-                                    name={f.name}
-                                    chapter={f.chapter}
+                                    id={f.imdbId}
+                                    image={f.posterPath}
+                                    cat="Action"
+                                    name={f.title}
                                 />
                             ))}
                     </Slider>

@@ -124,7 +124,7 @@ function Search() {
                                     cat.map((item) => (
                                         <li key={item.value}>
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 name={item.name}
                                                 value={item.value}
                                                 checked={item.select}
@@ -148,7 +148,7 @@ function Search() {
                                     date.map((item) => (
                                         <li key={item.value}>
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 name={item.name}
                                                 value={item.value}
                                                 checked={item.select}
