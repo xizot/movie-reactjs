@@ -2,67 +2,45 @@ import React, { useEffect, useState } from "react";
 import { MinusOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import SearchItem from "../components/SearchItem";
 import $ from "jquery";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSearchKey, getFilter, getSearch } from "../actions/search.action";
+import { catFilter } from "./../helper";
 function Search() {
-    const [searchKey, setSearchKey] = useState("");
-    const [date, setDate] = useState([]);
+    const searchKey = useSelector((state) => state.search.searchKey);
+    const searchResults = useSelector((state) => state.search.data);
+    const searchFilter = useSelector((state) => state.search.filter);
+    const isFilter = useSelector((state) => state.search.isFilter);
+
     const [cat, setCat] = useState([]);
+    const [filter, setFilter] = useState("");
+    const dispatch = useDispatch();
 
-    const handleSearch = (e) => {
-        const value = e.target.value;
-        if (value && value.length) {
-            setSearchKey(value);
-        }
-    };
-    const handleDateChange = (e) => {
-        const value = e.target.value;
-        const isChecked = e.target.checked;
-        let allFlag = true;
-        setDate((state) => {
-            return state.map((item, length) => {
-                if (value === "all") {
-                    item.select = isChecked;
-                    return item;
-                }
-                if (item.value === value) {
-                    item.select = isChecked;
-                }
-
-                if (!item.select && item.value !== "all") allFlag = false;
-                if (item.value === "all" && allFlag) {
-                    item.select = true;
-                } else if (item.value === "all" && !allFlag) {
-                    item.select = false;
-                }
-                return item;
-            });
-        });
+    const handleSearchValue = (e) => {
+        let value = e.target.value;
+        dispatch(changeSearchKey(value));
     };
     const handleCatChange = (e) => {
         const value = e.target.value;
         const isChecked = e.target.checked;
-        let allFlag = true;
         setCat((state) => {
             return state.map((item, length) => {
-                if (value === "all") {
-                    item.select = isChecked;
-                    return item;
-                }
+                item.select = false;
                 if (item.value === value) {
+                    setFilter(value);
                     item.select = isChecked;
                 }
-
-                if (!item.select && item.value !== "all") allFlag = false;
-                if (item.value === "all" && allFlag) {
-                    item.select = true;
-                } else if (item.value === "all" && !allFlag) {
-                    item.select = false;
+                if (value === "all") {
+                    setFilter("");
                 }
+                dispatch(getFilter(filter));
                 return item;
             });
         });
     };
+
     const submitSearch = (e) => {
         e.preventDefault();
+        dispatch(getSearch(searchKey));
     };
 
     useEffect(() => {
@@ -70,43 +48,9 @@ function Search() {
             $(this).parent().find("ul").slideToggle();
             $(this).toggleClass("is-open");
         });
-        const dateCheckboxes = [
-            {
-                name: "date",
-                value: "2019",
-                select: true,
-            },
-            {
-                name: "date",
-                value: "2020",
-                select: true,
-            },
-            {
-                name: "date",
-                value: "all",
-                select: true,
-            },
-        ];
-        const catCheckboxes = [
-            {
-                name: "cat",
-                value: "action",
-                select: true,
-            },
-            {
-                name: "cat",
-                value: "romantic",
-                select: true,
-            },
-            {
-                name: "cat",
-                value: "all",
-                select: true,
-            },
-        ];
-        setDate(dateCheckboxes);
-        setCat(catCheckboxes);
-    }, [searchKey]);
+        setCat(catFilter);
+    }, []);
+
     return (
         <div className="p-search">
             <div className="l-container">
@@ -137,30 +81,6 @@ function Search() {
                                     ))}
                             </ul>
                         </div>
-                        <div className="p-search__filter">
-                            <div className="p-search__filter__control js-toggle ">
-                                <h4>Date</h4>
-                                <PlusOutlined className="plus" />
-                                <MinusOutlined className="minus" />
-                            </div>
-                            <ul>
-                                {date.length &&
-                                    date.map((item) => (
-                                        <li key={item.value}>
-                                            <input
-                                                type="radio"
-                                                name={item.name}
-                                                value={item.value}
-                                                checked={item.select}
-                                                onChange={(e) =>
-                                                    handleDateChange(e)
-                                                }
-                                            />
-                                            <span>{item.value}</span>
-                                        </li>
-                                    ))}
-                            </ul>
-                        </div>
                     </div>
                     <div className="p-search__right">
                         <div className="p-search__top">
@@ -174,7 +94,7 @@ function Search() {
                                 <input
                                     type="text"
                                     placeholder="Enter your film"
-                                    onChange={(e) => handleSearch(e)}
+                                    onChange={(e) => handleSearchValue(e)}
                                     value={searchKey}
                                 />
                             </form>
@@ -188,62 +108,63 @@ function Search() {
                         </div>
 
                         <div className="p-search__list row">
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
-                            <SearchItem
-                                link="/movie"
-                                image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                name="Sotn can all"
-                                rated="5.0"
-                                actor="SOTN"
-                            />
+                            {isFilter
+                                ? (searchFilter.length &&
+                                      searchFilter.map((item, index) => (
+                                          <React.Fragment key={index}>
+                                              <SearchItem
+                                                  id={item._id}
+                                                  image={item.posterPath}
+                                                  name={item.title}
+                                                  rated={item.popularity}
+                                                  actor=""
+                                                  cat={item.genres.join(", ")}
+                                                  overview={
+                                                      item.overview.substring(
+                                                          0,
+                                                          150
+                                                      ) + "..."
+                                                  }
+                                                  type={
+                                                      item.tvShow
+                                                          ? "tvshow"
+                                                          : "movie"
+                                                  }
+                                              />
+                                          </React.Fragment>
+                                      ))) || (
+                                      <p className="p-search__list--empty">
+                                          No filter results found
+                                      </p>
+                                  )
+                                : (searchResults.length &&
+                                      searchResults.map((item, index) => (
+                                          <React.Fragment key={index}>
+                                              <SearchItem
+                                                  id={item._id}
+                                                  image={item.posterPath}
+                                                  name={item.title}
+                                                  rated={item.popularity}
+                                                  actor=""
+                                                  cat={item.genres.join(", ")}
+                                                  overview={
+                                                      item.overview.substring(
+                                                          0,
+                                                          150
+                                                      ) + "..."
+                                                  }
+                                                  type={
+                                                      item.tvShow
+                                                          ? "tvshow"
+                                                          : "movie"
+                                                  }
+                                              />
+                                          </React.Fragment>
+                                      ))) || (
+                                      <p className="p-search__list--empty">
+                                          No search results found
+                                      </p>
+                                  )}
                         </div>
                     </div>
                 </div>

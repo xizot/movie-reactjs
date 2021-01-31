@@ -1,25 +1,23 @@
 .c-search-item {
-    color: rgba($color: #fff, $alpha: .8);
+    color: rgba($color: #fff, $alpha: 0.8);
     margin-bottom: 50px;
     padding: 0 20px;
-    @include breakpoint(tab){
+    font-family: "Raleway", sans-serif;
+    @include breakpoint(tab) {
         padding: 0 10px;
     }
-    .anticon-star{
-        color: yellow;
-    }
- 
-    .gutter{
+    .gutter {
+        position: relative;
     }
     &__img {
         height: 145px;
         margin-bottom: 10px;
         border-radius: 10px;
         overflow: hidden;
-        @include breakpoint(pro){
+        @include breakpoint(pro) {
             height: 135px;
         }
-        @include breakpoint(tab){
+        @include breakpoint(tab) {
             height: 150px;
         }
         img {
@@ -31,16 +29,38 @@
     &__name {
         font-size: 1.8rem;
         letter-spacing: 0.54px;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
     }
     &__bottom {
         display: flex;
         justify-content: space-between;
         font-size: 1.2rem;
-        color: rgba($color: #fff, $alpha: .6);
+        color: rgba($color: #fff, $alpha: 0.6);
     }
     &__rated {
     }
     &__actor {
+    }
+    &__cat {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 1.2rem;
+        background-color: rgba($color: #fff, $alpha: 0.8);
+        color: $mainColor;
+        padding: 2px 5px;
+        border-top-right-radius: 7px;
+        border-bottom-left-radius: 7px;
+        font-weight: 600;
+    }
+    &__release {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        font-style: italic;
+        color: rgba($color: #fff, $alpha: 0.6);
+    }
+    &__overview {
+        font-size: 1.3rem;
+        line-height: 1.4;
     }
 }

@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import $ from "jquery";
+import { history } from "../helper";
+import { changeSearchKey, getSearch } from "../actions/search.action";
 function Header({ isDark = null }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const user = useSelector((state) => state.auth.user);
     const [isOpen, setisOpen] = useState(false);
+    const searchKey = useSelector((state) => state.search.searchKey);
+    const dispatch = useDispatch();
+
     const handleMenu = () => {
         setisOpen(!isOpen);
+    };
+    const handleSearchValue = (e) => {
+        let value = e.target.value;
+        dispatch(changeSearchKey(value));
+    };
+    const handleSearch = (e) => {
+        e.preventDefault()
+        dispatch(getSearch(searchKey));
+        history.push(`/search?query=${searchKey}`);
     };
     useEffect(() => {
         $(".c-menusp a").on("click", function () {
@@ -53,9 +67,23 @@ function Header({ isDark = null }) {
                             )}
                         </ul>
                         <div className="p-header__actions u-flex u-a-center">
-                            <Link to="/" className="p-header__search">
-                                <SearchOutlined />
-                            </Link>
+                            <div className="p-header__search">
+                                <form
+                                    action=""
+                                    onSubmit={(e) => handleSearch(e)}
+                                >
+                                    <input
+                                        type="text"
+                                        value={searchKey}
+                                        onChange={(e) => handleSearchValue(e)}
+                                    />
+                                </form>
+                                <div className="p-header__search__icon">
+                                    <SearchOutlined
+                                        onClick={(e) => handleSearch(e)}
+                                    />
+                                </div>
+                            </div>
                             {isAuthenticated ? (
                                 <>
                                     <Link

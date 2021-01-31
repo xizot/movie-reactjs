@@ -1,10 +1,10 @@
-import { StarOutlined } from "@ant-design/icons";
+
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SearchItem({link,image,name,rated,actor}) {
+function SearchItem({id,image,name,type,overview,cat}) {
     return (
-        <Link to={link} className="c-search-item col-lg-4 col-sm-6 col-xs-12">
+        <Link to={"/" + id} className="c-search-item col-lg-4 col-sm-6 col-xs-12">
             <div className="gutter">
                 <div className="c-search-item__img">
                     <img
@@ -13,11 +13,15 @@ function SearchItem({link,image,name,rated,actor}) {
                     />
                 </div>
                 <div className="c-search-item__name">{name}</div>
+                <div className="c-search-item__cat">
+                    {cat}
+                </div>
+                <div className="c-search-item__release">
+                20/02/2022
+                   
+                </div>
                 <div className="c-search-item__bottom">
-                    <div className="c-search-item__rated">
-                        <StarOutlined /> {rated}
-                    </div>
-                    <div className="c-search-item__actor">by {actor}</div>
+                    <p className="c-search-item__overview">{overview}</p>
                 </div>
             </div>
         </Link>
