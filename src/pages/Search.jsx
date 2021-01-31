@@ -12,7 +12,6 @@ function Search() {
     const isFilter = useSelector((state) => state.search.isFilter);
 
     const [cat, setCat] = useState([]);
-    const [filter, setFilter] = useState("");
     const dispatch = useDispatch();
 
     const handleSearchValue = (e) => {
@@ -26,13 +25,9 @@ function Search() {
             return state.map((item, length) => {
                 item.select = false;
                 if (item.value === value) {
-                    setFilter(value);
                     item.select = isChecked;
                 }
-                if (value === "all") {
-                    setFilter("");
-                }
-                dispatch(getFilter(filter));
+                dispatch(getFilter(value));
                 return item;
             });
         });
