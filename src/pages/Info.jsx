@@ -40,6 +40,7 @@ function Info() {
   const errorServer = useSelector((state) => state.error);
 
   const handleUpdate = () => {
+    console.log("test")
     if (
       !errorUsername &&
       !errorEmail &&
