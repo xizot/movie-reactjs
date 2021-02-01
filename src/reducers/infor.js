@@ -17,7 +17,7 @@ const initialState = {
   data: "",
   update: false,
   avatar: false,
-  urlAvatar: localStorage.getItem("avatar"),
+  urlAvatar: localStorage.getItem("avatar") || {},
   code: localStorage.getItem("code"),
 };
 const inforReducer = (state = initialState, action) => {
