@@ -5,7 +5,7 @@ import { clearError } from "../actions/error.action";
 //import { loadUser } from "../actions/user.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
-import { update, getAvatar } from "../actions/infor.action";
+import { update, getAvatar, upAvatar } from "../actions/infor.action";
 import {
   validateEmail,
   validateUsername,
@@ -20,8 +20,8 @@ function Info() {
   const dispath = useDispatch();
   let user = useSelector((state) => state.auth.user);
   let avatar = useSelector((state) => state.infor.urlAvatar);
-  console.log(avatar.uri);
 
+  const [image, setImage] = React.useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -40,7 +40,6 @@ function Info() {
   const errorServer = useSelector((state) => state.error);
 
   const handleUpdate = () => {
-    console.log("test")
     if (
       !errorUsername &&
       !errorEmail &&
@@ -71,7 +70,15 @@ function Info() {
       }
     }
   };
-
+  const handleAvatar = (e) => {
+    if (errorServer.id) {
+      dispath(clearError());
+    }
+    const formData = new FormData();
+    setImage(e.target.files[0]);
+    formData.append("image", image);
+    dispath(upAvatar(formData));
+  };
   const handleUsername = (e) => {
     if (errorServer.id) {
       dispath(clearError());
@@ -232,6 +239,7 @@ function Info() {
                         id="upload-avatar"
                         accept="image/*"
                         style={{ display: "none" }}
+                        onChange={(e) => handleAvatar(e)}
                       />
                     </div>
                   </div>
