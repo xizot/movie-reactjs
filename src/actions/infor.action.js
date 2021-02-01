@@ -44,7 +44,7 @@ export const getAvatar = () => (dispatch, getState) => {
 };
 
 export const upAvatar = (image) => (dispatch) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token"); 
   dispatch({
     type: UPDATE_AVATAR_REQUEST,
   });
@@ -52,11 +52,11 @@ export const upAvatar = (image) => (dispatch) => {
     axios
       .post("/user/avatar", image)
       .then((res) => {
+        console.log(res.data);
         dispatch({
           type: UPDATE_AVATAR_SUCCESS,
           payload: res.data,
         });
-
         dispatch(clearError());
       })
       .catch((err) => {

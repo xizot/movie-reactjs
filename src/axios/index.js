@@ -39,6 +39,7 @@ axiosInstance.interceptors.response.use(
                     return axiosInstance.request(error.config);
                 })
                 .catch((error) => {
+
                     history.push("/login");
                     localStorage.removeItem("token");
                     localStorage.removeItem("refreshToken");

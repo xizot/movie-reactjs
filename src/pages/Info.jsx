@@ -20,6 +20,9 @@ function Info() {
   const dispath = useDispatch();
   let user = useSelector((state) => state.auth.user);
   let avatar = useSelector((state) => state.infor.urlAvatar);
+  if(!avatar){
+    avatar.uri= `${process.env.PUBLIC_URL}/assets/img/avata.jpg`
+  }
 
   const [image, setImage] = React.useState("");
   const [username, setUsername] = useState("");
@@ -71,10 +74,14 @@ function Info() {
     }
   };
   const handleAvatar = (e) => {
+    e.preventDefault();
+    // nay cai loi tu dong logout t bo tay
     if (errorServer.id) {
       dispath(clearError());
     }
+
     const formData = new FormData();
+    
     setImage(e.target.files[0]);
     formData.append("image", image);
     dispath(upAvatar(formData));
@@ -221,7 +228,7 @@ function Info() {
               <div className="index_form">
                 <div className="infouser__left">
                   <div className="infouser__img">
-                    <img src={avatar.uri} alt="" />
+                    <img src={avatar && avatar.uri} alt="" />
                     <div className="is-hover">
                       <label
                         className="is-hover__handle is-hover__handle__upload"
