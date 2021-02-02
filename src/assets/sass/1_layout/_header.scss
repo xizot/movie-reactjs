@@ -6,11 +6,12 @@
     width: 100%;
     z-index: 999;
     transition: background-color 0.5s;
-    .is-dark {
-        background-color: #131722;
-    }
+    pointer-events: none;
     &.is-dark {
         background-color: #131722;
+        @include breakpoint(tab) {
+            background-color:transparent;
+        }
         &-2 {
             background-color: $bgSmooth;
         }
@@ -24,6 +25,7 @@
     }
     &__logo {
         width: 60px;
+        pointer-events: all;
         img {
             width: 100%;
             height: auto;
@@ -32,6 +34,7 @@
         }
     }
     &__cgnav {
+        pointer-events: all;
         @include breakpoint(tab) {
             display: none !important;
         }
@@ -63,6 +66,7 @@
         }
     }
     &__actions {
+        pointer-events: all;
         @include breakpoint(tab) {
             display: none !important;
         }

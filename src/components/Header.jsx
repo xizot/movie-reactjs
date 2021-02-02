@@ -20,15 +20,15 @@ function Header({ isDark = null }) {
         dispatch(changeSearchKey(value));
     };
     const handleSearch = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         dispatch(getSearch(searchKey));
         history.push(`/search?query=${searchKey}`);
     };
     useEffect(() => {
-        $(".c-menusp a").on("click", function () {
+        $("a").on("click", function (e) {
             setisOpen(false);
         });
-    }, []);
+    }, [user]);
 
     return (
         <>
@@ -130,11 +130,21 @@ function Header({ isDark = null }) {
                             ></div>
                             <div className="c-menusp__sidebar">
                                 <div className="c-menusp__search">
-                                    <SearchOutlined />
-                                    <input
-                                        type="text"
-                                        placeholder="Films, Actors"
+                                    <SearchOutlined
+                                        onClick={(e) => handleSearch(e)}
                                     />
+                                    <form
+                                        action=""
+                                        onSubmit={(e) => handleSearch(e)}
+                                    >
+                                        <input
+                                            type="text"
+                                            value={searchKey}
+                                            onChange={(e) =>
+                                                handleSearchValue(e)
+                                            }
+                                        />
+                                    </form>
                                 </div>
                                 <ul className="c-menusp__cgnav">
                                     <li>
