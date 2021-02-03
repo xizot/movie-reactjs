@@ -29,10 +29,8 @@ export const getMovie = () => (dispatch) => {
 
 export const getTvShow = () => (dispatch) => {
 	axios
-		.get("/media/fetch?limit=20&type=movie")
+		.get("/media/fetch?limit=20&type=tv")
 		.then(res => {
-			console.log(res.data.results);
-
 			dispatch({
 				type: GET_TVSHOW,
 				payload: res.data.results,

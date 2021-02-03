@@ -29,6 +29,8 @@ const filmReducer = (state = initialState, action) => {
                 comment: newComments.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i)
             };
         case GET_TVSHOW:
+            console.log(action.payload);
+
             return {
                 ...state,
                 tv: action.payload,

@@ -99,7 +99,7 @@ function fadeEffect() {
     var scrollTop = $(window).scrollTop();
     var bottom = scrollTop + $(window).height();
     $(".u-fade").each(function () {
-        if (bottom > $(this).offset().top + 200) {
+        if (bottom > $(this).offset().top + 50) {
             $(this).addClass("u-fade--show");
         } else {
             $(this).removeClass("u-fade--show");

@@ -3,20 +3,30 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
-function Detail1({ title, cat, description, poster, actors, year }) {
+import { history } from "../helper";
+function Detail1({ type, title, cat, description, poster, actors, year, id }) {
     const openPopUp = () => {
-        $(".p-popup").fadeIn(500);
+        console.log(type);
+        if (type === "movie") {
+            history.push(`/movie/${id}/watch`);
+        } else {
+            $(".p-popup").fadeIn(500);
+        }
     };
     const closePopup = () => {
-        $(".p-popup").fadeOut(500);
+        if (type === "tv") {
+            $(".p-popup").fadeOut(500);
+        }
     };
     return (
         <div className="p-detail1 ">
             <div className="l-container">
                 <MoviePopup
-                    title="The rise of kingdom"
+                    id={id}
+                    title={title}
                     handlePopup={() => closePopup()}
                 />
+
                 <div className="p-detail1__content js-dark-here">
                     <div className="row row-reverse">
                         <div className="col-sm-12 col-lg-8 p-detail1__left">

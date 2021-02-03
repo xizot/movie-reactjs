@@ -24,7 +24,7 @@ const movieReducer = (state = initialState, action) => {
                 data: action.payload,
                 isLoading: false,
                 isLoaded: true,
-                type: "tvshow",
+                type: "tv",
                 error: null
             }
         case GET_MOVIE_INFO:

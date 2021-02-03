@@ -10,7 +10,7 @@ function Detail({ title, cat, description, poster, nation, id }) {
     const comments = useSelector((state) => state.film.comment);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const movieInfo = useSelector((state) => state.movie.data);
-    // const type = useSelector((state) => state.movie.type);
+    const type = useSelector((state) => state.movie.type);
 
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
@@ -30,6 +30,8 @@ function Detail({ title, cat, description, poster, nation, id }) {
         <>
             <section className="p-detail">
                 <Detail1
+                    id={id}
+                    type={type}
                     title={movieInfo.title}
                     cat={movieInfo.genres && movieInfo.genres.join(", ")}
                     description={movieInfo.overview}
@@ -43,11 +45,17 @@ function Detail({ title, cat, description, poster, nation, id }) {
                         (movieInfo.tvShow && movieInfo.tvShow.firstAirDate)
                     }
                 />
-                <Detail2
-                    type={movieInfo.videos && movieInfo.videos[0].site}
-                    videoID={movieInfo.videos && movieInfo.videos[0].key}
-                    poster={movieInfo.posterPath}
-                />
+                {movieInfo.videos &&
+                    (movieInfo.videos.length ? (
+                        <Detail2
+                            type={movieInfo.videos[0].site}
+                            videoID={movieInfo.videos[0].key}
+                            poster={movieInfo.posterPath}
+                        />
+                    ) : (
+                        <></>
+                    ))}
+
                 <div className="p-detail3 u-fade">
                     <div className="l-container">
                         <h3 className="c-title">Comments</h3>

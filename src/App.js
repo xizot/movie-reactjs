@@ -24,6 +24,7 @@ import History from './pages/History';
 import { PrivateRoute } from './components/common/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Watch from './pages/Watch';
 
 function App() {
 	const dispath = useDispatch();
@@ -45,6 +46,7 @@ function App() {
 					<Route path="/verifyemail" component={VerifyEmail} />
 					<Route path="/recovery" component={Recovery} />
 					<Route path="/login" component={Login} />
+					<Route path="/movie/:id/watch" component={Watch} />
 					<Route path="/movie/:id" component={Movie} />
 					<Route path="/search" component={Search} />
 					<Route path="/history" component={History} />

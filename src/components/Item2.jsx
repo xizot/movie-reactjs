@@ -5,7 +5,7 @@ function Item2({
     image,
     resolution = [],
     rated,
-    minutes,
+    runtime,
     cat,
     age,
     name,
@@ -41,8 +41,15 @@ function Item2({
                     </div>
                     <div className="c-item2__name">{name}</div>
                     <div className="c-item2__info">
-                        <span className="c-item2__minute">{minutes} mins</span>
-
+                        {type === "movie " ? (
+                            <span className="c-item2__minute">
+                                {runtime} mins
+                            </span>
+                        ) : (
+                            <span className="c-item2__minute">
+                                Season number: {runtime}
+                            </span>
+                        )}
                         {age ? (
                             <span className="c-item2__age">PG{age}</span>
                         ) : (

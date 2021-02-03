@@ -7,6 +7,7 @@ import forgotReducer from "./forgot.reducer";
 import inforReducer from "./infor.reducer"
 import searchReducer from "./search.reducer"
 import movieReducer from "./movie.reducer"
+import streamReducer from "./stream.reducer"
 // import inforReducer from "./infor";
 
 const reducer = combineReducers({
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     forgot: forgotReducer,
     infor: inforReducer,
     search: searchReducer,
-    movie: movieReducer
+    movie: movieReducer,
+    stream: streamReducer
 });
 
 export default reducer;

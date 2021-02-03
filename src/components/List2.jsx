@@ -73,7 +73,10 @@ function List2({ subtitle, title, list }) {
                                     image={item.posterPath}
                                     cat={item.genres && item.genres.join(", ")}
                                     name={item.title}
-                                    minutes={item.movie.runtime}
+                                    runtime={
+                                        (item.movie && item.movie.runtime) ||
+                                        (item.tvShow && item.tvShow.seasonCount)
+                                    }
                                     rated={item.popularity}
                                     type={item.movie ? "movie" : "tvshow"}
                                 />
