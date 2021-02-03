@@ -6,9 +6,12 @@ import CommentItem from "./CommentItem";
 import Detail1 from "./Detail1";
 import Detail2 from "./Detail2";
 
-function Detail({ ID = null }) {
+function Detail({ title, cat, description, poster, nation, id }) {
     const comments = useSelector((state) => state.film.comment);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const movieInfo = useSelector((state) => state.movie.data);
+    // const type = useSelector((state) => state.movie.type);
+
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
 
@@ -27,16 +30,24 @@ function Detail({ ID = null }) {
         <>
             <section className="p-detail">
                 <Detail1
-                    title="The rise of KingDom"
-                    cat={["Action", "Romance"]}
-                    description="She can truly celebrate who shie is. Directed by Ryan Murphu 'The Mando' is the spectacular, big-hearted flim."
-                    poster="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1574144362"
-                    actors="SOTN"
-                    directors="SOTN"
-                    year="2022"
-                    nation="LAOs"
+                    title={movieInfo.title}
+                    cat={movieInfo.genres && movieInfo.genres.join(", ")}
+                    description={movieInfo.overview}
+                    poster={movieInfo.posterPath}
+                    actors={
+                        movieInfo.credits &&
+                        movieInfo.credits.map((item) => item.name).join(", ")
+                    }
+                    year={
+                        (movieInfo.movie && movieInfo.movie.releaseDate) ||
+                        (movieInfo.tvShow && movieInfo.tvShow.firstAirDate)
+                    }
                 />
-                <Detail2 />
+                <Detail2
+                    type={movieInfo.videos && movieInfo.videos[0].site}
+                    videoID={movieInfo.videos && movieInfo.videos[0].key}
+                    poster={movieInfo.posterPath}
+                />
                 <div className="p-detail3 u-fade">
                     <div className="l-container">
                         <h3 className="c-title">Comments</h3>

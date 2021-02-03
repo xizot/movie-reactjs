@@ -45,13 +45,13 @@ function App() {
 					<Route path="/verifyemail" component={VerifyEmail} />
 					<Route path="/recovery" component={Recovery} />
 					<Route path="/login" component={Login} />
-					<Route path="/movie" component={Movie} />
+					<Route path="/movie/:id" component={Movie} />
 					<Route path="/search" component={Search} />
 					<Route path="/history" component={History} />
 					<Route path="/register" component={Register} />
 					<Route path="/watchlater" component={WatchLater} />
 					<Route exact path="/" component={Home} />
-					<Route> 
+					<Route>
 						<>404 Not Found</>
 
 					</Route>

@@ -1,50 +1,7 @@
 .p-top {
     position: relative;
     z-index: 1;
-    .slick-prev {
-        left: 0;
-    }
-    .slick-next {
-        right: 0;
-    }
-    .slick-arrow {
-        margin: 0;
-        z-index: 1;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #ddd;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        opacity: 0.5;
-        transition: opacity 0.6s;
-        &.u-fade {
-            opacity: 0;
-            pointer-events: none;
-            &--show {
-                pointer-events: all;
 
-                opacity: 0.5;
-            }
-        }
-        &:hover {
-            opacity: 1 !important;
-        }
-        svg {
-            font-size: 1.5rem;
-        }
-        &::before {
-            display: none;
-        }
-    }
-    .slick-next:focus,
-    .slick-next:hover,
-    .slick-prev:focus,
-    .slick-prev:hover {
-        color: black;
-    }
     &1 {
         padding: 100px 0;
         background-color: #131722;
@@ -56,7 +13,7 @@
             margin-top: 60px;
             margin-left: -15px;
             margin-right: -15px;
-            @include breakpoint(sp){
+            @include breakpoint(sp) {
                 margin-left: -7.5px;
                 margin-right: -7.5px;
             }
@@ -76,10 +33,55 @@
             margin-top: 60px;
             margin-left: -15px;
             margin-right: -15px;
-            @include breakpoint(sp){
+            @include breakpoint(sp) {
                 margin-left: -7.5px;
                 margin-right: -7.5px;
             }
         }
     }
+}
+
+.slick-slider .slick-prev {
+    left: 0;
+}
+.slick-slider .slick-next {
+    right: 0;
+}
+.slick-slider .slick-arrow {
+    margin: 0;
+    z-index: 2 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    opacity: 0.5;
+    transition: opacity 0.6s;
+    &.u-fade {
+        opacity: 0;
+        pointer-events: none;
+        &--show {
+            pointer-events: all;
+
+            opacity: 0.5;
+        }
+    }
+    &:hover {
+        opacity: 1 !important;
+    }
+    svg {
+        font-size: 1.5rem;
+    }
+    &::before {
+        display: none;
+    }
+}
+.slick-slider .slick-next:focus,
+.slick-slider .slick-next:hover,
+.slick-slider .slick-prev:focus,
+.slick-slider .slick-prev:hover {
+    color: black;
 }

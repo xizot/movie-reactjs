@@ -14,7 +14,7 @@ function Item2({
     return (
         <div className="c-item2 u-fade">
             <div className="gutter">
-                <Link to={`movie/${id}?type=${type}`}>
+                <Link to={`/movie/${id}`}>
                     <div className="c-item2__image">
                         <img
                             src={
@@ -26,6 +26,8 @@ function Item2({
                             loading="lazy"
                         />
                         <div className="is-hover">
+                            <span className="c-item2__cat">{cat}</span>
+
                             <div className="c-item2__hover u-flex u-a-center u-between">
                                 <div className="c-resolution">
                                     {resolution[0] ? resolution[0] : "720"}
@@ -33,22 +35,20 @@ function Item2({
                                         {resolution[1] ? resolution[1] : "HD"}
                                     </span>
                                 </div>
-                                <div className="c-rated">
-                                    {rated ? rated : 0}
-                                </div>
+                                <div></div>
                             </div>
                         </div>
                     </div>
+                    <div className="c-item2__name">{name}</div>
                     <div className="c-item2__info">
-                        <span className="c-item2__minute">{minutes} min,</span>
-                        <span className="c-item2__cat">{cat}</span>
+                        <span className="c-item2__minute">{minutes} mins</span>
+
                         {age ? (
                             <span className="c-item2__age">PG{age}</span>
                         ) : (
                             <></>
                         )}
                     </div>
-                    <div className="c-item2__name">{name}</div>
                 </Link>
             </div>
         </div>

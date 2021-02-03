@@ -4,6 +4,7 @@ import Mainvisuals from "../components/MainVisuals";
 import PTop from "../components/PTop";
 function Home() {
     const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         setIsLoading(true);
     }, [isLoading]);

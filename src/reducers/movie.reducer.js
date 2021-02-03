@@ -3,7 +3,8 @@ import { GET_MOVIE_INFO, GET_TV_INFO, GET_MOVIE_REQUEST, GET_MOVIE_REQUEST_FAIL 
 const initialState = {
     isLoading: false,
     isLoaded: true,
-    data: [],
+    data: {},
+    type: "movie",
     error: null
 }
 
@@ -18,12 +19,21 @@ const movieReducer = (state = initialState, action) => {
                 error: null
             }
         case GET_TV_INFO:
+            return {
+                ...state,
+                data: action.payload,
+                isLoading: false,
+                isLoaded: true,
+                type: "tvshow",
+                error: null
+            }
         case GET_MOVIE_INFO:
             return {
                 ...state,
-                data: action.payload.data,
+                data: action.payload,
                 isLoading: false,
                 isLoaded: true,
+                type: "movie",
                 error: null
             }
         case GET_MOVIE_REQUEST_FAIL:
@@ -31,7 +41,7 @@ const movieReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 isLoaded: true,
-                error: action.payload.data
+                error: action.payload.msg
             }
         default:
             return state;

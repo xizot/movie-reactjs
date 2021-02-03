@@ -21,10 +21,7 @@ function Item1({ id, image, cat, name, chapter, type }) {
                     </div>
                     <p className="c-item__name">{name}</p>
                     <div className="u-flex u-a-center">
-                        <Link
-                            to={`movie/${id}?type=${type}`}
-                            className="c-item__play"
-                        >
+                        <Link to={`/movie/${id}`} className="c-item__play">
                             <CaretRightFilled />
                         </Link>
                         <span className="c-item__chapter">{chapter}</span>
