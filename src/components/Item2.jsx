@@ -1,10 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Item2({ id, image, resolution = [], rated, minutes, cat, age, name }) {
+function Item2({
+    id,
+    image,
+    resolution = [],
+    rated,
+    minutes,
+    cat,
+    age,
+    name,
+    type,
+}) {
     return (
         <div className="c-item2 u-fade">
             <div className="gutter">
-                <Link to={`movie/${id}`}>
+                <Link to={`movie/${id}?type=${type}`}>
                     <div className="c-item2__image">
                         <img
                             src={

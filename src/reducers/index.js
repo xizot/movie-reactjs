@@ -1,11 +1,12 @@
 import { combineReducers } from "redux";
-import errorReducer from "./error";
-import filmReducer from "./film";
-import watchReducer from "./watch";
-import authenReducer from "./auth";
-import forgotReducer from "./forgot";
-import inforReducer from "./infor"
-import searchReducer from "./search"
+import errorReducer from "./error.reducer";
+import filmReducer from "./film.reducer";
+import watchReducer from "./watch.reducer";
+import authenReducer from "./auth.reducer";
+import forgotReducer from "./forgot.reducer";
+import inforReducer from "./infor.reducer"
+import searchReducer from "./search.reducer"
+import movieReducer from "./movie.reducer"
 // import inforReducer from "./infor";
 
 const reducer = combineReducers({
@@ -13,9 +14,10 @@ const reducer = combineReducers({
     film: filmReducer,
     watch: watchReducer,
     auth: authenReducer,
-    forgot:forgotReducer,
-    infor:inforReducer,
-    search: searchReducer
+    forgot: forgotReducer,
+    infor: inforReducer,
+    search: searchReducer,
+    movie: movieReducer
 });
 
 export default reducer;

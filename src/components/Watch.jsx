@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { closeWatch } from "../actions/watch.action";
 
-function Watch({
-    videoSrc = "https://storage.whitefoo.workers.dev/Encodes/Mama_2013_1080p.mp4",
-    listEpisode = [],
-    ID,
-    ep,
-}) {
+function Watch({ id, videoSrc, listEpisode, ep }) {
     const dispatch = useDispatch();
     const videoSettings = {
         type: "video",
@@ -27,7 +22,7 @@ function Watch({
 
     return (
         <div>
-            <Link to={`/movie/${ID}`} onClick={(e) => handleWatch(e)}>
+            <Link to={`/movie/${id}`} onClick={(e) => handleWatch(e)}>
                 Back
             </Link>
             <Plyr source={videoSettings} />

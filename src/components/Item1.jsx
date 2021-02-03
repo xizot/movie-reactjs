@@ -1,7 +1,7 @@
 import { CaretRightFilled } from "@ant-design/icons";
 import React from "react";
 import { Link } from "react-router-dom";
-function Item1({ id, image, cat, name, chapter }) {
+function Item1({ id, image, cat, name, chapter, type }) {
     return (
         <div className="c-item u-fade">
             <div className="gutter">
@@ -21,7 +21,10 @@ function Item1({ id, image, cat, name, chapter }) {
                     </div>
                     <p className="c-item__name">{name}</p>
                     <div className="u-flex u-a-center">
-                        <Link to={`movie/${id}`} className="c-item__play">
+                        <Link
+                            to={`movie/${id}?type=${type}`}
+                            className="c-item__play"
+                        >
                             <CaretRightFilled />
                         </Link>
                         <span className="c-item__chapter">{chapter}</span>

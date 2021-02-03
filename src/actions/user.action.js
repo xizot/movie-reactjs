@@ -1,4 +1,4 @@
-import { history } from "../helper";
+import { history, useAuthorization } from "../helper";
 import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -18,9 +18,9 @@ import { clearError, getError } from "./error.action";
 //login
 export const login = (username, password) => (dispatch) => {
     axios
-        .post("/auth/login/", { username, password }, {headers:{ Authorization:""}})
-        .then((res) => {     
-            history.push("/");  
+        .post("/auth/login/", { username, password }, { headers: { Authorization: "" } })
+        .then((res) => {
+            history.push("/");
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {
@@ -30,7 +30,7 @@ export const login = (username, password) => (dispatch) => {
             });
             dispatch(loadUser())
             dispatch(clearError());
-           
+
         })
         .catch((err) => {
             if (err.response) {
@@ -39,7 +39,7 @@ export const login = (username, password) => (dispatch) => {
                 );
             }
             dispatch({
-                payload: { msg:"Server error!!!", status: 500, id: LOGIN_FAIL },
+                payload: { msg: "Server error!!!", status: 500, id: LOGIN_FAIL },
                 type: LOGIN_FAIL,
             });
         });
@@ -78,7 +78,7 @@ export const register = (
                 );
             }
             dispatch({
-                payload: { msg:"Server error!!!", status: 500, id: REGISTER_FAIL },
+                payload: { msg: "Server error!!!", status: 500, id: REGISTER_FAIL },
                 type: REGISTER_FAIL,
             });
         });
@@ -87,7 +87,7 @@ export const register = (
 //verify Email
 export const verifyEmail = (activationCode) => (dispatch) => {
     axios
-        .post("/auth/confirmemail/", { activationCode })
+        .post("/auth/confirmemail/", { activationCode, headers: useAuthorization() })
         .then((res) => {
             dispatch({
                 type: VERIFY_SUCCESS,
@@ -96,14 +96,14 @@ export const verifyEmail = (activationCode) => (dispatch) => {
             // alert("Email confirmed!");
 
             dispatch(clearError());
-            
-            setTimeout(()=>{ 
-                history.push("/login"); 
+
+            setTimeout(() => {
+                history.push("/login");
                 dispatch({
                     type: VERIFY_FAIL,
                     payload: res.data,
                 })
-            }, 5000)       
+            }, 5000)
         })
         .catch((err) => {
             if (err.response) {
@@ -114,11 +114,11 @@ export const verifyEmail = (activationCode) => (dispatch) => {
                 //alert("Failed to confirm email!");
             }
             dispatch({
-                payload:{ msg:"Server error!!!", status:500,id: VERIFY_FAIL},
+                payload: { msg: "Server error!!!", status: 500, id: VERIFY_FAIL },
                 type: VERIFY_FAIL,
             });
 
-            setTimeout(()=>{history.push("/login");}, 2000)       
+            setTimeout(() => { history.push("/login"); }, 2000)
         });
 };
 
@@ -135,22 +135,24 @@ export const loadUser = () => (dispatch, getState) => {
     });
     if (token) {
         axios
-            .get("/user")
+            .get("/user", { headers: useAuthorization() })
             .then((res) => {
                 dispatch({
                     type: USER_LOADED,
                     payload: res.data,
                 });
             })
-            .catch((err) => {
-                if(err){
-                    dispatch(
-                        getError(err.response.data, err.response.status, AUTH_ERROR)
-                    );
-                    dispatch({
-                        type: AUTH_ERROR,
-                    });
-                }
+            .catch(err => {
+                console.log(err);
+
+                // if (err) {
+                //     dispatch(
+                //         getError((err.response && err.response.data) || "Please login again", err.response.status, AUTH_ERROR)
+                //     );
+                //     dispatch({
+                //         type: AUTH_ERROR,
+                //     });
+                // }
             });
     } else {
         dispatch({

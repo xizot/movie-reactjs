@@ -23,6 +23,7 @@ function Header({ isDark = null }) {
         e.preventDefault();
         dispatch(getSearch(searchKey));
         history.push(`/search?query=${searchKey}`);
+        setisOpen(false);
     };
     useEffect(() => {
         $("a").on("click", function (e) {
@@ -52,13 +53,7 @@ function Header({ isDark = null }) {
                                 <Link to="/">HOME</Link>
                             </li>
                             <li>
-                                <Link to="/movie">MOVIES</Link>
-                            </li>
-                            <li>
-                                <Link to="/tv">TV SHOWS</Link>
-                            </li>
-                            <li>
-                                <Link to="/tips">ABOUT</Link>
+                                <Link to="/about">ABOUT</Link>
                             </li>
                             {user && user.role === "admin" && (
                                 <li>
@@ -151,13 +146,7 @@ function Header({ isDark = null }) {
                                         <Link to="/">HOME</Link>
                                     </li>
                                     <li>
-                                        <Link to="/movie">MOVIES</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/tv">TV SHOWS</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/tips">ABOUT</Link>
+                                        <Link to="/about">ABOUT</Link>
                                     </li>
                                     {user && user.role === "admin" && (
                                         <li>

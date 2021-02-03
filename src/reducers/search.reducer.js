@@ -6,7 +6,7 @@ const initialState = {
     data: [],
     filter: [],
     isFilter: false,
-    searchKey : ""
+    searchKey: ""
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -28,11 +28,11 @@ const searchReducer = (state = initialState, action) => {
             let filter =
                 action.payload.cat !== "all"
                     ? state.data.filter((item) =>
-                          item.genres.some(
-                              (item) =>
-                                  item.toLowerCase() === action.payload.cat
-                          )
-                      )
+                        item.genres.some(
+                            (item) =>
+                                item.toLowerCase() === action.payload.cat
+                        )
+                    )
                     : [];
             return {
                 ...state,

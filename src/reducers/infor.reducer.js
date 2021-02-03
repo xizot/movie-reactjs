@@ -10,10 +10,13 @@ import {
   GET_AVATAR_SUCCESS,
   GET_AVATAR_FAIL,
   GET_AVATAR_REQUEST,
+  INFO_LOADING
 } from "../types/infor.type";
 
 const initialState = {
-  isLoading: false,
+  isUploading: false,
+  isUploaded: true,
+  isLoading: true,
   data: "",
   update: false,
   avatar: false,
@@ -22,6 +25,12 @@ const initialState = {
 };
 const inforReducer = (state = initialState, action) => {
   switch (action.type) {
+    case INFO_LOADING: {
+      return {
+        ...state,
+        isLoading: true
+      }
+    }
     case GET_INFOR_SUCCESS:
       return {
         ...state,
@@ -38,6 +47,8 @@ const inforReducer = (state = initialState, action) => {
       return {
         ...state,
         avatar: true,
+        isUploading: true,
+        isUploaded: false,
       };
     case UPDATE_AVATAR_FAIL:
     case GET_AVATAR_FAIL:
@@ -51,11 +62,19 @@ const inforReducer = (state = initialState, action) => {
         ...state,
         avatar: true,
         urlAvatar: action.payload,
+        isUploading: false,
+        isUploaded: true,
+        isLoading: false
+
       };
     case UPDATE_AVATAR_SUCCESS:
       return {
         ...state,
         avatar: true,
+        isUploading: false,
+        isUploaded: true,
+        isLoading: false
+
       };
     case UPDATE_USER_REQUEST:
       return {

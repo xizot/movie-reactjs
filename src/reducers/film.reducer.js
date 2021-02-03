@@ -5,7 +5,7 @@ import {
     GET_MOVIE,
     GET_TVSHOW,
     GET_WATCHLATER
-} from "./../types/film.type";
+} from "../types/film.type";
 
 const initialState = {
     movie: [],

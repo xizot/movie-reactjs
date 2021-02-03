@@ -66,25 +66,16 @@ function List2({ subtitle, title, list }) {
                 <div className="p-top2__content">
                     {list.length && (
                         <Slider2 {...settings}>
-                            {list.map((f, idx) => (
+                            {list.map((item, idx) => (
                                 <Item2
-                                    // key={idx}
-                                    // id={f.id}
-                                    // image={f.image}
-                                    // resolution={f.resolution}
-                                    // rated={f.rated}
-                                    // minutes={f.minutes}
-                                    // name={f.name}
-                                    // age={f.age}
-                                    // cat={f.cat}
-
                                     key={idx}
-                                    id={f.imdbId}
-                                    image={f.posterPath}
-                                    cat="Action"
-                                    name={f.title}
-                                    minutes={f.movie.runtime}
-                                    rated={f.popularity}
+                                    id={item._id}
+                                    image={item.posterPath}
+                                    cat={item.genres && item.genres.join(", ")}
+                                    name={item.title}
+                                    minutes={item.movie.runtime}
+                                    rated={item.popularity}
+                                    type={item.movie ? "movie" : "tvshow"}
                                 />
                             ))}
                         </Slider2>

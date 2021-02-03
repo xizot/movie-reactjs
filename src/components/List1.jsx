@@ -66,13 +66,14 @@ function List1({ subtitle, title, list }) {
                 <div className="p-top1__content">
                     <Slider {...settings}>
                         {list.length &&
-                            list.map((f, idx) => (
+                            list.map((item, idx) => (
                                 <Item1
                                     key={idx}
-                                    id={f.imdbId}
-                                    image={f.posterPath}
-                                    cat="Action"
-                                    name={f.title}
+                                    id={item._id}
+                                    image={item.posterPath}
+                                    cat={item.genres && item.genres.join(", ")}
+                                    name={item.title}
+                                    type={item.movie ? "movie" : "tvshow"}
                                 />
                             ))}
                     </Slider>

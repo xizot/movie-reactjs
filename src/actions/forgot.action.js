@@ -1,11 +1,11 @@
-import { history } from "../helper";
-import { FORGOT_SUCCESS, FORGOT_FAIL,SENDPASSWORD_SUCCESS,SENDPASSWORD_FAIL } from '../types/forgot.type';
+import { history, useAuthorization } from "../helper";
+import { FORGOT_SUCCESS, FORGOT_FAIL, SENDPASSWORD_SUCCESS, SENDPASSWORD_FAIL } from '../types/forgot.type';
 import axios from './../axios';
 import { clearError, getError } from "./error.action";
 
 export const recoveryEmail = (email) => (dispatch) => {
     axios
-        .post('/auth/sendrecoveryemail/', { email })
+        .post('/auth/sendrecoveryemail/', { email }, { headers: useAuthorization() })
         .then((res) => {
             dispatch({
                 type: FORGOT_SUCCESS,
@@ -20,19 +20,19 @@ export const recoveryEmail = (email) => (dispatch) => {
                 );
             }
             dispatch({
-                payload: { msg:"Server error!!!", status: 500, id: FORGOT_FAIL },
+                payload: { msg: "Server error!!!", status: 500, id: FORGOT_FAIL },
                 type: FORGOT_FAIL,
             });
         });
 };
-export const forgotPassword = (recoveryCode,password,confirmPassword) => (dispatch) => {
+export const forgotPassword = (recoveryCode, password, confirmPassword) => (dispatch) => {
     const body = {
         recoveryCode,
         password,
         confirmPassword,
     };
     axios
-        .post("/auth/resetpassword/", body)
+        .post("/auth/resetpassword/", body, { headers: useAuthorization() })
         .then((res) => {
             dispatch({
                 type: SENDPASSWORD_SUCCESS,
@@ -47,7 +47,7 @@ export const forgotPassword = (recoveryCode,password,confirmPassword) => (dispat
                 );
             }
             dispatch({
-                payload: { msg:"Server error!!!", status: 500, id: SENDPASSWORD_FAIL },
+                payload: { msg: "Server error!!!", status: 500, id: SENDPASSWORD_FAIL },
                 type: SENDPASSWORD_FAIL,
             });
         });
