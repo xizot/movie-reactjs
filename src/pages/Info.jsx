@@ -19,16 +19,16 @@ import {
     validateConfirmPassword,
 } from "../helper/validator";
 import Loading from "../components/Loading";
+import Alert from "../components/Alert";
 
 function Info() {
     const dispath = useDispatch();
     let user = useSelector((state) => state.auth.user);
     let avatar = useSelector((state) => state.infor.urlAvatar);
     const isUploading = useSelector((state) => state.infor.isUploading);
+    const isUploaded = useSelector((state) => state.infor.isUploaded);
     const isLoading = useSelector((state) => state.infor.isLoading);
     const errorServer = useSelector((state) => state.error);
-
-    const [image, setImage] = React.useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [displayName, setDisplayName] = useState("");
@@ -44,6 +44,7 @@ function Info() {
     const [errorPassword, setErrorPassword] = useState(false);
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
     const [errorNewPassword, setErrorNewPassword] = useState(false);
+
     if (!avatar) {
         avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
     }
@@ -86,12 +87,12 @@ function Info() {
             dispath(clearError());
         }
 
-        const formData = new FormData();
-
-        setImage(e.target.files[0]);
-        console.log(e.target.files[0]);
-        formData.append("image", image);
-        dispath(upAvatar(formData));
+        var file = e.target.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append("image", file);
+            dispath(upAvatar(formData));
+        }
     };
     const handleUsername = (e) => {
         if (errorServer.id) {
@@ -212,6 +213,9 @@ function Info() {
 
     return (
         <div className="infouser">
+            {isUploaded && (
+                <Alert msg="Upload success" type="c-alert--success" />
+            )}
             <Loading nameClass={isLoading ? "" : "is-fadeout"} />
             {user && (
                 <>
@@ -269,9 +273,9 @@ function Info() {
                                                 onChange={(e) =>
                                                     handleAvatar(e)
                                                 }
-                                                onClick={(e) => {
-                                                    e.target.value = null;
-                                                }}
+                                                onClick={(e) =>
+                                                    (e.target.value = null)
+                                                }
                                             />
                                         </div>
                                     </div>
@@ -331,6 +335,7 @@ function Info() {
                                             {errorEmail && (
                                                 <FormError text="Email must be valid" />
                                             )}
+
                                             <div className="c-form__group is-focus">
                                                 <input
                                                     className="c-form__input_date"
@@ -338,11 +343,14 @@ function Info() {
                                                     max="2021-12-12"
                                                     type="date"
                                                     required
-                                                    value={convertDateTime(
-                                                        dateOfBirth,
-                                                        "DD-MM-YYYY",
-                                                        "YYYY-MM-DD",
-                                                    )}
+                                                    value={
+                                                        dateOfBirth &&
+                                                        convertDateTime(
+                                                            dateOfBirth,
+                                                            "DD-MM-YYYY",
+                                                            "YYYY-MM-DD",
+                                                        )
+                                                    }
                                                     onChange={(e) =>
                                                         handleDateOfBirth(e)
                                                     }
@@ -354,6 +362,7 @@ function Info() {
                                             {errorDateOfBirth && (
                                                 <FormError text="Date of birth must not be after the current date" />
                                             )}
+
                                             <div className="c-form__group">
                                                 <input
                                                     className="c-form__input"
@@ -372,6 +381,7 @@ function Info() {
                                             {errorPassword && (
                                                 <FormError text="Password must be between 8 and 128 characters long" />
                                             )}
+
                                             <div className="c-form__group">
                                                 <input
                                                     className="c-form__input"
@@ -390,6 +400,7 @@ function Info() {
                                             {errorNewPassword && (
                                                 <FormError text="Password must be between 8 and 128 characters long" />
                                             )}
+
                                             <div className="c-form__group">
                                                 <input
                                                     className="c-form__input"

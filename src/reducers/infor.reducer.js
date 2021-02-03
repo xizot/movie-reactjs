@@ -15,7 +15,7 @@ import {
 
 const initialState = {
   isUploading: false,
-  isUploaded: true,
+  isUploaded: false,
   isLoading: true,
   data: "",
   update: false,
@@ -63,7 +63,6 @@ const inforReducer = (state = initialState, action) => {
         avatar: true,
         urlAvatar: action.payload,
         isUploading: false,
-        isUploaded: true,
         isLoading: false
 
       };

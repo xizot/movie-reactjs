@@ -16,15 +16,15 @@
 @import "0_base/resuable";
 
 .sp-only {
-	display: none;
+    display: none;
 }
 @include breakpoint(sp) {
-	.pc-only {
-		display: none !important;
-	}
-	.sp-only {
-		display: block;
-	}
+    .pc-only {
+        display: none !important;
+    }
+    .sp-only {
+        display: block;
+    }
 }
 
 /*≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
@@ -64,9 +64,10 @@
 @import "./3_components/form";
 @import "./3_components/login";
 @import "./3_components/comment";
-@import './3_components/info';
-@import './3_components/search-item';
-@import './3_components/popup2';
+@import "./3_components/info";
+@import "./3_components/search-item";
+@import "./3_components/popup2";
+@import "./3_components/alert";
 
 // Pages .pages-
 //≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡*/
