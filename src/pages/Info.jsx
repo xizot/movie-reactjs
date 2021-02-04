@@ -46,6 +46,7 @@ function Info() {
     const [errorNewPassword, setErrorNewPassword] = useState(false);
 
     if (!avatar) {
+        console.log("handleError")
         avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
     }
 
