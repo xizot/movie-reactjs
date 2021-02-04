@@ -8,7 +8,7 @@ import inforReducer from "./infor.reducer"
 import searchReducer from "./search.reducer"
 import movieReducer from "./movie.reducer"
 import streamReducer from "./stream.reducer"
-// import inforReducer from "./infor";
+
 
 const reducer = combineReducers({
     error: errorReducer,

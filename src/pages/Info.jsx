@@ -6,10 +6,9 @@ import {
     LoadingOutlined,
 } from "@ant-design/icons";
 import { clearError } from "../actions/error.action";
-//import { loadUser } from "../actions/user.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
-import { update, getAvatar, upAvatar } from "../actions/infor.action";
+import { update, getAvatar, upAvatar , delAvatar } from "../actions/infor.action";
 import {
     validateEmail,
     validateUsername,
@@ -28,6 +27,7 @@ function Info() {
     const isUploading = useSelector((state) => state.infor.isUploading);
     const isUploaded = useSelector((state) => state.infor.isUploaded);
     const isLoading = useSelector((state) => state.infor.isLoading);
+    const isDeleted = useSelector((state) => state.infor.isDeleted);
     const errorServer = useSelector((state) => state.error);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -94,12 +94,21 @@ function Info() {
             dispath(upAvatar(formData));
         }
     };
+
+    const handleDeleteAvatar = () =>{
+        if (errorServer.id) {
+            dispath(clearError());
+        }
+        dispath(delAvatar());
+
+    }
     const handleUsername = (e) => {
+        e.preventDefault();
         if (errorServer.id) {
             dispath(clearError());
         }
         let value = e.target.value;
-        setUsername(user.username);
+        setUsername((user&&user.username)|| "");
         if (value.length >= 0) {
             setUsername(value);
             if (validateUsername(value) === true) {
@@ -111,11 +120,12 @@ function Info() {
     };
 
     const handleEmail = (e) => {
+        e.preventDefault();
         if (errorServer.id) {
             dispath(clearError());
         }
         let value = e.target.value;
-        setEmail(user.email);
+        setEmail((user&&user.email)|| "");
         if (value.length >= 0) {
             setEmail(value);
             if (validateEmail(value) === true) {
@@ -127,10 +137,12 @@ function Info() {
     };
 
     const handleDisplayName = (e) => {
+        e.preventDefault();
         if (errorServer.id) {
             dispath(clearError());
         }
         let value = e.target.value;
+        setDisplayName((user&&user.displayName)|| "");
         if (value.length >= 0) {
             setDisplayName(value);
             if (validateDisplayName(value) === true) {
@@ -146,6 +158,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
+        setDateOfBirth((user&&user.dateOfBirth)|| "");
         if (value.length >= 0) {
             if (value.length === 0) value = user.dateOfBirth;
             setDateOfBirth(value);
@@ -162,6 +175,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
+        setPassword("");
         if (value.length >= 0) {
             setPassword(value);
             if (validatePassword(value) === true) {
@@ -191,6 +205,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
+        setNewPassword("");
         if (value.length >= 0) {
             setNewPassword(value);
             if (validatePassword(value) === true) {
@@ -204,17 +219,20 @@ function Info() {
     useEffect(() => {
         dispath(getAvatar());
         if (user) {
-            setUsername(user.username);
-            setDateOfBirth(user.dateOfBirth);
-            setEmail(user.email);
-            setDisplayName(user.displayName);
+            setUsername((user&&user.username)|| "");
+            setDateOfBirth((user.dateOfBirth)||"");
+            setEmail((user.email)||"");
+            setDisplayName((user.displayName)||"");
         }
-    }, [dispath, errorServer, user]);
+    }, [dispath, user]);
 
     return (
         <div className="infouser">
-            {isUploaded && (
+            {isUploaded && !isDeleted &&(
                 <Alert msg="Upload success" type="c-alert--success" />
+            )} 
+            {isDeleted && isUploaded &&(
+                <Alert msg="Delete success" type="c-alert--success" />
             )}
             <Loading nameClass={isLoading ? "" : "is-fadeout"} />
             {user && (
@@ -261,7 +279,7 @@ function Info() {
                                             >
                                                 <PlusOutlined /> Upload Avatar
                                             </label>
-                                            <button className="is-hover__handle is-hover__handle__delete">
+                                            <button className="is-hover__handle is-hover__handle__delete" onClick={()=> handleDeleteAvatar()}>
                                                 <DeleteOutlined /> Delete Avatar
                                             </button>
 
@@ -369,7 +387,7 @@ function Info() {
                                                     autoComplete="new-password"
                                                     type="password"
                                                     required
-                                                    value={currentPassword}
+                                                    value={currentPassword }
                                                     onChange={(e) =>
                                                         handlePassword(e)
                                                     }
