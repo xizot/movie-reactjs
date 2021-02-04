@@ -1,36 +1,51 @@
 import React, { useEffect } from "react";
-import Plyr from "plyr-react";
-// import "plyr-react/dist/plyr.css";
+import Plyr from "plyr";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieVideo } from "../actions/stream.action";
 import Loading from "../components/Loading";
-
+import { SwapLeftOutlined } from "@ant-design/icons";
+import { history } from "./../helper";
 function Watch({ match }) {
     const dispatch = useDispatch();
     const { id, episode } = match.params;
-    const videoLinks = useSelector((state) => state.stream.data);
+    const videoSources = useSelector((state) => state.stream.data);
     const isLoading = useSelector((state) => state.stream.isLoading);
-    const videoSettings = {
-        type: "video",
-        sources: [
-            {
-                src: videoLinks.length && videoLinks[0].url,
-            },
-        ],
-    };
+
     useEffect(() => {
         if (!episode) {
             dispatch(getMovieVideo(id));
         }
     }, [dispatch, episode, id]);
+
+    useEffect(() => {
+        if (videoSources.length) {
+            const player = new Plyr("#player");
+            const videoSettings = {
+                type: "video",
+                sources: videoSources,
+            };
+            console.log(videoSettings);
+            player.source = videoSettings;
+        }
+    }, [videoSources]);
     return (
-        <div>
+        <div className="p-watch">
             <Loading nameClass={isLoading ? "" : "is-fadeout"} />
-            {videoLinks.length ? (
-                <Plyr source={videoSettings} />
-            ) : (
-                "No data available"
-            )}
+            <video id="player" playsInline controls>
+                <source
+                    src={videoSources.length && videoSources[0].src}
+                    type="video/mp4"
+                />
+            </video>
+
+            <div className="p-watch__back">
+                <SwapLeftOutlined
+                    onClick={() => {
+                        history.goBack();
+                    }}
+                />
+                <p>Back to detail</p>
+            </div>
         </div>
     );
 }

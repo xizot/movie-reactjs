@@ -1,9 +1,7 @@
-import { Router, Route, Switch } from 'react-router-dom';
-// import Home from './pages/Home';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/user.action';
 import { useEffect } from 'react';
-import { history } from './helper';
 
 // Pages
 import Search from './pages/Search';
@@ -18,15 +16,16 @@ import Info from './pages/Info';
 import Movie from './pages/Movie';
 import Admin from './pages/Admin';
 import History from './pages/History';
-
+import Watch from './pages/Watch';
 
 // Components
 import { PrivateRoute } from './components/common/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Watch from './pages/Watch';
+
 
 function App() {
+	const location = useLocation()
 	const dispath = useDispatch();
 	useEffect(
 		() => {
@@ -34,33 +33,42 @@ function App() {
 		},
 		[dispath]
 	);
+	useEffect(() => {
+		const header = document.querySelector(".c-header")
+		const footer = document.querySelector(".c-footer")
+
+		if (location.pathname.includes("/watch") && header && footer) {
+			header.classList.add("is-hide")
+			footer.classList.add("is-hide")
+		}
+		else {
+			header.classList.remove("is-hide")
+			footer.classList.remove("is-hide")
+		}
+	}, [location])
 
 	return (
 		<div className="App">
-			<Router history={history}>
-				<Header />
-				<Switch>
-					<PrivateRoute path="/admin" component={Admin} />
-					<Route path="/account" component={Info} />
-					<Route path="/forgotpassword" component={ForgotPassword} />
-					<Route path="/verifyemail" component={VerifyEmail} />
-					<Route path="/recovery" component={Recovery} />
-					<Route path="/login" component={Login} />
-					<Route path="/movie/:id/watch" component={Watch} />
-					<Route path="/movie/:id" component={Movie} />
-					<Route path="/search" component={Search} />
-					<Route path="/history" component={History} />
-					<Route path="/register" component={Register} />
-					<Route path="/watchlater" component={WatchLater} />
-					<Route exact path="/" component={Home} />
-					<Route>
-						<>404 Not Found</>
-
-					</Route>
-				</Switch>
-				<Footer />
-			</Router>
-
+			<Header />
+			<Switch>
+				<PrivateRoute path="/admin" component={Admin} />
+				<Route path="/account" component={Info} />
+				<Route path="/forgotpassword" component={ForgotPassword} />
+				<Route path="/verifyemail" component={VerifyEmail} />
+				<Route path="/recovery" component={Recovery} />
+				<Route path="/login" component={Login} />
+				<Route path="/movie/:id/watch" component={Watch} />
+				<Route path="/movie/:id" component={Movie} />
+				<Route path="/search" component={Search} />
+				<Route path="/history" component={History} />
+				<Route path="/register" component={Register} />
+				<Route path="/watchlater" component={WatchLater} />
+				<Route exact path="/" component={Home} />
+				<Route>
+					<>404 Not Found</>
+				</Route>
+			</Switch>
+			<Footer />
 		</div>
 	);
 }

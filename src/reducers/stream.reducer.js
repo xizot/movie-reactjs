@@ -15,9 +15,13 @@ const streamReducer = (state = initialState, action) => {
                 isLoaded: false
             }
         case GET_VIDEO:
+            var newData = action.payload.map(item => {
+                const { quality, mimeType, url, ...rest } = item
+                return { src: url, type: mimeType, size: quality, ...rest }
+            })
             return {
                 ...state,
-                data: action.payload,
+                data: newData,
                 isLoading: false,
                 isLoaded: true
             }

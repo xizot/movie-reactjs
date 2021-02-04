@@ -47,7 +47,8 @@ function Mainvisuals() {
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is.<br/>
+                                    She can truly celebrate who shie is.
+                                    <br />
                                     Directed by Ryan Murphu 'The Mando' is the
                                     spectacular, big-hearted flim.
                                 </p>
@@ -85,7 +86,8 @@ function Mainvisuals() {
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is.<br/>
+                                    She can truly celebrate who shie is.
+                                    <br />
                                     Directed by Ryan Murphu 'The Mando' is the
                                     spectacular, big-hearted flim.
                                 </p>
@@ -122,7 +124,8 @@ function Mainvisuals() {
                                     <span>Romance, Action</span>
                                 </div>
                                 <p className="c-slide__description">
-                                    She can truly celebrate who shie is.<br/>
+                                    She can truly celebrate who shie is.
+                                    <br />
                                     Directed by Ryan Murphu 'The Mando' is the
                                     spectacular, big-hearted flim.
                                 </p>

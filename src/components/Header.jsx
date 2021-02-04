@@ -33,7 +33,7 @@ function Header({ isDark = null }) {
 
     return (
         <>
-            <header className="c-header">
+            <header className={`c-header`}>
                 <div
                     className={
                         isDark

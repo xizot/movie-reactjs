@@ -144,7 +144,6 @@
     &2 {
         background-color: #000;
         width: 100%;
-        height: 100vh;
         position: relative;
         &__content {
             position: relative;
@@ -160,6 +159,7 @@
                 z-index: 99;
                 opacity: 0;
                 color: $mainColor;
+                transition: opacity 0.6s;
             }
             .c-btn--play {
                 width: 80px;
@@ -214,16 +214,16 @@
         padding-top: 70px;
         padding-bottom: 70px;
         background: $bgSmooth;
-        &__notlogin{
+        &__notlogin {
             height: 450px;
             display: flex;
             justify-content: center;
             align-items: center;
-            p{
+            p {
                 font-size: 1.6rem;
                 color: white;
             }
-            a{
+            a {
                 color: $mainColor;
             }
         }
@@ -252,7 +252,7 @@
                 }
             }
         }
-        .c-btn--loadmore{
+        .c-btn--loadmore {
             width: 300px;
             height: 50px;
             border-radius: 2px;

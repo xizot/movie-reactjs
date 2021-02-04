@@ -1,24 +1,29 @@
-import React from "react";
-import Plyr from "plyr-react";
-import "plyr-react/dist/plyr.css";
+import React, { useEffect } from "react";
+import Plyr from "plyr";
 
 function Detail2({ type, videoID }) {
-    const videoSettings = {
-        type: "video",
-        sources: [
-            {
-                src: videoID,
-                provider: type && type.toLowerCase(),
-            },
-        ],
-    };
+    useEffect(() => {
+        const videoSettings = {
+            type: "video",
+            sources: [
+                {
+                    src: videoID,
+                    provider: type && type.toLowerCase(),
+                },
+            ],
+        };
+        const player = new Plyr("#player");
+        player.source = videoSettings;
+    }, [type, videoID]);
     return (
         <div className="p-detail2 u-fade ">
             <div className="p-detail2__content">
                 <div className="l-container">
                     <h3 className="c-title">Trailer</h3>
                 </div>
-                <Plyr source={videoSettings} />
+
+                <video id="player" playsInline controls></video>
+                {/* <Plyr source={videoSettings} /> */}
             </div>
         </div>
     );
