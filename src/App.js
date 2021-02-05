@@ -17,12 +17,12 @@ import Movie from './pages/Movie';
 import Admin from './pages/Admin';
 import History from './pages/History';
 import Watch from './pages/Watch';
+import About from './pages/About';
 
 // Components
 import { PrivateRoute } from './components/common/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 
 function App() {
 	const location = useLocation()
@@ -63,6 +63,7 @@ function App() {
 				<Route path="/history" component={History} />
 				<Route path="/register" component={Register} />
 				<Route path="/watchlater" component={WatchLater} />
+				<Route path="/about" component={About} />
 				<Route exact path="/" component={Home} />
 				<Route>
 					<>404 Not Found</>

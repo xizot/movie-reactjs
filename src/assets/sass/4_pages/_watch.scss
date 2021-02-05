@@ -5,6 +5,28 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    .c-watch-controller {
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        z-index: 2;
+        opacity: 0;
+        opacity: 1;
+        transition: opacity 0.6s;
+        @include breakpoint(tab) {
+            top: 30px;
+            transform: none;
+        }
+        &__icon {
+            border-radius: 5px;
+            color: #00b3ff;
+            cursor: pointer;
+        }
+        &:hover {
+            opacity: 1 !important;
+        }
+    }
     .plyr {
         height: 100%;
         width: 100%;
@@ -39,6 +61,9 @@
         }
     }
     .plyr--hide-controls ~ &__back {
+        opacity: 0;
+    }
+    .plyr--hide-controls ~ .c-watch-controller {
         opacity: 0;
     }
 }

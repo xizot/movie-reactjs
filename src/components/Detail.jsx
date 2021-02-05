@@ -6,7 +6,7 @@ import CommentItem from "./CommentItem";
 import Detail1 from "./Detail1";
 import Detail2 from "./Detail2";
 
-function Detail({ title, cat, description, poster, nation, id }) {
+function Detail({ id }) {
     const comments = useSelector((state) => state.film.comment);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const movieInfo = useSelector((state) => state.movie.data);
@@ -44,6 +44,8 @@ function Detail({ title, cat, description, poster, nation, id }) {
                         (movieInfo.movie && movieInfo.movie.releaseDate) ||
                         (movieInfo.tvShow && movieInfo.tvShow.firstAirDate)
                     }
+                    type={type}
+                    movieInfo={movieInfo}
                 />
                 {movieInfo.videos &&
                     (movieInfo.videos.length ? (

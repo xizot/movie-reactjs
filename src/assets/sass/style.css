@@ -2099,8 +2099,17 @@ img {
   }
 }
 
+.p-detail1__left {
+  padding-right: 40px;
+}
+
+@media only screen and (max-width: 812px) {
+  .p-detail1__left {
+    padding-right: unset;
+  }
+}
+
 .p-detail1__right {
-  padding-left: 40px;
   margin: 0 auto;
 }
 
@@ -2114,12 +2123,6 @@ img {
   .p-detail1__right .gutter {
     padding: unset;
     padding-bottom: 20px;
-  }
-}
-
-@media only screen and (max-width: 812px) {
-  .p-detail1__right {
-    padding-left: unset;
   }
 }
 
@@ -2158,8 +2161,10 @@ img {
 
 .p-detail1__item {
   font-size: 1.4rem;
-  display: block;
   margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 @media only screen and (max-width: 812px) {
@@ -2169,12 +2174,12 @@ img {
 }
 
 .p-detail1__item b {
-  width: 80px;
-  display: inline-block;
+  width: 50px;
+  margin-right: 10px;
 }
 
 .p-detail1__item span {
-  width: calc(100% - 80px);
+  display: block;
 }
 
 .p-detail1__action {
@@ -2439,15 +2444,43 @@ img {
   display: none;
 }
 
+.p-popup__season {
+  font-size: 1.8rem;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+@media only screen and (max-width: 812px) {
+  .p-popup__season {
+    font-size: 1.6rem;
+  }
+}
+
 .p-popup__title {
   text-align: center;
   text-transform: capitalize;
+  margin-bottom: 30px;
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 812px) {
+  .p-popup__title {
+    font-size: 1.8rem;
+  }
 }
 
 .p-popup__subtitle {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  margin-top: 30px;
+}
+
+@media only screen and (max-width: 812px) {
+  .p-popup__subtitle {
+    font-size: 1.4rem;
+  }
 }
 
 .p-popup__content {
@@ -2460,9 +2493,16 @@ img {
   min-height: calc(100vh - 80px);
 }
 
+@media only screen and (max-width: 1200px) {
+  .p-popup__content {
+    width: calc(100% - 70px);
+  }
+}
+
 @media only screen and (max-width: 812px) {
   .p-popup__content {
     width: calc(100% - 30px);
+    padding: 40px 15px;
   }
 }
 
@@ -2474,11 +2514,18 @@ img {
 
 .p-popup__content .c-close svg {
   cursor: pointer;
-  font-size: 3.5rem;
+  font-size: 3rem;
+  color: white;
+}
+
+@media only screen and (max-width: 812px) {
+  .p-popup__content .c-close svg {
+    font-size: 2rem;
+  }
 }
 
 .p-popup__content .c-close svg:hover {
-  color: #e90101;
+  opacity: 0.7;
 }
 
 .c-popup__item {
@@ -2570,6 +2617,12 @@ img {
 
 .c-popup__item .c-title3 {
   font-size: 1.6rem;
+}
+
+@media only screen and (max-width: 812px) {
+  .c-popup__item .c-title3 {
+    font-size: 1.4rem;
+  }
 }
 
 @media only screen and (max-width: 450px) {
@@ -3952,6 +4005,212 @@ img {
   pointer-events: all;
 }
 
+.c-watch-controller {
+  position: relative;
+}
+
+.c-watch-controller__icon {
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #252525;
+  color: white;
+}
+
+.c-watch-controller__content {
+  position: absolute;
+  background-color: #252525;
+  width: 350px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+  color: #fff;
+  padding-bottom: 20px;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translate(-100%, -50%);
+          transform: translate(-100%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), -1px -1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), -1px -1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 812px) {
+  .c-watch-controller__content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: unset;
+            transform: unset;
+    border-radius: 0;
+  }
+}
+
+@media only screen and (min-width: 813px) {
+  .c-watch-controller:hover .c-watch-controller__content {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.c-watch-controller__season {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  -webkit-transition: left 0.3s;
+  transition: left 0.3s;
+}
+
+.c-watch-controller__season.is-fadeout {
+  left: -100%;
+}
+
+.c-watch-controller__season__close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 2rem;
+}
+
+@media only screen and (min-width: 813px) {
+  .c-watch-controller__season__close {
+    opacity: 0;
+    pointer-events: all;
+  }
+}
+
+.c-watch-controller__title {
+  padding: 10px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media only screen and (max-width: 812px) {
+  .c-watch-controller__title {
+    padding: 30px 50px 10px 20px;
+  }
+}
+
+.c-watch-controller__title h3 {
+  letter-spacing: 0.54px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.c-watch-controller__title span {
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.c-watch-controller__episode {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-height: 100%;
+  -webkit-transition: right 0.3s;
+  transition: right 0.3s;
+}
+
+.c-watch-controller__episode.is-show {
+  right: 0;
+}
+
+.c-watch-controller__list {
+  max-height: 100%;
+  overflow: hidden auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.c-watch-controller__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 1.45;
+  position: relative;
+  font-size: 1.4rem;
+  padding: 15px 30px 15px 20px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.c-watch-controller__item__checked {
+  width: 15px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.c-watch-controller__item__icon {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
+}
+
+.c-watch-controller__item:hover .c-watch-controller__item__icon {
+  opacity: 1;
+}
+
+.c-watch-controller__item:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.c-watch-controller__item.is-active {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media only screen and (max-width: 812px) {
+  .c-watch-controller.is-show .c-watch-controller__content {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.p-about {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .pages-movie .p-top2 {
   background: #131722;
 }
@@ -5275,6 +5534,37 @@ img {
   position: relative;
 }
 
+.p-watch .c-watch-controller {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 2;
+  opacity: 0;
+  opacity: 1;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
+}
+
+@media only screen and (max-width: 812px) {
+  .p-watch .c-watch-controller {
+    top: 30px;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.p-watch .c-watch-controller__icon {
+  border-radius: 5px;
+  color: #00b3ff;
+  cursor: pointer;
+}
+
+.p-watch .c-watch-controller:hover {
+  opacity: 1 !important;
+}
+
 .p-watch .plyr {
   height: 100%;
   width: 100%;
@@ -5320,6 +5610,10 @@ img {
 }
 
 .plyr--hide-controls ~ .p-watch__back {
+  opacity: 0;
+}
+
+.p-watch .plyr--hide-controls ~ .c-watch-controller {
   opacity: 0;
 }
 
@@ -5426,5 +5720,16 @@ img {
 
 .is-fade--show {
   opacity: 0;
+}
+
+.u-color--main {
+  color: #e90101;
+}
+
+.c-message {
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 50px 0;
+  font-style: italic;
 }
 /*# sourceMappingURL=style.css.map */

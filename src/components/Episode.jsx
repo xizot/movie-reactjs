@@ -3,8 +3,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { openWatch } from "../actions/watch.action";
+import { truncateByLength } from "./../helper";
 
-function Episode({ ID, index, ep, image, content = "No content" }) {
+function Episode({ season, ep, epName, id, image, overview, index }) {
     const dispatch = useDispatch();
     const handleWatch = (e) => {
         dispatch(openWatch());
@@ -12,7 +13,7 @@ function Episode({ ID, index, ep, image, content = "No content" }) {
 
     return (
         <Link
-            to={`/movie/${ID}?watch&ep=${ep}`}
+            to={`/movie/${id}/watch?season=${season}&episode=${ep}`}
             className="c-popup__item u-flex"
             onClick={(e) => handleWatch(e)}
         >
@@ -26,8 +27,10 @@ function Episode({ ID, index, ep, image, content = "No content" }) {
                 </div>
             </div>
             <div className="c-popup__item__right">
-                <h4 className="c-title3">Ep {ep}</h4>
-                <div className="c-popup__item__content">{content}</div>
+                <h4 className="c-title3"> {epName}</h4>
+                <div className="c-popup__item__content">
+                    {truncateByLength(overview || "")}
+                </div>
             </div>
         </Link>
     );

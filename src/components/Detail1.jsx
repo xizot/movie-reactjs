@@ -1,12 +1,20 @@
 import { DislikeOutlined, LikeOutlined, PlusOutlined } from "@ant-design/icons";
 import React from "react";
-// import { Link } from "react-router-dom";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
 import { history } from "../helper";
-function Detail1({ type, title, cat, description, poster, actors, year, id }) {
+function Detail1({
+    type,
+    title,
+    cat,
+    description,
+    poster,
+    actors,
+    year,
+    id,
+    movieInfo,
+}) {
     const openPopUp = () => {
-        console.log(type);
         if (type === "movie") {
             history.push(`/movie/${id}/watch`);
         } else {
@@ -25,6 +33,7 @@ function Detail1({ type, title, cat, description, poster, actors, year, id }) {
                     id={id}
                     title={title}
                     handlePopup={() => closePopup()}
+                    seasons={movieInfo.tvShow && movieInfo.tvShow.seasons}
                 />
 
                 <div className="p-detail1__content js-dark-here">
@@ -67,10 +76,10 @@ function Detail1({ type, title, cat, description, poster, actors, year, id }) {
                                 <div className="p-detail1__image">
                                     <img src={poster} alt="" />
                                 </div>
-                                <p className="p-detail1__item u-flex ">
+                                <p className="p-detail1__item">
                                     <b>Actor:</b> <span> {actors}</span>
                                 </p>
-                                <p className="p-detail1__item u-flex ">
+                                <p className="p-detail1__item">
                                     <b>Year:</b> <span>{year}</span>
                                 </p>
                             </div>

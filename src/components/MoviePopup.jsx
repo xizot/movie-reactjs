@@ -1,17 +1,33 @@
-import React, { useEffect } from "react";
-import { CloseCircleFilled } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { CloseOutlined } from "@ant-design/icons";
 import Episode from "./Episode";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getEpisode } from "../actions/film.action";
-function MoviePopup({ ID, title, handlePopup }) {
+function MoviePopup({ id, title, handlePopup, seasons }) {
     const dispatch = useDispatch();
-    const listEpisode = useSelector((state) => state.film.episode);
+    const [episodes, setEpisodes] = useState(null);
+    const [currentSeason, setCurrentSeason] = useState(null);
     const focus = (e) => {
         e.stopPropagation();
     };
+
+    const findSeasonByValue = (value) => {
+        const rs = seasons.find((item) => item.seasonNumber === value);
+        return rs ? rs.episodes : null;
+    };
+
+    const handleSeason = (e) => {
+        const value = e.target.value;
+        setCurrentSeason(value);
+        setEpisodes(findSeasonByValue(Number(value)));
+    };
     useEffect(() => {
-        dispatch(getEpisode(ID));
-    }, [ID, dispatch]);
+        dispatch(getEpisode(id));
+        if (seasons && seasons.length) {
+            setCurrentSeason(1);
+            setEpisodes(findSeasonByValue(1));
+        }
+    }, [id, dispatch, seasons]);
 
     return (
         <div className="c-popup" onClick={() => handlePopup()}>
@@ -19,23 +35,49 @@ function MoviePopup({ ID, title, handlePopup }) {
                 <div className="overlayer"></div>
                 <div className="p-popup__content" onClick={(e) => focus(e)}>
                     <div className="c-close" onClick={() => handlePopup()}>
-                        <CloseCircleFilled />
+                        <CloseOutlined />
                     </div>
                     <h3 className="c-title p-popup__title">{title}</h3>
-                    <h4 className="c-title4 p-popup__subtitle">Episode</h4>
-                    <div className="p-popup__episode">
-                        {listEpisode.length &&
-                            listEpisode.map((item, index) => (
-                                <Episode
-                                    ID={item.id}
-                                    key={index}
-                                    index={index}
-                                    ep={item.ep}
-                                    image={item.image}
-                                    content={item.content}
-                                />
-                            ))}
-                    </div>
+                    {seasons && seasons.length ? (
+                        <React.Fragment>
+                            <select
+                                name=""
+                                id=""
+                                className="p-popup__season"
+                                value={currentSeason || 1}
+                                onChange={(e) => handleSeason(e)}
+                            >
+                                {seasons.map((item, idx) => (
+                                    <React.Fragment key={idx}>
+                                        <option value={item.seasonNumber}>
+                                            {item.name}
+                                        </option>
+                                    </React.Fragment>
+                                ))}
+                            </select>
+
+                            <h4 className="c-title4 p-popup__subtitle">
+                                Episode
+                            </h4>
+                            <div className="p-popup__episode">
+                                {episodes &&
+                                    episodes.map((item, index) => (
+                                        <Episode
+                                            key={index}
+                                            index={index + 1}
+                                            season={currentSeason}
+                                            ep={item.episodeNumber}
+                                            epName={item.name}
+                                            id={id}
+                                            image={item.stillPath}
+                                            overview={item.overview}
+                                        />
+                                    ))}
+                            </div>
+                        </React.Fragment>
+                    ) : (
+                        <p className="c-message">No data available</p>
+                    )}
                 </div>
             </div>
         </div>

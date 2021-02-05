@@ -59,6 +59,9 @@
     }
     .c-title3 {
         font-size: 1.6rem;
+        @include breakpoint(tab) {
+            font-size: 1.4rem;
+        }
         @include breakpoint(sp) {
             margin-top: 10px;
         }

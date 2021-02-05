@@ -3,7 +3,8 @@ const initialState = {
     error: null,
     isLoading: true,
     isLoaded: false,
-    data: []
+    data: [],
+
 }
 
 const streamReducer = (state = initialState, action) => {
@@ -12,7 +13,8 @@ const streamReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true,
-                isLoaded: false
+                isLoaded: false,
+                error: null,
             }
         case GET_VIDEO:
             var newData = action.payload.map(item => {

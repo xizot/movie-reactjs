@@ -25,8 +25,13 @@
                 width: 100%;
             }
         }
+        &__left {
+            padding-right: 40px;
+            @include breakpoint(tab) {
+                padding-right: unset;
+            }
+        }
         &__right {
-            padding-left: 40px;
             margin: 0 auto;
             .gutter {
                 background-color: white;
@@ -36,9 +41,6 @@
                     padding: unset;
                     padding-bottom: 20px;
                 }
-            }
-            @include breakpoint(tab) {
-                padding-left: unset;
             }
         }
         &__cat {
@@ -73,17 +75,17 @@
         }
         &__item {
             font-size: 1.4rem;
-            display: block;
             margin-bottom: 10px;
+            display: flex;
             @include breakpoint(tab) {
                 padding-left: 15px;
             }
             b {
-                width: 80px;
-                display: inline-block;
+                width: 50px;
+                margin-right: 10px;
             }
             span {
-                width: calc(100% - 80px);
+                display: block;
             }
         }
         &__action {

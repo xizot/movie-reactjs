@@ -18,14 +18,25 @@ export const getMovieVideo = id => dispatch => {
             })
         })
 }
-export const getTVVideo = (id, season, episode) => dispatch => {
+export const getTvideo = (id, season, episode) => dispatch => {
     dispatch({
         type: GET_VIDEO_REQUEST
     })
-    axios.get(`/media/stream/${id}`, {
-        season,
-        episode
-    })
+    axios.get(`/media/stream/${id}?season=${season}&episode=${episode}`)
+        .then(res => {
+            dispatch({
+                type: GET_VIDEO,
+                payload: res.data
+            })
+        }).catch(err => {
+            dispatch({
+                type: GET_VIDEO_FAIL,
+                payload: { msg: "Video link not found" }
+            })
+        })
+}
+export const getSeasonInfo = (id, season) => dispatch => {
+    axios.get(`/media/details/${id}/season/${season}`)
         .then(res => {
             dispatch({
                 type: GET_VIDEO,
