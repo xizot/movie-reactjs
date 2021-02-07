@@ -25,7 +25,10 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
         dispatch(getEpisode(id));
         if (seasons && seasons.length) {
             setCurrentSeason(1);
-            setEpisodes(findSeasonByValue(1));
+            const rs = seasons.find(
+                (item) => item.seasonNumber === 1
+            );
+            setEpisodes(rs ? rs.episodes : null);
         }
     }, [id, dispatch, seasons]);
 

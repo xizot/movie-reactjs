@@ -4473,7 +4473,7 @@ img {
   font-family: "Raleway", sans-serif;
   overflow: hidden;
   padding-bottom: 100px;
-  background-color: #1a191f;
+  background-color: #131722;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4516,8 +4516,62 @@ img {
   margin-top: 50px;
 }
 
+.p-admin__top__item {
+  position: relative;
+  border-radius: 2px !important;
+}
+
 .p-admin__top__item:not(:last-child) {
   margin-right: 30px;
+}
+
+.p-admin__top__item--dropdown {
+  padding: 0 10px;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  -webkit-box-pack: justify !important;
+      -ms-flex-pack: justify !important;
+          justify-content: space-between !important;
+}
+
+.p-admin__top__item .p-adamin__top__down {
+  font-size: 1.1rem;
+}
+
+.p-admin__top__option {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  min-width: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  padding: 5px 0;
+  color: #333;
+}
+
+.p-admin__top__option ul {
+  border-radius: 2px;
+  background-color: #fff;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.p-admin__top__option li {
+  padding: 10px 0;
+}
+
+.p-admin__top__option.is-open {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .p-admin__toggle {

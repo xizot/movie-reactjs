@@ -44,7 +44,6 @@ function Detail({ id }) {
                         (movieInfo.movie && movieInfo.movie.releaseDate) ||
                         (movieInfo.tvShow && movieInfo.tvShow.firstAirDate)
                     }
-                    type={type}
                     movieInfo={movieInfo}
                 />
                 {movieInfo.videos &&

@@ -2,36 +2,48 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "../actions/user.action";
 import $ from "jquery";
-import { CloudUploadOutlined } from "@ant-design/icons";
+import { CloudUploadOutlined, DownOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
 
 function Admin() {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
+    const [openOption, setOpenOption] = useState(false);
+    const [openMoviePopUp, setOpenMoviePopUp] = useState(false);
+    const [openSearch, setOpenSearch] = useState(false);
+    const [type, setType] = useState("");
+    const handleOption = () => {
+        setOpenOption(!openOption);   
+    };
+    const handleType = (type) => {
+        setType(type);
+    };
 
-    // const use = useSelector(state => state.auth.user)
+    const HandleOpenSearch = (type) => {
+        setOpenSearch(true);
+        handleType(type);
+        setOpenOption(false)
+        alert(type)
+    };
+    const closeSearch = () => {
+        setOpenSearch(false);
+        handleType("");
+    };
+
+    const openMovie = () => {
+        setOpenMoviePopUp(true);
+    };
+    const closePopUp = () => {
+        setOpenMoviePopUp(false);
+        handleType("");
+    };
     useEffect(() => {
         // Event
         $(".js-toggle-option").click(function (e) {
             e.preventDefault();
             $(".c-panel").toggleClass("is-open");
         });
-        $(".js-open-search").on("click", function (e) {
-            e.preventDefault();
-            $(".c-popup2-search").addClass("is-open");
-        });
-        $(".js-close-search").on("click", function (e) {
-            e.preventDefault();
-            $(".c-popup2-search").removeClass("is-open");
-        });
-        $(".js-open-addfilm").on("click", function (e) {
-            e.preventDefault();
-            $(".c-popup2-addfilm").addClass("is-open");
-        });
-        $(".js-close-addfilm").on("click", function (e) {
-            e.preventDefault();
-            $(".c-popup2-addfilm").removeClass("is-open");
-        });
+
         $(".js-priority").on("click", function (e) {
             e.stopPropagation();
         });
@@ -43,9 +55,17 @@ function Admin() {
         <>
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
 
-            <div className="c-popup2 c-popup2-search js-close-search">
-                <div className="c-popup2__content js-priority">
-                    <span className="c-popup2__close js-close-search">
+            <div
+                className={`c-popup2 c-popup2-search ${
+                    openSearch ? "is-open" : ""
+                }`}
+            >
+                <div className="c-popup2__content">
+                    <span
+                        className="c-popup2__close"
+
+                        onClick={()=> closeSearch()}
+                    >
                         <svg
                             height="365.696pt"
                             viewBox="0 0 365.696 365.696"
@@ -60,7 +80,7 @@ function Admin() {
                     </div>
                     <div className="c-popup2__bottom c-search">
                         <div className="c-search__box">
-                            <form >
+                            <form>
                                 <div className="c-search__box__icon">
                                     <span
                                         role="img"
@@ -147,9 +167,9 @@ function Admin() {
                     </div>
                 </div>
             </div>
-            <div className="c-popup2 c-popup2-addfilm js-close-addfilm">
+            <div className="c-popup2 c-popup2-addfilm">
                 <div className="c-popup2__content  js-priority">
-                    <span className="c-popup2__close js-close-addfilm">
+                    <span className="c-popup2__close" onClick={()=>closePopUp()}>
                         <svg
                             height="365.696pt"
                             viewBox="0 0 365.696 365.696"
@@ -176,7 +196,7 @@ function Admin() {
                         </div>
                         <div className="c-addfilm__info">
                             <div className="c-form">
-                                <form >
+                                <form>
                                     <div className="row">
                                         <div className="col-lg-12">
                                             <div className="c-form__group ">
@@ -421,8 +441,25 @@ function Admin() {
                                     </g>
                                 </svg>
                             </div>
-                            <div className="p-admin__top__item c-btn js-open-search">
-                                ADD Film
+                            <div
+                                className="p-admin__top__item c-btn p-admin__top__item--dropdown"
+                                onClick={() => handleOption()}
+                            >
+                                <p>Add Film </p>
+                                <DownOutlined className="p-adamin__top__down" />
+                                <div
+                                    className={`p-admin__top__option ${
+                                        openOption ? "is-open" : ""
+                                    }`}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <ul className="">
+                                        <li onClick={() => HandleOpenSearch("movie")}>
+                                            Add new movie
+                                        </li>
+                                        <li onClick={() => HandleOpenSearch("tv")}>Add new tv show</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -433,7 +470,12 @@ function Admin() {
                             <div className="c-view">
                                 <div className="c-view__title ">
                                     <h3>Movies</h3>
-                                    <div className="c-btn js-open-search">
+                                    <div
+                                        className="c-btn"
+                                        onClick={() =>
+                                            HandleOpenSearch("movie")
+                                        }
+                                    >
                                         Add New
                                     </div>
                                 </div>
@@ -582,7 +624,7 @@ function Admin() {
                             <div className="c-view">
                                 <div className="c-view__title">
                                     <h3>TV Shows</h3>
-                                    <div className="c-btn js-open-search">
+                                    <div className="c-btn" onClick={() => HandleOpenSearch("tv")}>
                                         Add New
                                     </div>
                                 </div>

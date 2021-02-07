@@ -39,9 +39,14 @@ function WatchController({ id, title, seasons, currentSeason, currentEp }) {
         });
 
         if (seasons && seasons.length && currentSeason) {
-            setEpisodes(findSeasonByValue(Number(currentSeason)));
+            const rs = seasons.find(
+                (item) => item.seasonNumber === Number(currentSeason)
+            );
+            setEpisodes(rs ? rs.episodes : null);
         }
-    }, [id, currentSeason, currentEp]);
+
+    }, [id, currentSeason, currentEp, seasons]);
+
     return (
         <div className="c-watch-controller">
             <div className="c-watch-controller__icon js-controller-open">
@@ -109,7 +114,7 @@ function WatchController({ id, title, seasons, currentSeason, currentEp }) {
                                                 ". " +
                                                 truncateByLength(
                                                     item.overview || "",
-                                                    200,
+                                                    200
                                                 )}
                                         </Link>
                                     </li>
