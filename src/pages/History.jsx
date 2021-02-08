@@ -13,8 +13,7 @@ function Search() {
         e.preventDefault();
     };
 
-    useEffect(() => {
-    }, [searchKey]);
+    useEffect(() => {}, [searchKey]);
     return (
         <div className="p-search">
             <div className="l-container">

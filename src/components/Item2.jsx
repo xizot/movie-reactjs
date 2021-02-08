@@ -1,15 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Item2({
-    id,
-    image,
-    resolution = [],
-    runtime,
-    cat,
-    age,
-    name,
-    type,
-}) {
+function Item2({ id, image, resolution = [], runtime, cat, age, name, type }) {
     return (
         <div className="c-item2 u-fade">
             <div className="gutter">

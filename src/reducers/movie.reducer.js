@@ -1,23 +1,27 @@
-import { GET_MOVIE_INFO, GET_TV_INFO, GET_MOVIE_REQUEST, GET_MOVIE_REQUEST_FAIL } from "./../types/movie.type";
+import {
+    GET_MOVIE_INFO,
+    GET_TV_INFO,
+    GET_MOVIE_REQUEST,
+    GET_MOVIE_REQUEST_FAIL,
+} from "./../types/movie.type";
 
 const initialState = {
     isLoading: false,
     isLoaded: true,
     data: {},
     type: "movie",
-    error: null
-}
+    error: null,
+};
 
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
-
         case GET_MOVIE_REQUEST:
             return {
                 ...state,
                 isLoading: true,
                 isLoaded: false,
-                error: null
-            }
+                error: null,
+            };
         case GET_TV_INFO:
             return {
                 ...state,
@@ -25,8 +29,8 @@ const movieReducer = (state = initialState, action) => {
                 isLoading: false,
                 isLoaded: true,
                 type: "tv",
-                error: null
-            }
+                error: null,
+            };
         case GET_MOVIE_INFO:
             return {
                 ...state,
@@ -34,17 +38,17 @@ const movieReducer = (state = initialState, action) => {
                 isLoading: false,
                 isLoaded: true,
                 type: "movie",
-                error: null
-            }
+                error: null,
+            };
         case GET_MOVIE_REQUEST_FAIL:
             return {
                 ...state,
                 isLoading: false,
                 isLoaded: true,
-                error: action.payload.msg
-            }
+                error: action.payload.msg,
+            };
         default:
             return state;
     }
-}
-export default movieReducer
+};
+export default movieReducer;

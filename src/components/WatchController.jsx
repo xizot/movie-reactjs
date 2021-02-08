@@ -44,7 +44,6 @@ function WatchController({ id, title, seasons, currentSeason, currentEp }) {
             );
             setEpisodes(rs ? rs.episodes : null);
         }
-
     }, [id, currentSeason, currentEp, seasons]);
 
     return (

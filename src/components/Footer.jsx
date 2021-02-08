@@ -1,15 +1,22 @@
-import { FacebookOutlined, GooglePlusOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons'
-import React from 'react'
+import {
+    FacebookOutlined,
+    GooglePlusOutlined,
+    InstagramOutlined,
+    TwitterOutlined,
+} from "@ant-design/icons";
+import React from "react";
 
 function Footer() {
-
     return (
         <footer className="c-footer footer ">
             <div className="p-footer ">
                 <div className="l-container">
                     <div className="p-footer__top u-flex u-between u-a-center">
                         <a href="/" className="p-footer__logo">
-                            <img src="https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png" alt="" />
+                            <img
+                                src="https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png"
+                                alt=""
+                            />
                         </a>
                         <div className="p-footer__cgnav u-flex u-a-center">
                             <a href="/" className="p-footer__socials">
@@ -91,7 +98,6 @@ function Footer() {
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
                 <p className="p-footer__copyright">
@@ -99,7 +105,7 @@ function Footer() {
                 </p>
             </div>
         </footer>
-    )
+    );
 }
 
-export default Footer
+export default Footer;

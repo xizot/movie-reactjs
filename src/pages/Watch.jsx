@@ -29,7 +29,7 @@ function Watch({ match, location }) {
                 dispatch(getMovieInfo(id));
             }
         }
-    }, [dispatch, episode, season,id]);
+    }, [dispatch, episode, season, id]);
 
     useEffect(() => {
         if (videoSources.length) {

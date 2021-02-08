@@ -4,12 +4,11 @@ import filmReducer from "./film.reducer";
 import watchReducer from "./watch.reducer";
 import authenReducer from "./auth.reducer";
 import forgotReducer from "./forgot.reducer";
-import inforReducer from "./infor.reducer"
-import searchReducer from "./search.reducer"
-import movieReducer from "./movie.reducer"
-import streamReducer from "./stream.reducer"
-import adminReducer from "./admin.reducer"
-
+import inforReducer from "./infor.reducer";
+import searchReducer from "./search.reducer";
+import movieReducer from "./movie.reducer";
+import streamReducer from "./stream.reducer";
+import adminReducer from "./admin.reducer";
 
 const reducer = combineReducers({
     error: errorReducer,
@@ -21,7 +20,7 @@ const reducer = combineReducers({
     search: searchReducer,
     movie: movieReducer,
     stream: streamReducer,
-    admin: adminReducer
+    admin: adminReducer,
 });
 
 export default reducer;

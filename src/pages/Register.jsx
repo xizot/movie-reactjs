@@ -271,10 +271,9 @@ function Register() {
                         )}
                         {errorServer.id === "REGISTER_FAIL" &&
                             (Array.isArray(errorServer.msg) ? (
-                                errorServer.msg.map((item,index) => (
+                                errorServer.msg.map((item, index) => (
                                     <React.Fragment key={index}>
                                         <FormError text={item.msg} />
-
                                     </React.Fragment>
                                 ))
                             ) : (

@@ -4,7 +4,7 @@ import {
     LOAD_COMMENT,
     GET_MOVIE,
     GET_TVSHOW,
-    GET_WATCHLATER
+    GET_WATCHLATER,
 } from "../types/film.type";
 
 const initialState = {
@@ -20,13 +20,15 @@ const filmReducer = (state = initialState, action) => {
         case LOAD_COMMENT:
             return {
                 ...state,
-                comment: [...action.payload]
+                comment: [...action.payload],
             };
         case GET_COMMENT:
-            var newComments = [...state.comment, ...action.payload]
+            var newComments = [...state.comment, ...action.payload];
             return {
                 ...state,
-                comment: newComments.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i)
+                comment: newComments.filter(
+                    (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+                ),
             };
         case GET_TVSHOW:
             return {

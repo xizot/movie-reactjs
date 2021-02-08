@@ -16,7 +16,7 @@ export const getSearch = (value) => (dispatch) => {
             });
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
             dispatch({
                 type: CLEAR_SEARCH,
             });
@@ -25,7 +25,7 @@ export const getSearch = (value) => (dispatch) => {
 export const changeSearchKey = (value) => (dispatch) => {
     dispatch({
         type: CHANGE_SEARCH_KEY,
-        payload:value
+        payload: value,
     });
 };
 

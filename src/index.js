@@ -8,10 +8,10 @@ import { Router } from "react-router-dom";
 import { history } from "./helper";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <Router history={history}>
+            <App />
+        </Router>
+    </Provider>,
+    document.getElementById("root")
 );

@@ -6,14 +6,13 @@ function VerifyEmail() {
     // useEffect(() => {
     // }, [dispath]);
     let rows = [];
-    for (let i = 0 ; i < 10; i ++) {
+    for (let i = 0; i < 10; i++) {
         rows.push(
-        <div className = "c-wl-form__group">
-            <h2 className="c-wl-form__label">
-                item {i}
-            </h2>
-        </div>
-    );}
+            <div className="c-wl-form__group">
+                <h2 className="c-wl-form__label">item {i}</h2>
+            </div>
+        );
+    }
     return (
         <div className="register">
             <div className="register__content">
@@ -21,7 +20,7 @@ function VerifyEmail() {
                     <h2 className="c-wl-form__title c-wl-form__title-mid">
                         My watch later list
                     </h2>
-                        {rows}
+                    {rows}
                 </div>
             </div>
         </div>

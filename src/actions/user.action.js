@@ -18,7 +18,11 @@ import { clearError, getError } from "./error.action";
 //login
 export const login = (username, password) => (dispatch) => {
     axios
-        .post("/auth/login/", { username, password }, { headers: { Authorization: "" } })
+        .post(
+            "/auth/login/",
+            { username, password },
+            { headers: { Authorization: "" } }
+        )
         .then((res) => {
             history.push("/");
             dispatch({
@@ -28,18 +32,25 @@ export const login = (username, password) => (dispatch) => {
                     refreshToken: res.data.refreshToken,
                 },
             });
-            dispatch(loadUser())
+            dispatch(loadUser());
             dispatch(clearError());
-
         })
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(err.response.data.error || err.response.data.errors, err.response.status, LOGIN_FAIL)
+                    getError(
+                        err.response.data.error || err.response.data.errors,
+                        err.response.status,
+                        LOGIN_FAIL
+                    )
                 );
             }
             dispatch({
-                payload: { msg: "Server error!!!", status: 500, id: LOGIN_FAIL },
+                payload: {
+                    msg: "Server error!!!",
+                    status: 500,
+                    id: LOGIN_FAIL,
+                },
                 type: LOGIN_FAIL,
             });
         });
@@ -74,11 +85,19 @@ export const register = (
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(err.response.data.error || err.response.data.errors, err.response.status, REGISTER_FAIL)
+                    getError(
+                        err.response.data.error || err.response.data.errors,
+                        err.response.status,
+                        REGISTER_FAIL
+                    )
                 );
             }
             dispatch({
-                payload: { msg: "Server error!!!", status: 500, id: REGISTER_FAIL },
+                payload: {
+                    msg: "Server error!!!",
+                    status: 500,
+                    id: REGISTER_FAIL,
+                },
                 type: REGISTER_FAIL,
             });
         });
@@ -87,7 +106,10 @@ export const register = (
 //verify Email
 export const verifyEmail = (activationCode) => (dispatch) => {
     axios
-        .post("/auth/confirmemail/", { activationCode, headers: useAuthorization() })
+        .post("/auth/confirmemail/", {
+            activationCode,
+            headers: useAuthorization(),
+        })
         .then((res) => {
             dispatch({
                 type: VERIFY_SUCCESS,
@@ -102,23 +124,33 @@ export const verifyEmail = (activationCode) => (dispatch) => {
                 dispatch({
                     type: VERIFY_FAIL,
                     payload: res.data,
-                })
-            }, 5000)
+                });
+            }, 5000);
         })
         .catch((err) => {
             if (err.response) {
                 dispatch(
-                    getError(err.response.data.error || err.response.data.errors, err.response.status, VERIFY_FAIL)
+                    getError(
+                        err.response.data.error || err.response.data.errors,
+                        err.response.status,
+                        VERIFY_FAIL
+                    )
                 );
 
                 //alert("Failed to confirm email!");
             }
             dispatch({
-                payload: { msg: "Server error!!!", status: 500, id: VERIFY_FAIL },
+                payload: {
+                    msg: "Server error!!!",
+                    status: 500,
+                    id: VERIFY_FAIL,
+                },
                 type: VERIFY_FAIL,
             });
 
-            setTimeout(() => { history.push("/login"); }, 2000)
+            setTimeout(() => {
+                history.push("/login");
+            }, 2000);
         });
 };
 
@@ -142,7 +174,7 @@ export const loadUser = () => (dispatch) => {
                     payload: res.data,
                 });
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
 
                 // if (err) {

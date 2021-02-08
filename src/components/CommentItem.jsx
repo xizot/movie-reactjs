@@ -1,6 +1,6 @@
 import React from "react";
 
-function CommentItem({id, avatar, content, name }) {
+function CommentItem({ id, avatar, content, name }) {
     return (
         <div className="c-comment" id={id}>
             <div className="c-comment__image">

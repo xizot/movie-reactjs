@@ -8,7 +8,12 @@ import {
 import { clearError } from "../actions/error.action";
 import FormError from "../components/FormError";
 import { convertDateTime } from "../helper/converter";
-import { update, getAvatar, upAvatar , delAvatar } from "../actions/infor.action";
+import {
+    update,
+    getAvatar,
+    upAvatar,
+    delAvatar,
+} from "../actions/infor.action";
 import {
     validateEmail,
     validateUsername,
@@ -46,7 +51,7 @@ function Info() {
     const [errorNewPassword, setErrorNewPassword] = useState(false);
 
     if (!avatar) {
-        console.log("handleError")
+        console.log("handleError");
         avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
     }
 
@@ -75,8 +80,8 @@ function Info() {
                         currentPassword,
                         confirmPassword,
                         dateOfBirth,
-                        newPassword,
-                    ),
+                        newPassword
+                    )
                 );
             }
         }
@@ -96,20 +101,19 @@ function Info() {
         }
     };
 
-    const handleDeleteAvatar = () =>{
+    const handleDeleteAvatar = () => {
         if (errorServer.id) {
             dispath(clearError());
         }
         dispath(delAvatar());
-
-    }
+    };
     const handleUsername = (e) => {
         e.preventDefault();
         if (errorServer.id) {
             dispath(clearError());
         }
         let value = e.target.value;
-        setUsername((user&&user.username)|| "");
+        setUsername((user && user.username) || "");
         if (value.length >= 0) {
             setUsername(value);
             if (validateUsername(value) === true) {
@@ -126,7 +130,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
-        setEmail((user&&user.email)|| "");
+        setEmail((user && user.email) || "");
         if (value.length >= 0) {
             setEmail(value);
             if (validateEmail(value) === true) {
@@ -143,7 +147,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
-        setDisplayName((user&&user.displayName)|| "");
+        setDisplayName((user && user.displayName) || "");
         if (value.length >= 0) {
             setDisplayName(value);
             if (validateDisplayName(value) === true) {
@@ -159,7 +163,7 @@ function Info() {
             dispath(clearError());
         }
         let value = e.target.value;
-        setDateOfBirth((user&&user.dateOfBirth)|| "");
+        setDateOfBirth((user && user.dateOfBirth) || "");
         if (value.length >= 0) {
             if (value.length === 0) value = user.dateOfBirth;
             setDateOfBirth(value);
@@ -220,19 +224,19 @@ function Info() {
     useEffect(() => {
         dispath(getAvatar());
         if (user) {
-            setUsername((user&&user.username)|| "");
-            setDateOfBirth((user.dateOfBirth)||"");
-            setEmail((user.email)||"");
-            setDisplayName((user.displayName)||"");
+            setUsername((user && user.username) || "");
+            setDateOfBirth(user.dateOfBirth || "");
+            setEmail(user.email || "");
+            setDisplayName(user.displayName || "");
         }
     }, [dispath, user]);
 
     return (
         <div className="infouser">
-            {!isUploaded && !isDeleted &&(
+            {!isUploaded && !isDeleted && (
                 <Alert msg="Upload success" type="c-alert--success" />
-            )} 
-            {isDeleted && isUploaded &&(
+            )}
+            {isDeleted && isUploaded && (
                 <Alert msg="Delete success" type="c-alert--success" />
             )}
             <Loading nameClass={isLoading ? "" : "is-fadeout"} />
@@ -280,7 +284,12 @@ function Info() {
                                             >
                                                 <PlusOutlined /> Upload Avatar
                                             </label>
-                                            <button className="is-hover__handle is-hover__handle__delete" onClick={()=> handleDeleteAvatar()}>
+                                            <button
+                                                className="is-hover__handle is-hover__handle__delete"
+                                                onClick={() =>
+                                                    handleDeleteAvatar()
+                                                }
+                                            >
                                                 <DeleteOutlined /> Delete Avatar
                                             </button>
 
@@ -367,7 +376,7 @@ function Info() {
                                                         convertDateTime(
                                                             dateOfBirth,
                                                             "DD-MM-YYYY",
-                                                            "YYYY-MM-DD",
+                                                            "YYYY-MM-DD"
                                                         )
                                                     }
                                                     onChange={(e) =>
@@ -388,7 +397,7 @@ function Info() {
                                                     autoComplete="new-password"
                                                     type="password"
                                                     required
-                                                    value={currentPassword }
+                                                    value={currentPassword}
                                                     onChange={(e) =>
                                                         handlePassword(e)
                                                     }

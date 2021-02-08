@@ -128,7 +128,7 @@ function Search({ location }) {
                                                   overview={
                                                       item.overview.substring(
                                                           0,
-                                                          150,
+                                                          150
                                                       ) + "..."
                                                   }
                                                   type={
@@ -156,7 +156,7 @@ function Search({ location }) {
                                                   overview={
                                                       item.overview.substring(
                                                           0,
-                                                          150,
+                                                          150
                                                       ) + "..."
                                                   }
                                                   type={

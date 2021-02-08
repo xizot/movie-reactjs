@@ -8,7 +8,7 @@ import {
 const initialState = {
     isLoading: false,
     sendRecovery: false,
-    sendPassword:false,
+    sendPassword: false,
     code: localStorage.getItem("code"),
 };
 const forgotReducer = (state = initialState, action) => {
@@ -16,27 +16,27 @@ const forgotReducer = (state = initialState, action) => {
         case FORGOT_SUCCESS:
             return {
                 ...state,
-                sendRecovery:true,
+                sendRecovery: true,
                 isLoading: false,
             };
         case FORGOT_FAIL:
             return {
                 ...state,
-                sendRecovery:false,
+                sendRecovery: false,
                 isLoading: false,
             };
         case SENDPASSWORD_SUCCESS:
             return {
                 ...state,
-                sendPassword:false,
+                sendPassword: false,
                 isLoading: false,
-            }; 
+            };
         case SENDPASSWORD_FAIL:
             return {
                 ...state,
-                sendPassword:false,
+                sendPassword: false,
                 isLoading: false,
-            };             
+            };
         default:
             return state;
     }

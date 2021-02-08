@@ -101,10 +101,10 @@ function Admin() {
             setTitle((movieDetailData && movieDetailData.title) || "");
             setDescription((movieDetailData && movieDetailData.overview) || "");
             setGenres(
-                (movieDetailData && movieDetailData.genres.join("/")) || "",
+                (movieDetailData && movieDetailData.genres.join("/")) || ""
             );
             setReleaseDate(
-                (movieDetailData && movieDetailData.releaseDate) || "",
+                (movieDetailData && movieDetailData.releaseDate) || ""
             );
             setRuntime((movieDetailData && movieDetailData.runtime) || "");
         }
@@ -201,7 +201,7 @@ function Admin() {
                                                     <span>
                                                         {truncateByLength(
                                                             item.overview,
-                                                            200,
+                                                            200
                                                         )}
                                                     </span>
                                                 </div>
@@ -268,7 +268,7 @@ function Admin() {
                                                         value={title}
                                                         onChange={(e) =>
                                                             setTitle(
-                                                                e.target.value,
+                                                                e.target.value
                                                             )
                                                         }
                                                         required
@@ -288,7 +288,7 @@ function Admin() {
                                                         value={description}
                                                         onChange={(e) =>
                                                             setDescription(
-                                                                e.target.value,
+                                                                e.target.value
                                                             )
                                                         }
                                                         required
@@ -308,7 +308,7 @@ function Admin() {
                                                         value={releaseDate}
                                                         onChange={(e) =>
                                                             setReleaseDate(
-                                                                e.target.value,
+                                                                e.target.value
                                                             )
                                                         }
                                                         required
@@ -329,7 +329,7 @@ function Admin() {
                                                         value={runtime}
                                                         onChange={(e) =>
                                                             setRuntime(
-                                                                e.target.value,
+                                                                e.target.value
                                                             )
                                                         }
                                                     />
@@ -349,7 +349,7 @@ function Admin() {
                                                         value={genres}
                                                         onChange={(e) =>
                                                             setGenres(
-                                                                e.target.value,
+                                                                e.target.value
                                                             )
                                                         }
                                                     />
@@ -369,7 +369,7 @@ function Admin() {
                                                         value={videoLink}
                                                         onChange={(e) =>
                                                             setVideoLink(
-                                                                e.target.value,
+                                                                e.target.value
                                                             )
                                                         }
                                                     />
