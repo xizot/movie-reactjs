@@ -27,6 +27,7 @@ import Footer from './components/Footer';
 function App() {
 	const location = useLocation()
 	const dispath = useDispatch();
+	const demo = "demo"
 	useEffect(
 		() => {
 			dispath(loadUser());

@@ -1,19 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../actions/user.action";
 import $ from "jquery";
 import { CloudUploadOutlined, DownOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
+import {
+    getMovieDetail,
+    searchMovieByQuery,
+    searchTvByQuery,
+} from "../actions/admin.action";
+import { truncateByLength } from "../helper";
 
 function Admin() {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [openOption, setOpenOption] = useState(false);
     const [openMoviePopUp, setOpenMoviePopUp] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchPage, setSearchPage] = useState(1);
     const [openSearch, setOpenSearch] = useState(false);
     const [type, setType] = useState("");
+
+    const searchData = useSelector((state) => state.admin.searchData);
+    const movieDetailData = useSelector((state) => state.admin.movieDetailData);
+    const tvDetailData = useSelector((state) => state.admin.tvDetailData);
+
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [releaseDate, setReleaseDate] = useState("");
+    const [runtime, setRuntime] = useState("");
+    const [genres, setGenres] = useState("");
+    const [videoLink, setVideoLink] = useState("");
+
     const handleOption = () => {
-        setOpenOption(!openOption);   
+        setOpenOption(!openOption);
     };
     const handleType = (type) => {
         setType(type);
@@ -22,20 +42,51 @@ function Admin() {
     const HandleOpenSearch = (type) => {
         setOpenSearch(true);
         handleType(type);
-        setOpenOption(false)
-        alert(type)
+        setOpenOption(false);
+        if (searchValue && searchValue.length) {
+            if (type === "movie") {
+                dispatch(searchMovieByQuery(searchValue, 1));
+            } else if (type === "tv") {
+                dispatch(searchTvByQuery(searchValue, 1));
+            }
+        }
     };
     const closeSearch = () => {
         setOpenSearch(false);
         handleType("");
     };
+    const handleSearchValue = (e) => {
+        const value = e.target.value;
+        setSearchValue(value);
+    };
+    const handleSubmitSearch = (e, page) => {
+        e.preventDefault();
+        if (type === "movie") {
+            dispatch(searchMovieByQuery(searchValue, page));
+        } else if (type === "tv") {
+            dispatch(searchTvByQuery(searchValue, page));
+        }
+    };
+    const handleOpenPopUp = (id) => {
+        console.log(id);
+        console.log(type);
+        if (type === "movie") {
+            openMovie(id);
+        } else if (type === "tv") {
+            // dispatch(searchTvByQuery(searchValue, page));
+        }
+    };
+    const loadSearchMore = () => {
+        setSearchPage((prevPage) => prevPage + 1);
+        handleSubmitSearch(searchPage);
+    };
 
-    const openMovie = () => {
+    const openMovie = (id) => {
+        dispatch(getMovieDetail(id));
         setOpenMoviePopUp(true);
     };
     const closePopUp = () => {
         setOpenMoviePopUp(false);
-        handleType("");
     };
     useEffect(() => {
         // Event
@@ -48,9 +99,21 @@ function Admin() {
             e.stopPropagation();
         });
 
-        dispatch(loadUser());
+        // dispatch(loadUser());
         setIsLoading(true);
-    }, [dispatch]);
+
+        if (movieDetailData) {
+            setTitle((movieDetailData && movieDetailData.title) || "");
+            setDescription((movieDetailData && movieDetailData.overview) || "");
+            setGenres(
+                (movieDetailData && movieDetailData.genres.join("/")) || "",
+            );
+            setReleaseDate(
+                (movieDetailData && movieDetailData.releaseDate) || "",
+            );
+            setRuntime((movieDetailData && movieDetailData.runtime) || "");
+        }
+    }, [dispatch, movieDetailData, tvDetailData]);
     return (
         <>
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
@@ -63,8 +126,7 @@ function Admin() {
                 <div className="c-popup2__content">
                     <span
                         className="c-popup2__close"
-
-                        onClick={()=> closeSearch()}
+                        onClick={() => closeSearch()}
                     >
                         <svg
                             height="365.696pt"
@@ -80,8 +142,16 @@ function Admin() {
                     </div>
                     <div className="c-popup2__bottom c-search">
                         <div className="c-search__box">
-                            <form>
-                                <div className="c-search__box__icon">
+                            <form
+                                action=""
+                                onSubmit={(e) => handleSubmitSearch(e, 1)}
+                            >
+                                <div
+                                    className="c-search__box__icon"
+                                    onClick={(e) => {
+                                        handleSubmitSearch(e, 1);
+                                    }}
+                                >
                                     <span
                                         role="img"
                                         aria-label="search"
@@ -102,74 +172,65 @@ function Admin() {
                                 <input
                                     type="text"
                                     placeholder="Enter your film"
+                                    onChange={(e) => handleSearchValue(e)}
                                 />
                             </form>
                         </div>
                         <div className="c-search__content">
-                            <div className="c-search__item js-open-addfilm">
-                                <div className="c-search__left">
-                                    <div className="c-search__img">
-                                        <img
-                                            src="https://cdn.vox-cdn.com/thumbor/J2XSqgAqREtpkGAWa6rMhkHA1Y0=/0x0:1600x900/1400x933/filters:focal(672x322:928x578):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66320060/Tanjiro__Demon_Slayer_.0.png"
-                                            alt=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className="c-search__right">
-                                    <div className="c-search__info">
-                                        <h4 className="c-search__info__name">
-                                            Sotn va nhung nguoi ban
-                                        </h4>
-                                        <div className="c-search__info__cat">
-                                            Action
+                            {searchData && searchData.results.length ? (
+                                searchData.results.map((item, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="c-search__item"
+                                        onClick={() =>
+                                            handleOpenPopUp(item.tmdbId)
+                                        }
+                                    >
+                                        <div className="c-search__left">
+                                            <div className="c-search__img">
+                                                <img
+                                                    src={item.posterPath}
+                                                    alt={item.title}
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="c-search__info__bottom">
-                                            <span className="c-search__info__minutes">
-                                                100 minutes
-                                            </span>
-                                            <span className="c-search__info__actor">
-                                                by SOTN
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="c-search__item js-open-addfilm">
-                                <div className="c-search__left">
-                                    <div className="c-search__img">
-                                        <img
-                                            src="https://cdn.vox-cdn.com/thumbor/J2XSqgAqREtpkGAWa6rMhkHA1Y0=/0x0:1600x900/1400x933/filters:focal(672x322:928x578):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66320060/Tanjiro__Demon_Slayer_.0.png"
-                                            alt=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className="c-search__right">
-                                    <div className="c-search__info">
-                                        <h4 className="c-search__info__name">
-                                            Sotn va nhung nguoi ban
-                                        </h4>
-                                        <div className="c-search__info__cat">
-                                            Action
-                                        </div>
-                                        <div className="c-search__info__bottom">
-                                            <span className="c-search__info__minutes">
-                                                100 minutes
-                                            </span>
-                                            <span className="c-search__info__actor">
-                                                by SOTN
-                                            </span>
+                                        <div className="c-search__right">
+                                            <div className="c-search__info">
+                                                <h4 className="c-search__info__name">
+                                                    {item.title}
+                                                </h4>
+                                                <div className="c-search__info__cat">
+                                                    {item.releaseDate}
+                                                </div>
+                                                <div className="c-search__info__bottom">
+                                                    <span>
+                                                        {truncateByLength(
+                                                            item.overview,
+                                                            200,
+                                                        )}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            {/* Không có kết quả tìm kiếm */}
+                                ))
+                            ) : (
+                                <>No search results found</>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="c-popup2 c-popup2-addfilm">
-                <div className="c-popup2__content  js-priority">
-                    <span className="c-popup2__close" onClick={()=>closePopUp()}>
+            <div
+                className={`c-popup2 c-popup2-addfilm ${
+                    openMoviePopUp ? "is-open" : ""
+                }`}
+            >
+                <div className="c-popup2__content">
+                    <span
+                        className="c-popup2__close"
+                        onClick={() => closePopUp()}
+                    >
                         <svg
                             height="365.696pt"
                             viewBox="0 0 365.696 365.696"
@@ -180,7 +241,9 @@ function Admin() {
                         </svg>
                     </span>
                     <div className="c-popup2__top">
-                        <h3 className="c-popup2__title">Title</h3>
+                        <h3 className="c-popup2__title">
+                            {movieDetailData && movieDetailData.title}
+                        </h3>
                     </div>
                     <div className="c-popup2__bottom c-addfilm">
                         <input
@@ -190,7 +253,10 @@ function Admin() {
                         />
                         <div className="c-addfilm__img">
                             <img
-                                src="https://cdn.vox-cdn.com/thumbor/J2XSqgAqREtpkGAWa6rMhkHA1Y0=/0x0:1600x900/1400x933/filters:focal(672x322:928x578):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66320060/Tanjiro__Demon_Slayer_.0.png"
+                                src={
+                                    movieDetailData &&
+                                    movieDetailData.posterPath
+                                }
                                 alt=""
                             />
                         </div>
@@ -204,6 +270,12 @@ function Admin() {
                                                     <input
                                                         className="c-form__input"
                                                         type="text"
+                                                        value={title}
+                                                        onChange={(e) =>
+                                                            setTitle(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                         required
                                                     />
                                                     <label className="c-form__label">
@@ -218,6 +290,12 @@ function Admin() {
                                                     <textarea
                                                         className="c-form__input"
                                                         type="text"
+                                                        value={description}
+                                                        onChange={(e) =>
+                                                            setDescription(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                         required
                                                     ></textarea>
                                                     <label className="c-form__label">
@@ -232,6 +310,12 @@ function Admin() {
                                                     <input
                                                         className="c-form__input"
                                                         type="text"
+                                                        value={releaseDate}
+                                                        onChange={(e) =>
+                                                            setReleaseDate(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                         required
                                                     />
                                                     <label className="c-form__label">
@@ -247,6 +331,12 @@ function Admin() {
                                                         className="c-form__input"
                                                         type="text"
                                                         required
+                                                        value={runtime}
+                                                        onChange={(e) =>
+                                                            setRuntime(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                     />
                                                     <label className="c-form__label">
                                                         Running timed in minute
@@ -261,23 +351,15 @@ function Admin() {
                                                         className="c-form__input"
                                                         type="text"
                                                         required
+                                                        value={genres}
+                                                        onChange={(e) =>
+                                                            setGenres(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                     />
                                                     <label className="c-form__label">
                                                         Genre/ Genres
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4 col-md-6 col-sm-12">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Age
                                                     </label>
                                                 </div>
                                             </div>
@@ -289,6 +371,12 @@ function Admin() {
                                                         className="c-form__input"
                                                         type="text"
                                                         required
+                                                        value={videoLink}
+                                                        onChange={(e) =>
+                                                            setVideoLink(
+                                                                e.target.value,
+                                                            )
+                                                        }
                                                     />
                                                     <label className="c-form__label">
                                                         Video Link
@@ -310,18 +398,21 @@ function Admin() {
                             <div className="c-addfilm__type">
                                 <span>Item type: </span>
                                 <div className="c-addfilm__type__item c-addfilm__tv">
-                                    <span className="c-radio is-check"></span>TV
-                                    Series
+                                    <span className="c-radio "></span>TV Series
                                 </div>
                                 <div className="c-addfilm__type__item c-addfilm__movie">
-                                    <span className="c-radio"></span>Movies
+                                    <span className="c-radio is-check"></span>
+                                    Movies
                                 </div>
                             </div>
                             <div className="c-addfilm__handle">
                                 <div className="c-btn c-addfilm__publish">
                                     Publish
                                 </div>
-                                <div className="c-btn c-addfilm__publish js-close-addfilm">
+                                <div
+                                    className="c-btn c-addfilm__publish"
+                                    onClick={() => closePopUp()}
+                                >
                                     Cancel
                                 </div>
                             </div>
@@ -329,6 +420,7 @@ function Admin() {
                     </div>
                 </div>
             </div>
+
             <div className="p-admin ">
                 <div className="c-panel ">
                     <div className="u-flex">
@@ -454,10 +546,20 @@ function Admin() {
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <ul className="">
-                                        <li onClick={() => HandleOpenSearch("movie")}>
+                                        <li
+                                            onClick={() =>
+                                                HandleOpenSearch("movie")
+                                            }
+                                        >
                                             Add new movie
                                         </li>
-                                        <li onClick={() => HandleOpenSearch("tv")}>Add new tv show</li>
+                                        <li
+                                            onClick={() =>
+                                                HandleOpenSearch("tv")
+                                            }
+                                        >
+                                            Add new tv show
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -624,7 +726,10 @@ function Admin() {
                             <div className="c-view">
                                 <div className="c-view__title">
                                     <h3>TV Shows</h3>
-                                    <div className="c-btn" onClick={() => HandleOpenSearch("tv")}>
+                                    <div
+                                        className="c-btn"
+                                        onClick={() => HandleOpenSearch("tv")}
+                                    >
                                         Add New
                                     </div>
                                 </div>

@@ -5222,6 +5222,11 @@ img {
   overflow: hidden auto;
 }
 
+.c-addfilm input,
+.c-addfilm textarea {
+  font-size: 1.5rem;
+}
+
 @media only screen and (max-width: 450px) {
   .c-addfilm {
     display: block;

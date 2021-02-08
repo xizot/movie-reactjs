@@ -31,8 +31,6 @@ $topHeight: 100px;
         height: $topHeight;
         margin-bottom: 50px;
         margin-top: 50px;
-        .l-container {
-        }
         &__item {
             position: relative;
             border-radius: 2px !important;
@@ -298,8 +296,6 @@ $topHeight: 100px;
             }
         }
         tr {
-            th {
-            }
             td {
                 padding: 5px 10px;
                 min-height: 50px;
@@ -335,8 +331,6 @@ $topHeight: 100px;
     }
     &__current {
         padding: 0 5px;
-    }
-    &__page {
     }
     &__total {
         padding: 0 5px;
@@ -542,8 +536,6 @@ $topHeight: 100px;
                 letter-spacing: 0.54px;
             }
         }
-        &__actor {
-        }
         &__minutes {
             margin-right: 20px;
         }
@@ -553,7 +545,10 @@ $topHeight: 100px;
     display: flex;
     flex-wrap: wrap;
     overflow: hidden auto;
-
+    input,
+    textarea {
+        font-size: 1.5rem;
+    }
     @include breakpoint(sp) {
         display: block;
     }

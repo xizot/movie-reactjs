@@ -22,7 +22,7 @@ function Header({ isDark = null }) {
     const handleSearch = (e) => {
         e.preventDefault();
         dispatch(getSearch(searchKey));
-        history.push(`/search?query=${searchKey}`);
+        history.push(`/search?q=${searchKey}`);
         setisOpen(false);
     };
     useEffect(() => {

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { MinusOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import SearchItem from "../components/SearchItem";
+import queryString from "query-string";
 import $ from "jquery";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSearchKey, getFilter, getSearch } from "../actions/search.action";
+import {
+    changeSearchKey,
+    getFilter,
+    getSearch,
+} from "../actions/search.action";
 import { catFilter } from "./../helper";
-function Search() {
+function Search({ location }) {
+    const { search } = location;
+    console.log(search);
     const searchKey = useSelector((state) => state.search.searchKey);
     const searchResults = useSelector((state) => state.search.data);
     const searchFilter = useSelector((state) => state.search.filter);
@@ -39,12 +46,17 @@ function Search() {
     };
 
     useEffect(() => {
+        if (search && search.length) {
+            const searchVal = queryString.parse(search).q;
+            dispatch(changeSearchKey(searchVal));
+            dispatch(getSearch(searchVal));
+        }
         $(".js-toggle").on("click", function (e) {
             $(this).parent().find("ul").slideToggle();
             $(this).toggleClass("is-open");
         });
         setCat(catFilter);
-    }, []);
+    }, [search]);
 
     return (
         <div className="p-search">
@@ -117,7 +129,7 @@ function Search() {
                                                   overview={
                                                       item.overview.substring(
                                                           0,
-                                                          150
+                                                          150,
                                                       ) + "..."
                                                   }
                                                   type={
@@ -145,7 +157,7 @@ function Search() {
                                                   overview={
                                                       item.overview.substring(
                                                           0,
-                                                          150
+                                                          150,
                                                       ) + "..."
                                                   }
                                                   type={

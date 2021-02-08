@@ -8,6 +8,7 @@ import inforReducer from "./infor.reducer"
 import searchReducer from "./search.reducer"
 import movieReducer from "./movie.reducer"
 import streamReducer from "./stream.reducer"
+import adminReducer from "./admin.reducer"
 
 
 const reducer = combineReducers({
@@ -19,7 +20,8 @@ const reducer = combineReducers({
     infor: inforReducer,
     search: searchReducer,
     movie: movieReducer,
-    stream: streamReducer
+    stream: streamReducer,
+    admin: adminReducer
 });
 
 export default reducer;
