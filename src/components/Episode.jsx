@@ -7,7 +7,7 @@ import { truncateByLength } from "./../helper";
 
 function Episode({ season, ep, epName, id, image, overview, index }) {
     const dispatch = useDispatch();
-    const handleWatch = (e) => {
+    const handleWatch = () => {
         dispatch(openWatch());
     };
 

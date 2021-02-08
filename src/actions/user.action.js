@@ -123,12 +123,12 @@ export const verifyEmail = (activationCode) => (dispatch) => {
 };
 
 //redirect
-export const customRedirect = (to) => (dispatch) => {
+export const customRedirect = (to) => {
     history.push(to);
 };
 
 // token
-export const loadUser = () => (dispatch, getState) => {
+export const loadUser = () => (dispatch) => {
     const token = localStorage.getItem("token");
     dispatch({
         type: USER_LOADING,

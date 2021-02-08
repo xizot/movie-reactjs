@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "../actions/user.action";
 import $ from "jquery";
 import { CloudUploadOutlined, DownOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
@@ -17,7 +16,7 @@ function Admin() {
     const [openOption, setOpenOption] = useState(false);
     const [openMoviePopUp, setOpenMoviePopUp] = useState(false);
     const [searchValue, setSearchValue] = useState("");
-    const [searchPage, setSearchPage] = useState(1);
+    // const [searchPage, setSearchPage] = useState(1);
     const [openSearch, setOpenSearch] = useState(false);
     const [type, setType] = useState("");
 
@@ -75,10 +74,6 @@ function Admin() {
         } else if (type === "tv") {
             // dispatch(searchTvByQuery(searchValue, page));
         }
-    };
-    const loadSearchMore = () => {
-        setSearchPage((prevPage) => prevPage + 1);
-        handleSubmitSearch(searchPage);
     };
 
     const openMovie = (id) => {

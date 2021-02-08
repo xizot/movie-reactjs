@@ -22,6 +22,7 @@ export const getMovieInfo = (id) => dispatch => {
             }
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: GET_MOVIE_REQUEST_FAIL,
                 payload: {

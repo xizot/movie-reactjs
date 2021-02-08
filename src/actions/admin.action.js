@@ -1,4 +1,4 @@
-import { SEARCH_MOVIE, SEARCH_TV, SEARCH_REQUEST, SEARCH_REQUEST_FAIL, SEARCH_REQUEST_SUCCESS, GET_MOVIE_INFO, GET_TV_INFO, GET_REQUEST, GET_REQUEST_FAIL, GET_REQUEST_SUCCESS, ADD_NEW_MOVIE, ADD_NEW_TV, ADD_REQUEST, ADD_REQUEST_FAIL, ADD_REQUEST_SUCCESS, GET_MOVIE_DETAIL, GET_TV_DETAIL, GET_DETAIL_REQUEST, GET_DETAIL_REQUESTT_FAIL, GET_DETAIL_REQUEST_SUCCESS } from "./../types/admin.type";
+import { SEARCH_MOVIE, SEARCH_TV, SEARCH_REQUEST, SEARCH_REQUEST_FAIL, SEARCH_REQUEST_SUCCESS, GET_MOVIE_INFO, GET_TV_INFO, GET_REQUEST, GET_REQUEST_FAIL, GET_REQUEST_SUCCESS, GET_MOVIE_DETAIL, GET_TV_DETAIL, GET_DETAIL_REQUEST, GET_DETAIL_REQUESTT_FAIL, GET_DETAIL_REQUEST_SUCCESS } from "./../types/admin.type";
 import axios from "./../axios";
 import { useAuthorization } from "../helper";
 export const searchMovieByQuery = (query, page = 1) => dispatch => {
@@ -18,6 +18,7 @@ export const searchMovieByQuery = (query, page = 1) => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: SEARCH_REQUEST_FAIL
             })
@@ -39,6 +40,7 @@ export const searchTvByQuery = (query, page = 1) => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: SEARCH_REQUEST_FAIL
             })
@@ -61,6 +63,7 @@ export const getMovieInfoById = (id) => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: GET_REQUEST_FAIL
             })
@@ -83,6 +86,7 @@ export const getTvInfoById = (id) => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: GET_REQUEST_FAIL
             })
@@ -106,6 +110,7 @@ export const getMovieDetail = (id) => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: GET_DETAIL_REQUESTT_FAIL
             })
@@ -128,6 +133,7 @@ export const getTvDetail = (id) => dispatch => {
             })
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: GET_DETAIL_REQUESTT_FAIL
             })

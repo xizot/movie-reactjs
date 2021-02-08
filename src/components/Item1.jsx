@@ -1,7 +1,7 @@
 import { CaretRightFilled } from "@ant-design/icons";
 import React from "react";
 import { Link } from "react-router-dom";
-function Item1({ id, image, cat, name, chapter, type }) {
+function Item1({ id, image, cat, name, chapter }) {
     return (
         <div className="c-item u-fade">
             <div className="gutter">

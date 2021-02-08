@@ -53,6 +53,6 @@ export const forgotPassword = (recoveryCode, password, confirmPassword) => (disp
         });
 }
 //redirect
-export const customRedirect = (to) => (dispatch) => {
+export const customRedirect = (to) => {
     history.push(to);
 };

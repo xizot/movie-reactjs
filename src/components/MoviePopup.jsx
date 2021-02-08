@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
 import Episode from "./Episode";
-import { useDispatch } from "react-redux";
-import { getEpisode } from "../actions/film.action";
 function MoviePopup({ id, title, handlePopup, seasons }) {
-    const dispatch = useDispatch();
     const [episodes, setEpisodes] = useState(null);
     const [currentSeason, setCurrentSeason] = useState(null);
     const focus = (e) => {
         e.stopPropagation();
     };
-
     const findSeasonByValue = (value) => {
         const rs = seasons.find((item) => item.seasonNumber === value);
         return rs ? rs.episodes : null;
@@ -22,7 +18,6 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
         setEpisodes(findSeasonByValue(Number(value)));
     };
     useEffect(() => {
-        dispatch(getEpisode(id));
         if (seasons && seasons.length) {
             setCurrentSeason(1);
             const rs = seasons.find(
@@ -30,7 +25,7 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
             );
             setEpisodes(rs ? rs.episodes : null);
         }
-    }, [id, dispatch, seasons]);
+    }, [id, seasons]);
 
     return (
         <div className="c-popup" onClick={() => handlePopup()}>

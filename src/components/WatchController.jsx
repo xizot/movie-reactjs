@@ -25,7 +25,7 @@ function WatchController({ id, title, seasons, currentSeason, currentEp }) {
         $(".c-watch-controller__season").addClass("is-fadeout");
         $(".c-watch-controller__episode").addClass("is-show");
     };
-    const handleBackClick = (e) => {
+    const handleBackClick = () => {
         $(".c-watch-controller__season").removeClass("is-fadeout");
         $(".c-watch-controller__episode").removeClass("is-show");
     };

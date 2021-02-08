@@ -75,7 +75,7 @@ function Detail({ id }) {
                                 </div>
                                 <div className="p-detail3__comments">
                                     {comments.length &&
-                                        comments.map((item, index) => (
+                                        comments.map((item) => (
                                             <React.Fragment key={item.id}>
                                                 <CommentItem
                                                     id={item.id}
@@ -89,7 +89,7 @@ function Detail({ id }) {
 
                                 <button
                                     className="c-btn c-btn--loadmore"
-                                    onClick={(e) => loadMore()}
+                                    onClick={() => loadMore()}
                                 >
                                     Load more
                                 </button>

@@ -16,6 +16,7 @@ export const getSearch = (value) => (dispatch) => {
             });
         })
         .catch((err) => {
+            console.log(err)
             dispatch({
                 type: CLEAR_SEARCH,
             });

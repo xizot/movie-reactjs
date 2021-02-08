@@ -4,7 +4,6 @@ function Item2({
     id,
     image,
     resolution = [],
-    rated,
     runtime,
     cat,
     age,

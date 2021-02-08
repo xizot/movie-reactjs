@@ -18,7 +18,6 @@ import Admin from './pages/Admin';
 import History from './pages/History';
 import Watch from './pages/Watch';
 import About from './pages/About';
-
 // Components
 import { PrivateRoute } from './components/common/ProtectedRoute';
 import Header from './components/Header';
@@ -27,7 +26,6 @@ import Footer from './components/Footer';
 function App() {
 	const location = useLocation()
 	const dispath = useDispatch();
-	const demo = "demo"
 	useEffect(
 		() => {
 			dispath(loadUser());

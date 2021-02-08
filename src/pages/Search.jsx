@@ -29,7 +29,7 @@ function Search({ location }) {
         const value = e.target.value;
         const isChecked = e.target.checked;
         setCat((state) => {
-            return state.map((item, length) => {
+            return state.map((item) => {
                 item.select = false;
                 if (item.value === value) {
                     item.select = isChecked;
@@ -44,19 +44,18 @@ function Search({ location }) {
         e.preventDefault();
         dispatch(getSearch(searchKey));
     };
-
     useEffect(() => {
         if (search && search.length) {
             const searchVal = queryString.parse(search).q;
             dispatch(changeSearchKey(searchVal));
             dispatch(getSearch(searchVal));
         }
-        $(".js-toggle").on("click", function (e) {
+        $(".js-toggle").on("click", function () {
             $(this).parent().find("ul").slideToggle();
             $(this).toggleClass("is-open");
         });
         setCat(catFilter);
-    }, [search]);
+    }, [dispatch, search]);
 
     return (
         <div className="p-search">

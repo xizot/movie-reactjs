@@ -26,7 +26,7 @@ function Header({ isDark = null }) {
         setisOpen(false);
     };
     useEffect(() => {
-        $("a").on("click", function (e) {
+        $("a").on("click", function () {
             setisOpen(false);
         });
     }, [user]);

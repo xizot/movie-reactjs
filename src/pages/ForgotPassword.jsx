@@ -17,7 +17,7 @@ function ForgotPassword() {
             dispath(recoveryEmail(email));
         }
     };
-    const onKeyPress = (e) => {
+    const onKeyPress = () => {
          handleSend();
     };
     const handleEmail = (e) => {

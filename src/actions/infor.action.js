@@ -17,7 +17,7 @@ import {
 import axios from "./../axios";
 import { clearError, getError } from "./error.action";
 
-export const getAvatar = () => (dispatch, getState) => {
+export const getAvatar = () => (dispatch) => {
   const token = localStorage.getItem("token");
 
   dispatch({
@@ -95,7 +95,7 @@ export const upAvatar = (image) => (dispatch) => {
   }
 };
 
-export const delAvatar = () => (dispatch, getState) => {
+export const delAvatar = () => (dispatch) => {
   const token = localStorage.getItem("token");
   dispatch({
     type: DELETE_AVATAR_REQUEST,

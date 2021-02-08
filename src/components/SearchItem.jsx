@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SearchItem({id,image,name,type,overview,cat}) {
+function SearchItem({id,image,name,overview,cat}) {
     return (
         <Link to={"/" + id} className="c-search-item col-lg-4 col-sm-6 col-xs-12">
             <div className="gutter">
