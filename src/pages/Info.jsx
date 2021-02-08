@@ -229,7 +229,7 @@ function Info() {
 
     return (
         <div className="infouser">
-            {isUploaded && !isDeleted &&(
+            {!isUploaded && !isDeleted &&(
                 <Alert msg="Upload success" type="c-alert--success" />
             )} 
             {isDeleted && isUploaded &&(
