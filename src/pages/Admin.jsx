@@ -7,6 +7,7 @@ import {
     getMovieDetail,
     searchMovieByQuery,
     searchTvByQuery,
+    addMovie
 } from "../actions/admin.action";
 import { truncateByLength } from "../helper";
 
@@ -69,13 +70,13 @@ function Admin() {
     const handleOpenPopUp = (id) => {
         console.log(id);
         console.log(type);
+        console.log(movieDetailData)
         if (type === "movie") {
             openMovie(id);
         } else if (type === "tv") {
             // dispatch(searchTvByQuery(searchValue, page));
         }
     };
-
     const openMovie = (id) => {
         dispatch(getMovieDetail(id));
         setOpenMoviePopUp(true);
@@ -83,6 +84,30 @@ function Admin() {
     const closePopUp = () => {
         setOpenMoviePopUp(false);
     };
+    // const handleAddMovie = () => {
+    //     const data = {
+    //         imdbId: movieDetailData.imdbId,
+    //         streamPath: videoLink,
+    //         isPublic: true,
+    //         override: {
+    //             genres: genres.split("/"),
+    //             tagline: movieDetailData.tagline,
+    //             title: title,
+    //             originalTitle: title,
+    //             overview: description,
+    //             posterPath: movieDetailData.posterPath,
+    //             backdropPath: movieDetailData.backdropPath,
+    //             popularity: movieDetailData.popularity,
+    //             movie: {
+    //                 runtime: runtime,
+    //                 releaseDate: releaseDate,
+    //                 status: movieDetailData.status,
+    //                 adult: movieDetailData.adult
+    //             }
+    //         }
+    //     }
+    //     dispatch(addMovie(data))
+    // }
     useEffect(() => {
         // Event
         $(".js-toggle-option").click(function (e) {
@@ -114,9 +139,8 @@ function Admin() {
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
 
             <div
-                className={`c-popup2 c-popup2-search ${
-                    openSearch ? "is-open" : ""
-                }`}
+                className={`c-popup2 c-popup2-search ${openSearch ? "is-open" : ""
+                    }`}
             >
                 <div className="c-popup2__content">
                     <span
@@ -210,16 +234,15 @@ function Admin() {
                                     </div>
                                 ))
                             ) : (
-                                <>No search results found</>
-                            )}
+                                    <>No search results found</>
+                                )}
                         </div>
                     </div>
                 </div>
             </div>
             <div
-                className={`c-popup2 c-popup2-addfilm ${
-                    openMoviePopUp ? "is-open" : ""
-                }`}
+                className={`c-popup2 c-popup2-addfilm ${openMoviePopUp ? "is-open" : ""
+                    }`}
             >
                 <div className="c-popup2__content">
                     <span
@@ -535,9 +558,8 @@ function Admin() {
                                 <p>Add Film </p>
                                 <DownOutlined className="p-adamin__top__down" />
                                 <div
-                                    className={`p-admin__top__option ${
-                                        openOption ? "is-open" : ""
-                                    }`}
+                                    className={`p-admin__top__option ${openOption ? "is-open" : ""
+                                        }`}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <ul className="">

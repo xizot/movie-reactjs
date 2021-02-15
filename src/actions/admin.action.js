@@ -1,4 +1,4 @@
-import { SEARCH_MOVIE, SEARCH_TV, SEARCH_REQUEST, SEARCH_REQUEST_FAIL, SEARCH_REQUEST_SUCCESS, GET_MOVIE_INFO, GET_TV_INFO, GET_REQUEST, GET_REQUEST_FAIL, GET_REQUEST_SUCCESS, GET_MOVIE_DETAIL, GET_TV_DETAIL, GET_DETAIL_REQUEST, GET_DETAIL_REQUESTT_FAIL, GET_DETAIL_REQUEST_SUCCESS } from "./../types/admin.type";
+import { SEARCH_MOVIE, SEARCH_TV, SEARCH_REQUEST, SEARCH_REQUEST_FAIL, SEARCH_REQUEST_SUCCESS, GET_MOVIE_INFO, GET_TV_INFO, GET_REQUEST, GET_REQUEST_FAIL, GET_REQUEST_SUCCESS, GET_MOVIE_DETAIL, GET_TV_DETAIL, GET_DETAIL_REQUEST, GET_DETAIL_REQUESTT_FAIL, GET_DETAIL_REQUEST_SUCCESS, ADD_REQUEST, ADD_REQUEST_SUCCESS, ADD_REQUEST_FAIL } from "./../types/admin.type";
 import axios from "./../axios";
 import { useAuthorization } from "../helper";
 export const searchMovieByQuery = (query, page = 1) => dispatch => {
@@ -138,4 +138,24 @@ export const getTvDetail = (id) => dispatch => {
                 type: GET_DETAIL_REQUESTT_FAIL
             })
         })
+}
+export const addMovie = (data) => dispatch =>{
+    dispatch({
+        type: ADD_REQUEST
+    })
+    axios.post("/media/movie", data, {headers: useAuthorization()} )
+    .then(res=>{
+        console.log(res)
+        dispatch({
+            type: ADD_REQUEST_SUCCESS
+        })
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({
+            type: ADD_REQUEST_FAIL,
+            msg: err.response.data,
+            status: err.response.status
+        })
+    })
 }
