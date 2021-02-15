@@ -7,7 +7,7 @@ import {
     getMovieDetail,
     searchMovieByQuery,
     searchTvByQuery,
-    addMovie
+    // addMovie
 } from "../actions/admin.action";
 import { truncateByLength } from "../helper";
 
