@@ -12,17 +12,18 @@ function Movie({ match }) {
     const dispatch = useDispatch();
     const listMovie = useSelector((state) => state.film.tv);
     const { id = null } = match.params;
-    if (id) {
-        dispatch(getMovieInfo(id));
-    } else {
-        history.goBack();
-    }
+
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (id) {
+            dispatch(getMovieInfo(id));
+        } else {
+            history.goBack();
+        }
         dispatch(getTvShow());
         setIsLoading(true);
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     return (
         <>

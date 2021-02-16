@@ -139,23 +139,23 @@ export const getTvDetail = (id) => dispatch => {
             })
         })
 }
-export const addMovie = (data) => dispatch =>{
+export const addMovie = (data) => dispatch => {
     dispatch({
         type: ADD_REQUEST
     })
-    axios.post("/media/movie", data, {headers: useAuthorization()} )
-    .then(res=>{
-        console.log(res)
-        dispatch({
-            type: ADD_REQUEST_SUCCESS
+    axios.post("/media/movie", data, { headers: useAuthorization() })
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: ADD_REQUEST_SUCCESS
+            })
         })
-    })
-    .catch(err=>{
-        console.log(err)
-        dispatch({
-            type: ADD_REQUEST_FAIL,
-            msg: err.response.data,
-            status: err.response.status
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: ADD_REQUEST_FAIL,
+                msg: err.response.data,
+                status: err.response.status
+            })
         })
-    })
 }

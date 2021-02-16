@@ -25,7 +25,7 @@ function Detail({ id }) {
 
     useEffect(() => {
         dispatch(getComment(1, page));
-    }, [dispatch, page]);
+    }, [dispatch, page, id]);
     return (
         <>
             <section className="p-detail">
@@ -54,8 +54,8 @@ function Detail({ id }) {
                             poster={movieInfo.posterPath}
                         />
                     ) : (
-                        <></>
-                    ))}
+                            <></>
+                        ))}
 
                 <div className="p-detail3 u-fade">
                     <div className="l-container">
@@ -95,14 +95,14 @@ function Detail({ id }) {
                                 </button>
                             </div>
                         )) || (
-                            <div className="p-detail3__notlogin">
-                                <p>
-                                    You must be{" "}
-                                    <Link to="/login">logged in</Link> to see
+                                <div className="p-detail3__notlogin">
+                                    <p>
+                                        You must be{" "}
+                                        <Link to="/login">logged in</Link> to see
                                     comment
                                 </p>
-                            </div>
-                        )}
+                                </div>
+                            )}
                     </div>
                 </div>
             </section>

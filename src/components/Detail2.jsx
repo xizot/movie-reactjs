@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Plyr from "plyr";
-
+let player = null;
 function Detail2({ type, videoID }) {
     useEffect(() => {
         const videoSettings = {
@@ -12,7 +12,8 @@ function Detail2({ type, videoID }) {
                 },
             ],
         };
-        const player = new Plyr("#player");
+        if (player) player.destroy();
+        player = new Plyr("#player");
         player.source = videoSettings;
     }, [type, videoID]);
     return (

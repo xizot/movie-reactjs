@@ -9,6 +9,9 @@ import {
     GET_TV_DETAIL,
     GET_DETAIL_REQUEST_SUCCESS,
     GET_DETAIL_REQUESTT_FAIL,
+    ADD_REQUEST,
+    ADD_REQUEST_FAIL,
+    ADD_REQUEST_SUCCESS
 } from "./../types/admin.type";
 const initialState = {
     searchError: null,
@@ -100,6 +103,31 @@ const adminReducer = (state = initialState, action) => {
                 tvDetailData: null,
             };
         //▲ Detail ▲
+
+        //▼ Add Media ▼
+        case ADD_REQUEST:
+            return {
+                ...state,
+                isAdding: true,
+                isAdded: false,
+                addError: null,
+            }
+        case ADD_REQUEST_SUCCESS:
+            return {
+                ...state,
+                isAdding: false,
+                isAdded: true,
+                addError: null,
+
+            }
+        case ADD_REQUEST_FAIL:
+            return {
+                ...state,
+                isAdding: false,
+                isAdded: true,
+                addError: action.payload.msg
+            }
+        //▲ Add Media ▲
         default:
             return state;
     }
