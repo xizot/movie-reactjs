@@ -1,46 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { SearchOutlined } from "@ant-design/icons";
+import React from "react";
 import SearchItem from "../components/SearchItem";
-function Search() {
-    const [searchKey, setSearchKey] = useState("");
-    const handleSearch = (e) => {
-        const value = e.target.value;
-        if (value && value.length) {
-            setSearchKey(value);
-        }
-    };
-    const submitSearch = (e) => {
-        e.preventDefault();
-    };
 
-    useEffect(() => {}, [searchKey]);
+//chua xong 
+function Search() {
+
     return (
         <div className="p-search">
             <div className="l-container">
                 <div className="p-search__content">
                     <div className="p-search__left">
-                        <h3>History</h3>
+                       
                     </div>
                     <div className="p-search__right">
                         <div className="p-search__top">
-                            <form action="" onSubmit={(e) => submitSearch(e)}>
-                                <div
-                                    className="search-icon"
-                                    onClick={(e) => submitSearch(e)}
-                                >
-                                    <SearchOutlined />
-                                </div>
-                                <input
-                                    type="text"
-                                    placeholder="Enter your film"
-                                    onChange={(e) => handleSearch(e)}
-                                    value={searchKey}
-                                />
-                            </form>
-
-                            <select className="p-search__sort">
-                                <option value="">Sort by: Latest</option>
-                            </select>
+                            <h3>History</h3>
                         </div>
 
                         <div className="p-search__list row">
@@ -50,6 +23,7 @@ function Search() {
                                 name="Sotn can all"
                                 rated="5.0"
                                 actor="SOTN"
+                                watched="2.0"
                             />
                             <SearchItem
                                 link="/movie"
@@ -57,6 +31,7 @@ function Search() {
                                 name="Sotn can all"
                                 rated="5.0"
                                 actor="SOTN"
+                                watched="3.0"
                             />
                             <SearchItem
                                 link="/movie"
@@ -64,6 +39,7 @@ function Search() {
                                 name="Sotn can all"
                                 rated="5.0"
                                 actor="SOTN"
+                                watched="1.0"
                             />
                             <SearchItem
                                 link="/movie"
