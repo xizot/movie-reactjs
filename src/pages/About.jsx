@@ -1,12 +1,6 @@
 import React from "react";
-import WatchController from "../components/WatchController";
-
 function About() {
-    return (
-        <div className="p-about">
-            <WatchController />
-        </div>
-    );
+    return <div className="p-about">About works</div>;
 }
 
 export default About;

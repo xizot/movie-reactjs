@@ -1,49 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import $ from "jquery";
-import { CloudUploadOutlined, DownOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
 import {
     getMovieDetail,
+    getTvDetail,
     searchMovieByQuery,
     searchTvByQuery,
-    // addMovie
 } from "../actions/admin.action";
 import { truncateByLength } from "../helper";
+import AddMovie from "../components/AddMovie";
+import AddTv from "../components/AddTv";
+import AddSeason from "../components/AddSeason";
 
 function Admin() {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
+
     const [openOption, setOpenOption] = useState(false);
-    const [openMoviePopUp, setOpenMoviePopUp] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     // const [searchPage, setSearchPage] = useState(1);
     const [openSearch, setOpenSearch] = useState(false);
     const [type, setType] = useState("");
 
-    const searchData = useSelector((state) => state.admin.searchData);
-    const movieDetailData = useSelector((state) => state.admin.movieDetailData);
-    const tvDetailData = useSelector((state) => state.admin.tvDetailData);
+    //▼ Popup flags ▼
+    const [isOpenMoviePopUp, setIsOpenMoviePopUp] = useState(false);
+    const [isOpenTvPopUp, setIsOpenTvPopUp] = useState(false);
+    //▲ Popup flags ▲
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [releaseDate, setReleaseDate] = useState("");
-    const [runtime, setRuntime] = useState("");
-    const [genres, setGenres] = useState("");
-    const [videoLink, setVideoLink] = useState("");
+    const searchData = useSelector((state) => state.admin.searchData);
 
     const handleOption = () => {
         setOpenOption(!openOption);
     };
-    const handleType = (type) => {
-        setType(type);
-    };
 
     const HandleOpenSearch = (type) => {
+        setType(type);
         setOpenSearch(true);
-        handleType(type);
         setOpenOption(false);
         if (searchValue && searchValue.length) {
+            // alert(searchValue);
             if (type === "movie") {
                 dispatch(searchMovieByQuery(searchValue, 1));
             } else if (type === "tv") {
@@ -53,11 +50,16 @@ function Admin() {
     };
     const closeSearch = () => {
         setOpenSearch(false);
-        handleType("");
+        setType("");
     };
     const handleSearchValue = (e) => {
         const value = e.target.value;
         setSearchValue(value);
+        if (type === "movie") {
+            dispatch(searchMovieByQuery(value, 1));
+        } else if (type === "tv") {
+            dispatch(searchTvByQuery(value, 1));
+        }
     };
     const handleSubmitSearch = (e, page) => {
         e.preventDefault();
@@ -68,46 +70,27 @@ function Admin() {
         }
     };
     const handleOpenPopUp = (id) => {
-        console.log(id);
-        console.log(type);
-        console.log(movieDetailData)
         if (type === "movie") {
             openMovie(id);
         } else if (type === "tv") {
-            // dispatch(searchTvByQuery(searchValue, page));
+            openTV(id);
         }
     };
     const openMovie = (id) => {
         dispatch(getMovieDetail(id));
-        setOpenMoviePopUp(true);
+        setIsOpenMoviePopUp(true);
+        setIsOpenTvPopUp(false);
+    };
+    const openTV = (id) => {
+        dispatch(getTvDetail(id));
+        setIsOpenTvPopUp(true);
+        setIsOpenMoviePopUp(false);
     };
     const closePopUp = () => {
-        setOpenMoviePopUp(false);
+        setIsOpenTvPopUp(false);
+        setIsOpenMoviePopUp(false);
     };
-    // const handleAddMovie = () => {
-    //     const data = {
-    //         imdbId: movieDetailData.imdbId,
-    //         streamPath: videoLink,
-    //         isPublic: true,
-    //         override: {
-    //             genres: genres.split("/"),
-    //             tagline: movieDetailData.tagline,
-    //             title: title,
-    //             originalTitle: title,
-    //             overview: description,
-    //             posterPath: movieDetailData.posterPath,
-    //             backdropPath: movieDetailData.backdropPath,
-    //             popularity: movieDetailData.popularity,
-    //             movie: {
-    //                 runtime: runtime,
-    //                 releaseDate: releaseDate,
-    //                 status: movieDetailData.status,
-    //                 adult: movieDetailData.adult
-    //             }
-    //         }
-    //     }
-    //     dispatch(addMovie(data))
-    // }
+
     useEffect(() => {
         // Event
         $(".js-toggle-option").click(function (e) {
@@ -121,26 +104,15 @@ function Admin() {
 
         // dispatch(loadUser());
         setIsLoading(true);
-
-        if (movieDetailData) {
-            setTitle((movieDetailData && movieDetailData.title) || "");
-            setDescription((movieDetailData && movieDetailData.overview) || "");
-            setGenres(
-                (movieDetailData && movieDetailData.genres.join("/")) || ""
-            );
-            setReleaseDate(
-                (movieDetailData && movieDetailData.releaseDate) || ""
-            );
-            setRuntime((movieDetailData && movieDetailData.runtime) || "");
-        }
-    }, [dispatch, movieDetailData, tvDetailData]);
+    }, [dispatch]);
     return (
         <>
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
 
             <div
-                className={`c-popup2 c-popup2-search ${openSearch ? "is-open" : ""
-                    }`}
+                className={`c-popup2 c-popup2-search ${
+                    openSearch ? "is-open" : ""
+                }`}
             >
                 <div className="c-popup2__content">
                     <span
@@ -157,7 +129,11 @@ function Admin() {
                         </svg>
                     </span>
                     <div className="c-popup2__top">
-                        <h3 className="c-popup2__title">Title</h3>
+                        <h3 className="c-popup2__title">
+                            {type === "movie"
+                                ? "Search for Movie"
+                                : "Search for TV show"}
+                        </h3>
                     </div>
                     <div className="c-popup2__bottom c-search">
                         <div className="c-search__box">
@@ -234,211 +210,22 @@ function Admin() {
                                     </div>
                                 ))
                             ) : (
-                                    <>No search results found</>
-                                )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                className={`c-popup2 c-popup2-addfilm ${openMoviePopUp ? "is-open" : ""
-                    }`}
-            >
-                <div className="c-popup2__content">
-                    <span
-                        className="c-popup2__close"
-                        onClick={() => closePopUp()}
-                    >
-                        <svg
-                            height="365.696pt"
-                            viewBox="0 0 365.696 365.696"
-                            width="365.696pt"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="m243.1875 182.859375 113.132812-113.132813c12.5-12.5 12.5-32.765624 0-45.246093l-15.082031-15.082031c-12.503906-12.503907-32.769531-12.503907-45.25 0l-113.128906 113.128906-113.132813-113.152344c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503907-12.5 32.769531 0 45.25l113.152344 113.152344-113.128906 113.128906c-12.503907 12.503907-12.503907 32.769531 0 45.25l15.082031 15.082031c12.5 12.5 32.765625 12.5 45.246093 0l113.132813-113.132812 113.128906 113.132812c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082031c12.5-12.503906 12.5-32.769531 0-45.25zm0 0" />
-                        </svg>
-                    </span>
-                    <div className="c-popup2__top">
-                        <h3 className="c-popup2__title">
-                            {movieDetailData && movieDetailData.title}
-                        </h3>
-                    </div>
-                    <div className="c-popup2__bottom c-addfilm">
-                        <input
-                            type="file"
-                            id="upload-image"
-                            style={{ display: "none" }}
-                        />
-                        <div className="c-addfilm__img">
-                            <img
-                                src={
-                                    movieDetailData &&
-                                    movieDetailData.posterPath
-                                }
-                                alt=""
-                            />
-                        </div>
-                        <div className="c-addfilm__info">
-                            <div className="c-form">
-                                <form>
-                                    <div className="row">
-                                        <div className="col-lg-12">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        value={title}
-                                                        onChange={(e) =>
-                                                            setTitle(
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12">
-                                            <div className=" c-form__group height-150">
-                                                <div className="gutter">
-                                                    <textarea
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        value={description}
-                                                        onChange={(e) =>
-                                                            setDescription(
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        required
-                                                    ></textarea>
-                                                    <label className="c-form__label">
-                                                        Description
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4 col-md-6 col-sm-12">
-                                            <div className=" c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        value={releaseDate}
-                                                        onChange={(e) =>
-                                                            setReleaseDate(
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Release Date
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4 col-md-6 col-sm-12">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                        value={runtime}
-                                                        onChange={(e) =>
-                                                            setRuntime(
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Running timed in minute
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4 col-md-6 col-sm-12">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                        value={genres}
-                                                        onChange={(e) =>
-                                                            setGenres(
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Genre/ Genres
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-8 col-md-12">
-                                            <div className=" c-form__group  c-addfilm__upload">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                        value={videoLink}
-                                                        onChange={(e) =>
-                                                            setVideoLink(
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Video Link
-                                                    </label>
-                                                    <a
-                                                        className="c-addfilm__link"
-                                                        href="http://"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                    >
-                                                        <CloudUploadOutlined />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div className="c-addfilm__type">
-                                <span>Item type: </span>
-                                <div className="c-addfilm__type__item c-addfilm__tv">
-                                    <span className="c-radio "></span>TV Series
-                                </div>
-                                <div className="c-addfilm__type__item c-addfilm__movie">
-                                    <span className="c-radio is-check"></span>
-                                    Movies
-                                </div>
-                            </div>
-                            <div className="c-addfilm__handle">
-                                <div className="c-btn c-addfilm__publish">
-                                    Publish
-                                </div>
-                                <div
-                                    className="c-btn c-addfilm__publish"
-                                    onClick={() => closePopUp()}
-                                >
-                                    Cancel
-                                </div>
-                            </div>
+                                <>No search results found</>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
 
+            <AddMovie
+                nameClass={isOpenMoviePopUp ? "is-open" : ""}
+                closePopUp={() => closePopUp()}
+            />
+            <AddTv
+                nameClass={isOpenTvPopUp ? "is-open" : ""}
+                closePopUp={() => closePopUp()}
+            />
+            <AddSeason />
             <div className="p-admin ">
                 <div className="c-panel ">
                     <div className="u-flex">
@@ -558,8 +345,9 @@ function Admin() {
                                 <p>Add Film </p>
                                 <DownOutlined className="p-adamin__top__down" />
                                 <div
-                                    className={`p-admin__top__option ${openOption ? "is-open" : ""
-                                        }`}
+                                    className={`p-admin__top__option ${
+                                        openOption ? "is-open" : ""
+                                    }`}
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <ul className="">

@@ -12,7 +12,6 @@ import {
 import { catFilter } from "./../helper";
 function Search({ location }) {
     const { search } = location;
-    console.log(search);
     const searchKey = useSelector((state) => state.search.searchKey);
     const searchResults = useSelector((state) => state.search.data);
     const searchFilter = useSelector((state) => state.search.filter);
@@ -123,7 +122,6 @@ function Search({ location }) {
                                                   image={item.posterPath}
                                                   name={item.title}
                                                   rated={item.popularity}
-                                                  actor=""
                                                   cat={item.genres.join(", ")}
                                                   overview={
                                                       item.overview.substring(

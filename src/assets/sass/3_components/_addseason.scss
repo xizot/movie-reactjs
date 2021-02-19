@@ -1,0 +1,134 @@
+.c-addseason {
+    &__item {
+        display: flex;
+        position: relative;
+        &__img {
+            width: 200px;
+            height: auto;
+            max-height: 200px;
+            border-radius: 5px;
+        }
+        &__content {
+            width: 100%;
+            flex: 1;
+            display: flex;
+        }
+        &__group {
+            padding: 0 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            input {
+            }
+        }
+        input,
+        textarea {
+            display: block;
+            height: 35px;
+            font-size: 1.5rem;
+            resize: none;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+        }
+        textarea {
+            height: 150px;
+            overflow: scroll;
+        }
+        label {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        &__actions {
+        }
+    }
+}
+.c-popup2-season {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2000;
+    background-color: #ddd;
+    opacity: 1;
+    display: flex;
+    pointer-events: all;
+    padding: 80px 0;
+
+    @include breakpoint(pro) {
+        padding: 100px 45px 80px;
+    }
+    @include breakpoint(tab) {
+        padding: 100px 15px 80px;
+    }
+    &__content {
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        color: white;
+        display: flex;
+        max-width: 1200px;
+        @include breakpoint(pro) {
+            max-width: unset;
+        }
+    }
+    &__left {
+        width: 150px;
+        padding: 50px 0 35px;
+        ul {
+            font-size: 1.6rem;
+            li {
+                display: block;
+                margin-bottom: 20px;
+                padding: 0 25px 0 35px;
+                cursor: pointer;
+            }
+        }
+        overflow: hidden auto;
+    }
+    &__addnew {
+        border: 1px solid #ddd;
+        display: flex;
+        padding: 5px 35px;
+        cursor: pointer;
+        &:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        span {
+            padding-right: 5px;
+        }
+    }
+    &__left &__title {
+        padding: 0 35px;
+    }
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    &__right {
+        padding: 50px 35px 40px 10px;
+        overflow: auto;
+        width: calc(100% - 150px);
+        .c-form {
+            margin: unset;
+            padding: unset;
+            width: 100%;
+            textarea {
+                height: 150px;
+                resize: none;
+            }
+        }
+    }
+    &__actions {
+        display: flex;
+        .c-btn {
+            min-width: 80px;
+            width: auto;
+            margin-right: 20px;
+            padding: 0 20px;
+            margin-top: unset;
+        }
+    }
+}

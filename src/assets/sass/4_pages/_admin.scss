@@ -308,10 +308,10 @@ $topHeight: 100px;
                     text-align: center;
                 }
                 &.c-view__hidden {
-                    color: red;
+                    color: #e97878;
                 }
                 &.c-view__publish {
-                    color: green;
+                    color: #11698e;
                 }
             }
         }
@@ -336,11 +336,11 @@ $topHeight: 100px;
         padding: 0 5px;
     }
     &__edit {
-        background-color: green;
+        background-color: #11698e;
         margin-right: 10px;
     }
     &__del {
-        background-color: red;
+        background-color: #e97878;
     }
     &__option {
         min-width: 130px;
@@ -451,6 +451,9 @@ $topHeight: 100px;
         overflow: auto;
         flex: 1;
         margin: 20px 0;
+        @include breakpoint(sp) {
+            font-size: 1.4rem;
+        }
         &::-webkit-scrollbar {
             width: 5px;
             cursor: pointer;
@@ -619,6 +622,7 @@ $topHeight: 100px;
             padding-top: 0;
             min-width: unset;
             overflow: unset;
+            margin-right: unset;
         }
     }
     &__handle {
@@ -667,6 +671,9 @@ $topHeight: 100px;
             display: block;
             margin-right: 20px;
             margin-bottom: 10px;
+            @include breakpoint(sp) {
+                margin-right: 10px;
+            }
         }
         input {
             // pointer-events: none;
@@ -676,6 +683,9 @@ $topHeight: 100px;
             display: flex;
             &:not(:last-child) {
                 margin-right: 20px;
+                @include breakpoint(sp) {
+                    margin-right: 10px;
+                }
             }
             .c-radio {
                 margin-right: 10px;
@@ -751,6 +761,9 @@ $topHeight: 100px;
                 background: transparent;
                 padding-left: 15px;
                 padding-right: 15px;
+                @include breakpoint(sp) {
+                    padding-right: unset;
+                }
             }
             .gutter {
                 background-color: #212028;
@@ -762,9 +775,6 @@ $topHeight: 100px;
             }
             label {
                 top: 25px;
-            }
-            .height-150 {
-                height: 150px;
             }
         }
     }
@@ -784,6 +794,9 @@ $topHeight: 100px;
     }
     @include breakpoint(tab) {
         padding-right: 5px;
+    }
+    @include breakpoint(sp) {
+        padding-right: 15px;
     }
 }
 .c-popup2-addfilm.is-open .c-popup2__content {

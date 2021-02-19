@@ -55,6 +55,9 @@ function Header({ isDark = null }) {
                             <li>
                                 <Link to="/about">ABOUT</Link>
                             </li>
+                            <li className="tab-only">
+                                <Link to="/search">SEARCH</Link>
+                            </li>
                             {user && user.role === "admin" && (
                                 <li>
                                     <Link to="/admin">ADMIN PAGE</Link>

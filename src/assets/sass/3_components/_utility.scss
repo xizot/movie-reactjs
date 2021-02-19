@@ -44,7 +44,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    @include breakpoint(tab){
+    @include breakpoint(tab) {
         font-size: 1.4rem;
     }
     &:hover {
@@ -88,6 +88,9 @@
         color: $mainColor;
     }
 }
-.u-column{
+.u-column {
     flex-direction: column;
+}
+.height-150 {
+    height: 150px !important;
 }

@@ -7,6 +7,7 @@ import {
 import axios from "./../axios";
 
 export const getSearch = (value) => (dispatch) => {
+    if (!value) return;
     axios
         .get(`/media/fetch?query=${value}`)
         .then((res) => {
