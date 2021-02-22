@@ -6,8 +6,8 @@
     position: fixed;
     opacity: 0;
     left: 30px;
-    z-index: 10;
-    padding: 17px 20px;
+    z-index: 9999;
+    padding: 17px 30px 17px 20px;
     font-size: 1.5rem;
     font-weight: 600;
     bottom: -10px;
@@ -15,11 +15,11 @@
     pointer-events: none;
 
     &.c-alert--success {
-        background-color: green;
+        background-color: #11698e;
         color: white;
     }
     &.c-alert--error {
-        background-color: red;
+        background-color: #e97878;
         color: white;
     }
     &__close {

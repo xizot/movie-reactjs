@@ -9,6 +9,7 @@ import {
     GET_TV_DETAIL,
     GET_DETAIL_REQUEST_SUCCESS,
     GET_DETAIL_REQUESTT_FAIL,
+    ADD_RESET,
     ADD_REQUEST,
     ADD_REQUEST_FAIL,
     ADD_REQUEST_SUCCESS,
@@ -105,6 +106,13 @@ const adminReducer = (state = initialState, action) => {
         //▲ Detail ▲
 
         //▼ Add Media ▼
+        case ADD_RESET:
+            return {
+                ...state,
+                isAdding: false,
+                isAdded: false,
+                addError: null,
+            };
         case ADD_REQUEST:
             return {
                 ...state,

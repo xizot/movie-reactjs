@@ -322,12 +322,16 @@ $topHeight: 100px;
         font-size: 1.5rem;
         font-weight: bold;
         color: #909094;
+        padding: 0 10px;
     }
+
     &__prev {
         margin-right: 5px;
+        cursor: pointer;
     }
     &__next {
         margin-left: 5px;
+        cursor: pointer;
     }
     &__current {
         padding: 0 5px;
@@ -353,10 +357,15 @@ $topHeight: 100px;
             color: #fff;
             display: inline-block;
             height: 30px;
-            min-width: 50px;
+            min-width: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+            span {
+                display: inline-block;
+                margin-right: 5px;
+            }
         }
     }
 }

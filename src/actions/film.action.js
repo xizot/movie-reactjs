@@ -25,7 +25,6 @@ export const getMovie = () => (dispatch) => {
             });
         });
 };
-
 export const getTvShow = () => (dispatch) => {
     axios
         .get("/media/fetch?limit=20&type=tv")
@@ -60,7 +59,6 @@ export const getWatchLater = () => (dispatch) => {
             });
         });
 };
-
 export const loadComment = (id) => (dispatch) => {
     console.log(id);
 

@@ -12,6 +12,7 @@ export const GET_REQUEST_SUCCESS = "GET_REQUEST_SUCCESS";
 
 export const ADD_NEW_MOVIE = "ADD_NEW_MOVIE";
 export const ADD_NEW_TV = "ADD_NEW_TV";
+export const ADD_RESET = "ADD_RESET";
 export const ADD_REQUEST = "ADD_REQUEST";
 export const ADD_REQUEST_FAIL = "ADD_REQUEST_FAIL";
 export const ADD_REQUEST_SUCCESS = "ADD_REQUEST_SUCCESS";

@@ -5,6 +5,9 @@ import {
     GET_MOVIE,
     GET_TVSHOW,
     GET_WATCHLATER,
+    DELETE_REQUEST,
+    DELETE_REQUEST_FAIL,
+    DELETE_REQUEST_SUCCESS,
 } from "../types/film.type";
 
 const initialState = {
@@ -13,6 +16,10 @@ const initialState = {
     watchLater: [],
     episode: [],
     comment: [],
+
+    isDeleting: false,
+    isDeleted: false,
+    deleteError: null,
 };
 
 const filmReducer = (state = initialState, action) => {
@@ -50,7 +57,29 @@ const filmReducer = (state = initialState, action) => {
                 ...state,
                 episode: action.payload,
             };
-
+        //▼ Delete ▼
+        case DELETE_REQUEST:
+            return {
+                ...state,
+                isDeleting: true,
+                isDeleted: false,
+                deleteError: null,
+            };
+        case DELETE_REQUEST_FAIL:
+            return {
+                ...state,
+                isDeleting: false,
+                isDeleted: true,
+                deleteError: action.payload,
+            };
+        case DELETE_REQUEST_SUCCESS:
+            return {
+                ...state,
+                isDeleting: false,
+                isDeleted: true,
+                deleteError: null,
+            };
+        //▲ Delete ▲
         default:
             return state;
     }

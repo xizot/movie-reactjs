@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import $ from "jquery";
-import { DownOutlined } from "@ant-design/icons";
+import { DeleteOutlined, DownOutlined, EditOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
 import {
     getMovieDetail,
@@ -9,10 +9,14 @@ import {
     searchMovieByQuery,
     searchTvByQuery,
 } from "../actions/admin.action";
-import { truncateByLength } from "../helper";
+import { getErrorResponse, truncateByLength } from "../helper";
 import AddMovie from "../components/AddMovie";
+import Alert from "../components/Alert";
 import AddTv from "../components/AddTv";
 import AddSeason from "../components/AddSeason";
+import axios from "../axios";
+import { deleteByID } from "../actions/common.action";
+import { ADD_RESET } from "../types/admin.type";
 
 function Admin() {
     const dispatch = useDispatch();
@@ -29,10 +33,61 @@ function Admin() {
     const [isOpenTvPopUp, setIsOpenTvPopUp] = useState(false);
     //▲ Popup flags ▲
 
+    const [currentMoviePage, setCurrentMoviePage] = useState(1);
+    const [currentTvPage, setCurrentTvPage] = useState(1);
+    const [movieData, setMovieData] = useState({});
+    const [tvData, setTvData] = useState({});
+
+    const [isShowDeleteAlert, setIsShowDeleteAlert] = useState(false);
+    const [deleteAlertMsg, setDeleteAlertMsg] = useState("");
+    const [isDeletedError, setIsDeletedError] = useState(false);
+
     const searchData = useSelector((state) => state.admin.searchData);
+    const isAdded = useSelector((state) => state.admin.isAdded);
+    const addError = useSelector((state) => state.admin.addError);
 
     const handleOption = () => {
         setOpenOption(!openOption);
+    };
+
+    const handleDeleteByID = (mediaId, type) => {
+        // ▼ Reset state ▼
+        setIsShowDeleteAlert(false);
+        setDeleteAlertMsg("");
+        setIsDeletedError(false);
+        // ▲ Reset state ▲
+
+        deleteByID(mediaId, type)
+            .then((data) => {
+                setIsDeletedError(false);
+                setIsShowDeleteAlert(true);
+                setDeleteAlertMsg(data.message);
+                //▼ Reload data ▼
+                if (type === "movie") {
+                    axios
+                        .get(
+                            `/media/fetch?limit=10&type=movie&page=${currentMoviePage}`
+                        )
+                        .then((res) => {
+                            setMovieData(res.data);
+                        });
+                } else {
+                    axios
+                        .get(
+                            `/media/fetch?limit=10&type=tv&page=${currentTvPage}`
+                        )
+                        .then((res) => {
+                            setTvData(res.data);
+                        });
+                }
+                //▲ Reload data ▲
+            })
+            .catch((err) => {
+                const error = getErrorResponse(err);
+                setIsDeletedError(true);
+                setIsShowDeleteAlert(true);
+                setDeleteAlertMsg(error);
+            });
     };
 
     const HandleOpenSearch = (type) => {
@@ -101,12 +156,50 @@ function Admin() {
         $(".js-priority").on("click", function (e) {
             e.stopPropagation();
         });
-
-        // dispatch(loadUser());
         setIsLoading(true);
+        dispatch({ type: ADD_RESET });
     }, [dispatch]);
+
+    //▼ Fetch movie data ▼
+    useEffect(() => {
+        axios
+            .get(`/media/fetch?limit=10&type=movie&page=${currentMoviePage}`)
+            .then((res) => {
+                setMovieData(res.data);
+            });
+    }, [currentMoviePage]);
+    //▲ Fetch movie data ▲
+
+    //▼ Fetch tvshow data ▼
+    useEffect(() => {
+        axios
+            .get(`/media/fetch?limit=10&type=tv&page=${currentTvPage}`)
+            .then((res) => {
+                setTvData(res.data);
+            });
+    }, [currentTvPage]);
+    //▲ Fetch tvshow data ▲
+
     return (
         <>
+            {isShowDeleteAlert ? (
+                <Alert
+                    msg={deleteAlertMsg}
+                    type={
+                        isDeletedError ? "c-alert--error" : "c-alert--success"
+                    }
+                />
+            ) : (
+                <></>
+            )}
+            {isAdded ? (
+                <Alert
+                    msg={addError ? addError : "Added Successfully"}
+                    type={addError ? "c-alert--error" : "c-alert--success"}
+                />
+            ) : (
+                <></>
+            )}
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
 
             <div
@@ -226,6 +319,7 @@ function Admin() {
                 closePopUp={() => closePopUp()}
             />
             <AddSeason />
+
             <div className="p-admin ">
                 <div className="c-panel ">
                     <div className="u-flex">
@@ -395,137 +489,107 @@ function Admin() {
                                                     Title
                                                 </th>
                                                 <th>Status</th>
-                                                <th>Like</th>
-                                                <th>Dislike</th>
+                                                <th>Release Date</th>
+                                                <th>Last Update</th>
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="c-view__hidden">
-                                                    Hidden
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="c-view__hidden">
-                                                    Hidden
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td>Sotn va nhung nguoi ban</td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            {movieData.results &&
+                                            movieData.results.length ? (
+                                                movieData.results.map(
+                                                    (item, idx) => (
+                                                        <tr
+                                                            id={item._id}
+                                                            key={idx}
+                                                        >
+                                                            <td>{item._id}</td>
+                                                            <td className="t-left">
+                                                                {item.title}
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    item.isPublic
+                                                                        ? "c-view__publish"
+                                                                        : "c-view__hidden"
+                                                                }
+                                                            >
+                                                                {item.isPublic
+                                                                    ? "Publish"
+                                                                    : "Hidden"}
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    item.releaseDate
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {item.updatedAt}
+                                                            </td>
+                                                            <td className="c-view__option">
+                                                                <button className="c-view__edit">
+                                                                    <EditOutlined />{" "}
+                                                                    Edit
+                                                                </button>
+                                                                <button
+                                                                    className="c-view__del"
+                                                                    onClick={() =>
+                                                                        handleDeleteByID(
+                                                                            item._id,
+                                                                            "movie"
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <DeleteOutlined />
+                                                                    Delete
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                )
+                                            ) : (
+                                                <></>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
                                 <div className="c-view__paginate">
-                                    <p className="c-view__prev">prev</p>
+                                    <p
+                                        className="c-view__prev"
+                                        onClick={() =>
+                                            setCurrentMoviePage((prev) =>
+                                                prev > 1 ? prev - 1 : prev
+                                            )
+                                        }
+                                    >
+                                        Prev
+                                    </p>
                                     <p className="c-view__page">
                                         <span className="c-view__current">
-                                            1
+                                            {currentMoviePage}
                                         </span>
                                         /
-                                        <span className="c-view__total">3</span>
+                                        <span className="c-view__total">
+                                            {movieData.totalPages
+                                                ? movieData.totalPages
+                                                : 1}
+                                        </span>
                                     </p>
-                                    <p className="c-view__next"> next </p>
+                                    <p
+                                        className="c-view__next"
+                                        onClick={() =>
+                                            setCurrentMoviePage((prev) =>
+                                                movieData.totalPages
+                                                    ? prev <
+                                                      movieData.totalPages
+                                                        ? prev + 1
+                                                        : prev
+                                                    : prev
+                                            )
+                                        }
+                                    >
+                                        Next
+                                    </p>
                                 </div>
                             </div>
                             <div className="c-view">
@@ -547,192 +611,124 @@ function Admin() {
                                                     Title
                                                 </th>
                                                 <th className="t-center">
-                                                    Session's Number
-                                                </th>
-                                                <th className="t-center">
-                                                    Episode's Number
+                                                    Session Count
                                                 </th>
                                                 <th>Status</th>
-                                                <th>Like</th>
-                                                <th>Dislike</th>
+                                                <th>First Air Date</th>
+                                                <th>Last Air Date</th>
+                                                <th>Last Update</th>
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__hidden">
-                                                    Hidden
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__hidden">
-                                                    Hidden
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__hidden">
-                                                    Hidden
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__hidden">
-                                                    Hidden
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr id={1}>
-                                                <td>1</td>
-                                                <td className="t-left">
-                                                    Sotn va nhung nguoi ban
-                                                </td>
-                                                <td className="t-center">
-                                                    999
-                                                </td>
-                                                <td className="t-center">0</td>
-                                                <td className="c-view__publish">
-                                                    Publish
-                                                </td>
-                                                <td>-9999999</td>
-                                                <td>999999+</td>
-                                                <td className="c-view__option">
-                                                    <button className="c-view__edit">
-                                                        edit
-                                                    </button>
-                                                    <button className="c-view__del">
-                                                        delete
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            {tvData.results &&
+                                            tvData.results.length ? (
+                                                tvData.results.map(
+                                                    (item, idx) => (
+                                                        <tr
+                                                            id={item._id}
+                                                            key={idx}
+                                                        >
+                                                            <td>{item._id}</td>
+                                                            <td className="t-left">
+                                                                {item.title}
+                                                            </td>
+                                                            <td className="t-center">
+                                                                {
+                                                                    item.tvShow
+                                                                        .seasonCount
+                                                                }
+                                                            </td>
+                                                            <td
+                                                                className={
+                                                                    item.isPublic
+                                                                        ? "c-view__publish"
+                                                                        : "c-view__hidden"
+                                                                }
+                                                            >
+                                                                {item.isPublic
+                                                                    ? "Publish"
+                                                                    : "Hidden"}
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    item.tvShow
+                                                                        .firstAirDate
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    item.tvShow
+                                                                        .lastAirDate
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {item.updatedAt}
+                                                            </td>
+                                                            <td className="c-view__option">
+                                                                <button className="c-view__edit">
+                                                                    <EditOutlined />
+                                                                    Edit
+                                                                </button>
+                                                                <button
+                                                                    className="c-view__del"
+                                                                    onClick={() =>
+                                                                        handleDeleteByID(
+                                                                            item._id,
+                                                                            "tv"
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <DeleteOutlined />
+                                                                    Delete
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                )
+                                            ) : (
+                                                <></>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
                                 <div className="c-view__paginate">
-                                    <p className="c-view__prev">prev</p>
+                                    <p
+                                        className="c-view__prev"
+                                        onClick={() =>
+                                            setCurrentTvPage((prev) =>
+                                                prev > 1 ? prev - 1 : prev
+                                            )
+                                        }
+                                    >
+                                        Prev
+                                    </p>
                                     <p className="c-view__page">
                                         <span className="c-view__current">
-                                            1
+                                            {currentTvPage}
                                         </span>
                                         /
-                                        <span className="c-view__total">3</span>
+                                        <span className="c-view__total">
+                                            {tvData.totalPages
+                                                ? tvData.totalPages
+                                                : 1}
+                                        </span>
                                     </p>
-                                    <p className="c-view__next"> next </p>
+                                    <p
+                                        className="c-view__next"
+                                        onClick={() =>
+                                            setCurrentTvPage((prev) =>
+                                                tvData.totalPages
+                                                    ? prev < tvData.totalPages
+                                                        ? prev + 1
+                                                        : prev
+                                                    : prev
+                                            )
+                                        }
+                                    >
+                                        {" "}
+                                        next{" "}
+                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,7 @@ import {
     ADD_REQUEST_FAIL,
 } from "./../types/admin.type";
 import axios from "./../axios";
-import { useAuthorization } from "../helper";
+import { getErrorResponse, useAuthorization } from "../helper";
 export const searchMovieByQuery = (query, page = 1) => (dispatch) => {
     dispatch({
         type: SEARCH_REQUEST,
@@ -181,12 +181,10 @@ export const addMovie = (data) => (dispatch) => {
             });
         })
         .catch((err) => {
-            console.log(err);
+            const error = getErrorResponse(err);
             dispatch({
                 type: ADD_REQUEST_FAIL,
-                payload:
-                    err.response.data &&
-                    (err.response.data.error || err.response.errors),
+                payload: error,
                 status: err.response.status,
             });
         });
@@ -199,17 +197,17 @@ export const addTV = (data) => (dispatch) => {
         .post("/media/tv", data, { headers: useAuthorization() })
         .then((res) => {
             console.log(res);
+
             dispatch({
                 type: ADD_REQUEST_SUCCESS,
             });
         })
         .catch((err) => {
-            console.log(err);
+            const error = getErrorResponse(err);
+
             dispatch({
                 type: ADD_REQUEST_FAIL,
-                payload:
-                    err.response.data &&
-                    (err.response.data.error || err.response.errors),
+                payload: error,
                 status: err.response.status,
             });
         });
