@@ -52,12 +52,17 @@ function Header({ isDark = null }) {
                             <li>
                                 <Link to="/">HOME</Link>
                             </li>
+
+                            <li>
+                                <Link to="/browse/movie">MOVIES</Link>
+                            </li>
+                            <li>
+                                <Link to="/browse/tv">TV SHOWS</Link>
+                            </li>
                             <li>
                                 <Link to="/about">ABOUT US</Link>
                             </li>
-                            <li className="tab-only">
-                                <Link to="/search">SEARCH</Link>
-                            </li>
+
                             {user && user.role === "admin" && (
                                 <li>
                                     <Link to="/admin">ADMIN PAGE</Link>
@@ -65,23 +70,12 @@ function Header({ isDark = null }) {
                             )}
                         </ul>
                         <div className="p-header__actions u-flex u-a-center">
-                            <div className="p-header__search">
-                                <form
-                                    action=""
-                                    onSubmit={(e) => handleSearch(e)}
-                                >
-                                    <input
-                                        type="text"
-                                        value={searchKey}
-                                        onChange={(e) => handleSearchValue(e)}
-                                    />
-                                </form>
-                                <div className="p-header__search__icon">
-                                    <SearchOutlined
-                                        onClick={(e) => handleSearch(e)}
-                                    />
-                                </div>
-                            </div>
+                            <Link
+                                to="/search"
+                                className="p-header__actions--icon"
+                            >
+                                <SearchOutlined />
+                            </Link>
                             {isAuthenticated ? (
                                 <>
                                     <Link
@@ -147,6 +141,13 @@ function Header({ isDark = null }) {
                                 <ul className="c-menusp__cgnav">
                                     <li>
                                         <Link to="/">HOME</Link>
+                                    </li>
+
+                                    <li>
+                                        <Link to="/browse/movie">MOVIES</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/browse/tv">TV SHOWS</Link>
                                     </li>
                                     <li>
                                         <Link to="/about">ABOUT US</Link>

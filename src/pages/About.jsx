@@ -38,7 +38,7 @@ function About() {
         {
             id: 4,
             name: "Vương Gia Huy",
-            mail: "NULL",
+            mail: "vghuy17ck1@gmail.com",
             position: "Backend Developer",
             imgSrc:
                 "https://scontent.fsgn2-6.fna.fbcdn.net/v/t1.0-9/121305327_870963900306538_6761623131720048352_n.jpg?_nc_cat=100&ccb=3&_nc_sid=09cbfe&_nc_ohc=hw-058at18cAX-6E5-h&_nc_ht=scontent.fsgn2-6.fna&oh=24619b7400c3e110e2c8cf3a13bb76f6&oe=60586BA0",
