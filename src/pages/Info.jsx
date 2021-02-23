@@ -41,6 +41,9 @@ function Info() {
     const [currentPassword, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+
+    const [checkField,setNewField] = useState(false);
+    const [checkPassword,setCheckPassword] = useState(false);
     //error
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
@@ -64,23 +67,17 @@ function Info() {
             !errorPassword &&
             !errorConfirmPassword
         ) {
-            if (
-                username !== "" &&
-                email !== "" &&
-                displayName !== "" &&
-                currentPassword !== "" &&
-                confirmPassword !== "" &&
-                newPassword !== ""
-            ) {
+            if (username !== "" && email !== "" && displayName !== "") {
                 dispath(
                     update(
                         username,
                         displayName,
                         email,
+                        dateOfBirth,
                         currentPassword,
                         confirmPassword,
-                        dateOfBirth,
-                        newPassword
+                        newPassword,
+                        checkPassword,
                     )
                 );
             }
@@ -107,6 +104,7 @@ function Info() {
         }
         dispath(delAvatar());
     };
+
     const handleUsername = (e) => {
         e.preventDefault();
         if (errorServer.id) {
@@ -115,6 +113,10 @@ function Info() {
         let value = e.target.value;
         setUsername((user && user.username) || "");
         if (value.length >= 0) {
+            if(value !== user.username){
+                setNewField(true);
+            }
+            console.log(checkField)
             setUsername(value);
             if (validateUsername(value) === true) {
                 setErrorUsername(false);
@@ -183,6 +185,7 @@ function Info() {
         setPassword("");
         if (value.length >= 0) {
             setPassword(value);
+            setCheckPassword(true);
             if (validatePassword(value) === true) {
                 setErrorPassword(false);
             } else {

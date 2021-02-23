@@ -138,20 +138,47 @@ export const update = (
     username,
     displayName,
     email,
+    dateOfBirth,
     currentPassword,
     confirmPassword,
-    dateOfBirth,
-    newPassword
+    newPassword,
+    checkPassword
 ) => (dispatch) => {
-    const body = {
+    let body = {
         username,
         displayName,
         email,
+        dateOfBirth,
         currentPassword,
         confirmPassword,
-        dateOfBirth,
         newPassword,
     };
+    if (checkPassword === true) {
+        body = {
+            username,
+            displayName,
+            email,
+            dateOfBirth,
+            currentPassword,
+        };
+    } else {
+        body = {
+            username,
+            displayName,
+            email,
+            dateOfBirth,
+        };
+    }
+    // const body = {
+    //     username,
+    //     displayName,
+    //     email,
+    //     dateOfBirth,
+    //     currentPassword,
+    //     confirmPassword,
+    //     newPassword,
+    // };
+    console.log(dateOfBirth);
     const token = localStorage.getItem("token");
     dispatch({
         type: UPDATE_USER_REQUEST,
