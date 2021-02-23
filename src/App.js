@@ -22,6 +22,7 @@ import About from "./pages/About";
 import { PrivateRoute } from "./components/common/ProtectedRoute";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Browse from "./pages/Browse";
 
 function App() {
     const location = useLocation();
@@ -59,6 +60,11 @@ function App() {
                 <Route path="/register" component={Register} />
                 <Route path="/watchlater" component={WatchLater} />
                 <Route path="/about" component={About} />
+                <Route path="/browse/movie" component={Browse} />
+                <Route
+                    path="/browse/tv"
+                    component={() => <Browse type="tv" />}
+                />
                 <Route exact path="/" component={Home} />
                 <Route>
                     <>404 Not Found</>

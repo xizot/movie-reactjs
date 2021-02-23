@@ -85,10 +85,10 @@ function List2({ subtitle, title, list }) {
                     )}
                 </div>
                 <Link
-                    to="/movie"
+                    to="/browse/tv"
                     className="c-btn c-btn--primary c-more u-fade"
                 >
-                    BROWSE ALL MOVIES
+                    BROWSE ALL TV SHOW
                 </Link>
             </div>
         </section>

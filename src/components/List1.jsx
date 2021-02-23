@@ -79,7 +79,7 @@ function List1({ subtitle, title, list }) {
                     </Slider>
                 </div>
                 <Link
-                    to="/movie"
+                    to="/browse/movie"
                     className="c-btn c-btn--primary c-more u-fade"
                 >
                     BROWSE ALL MOVIES
