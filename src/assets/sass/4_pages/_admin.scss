@@ -8,7 +8,17 @@ $topHeight: 100px;
     background-color: $bgBold;
     display: flex;
     flex-direction: column;
-    padding: 100px 0;
+    padding: 150px 0 100px;
+
+    @include breakpoint(pro) {
+        padding: 100px 0;
+    }
+    @include breakpoint(tab) {
+        padding: 100px 0;
+    }
+    @include breakpoint(sp) {
+        padding: 100px 0;
+    }
 
     .c-btn {
         background-color: transparent;

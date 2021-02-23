@@ -53,7 +53,7 @@ function Header({ isDark = null }) {
                                 <Link to="/">HOME</Link>
                             </li>
                             <li>
-                                <Link to="/about">ABOUT</Link>
+                                <Link to="/about">ABOUT US</Link>
                             </li>
                             <li className="tab-only">
                                 <Link to="/search">SEARCH</Link>
@@ -149,7 +149,7 @@ function Header({ isDark = null }) {
                                         <Link to="/">HOME</Link>
                                     </li>
                                     <li>
-                                        <Link to="/about">ABOUT</Link>
+                                        <Link to="/about">ABOUT US</Link>
                                     </li>
                                     {user && user.role === "admin" && (
                                         <li>
