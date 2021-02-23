@@ -7,7 +7,6 @@ function PTop() {
     const dispatch = useDispatch();
     const listMovie = useSelector((state) => state.film.movie);
     const listTV = useSelector((state) => state.film.tv);
-    const listWatchLater = useSelector((state) => state.film.watchLater);
 
     useEffect(() => {
         dispatch(getMovie());
@@ -22,6 +21,8 @@ function PTop() {
                         subtitle="Most watched movies by days"
                         title="Popular Movies"
                         list={listMovie}
+                        browseLink="/browse/movie"
+                        browseTitle="BROWSE ALL MOVIE"
                     />
                 )}
                 {listTV.length && (
@@ -29,13 +30,8 @@ function PTop() {
                         subtitle="Most watched movies by days"
                         title="TV Shows"
                         list={listTV}
-                    />
-                )}
-                {listWatchLater.length && (
-                    <List2
-                        subtitle=""
-                        title="Your Favourite Movies"
-                        list={listWatchLater}
+                        browseLink="/browse/tv"
+                        browseTitle="BROWSE ALL TV SHOW"
                     />
                 )}
             </div>

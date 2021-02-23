@@ -5,6 +5,7 @@ import {
     GET_TV_INFO,
 } from "./../types/movie.type";
 import axios from "./../axios";
+import { getErrorResponse } from "../helper";
 export const getMovieInfo = (id) => (dispatch) => {
     dispatch({
         type: GET_MOVIE_REQUEST,
@@ -25,12 +26,10 @@ export const getMovieInfo = (id) => (dispatch) => {
             }
         })
         .catch((err) => {
-            console.log(err);
+            const error = getErrorResponse(err);
             dispatch({
                 type: GET_MOVIE_REQUEST_FAIL,
-                payload: {
-                    msg: "Movie information not found",
-                },
+                payload: error,
             });
         });
     // request here

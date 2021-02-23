@@ -59,10 +59,20 @@ function Header({ isDark = null }) {
                             <li>
                                 <Link to="/browse/tv">TV SHOWS</Link>
                             </li>
-                            <li>
-                                <Link to="/about">ABOUT US</Link>
-                            </li>
-
+                            {isAuthenticated ? (
+                                <>
+                                    <li>
+                                        <Link to="/watcher-later">
+                                            WATCH LATER
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/history">HISTORY</Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <></>
+                            )}
                             {user && user.role === "admin" && (
                                 <li>
                                     <Link to="/admin">ADMIN PAGE</Link>
@@ -149,9 +159,23 @@ function Header({ isDark = null }) {
                                     <li>
                                         <Link to="/browse/tv">TV SHOWS</Link>
                                     </li>
-                                    <li>
-                                        <Link to="/about">ABOUT US</Link>
-                                    </li>
+                                    {isAuthenticated ? (
+                                        <>
+                                            <li>
+                                                <Link to="/watcher-later">
+                                                    WATCH LATER
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/history">
+                                                    HISTORY
+                                                </Link>
+                                            </li>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+
                                     {user && user.role === "admin" && (
                                         <li>
                                             <Link to="/admin">ADMIN PAGE</Link>

@@ -3,6 +3,7 @@ import {
     GET_TV_INFO,
     GET_MOVIE_REQUEST,
     GET_MOVIE_REQUEST_FAIL,
+    RESET_ERROR,
 } from "./../types/movie.type";
 
 const initialState = {
@@ -15,6 +16,11 @@ const initialState = {
 
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
+        case RESET_ERROR:
+            return {
+                ...state,
+                error: null,
+            };
         case GET_MOVIE_REQUEST:
             return {
                 ...state,
@@ -45,7 +51,7 @@ const movieReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 isLoaded: true,
-                error: action.payload.msg,
+                error: action.payload,
             };
         default:
             return state;

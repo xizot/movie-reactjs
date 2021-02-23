@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Slider2 from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
-function List2({ subtitle, title, list }) {
+function List2({ subtitle, title, list, browseLink, browseTitle }) {
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
         return (
@@ -84,12 +84,16 @@ function List2({ subtitle, title, list }) {
                         </Slider2>
                     )}
                 </div>
-                <Link
-                    to="/browse/tv"
-                    className="c-btn c-btn--primary c-more u-fade"
-                >
-                    BROWSE ALL TV SHOW
-                </Link>
+                {browseLink && browseTitle ? (
+                    <Link
+                        to={browseLink}
+                        className="c-btn c-btn--primary c-more u-fade"
+                    >
+                        {browseTitle}
+                    </Link>
+                ) : (
+                    <></>
+                )}
             </div>
         </section>
     );

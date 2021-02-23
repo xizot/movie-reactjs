@@ -6,24 +6,34 @@ import { history } from "../helper";
 import { getMovieInfo } from "../actions/movie.action";
 import List2 from "../components/List2";
 import { getTvShow } from "../actions/film.action";
+import { RESET_ERROR } from "../types/movie.type";
 function Movie({ match }) {
     window.scrollTo(0, 0);
 
     const dispatch = useDispatch();
     const listMovie = useSelector((state) => state.film.tv);
     const { id = null } = match.params;
-
+    const error = useSelector((state) => state.movie.error);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (id) {
             dispatch(getMovieInfo(id));
         } else {
-            history.goBack();
+            history.push("/");
         }
         dispatch(getTvShow());
         setIsLoading(true);
     }, [dispatch, id]);
+
+    useEffect(() => {
+        if (error !== null) {
+            history.push("/");
+            dispatch({
+                type: RESET_ERROR,
+            });
+        }
+    }, [dispatch, error]);
 
     return (
         <>
@@ -35,6 +45,8 @@ function Movie({ match }) {
                         subtitle="Most watched movies by days"
                         title="TV Shows"
                         list={listMovie}
+                        browseLink="/browse/tv"
+                        browseTitle="BROWSE ALL TV SHOW"
                     />
                 )}
             </div>

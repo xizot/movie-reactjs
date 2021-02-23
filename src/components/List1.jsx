@@ -3,7 +3,7 @@ import Item1 from "./../components/Item1";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-function List1({ subtitle, title, list }) {
+function List1({ subtitle, title, list, browseLink, browseTitle }) {
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
         return (
@@ -78,12 +78,16 @@ function List1({ subtitle, title, list }) {
                             ))}
                     </Slider>
                 </div>
-                <Link
-                    to="/browse/movie"
-                    className="c-btn c-btn--primary c-more u-fade"
-                >
-                    BROWSE ALL MOVIES
-                </Link>
+                {browseLink && browseTitle ? (
+                    <Link
+                        to={browseLink}
+                        className="c-btn c-btn--primary c-more u-fade"
+                    >
+                        {browseTitle}
+                    </Link>
+                ) : (
+                    <></>
+                )}
             </div>
         </section>
     );

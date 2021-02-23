@@ -82,13 +82,13 @@ function Footer() {
                             <h3>Support</h3>
                             <ul className="p-footer__breadcrumb">
                                 <li>
-                                    <a href="/">My Account</a>
+                                    <a href="/account">My Account</a>
+                                </li>
+                                <li>
+                                    <a href="/about">About Us</a>
                                 </li>
                                 <li>
                                     <a href="/">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="/">Watch on TV</a>
                                 </li>
                                 <li>
                                     <a href="/">Help Center</a>
