@@ -50,6 +50,7 @@ function Recovery() {
         return val.code; // CurrentURL?code=value    return value
     };
 
+
     useEffect(() => {
         let code = getCode();
         if (code && code.length > 0) {
@@ -57,7 +58,7 @@ function Recovery() {
         } else {
             dispath(customRedirect("/"));
         }
-    }, [dispath, errorServer, confirmPassword, password]);
+    },[dispath,password,confirmPassword]);
 
     return (
         <div className="login">

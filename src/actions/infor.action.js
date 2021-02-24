@@ -65,7 +65,6 @@ export const upAvatar = (image) => (dispatch) => {
         axios
             .post("/user/avatar", image, { headers: useAuthorization() })
             .then((res) => {
-                console.log(res.data);
                 dispatch({
                     type: UPDATE_AVATAR_SUCCESS,
                     payload: res.data,
@@ -142,7 +141,8 @@ export const update = (
     currentPassword,
     confirmPassword,
     newPassword,
-    checkPassword
+    checkPassword,
+    checkField,
 ) => (dispatch) => {
     let body = {
         username,
@@ -153,7 +153,7 @@ export const update = (
         confirmPassword,
         newPassword,
     };
-    if (checkPassword === true) {
+    if (checkPassword === true && checkField === true) {
         body = {
             username,
             displayName,
@@ -178,7 +178,6 @@ export const update = (
     //     confirmPassword,
     //     newPassword,
     // };
-    console.log(dateOfBirth);
     const token = localStorage.getItem("token");
     dispatch({
         type: UPDATE_USER_REQUEST,

@@ -55,6 +55,8 @@ function Info() {
 
     if (!avatar) {
         console.log("handleError");
+        avatar={};
+        // eslint-disable-next-line no-undef
         avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
     }
 
@@ -78,6 +80,7 @@ function Info() {
                         confirmPassword,
                         newPassword,
                         checkPassword,
+                        checkField,
                     )
                 );
             }
@@ -116,7 +119,6 @@ function Info() {
             if(value !== user.username){
                 setNewField(true);
             }
-            console.log(checkField)
             setUsername(value);
             if (validateUsername(value) === true) {
                 setErrorUsername(false);
@@ -254,7 +256,7 @@ function Info() {
                                         Your Profile
                                     </p>
                                     <h5 className="content_form__son">
-                                        Edit your name, avatar, etc..
+                                        Edit your profile
                                     </h5>
                                 </div>
                                 <div className="title_form__right">
@@ -406,7 +408,7 @@ function Info() {
                                                     }
                                                 />
                                                 <label className="c-form__label">
-                                                    PASSWORD
+                                                    CURRENT PASSWORD
                                                 </label>
                                             </div>
                                             {errorPassword && (
@@ -443,7 +445,7 @@ function Info() {
                                                     }
                                                 />
                                                 <label className="c-form__label">
-                                                    RE-PASSWORD
+                                                    CONFIRM NEWPASSWORD
                                                 </label>
                                             </div>
                                             {errorConfirmPassword && (

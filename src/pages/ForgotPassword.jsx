@@ -10,8 +10,6 @@ function ForgotPassword() {
     const [errorEmail, setErrorEmail] = useState(false);
 
     const isForgot = useSelector((state) => state.forgot.sendRecovery);
-    console.log(isForgot);
-    console.log("isForgot");
     const handleSend = () => {
         if (!errorEmail && email !== "") {
             dispath(recoveryEmail(email));
@@ -33,8 +31,6 @@ function ForgotPassword() {
     };
     return (
         <>
-            {console.log("-------------")}
-            {console.log(isForgot)}
             <div className="login">
                 <div className="c-overlayer"> </div>
                 <div className="login__content js-dark-here">
