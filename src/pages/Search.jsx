@@ -16,6 +16,7 @@ function Search({ location }) {
     const searchResults = useSelector((state) => state.search.data);
     const searchFilter = useSelector((state) => state.search.filter);
     const isFilter = useSelector((state) => state.search.isFilter);
+    const [currentSearch, setCurrentSearch] = useState(null);
 
     const [cat, setCat] = useState([]);
     const dispatch = useDispatch();
@@ -42,19 +43,21 @@ function Search({ location }) {
     const submitSearch = (e) => {
         e.preventDefault();
         dispatch(getSearch(searchKey));
+        setCurrentSearch(searchKey);
     };
     useEffect(() => {
         if (search && search.length) {
             const searchVal = queryString.parse(search).q;
             dispatch(changeSearchKey(searchVal));
             dispatch(getSearch(searchVal));
+            setCurrentSearch(searchVal);
         }
         $(".js-toggle").on("click", function () {
             $(this).parent().find("ul").slideToggle();
             $(this).toggleClass("is-open");
         });
         setCat(catFilter);
-    }, [dispatch, search]);
+    }, [dispatch, search, searchResults]);
 
     return (
         <div className="p-search">
@@ -89,20 +92,32 @@ function Search({ location }) {
                     </div>
                     <div className="p-search__right">
                         <div className="p-search__top">
-                            <form action="" onSubmit={(e) => submitSearch(e)}>
-                                <div
-                                    className="search-icon"
-                                    onClick={(e) => submitSearch(e)}
+                            <div className="p-search__top__form">
+                                <form
+                                    action=""
+                                    onSubmit={(e) => submitSearch(e)}
                                 >
-                                    <SearchOutlined />
-                                </div>
-                                <input
-                                    type="text"
-                                    placeholder="Enter your film"
-                                    onChange={(e) => handleSearchValue(e)}
-                                    value={searchKey}
-                                />
-                            </form>
+                                    <div
+                                        className="search-icon"
+                                        onClick={(e) => submitSearch(e)}
+                                    >
+                                        <SearchOutlined />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter your film"
+                                        onChange={(e) => handleSearchValue(e)}
+                                        value={searchKey}
+                                    />
+                                </form>
+                                {currentSearch && currentSearch.length ? (
+                                    <p>
+                                        Search for <b>{currentSearch}</b>
+                                    </p>
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
 
                             <select className="p-search__sort">
                                 <option value="">Sort by: Latest</option>
