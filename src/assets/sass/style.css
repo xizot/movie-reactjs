@@ -7,6 +7,7 @@
 	Reset
 ------------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chango&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -4756,7 +4757,6 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  text-align: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -4779,14 +4779,25 @@ img {
   width: 300px;
 }
 
+.p-search__top__form {
+  width: calc(66.6% - 10px);
+}
+
+.p-search__top__form p {
+  font-size: 1.3rem;
+  color: white;
+}
+
 .p-search__top form {
+  height: 45px;
   border-radius: 4px;
   background-color: #f9f5f4;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   padding-right: 5px;
-  width: calc(66.6% - 10px);
+  height: 100%;
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 812px) {
@@ -6450,6 +6461,55 @@ img {
   height: 50px;
   border-radius: 2px;
   margin: 100px auto 50px;
+}
+
+.p-404 {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #131722;
+}
+
+.p-404__content {
+  text-align: center;
+  color: white;
+}
+
+.p-404__content h3 {
+  font-size: 12rem;
+  letter-spacing: 10px;
+  font-weight: bolder;
+  font-family: "Chango", cursive;
+}
+
+@media only screen and (max-width: 450px) {
+  .p-404__content h3 {
+    font-size: 8rem;
+  }
+}
+
+.p-404__content p {
+  font-size: 1.6rem;
+  margin-bottom: 50px;
+}
+
+.p-404__content a.c-btn {
+  width: 300px;
+  height: 50px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 450px) {
+  .p-404__content a.c-btn {
+    width: 100%;
+  }
 }
 
 /* Utility .u-

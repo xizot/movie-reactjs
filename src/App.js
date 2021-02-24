@@ -23,6 +23,7 @@ import { PrivateRoute } from "./components/common/ProtectedRoute";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Browse from "./pages/Browse";
+import PageNotFound from "./pages/404";
 
 function App() {
     const location = useLocation();
@@ -67,7 +68,7 @@ function App() {
                 />
                 <Route exact path="/" component={Home} />
                 <Route>
-                    <>404 Not Found</>
+                    <PageNotFound />
                 </Route>
             </Switch>
             <Footer />
