@@ -12,6 +12,7 @@ function Recovery() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [codeRecovery,setCodeRecovery] =useState("");
     const [errorPassword, setErrorPassword] = useState(false);
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
     const errorServer = useSelector((state) => state.error);
@@ -50,15 +51,16 @@ function Recovery() {
         return val.code; // CurrentURL?code=value    return value
     };
 
-
+    const handleClickPassword = () => {
+        dispath(forgotPassword(codeRecovery, password, confirmPassword));
+    }
     useEffect(() => {
         let code = getCode();
-        if (code && code.length > 0) {
-            dispath(forgotPassword(code, password, confirmPassword));
-        } else {
+        setCodeRecovery(code);
+        if (!code) {
             dispath(customRedirect("/"));
         }
-    },[dispath,password,confirmPassword]);
+    },[dispath]);
 
     return (
         <div className="login">
@@ -100,6 +102,7 @@ function Recovery() {
                             <button
                                 className="c-btn c-btn--primary"
                                 type="button"
+                                onClick={()=> handleClickPassword()}
                             >
                                 Send
                             </button>
