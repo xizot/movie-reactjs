@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SearchItem({ id, image, name, overview, cat }) {
+function SearchItem({ id, image, name, overview, cat, count }) {
     return (
         <Link
             to={"/movie/" + id}
@@ -13,7 +13,7 @@ function SearchItem({ id, image, name, overview, cat }) {
                 </div>
                 <div className="c-search-item__name">{name}</div>
                 <div className="c-search-item__cat">{cat}</div>
-                {/* <div className="c-search-item__release">20/02/2022</div> */}
+                <div className="c-search-item__release">Watched: {count}</div>
                 <div className="c-search-item__bottom">
                     <p className="c-search-item__overview">{overview}</p>
                 </div>
