@@ -20,7 +20,6 @@ export const getHistory = () => (dispatch) => {
                     type: GET_HISTORY_SUCCESS,
                     payload: res.data,
                 });
-                console.log(res.data);
             })
             .catch((err) => {
                 if (err) {
