@@ -1,22 +1,22 @@
 import { getErrorResponse, useAuthorization } from "../helper";
 import {
-    GET_HISTORY_SUCCESS,
-    GET_HISTORY_REQUEST,
-    GET_HISTORY_FAIL,
-} from "../types/history.type";
+    GET_WATCHLIST_SUCCESS,
+    GET_WATCHLIST_REQUEST,
+    GET_WATCHLIST_FAIL,
+} from "../types/watchlist.type";
 import axios from "./../axios";
 
-export const getHistory = (page) => (dispatch) => {
+export const getWatchlist = (page) => (dispatch) => {
     const token = localStorage.getItem("token");
     dispatch({
-        type: GET_HISTORY_REQUEST,
+        type: GET_WATCHLIST_REQUEST,
     });
     if (token) {
         axios
-            .get(`/history?limit=20?page=${page}`, { headers: useAuthorization() })
+            .get(`/watchlist?limit=20?page=${page}`, { headers: useAuthorization() })
             .then((res) => {
                 dispatch({
-                    type: GET_HISTORY_SUCCESS,
+                    type: GET_WATCHLIST_SUCCESS,
                     payload: res.data,
                 });
             })
@@ -24,7 +24,7 @@ export const getHistory = (page) => (dispatch) => {
                 if (err) {
                     const error = getErrorResponse(err);
                     dispatch({
-                        type: GET_HISTORY_FAIL,
+                        type: GET_WATCHLIST_FAIL,
                         paload: error,
                         status: err.response.status,
                     });
@@ -32,7 +32,7 @@ export const getHistory = (page) => (dispatch) => {
             });
     } else {
         dispatch({
-            type: GET_HISTORY_FAIL,
+            type: GET_WATCHLIST_FAIL,
         });
     }
 };

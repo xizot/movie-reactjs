@@ -8,7 +8,7 @@ const initialState = {
     isLoading: false,
     data: "",
 };
-const inforReducer = (state = initialState, action) => {
+const historyReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_HISTORY_REQUEST: {
             return {
@@ -33,4 +33,4 @@ const inforReducer = (state = initialState, action) => {
     }
 };
 
-export default inforReducer;
+export default historyReducer;
