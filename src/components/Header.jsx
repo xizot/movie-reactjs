@@ -62,7 +62,7 @@ function Header({ isDark = null }) {
                             {isAuthenticated ? (
                                 <>
                                     <li>
-                                        <Link to="/watcher-later">
+                                        <Link to="/mylist">
                                             MY LIST
                                         </Link>
                                     </li>

@@ -1,8 +1,17 @@
-import React from "react";
-import SearchItem from "../components/SearchItem";
-
-
+import React, { useEffect } from "react";
+//import SearchItem from "../components/SearchItem";
+import { useDispatch } from "react-redux";
+import { getHistory } from "../actions/history.action";
 function History() {
+    const dispath = useDispatch();
+
+    //let data = useSelector((state) => state.history.data);
+
+    // const 
+    useEffect(() => {
+        dispath(getHistory());
+    }, [dispath]);
+
     return (
         <div className="p-search">
             <div className="l-container">
@@ -11,53 +20,21 @@ function History() {
                         <h3>History</h3>
                     </div>
                     <div className="p-search__list row">
-                        <SearchItem
-                            link="/movie"
-                            image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            name="Sotn can all"
-                            rated="5.0"
-                            actor="SOTN"
-                            count="2"
-                        />
-                        <SearchItem
-                            link="/movie"
-                            image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            name="Sotn can all"
-                            rated="5.0"
-                            actor="SOTN"
-                            count="4"
-                        />
-                        <SearchItem
-                            link="/movie"
-                            image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            name="Sotn can all"
-                            rated="5.0"
-                            actor="SOTN"
-                            count="400"
-                        />
-                        <SearchItem
-                            link="/movie"
-                            image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            name="Sotn can all"
-                            rated="5.0"
-                            actor="SOTN"
-                            count="24"
-                        />
-                        <SearchItem
-                            link="/movie"
-                            image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            name="Sotn can all"
-                            rated="5.0"
-                            actor="SOTN"
-                        />
-                        <SearchItem
-                            link="/movie"
-                            image="https://images.pexels.com/photos/2773498/pexels-photo-2773498.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            name="Sotn can all"
-                            rated="5.0"
-                            actor="SOTN"
-                            count="1234"
-                        />
+                        {/* {data.map((item, index) => (
+                            <React.Fragment key={index}>
+                                <SearchItem
+                                    id={item._id}
+                                    image={item.posterPath}
+                                    name={item.title}
+                                    rated={item.popularity}
+                                    cat={item.genres.join(", ")}
+                                    overview={
+                                        item.overview.substring(0, 150) + "..."
+                                    }
+                                    type={item.tvShow ? "tvshow" : "movie"}
+                                />
+                            </React.Fragment>
+                        ))} */}
                     </div>
                 </div>
             </div>

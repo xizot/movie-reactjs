@@ -9,6 +9,8 @@ import searchReducer from "./search.reducer";
 import movieReducer from "./movie.reducer";
 import streamReducer from "./stream.reducer";
 import adminReducer from "./admin.reducer";
+import historyReducer from "./history.reducer";
+import watchlistReducer from "./watchlist.reducer";
 
 const reducer = combineReducers({
     error: errorReducer,
@@ -21,6 +23,8 @@ const reducer = combineReducers({
     movie: movieReducer,
     stream: streamReducer,
     admin: adminReducer,
+    history: historyReducer,
+    watchlist: watchlistReducer,
 });
 
 export default reducer;

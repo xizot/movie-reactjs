@@ -13,7 +13,7 @@ function SearchItem({ id, image, name, overview, cat, count }) {
                 </div>
                 <div className="c-search-item__name">{name}</div>
                 <div className="c-search-item__cat">{cat}</div>
-                <div className="c-search-item__release">Watched: {count}</div>
+                <div className="c-search-item__release">{count}</div>
                 <div className="c-search-item__bottom">
                     <p className="c-search-item__overview">{overview}</p>
                 </div>
