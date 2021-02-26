@@ -106,6 +106,7 @@ function Info() {
             dispath(clearError());
         }
         dispath(delAvatar());
+        console.log(avatar.uri);
     };
 
     const handleUsername = (e) => {
@@ -279,7 +280,7 @@ function Info() {
                                         )}
 
                                         <img
-                                            src={avatar && avatar.uri}
+                                            src={avatar.uri || `${process.env.PUBLIC_URL}/assets/img/avata.jpg`}
                                             alt=""
                                         />
                                         <div className="is-hover">

@@ -63,7 +63,7 @@ function Header({ isDark = null }) {
                                 <>
                                     <li>
                                         <Link to="/watcher-later">
-                                            WATCH LATER
+                                            MY LIST
                                         </Link>
                                     </li>
                                     <li>

@@ -59,7 +59,7 @@ function App() {
                 <Route path="/search" component={Search} />
                 <Route path="/history" component={History} />
                 <Route path="/register" component={Register} />
-                <Route path="/watchlater" component={WatchLater} />
+                <Route path="/mylist" component={WatchLater} />
                 <Route path="/about" component={About} />
                 <Route path="/browse/movie" component={Browse} />
                 <Route
