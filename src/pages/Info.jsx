@@ -137,6 +137,9 @@ function Info() {
         let value = e.target.value;
         setEmail((user && user.email) || "");
         if (value.length >= 0) {
+            if(value !== user.email){
+                setNewField(true);
+            }
             setEmail(value);
             if (validateEmail(value) === true) {
                 setErrorEmail(false);
