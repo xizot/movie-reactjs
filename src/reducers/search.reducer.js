@@ -1,8 +1,6 @@
 import { GET_SEARCH, FILTER, CHANGE_SEARCH_KEY } from "./../types/search.type";
 
 const initialState = {
-    page: 0,
-    totalPage: 1,
     data: [],
     filter: [],
     isFilter: false,
@@ -19,24 +17,26 @@ const searchReducer = (state = initialState, action) => {
         case GET_SEARCH:
             return {
                 ...state,
-                page: action.payload.page,
-                totalPage: action.payload.totalResults,
-                data: action.payload.results,
+                data: action.payload,
                 searchKey: action.payload.searchKey,
             };
         case FILTER:
+            console.log("filter", state.data.results);
             let filter =
-                action.payload.cat !== "all"
-                    ? state.data.filter((item) =>
+                action.payload.cat !== "all" && state.data.results
+                    ? state.data.results.filter((item) =>
                           item.genres.some(
                               (item) =>
                                   item.toLowerCase() === action.payload.cat
                           )
                       )
                     : [];
+
             return {
                 ...state,
-                filter: filter,
+                filter: {
+                    results: filter,
+                },
                 isFilter: action.payload.cat !== "all" ? true : false,
             };
         default:

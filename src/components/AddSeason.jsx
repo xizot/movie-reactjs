@@ -1,18 +1,23 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { ADD_RESET } from "../types/admin.type";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getTvDetail } from "../actions/admin.action";
 // import AddSeasonItem from "./AddSeasonItem";
 
-function AddSeason() {
+function AddSeason({ nameClass, mediaId }) {
     // const tvDetailData = useSelector((state) => state.admin.tvDetailData);
     // const [currentSeason, setCurrentSeason] = useState(null);
     // const dispatch = useDispatch();
     // useEffect(() => {
     //     dispatch(getTvDetail("118255"));
     // }, [dispatch]);
+    console.log(mediaId);
+    const dispatch = useDispatch();
+    const resetState = () => dispatch({ type: ADD_RESET });
     return (
         <>
-            <div className="c-popup2 c-popup2-season c-step2">
+            <div className={`c-popup2 c-popup2-season c-step2 ${nameClass}`}>
                 <div className="c-popup2-season__content">
                     <div className="c-popup2-season__left">
                         <h3 className="c-popup2-season__title">Seasons</h3>
@@ -107,6 +112,12 @@ function AddSeason() {
                                     </div>
                                 </form>
                                 <div className="c-popup2-season__actions">
+                                    <button
+                                        className="c-btn"
+                                        onClick={() => resetState()}
+                                    >
+                                        Cancel
+                                    </button>
                                     <button className="c-btn">Update</button>
                                     <button className="c-btn">Delete</button>
                                     <button className="c-btn">

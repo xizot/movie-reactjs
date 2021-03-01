@@ -6,7 +6,7 @@ export const catFilter = [
     },
     {
         name: "cat",
-        value: "romantic",
+        value: "romance",
         select: false,
     },
     {

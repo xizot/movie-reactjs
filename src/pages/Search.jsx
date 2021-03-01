@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { MinusOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import SearchItem from "../components/SearchItem";
 import queryString from "query-string";
-import $ from "jquery";
 import { useDispatch, useSelector } from "react-redux";
 import {
     changeSearchKey,
@@ -10,6 +9,7 @@ import {
     getSearch,
 } from "../actions/search.action";
 import { catFilter } from "./../helper";
+import Paginate from "../components/Paginate";
 function Search({ location }) {
     const { search } = location;
     const searchKey = useSelector((state) => state.search.searchKey);
@@ -17,10 +17,17 @@ function Search({ location }) {
     const searchFilter = useSelector((state) => state.search.filter);
     const isFilter = useSelector((state) => state.search.isFilter);
     const [currentSearch, setCurrentSearch] = useState(null);
-
+    const [page, setPage] = useState(1);
     const [cat, setCat] = useState([]);
     const dispatch = useDispatch();
 
+    const onPageChange = (e, value) => {
+        e.preventDefault();
+        if (Number(value)) {
+            setPage(value);
+            dispatch(getSearch(searchKey, value));
+        }
+    };
     const handleSearchValue = (e) => {
         let value = e.target.value;
         dispatch(changeSearchKey(value));
@@ -45,6 +52,10 @@ function Search({ location }) {
         dispatch(getSearch(searchKey));
         setCurrentSearch(searchKey);
     };
+    const [slideToggle, setSlideToggle] = useState(false);
+    const toggleSlide = () => {
+        setSlideToggle((prev) => !prev);
+    };
     useEffect(() => {
         if (search && search.length) {
             const searchVal = queryString.parse(search).q;
@@ -52,13 +63,8 @@ function Search({ location }) {
             dispatch(getSearch(searchVal));
             setCurrentSearch(searchVal);
         }
-        $(".js-toggle").on("click", function () {
-            $(this).parent().find("ul").slideToggle();
-            $(this).toggleClass("is-open");
-        });
         setCat(catFilter);
     }, [dispatch, search, searchResults]);
-
     return (
         <div className="p-search">
             <div className="l-container">
@@ -66,12 +72,15 @@ function Search({ location }) {
                     <div className="p-search__left">
                         <h3>Search</h3>
                         <div className="p-search__filter">
-                            <div className="p-search__filter__control js-toggle ">
+                            <div
+                                className="p-search__filter__control"
+                                onClick={() => toggleSlide()}
+                            >
                                 <h4>Categories</h4>
                                 <PlusOutlined className="plus" />
                                 <MinusOutlined className="minus" />
                             </div>
-                            <ul>
+                            <ul className={slideToggle ? "is-open" : ""}>
                                 {cat.length &&
                                     cat.map((item) => (
                                         <li key={item.value}>
@@ -129,61 +138,80 @@ function Search({ location }) {
 
                         <div className="p-search__list row">
                             {isFilter
-                                ? (searchFilter.length &&
-                                      searchFilter.map((item, index) => (
-                                          <React.Fragment key={index}>
-                                              <SearchItem
-                                                  id={item._id}
-                                                  image={item.posterPath}
-                                                  name={item.title}
-                                                  rated={item.popularity}
-                                                  cat={item.genres.join(", ")}
-                                                  overview={
-                                                      item.overview.substring(
-                                                          0,
-                                                          150
-                                                      ) + "..."
-                                                  }
-                                                  type={
-                                                      item.tvShow
-                                                          ? "tvshow"
-                                                          : "movie"
-                                                  }
-                                              />
-                                          </React.Fragment>
-                                      ))) || (
+                                ? (searchFilter.results &&
+                                      searchFilter.results.length &&
+                                      searchFilter.results.map(
+                                          (item, index) => (
+                                              <React.Fragment key={index}>
+                                                  <SearchItem
+                                                      id={item._id}
+                                                      image={item.posterPath}
+                                                      name={item.title}
+                                                      rated={item.popularity}
+                                                      cat={item.genres.join(
+                                                          ", "
+                                                      )}
+                                                      overview={
+                                                          item.overview.substring(
+                                                              0,
+                                                              150
+                                                          ) + "..."
+                                                      }
+                                                      type={
+                                                          item.tvShow
+                                                              ? "tvshow"
+                                                              : "movie"
+                                                      }
+                                                  />
+                                              </React.Fragment>
+                                          )
+                                      )) || (
                                       <p className="p-search__list--empty">
                                           No filter results found
                                       </p>
                                   )
-                                : (searchResults.length &&
-                                      searchResults.map((item, index) => (
-                                          <React.Fragment key={index}>
-                                              <SearchItem
-                                                  id={item._id}
-                                                  image={item.posterPath}
-                                                  name={item.title}
-                                                  rated={item.popularity}
-                                                  actor=""
-                                                  cat={item.genres.join(", ")}
-                                                  overview={
-                                                      item.overview.substring(
-                                                          0,
-                                                          150
-                                                      ) + "..."
-                                                  }
-                                                  type={
-                                                      item.tvShow
-                                                          ? "tvshow"
-                                                          : "movie"
-                                                  }
-                                              />
-                                          </React.Fragment>
-                                      ))) || (
+                                : (searchResults.results &&
+                                      searchResults.results.length &&
+                                      searchResults.results.map(
+                                          (item, index) => (
+                                              <React.Fragment key={index}>
+                                                  <SearchItem
+                                                      id={item._id}
+                                                      image={item.posterPath}
+                                                      name={item.title}
+                                                      rated={item.popularity}
+                                                      actor=""
+                                                      cat={item.genres.join(
+                                                          ", "
+                                                      )}
+                                                      overview={
+                                                          item.overview.substring(
+                                                              0,
+                                                              150
+                                                          ) + "..."
+                                                      }
+                                                      type={
+                                                          item.tvShow
+                                                              ? "tvshow"
+                                                              : "movie"
+                                                      }
+                                                  />
+                                              </React.Fragment>
+                                          )
+                                      )) || (
                                       <p className="p-search__list--empty">
                                           No search results found
                                       </p>
                                   )}
+                        </div>
+                        <div className="p-search__paginate">
+                            <Paginate
+                                page={page}
+                                totalPage={searchResults.totalPages || 0}
+                                onPageChange={(e, value) =>
+                                    onPageChange(e, value)
+                                }
+                            />
                         </div>
                     </div>
                 </div>

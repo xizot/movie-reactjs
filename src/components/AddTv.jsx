@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTV } from "../actions/admin.action";
-import { EyeOutlined, PlusOutlined } from "@ant-design/icons";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { getImageList } from "../helper/reusble";
+var settings = {
+    dots: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 3,
+    infinite: false,
+};
 function AddTv({ nameClass = 0, closePopUp }) {
     const tvDetailData = useSelector((state) => state.admin.tvDetailData);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [firstAirDate, setFirstAirDate] = useState("");
+    const [lastAirDate, setLastAirDate] = useState("");
     const [genres, setGenres] = useState("");
-    const [seasonCount, setSeasonCount] = useState(0);
+    const [listImage, setListImage] = useState([]);
+
+    const [poster, setPoster] = useState(null);
     // const [episodeCount, setEpisodeCount] = useState(0);
     const dispatch = useDispatch();
     const handleClosePopUp = () => {
@@ -16,26 +30,26 @@ function AddTv({ nameClass = 0, closePopUp }) {
     };
     const handleAddTV = () => {
         const data = {
-            imdbId: tvDetailData && tvDetailData.imdbId,
-            // streamPath: videoLink,
-            // isPublic: true,
-            // override: {
-            //     genres: genres.split("/"),
-            //     tagline: movieDetailData.tagline,
-            //     title: title,
-            //     originalTitle: title,
-            //     overview: description,
-            //     posterPath: movieDetailData && movieDetailData.posterPath,
-            //     backdropPath: movieDetailData.backdropPath,
-            //     popularity: movieDetailData.popularity,
-            //     movie: {
-            //         runtime: runtime,
-            //         releaseDate: releaseDate,
-            //         status: movieDetailData.status,
-            //         adult: movieDetailData.adult,
-            //     },
-            // },
+            tmdbId: tvDetailData.tmdbId,
+            isPublic: true,
+            override: {
+                genres: genres.split("/"),
+                tagline: tvDetailData.tagline,
+                title: title,
+                originalTitle: tvDetailData.originalTitle,
+                overview: description,
+                posterPath: poster,
+                backdropPath: tvDetailData.backdropPath,
+                popularity: tvDetailData.popularity,
+                tvShow: {
+                    episodeRuntime: tvDetailData.episodeRuntime || [],
+                    firstAirDate: firstAirDate || tvDetailData.firstAirDate,
+                    lastAirDate: lastAirDate || tvDetailData.lastAirDate,
+                    status: "",
+                },
+            },
         };
+        console.log(tvDetailData);
         dispatch(addTV(data));
     };
 
@@ -46,6 +60,19 @@ function AddTv({ nameClass = 0, closePopUp }) {
             setDescription((tvDetailData && tvDetailData.overview) || "");
             setGenres((tvDetailData && tvDetailData.genres.join("/")) || "");
             setFirstAirDate((tvDetailData && tvDetailData.firstAirDate) || "");
+            setLastAirDate((tvDetailData && tvDetailData.lastAirDate) || "");
+            setPoster((tvDetailData && tvDetailData.posterPath) || null);
+            getImageList(tvDetailData.tmdbId, "tv")
+                .then((res) => {
+                    console.log(res);
+                    setListImage(res.data.posters);
+                    if (res.data.posters.length > 4) {
+                        settings.infinite = true;
+                    }
+                })
+                .catch(() => {
+                    setListImage([]);
+                });
         }
     }, [dispatch, tvDetailData]);
     return (
@@ -68,16 +95,24 @@ function AddTv({ nameClass = 0, closePopUp }) {
                     <h3 className="c-popup2__title">{title}</h3>
                 </div>
                 <div className="c-popup2__bottom c-addfilm">
-                    <input
-                        type="file"
-                        id="upload-image"
-                        style={{ display: "none" }}
-                    />
-                    <div className="c-addfilm__img">
-                        <img
-                            src={tvDetailData && tvDetailData.posterPath}
-                            alt=""
-                        />
+                    <div className="c-addfilm__poster">
+                        <img className="c-addfilm__img" src={poster} alt="" />
+
+                        {listImage.length ? (
+                            <Slider {...settings} className="c-addfilm__slick">
+                                {listImage.map((item, index) => (
+                                    <div
+                                        className="c-addfilm__select--img"
+                                        key={index}
+                                        onClick={() => setPoster(item)}
+                                    >
+                                        <img src={item} alt="" />
+                                    </div>
+                                ))}
+                            </Slider>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div className="c-addfilm__info">
                         <div className="c-form">
@@ -142,6 +177,26 @@ function AddTv({ nameClass = 0, closePopUp }) {
                                         </div>
                                     </div>
                                     <div className="col-lg-4 col-md-6 col-sm-12">
+                                        <div className=" c-form__group ">
+                                            <div className="gutter">
+                                                <input
+                                                    className="c-form__input"
+                                                    type="text"
+                                                    value={lastAirDate}
+                                                    onChange={(e) =>
+                                                        setLastAirDate(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    required
+                                                />
+                                                <label className="c-form__label">
+                                                    Last Air Date
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-4 col-md-6 col-sm-12">
                                         <div className="c-form__group">
                                             <div className="gutter">
                                                 <input
@@ -160,44 +215,7 @@ function AddTv({ nameClass = 0, closePopUp }) {
                                                 </label>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                        <div className="row">
-                                            <div className="col-lg-4">
-                                                <div className="c-form__group">
-                                                    <div className="gutter">
-                                                        <input
-                                                            className="c-form__input"
-                                                            type="text"
-                                                            required
-                                                            value={seasonCount}
-                                                            onChange={(e) =>
-                                                                setSeasonCount(
-                                                                    e.target
-                                                                        .value
-                                                                )
-                                                            }
-                                                            readOnly
-                                                        />
-                                                        <label className="c-form__label">
-                                                            Season Count
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-8">
-                                                {seasonCount !== 0 ? (
-                                                    <span className="c-form__btn c-form__btn--view">
-                                                        <EyeOutlined /> View
-                                                    </span>
-                                                ) : (
-                                                    <span className="c-form__btn c-form__btn--add">
-                                                        <PlusOutlined /> Add
-                                                    </span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>{" "}
                                 </div>
                             </form>
                         </div>

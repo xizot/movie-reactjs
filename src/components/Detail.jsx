@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getComment, loadComment } from "../actions/film.action";
+import { getComment, postComment } from "../helper/reusble";
 import CommentItem from "./CommentItem";
 import Detail1 from "./Detail1";
 import Detail2 from "./Detail2";
 
 function Detail({ id }) {
-    const comments = useSelector((state) => state.film.comment);
+    const [comments, setComments] = useState({});
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const movieInfo = useSelector((state) => state.movie.data);
     const type = useSelector((state) => state.movie.type);
-
+    const [commentValue, setCommentValue] = useState("");
+    const handleCommentValue = (e) => {
+        const value = e.target.value;
+        if (value && value.length < 1000) {
+            setCommentValue(value);
+        }
+    };
+    const handleSubmitComment = () => {
+        postComment(id, commentValue)
+            .then((res) => {
+                setCommentValue("");
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
 
@@ -20,12 +36,15 @@ function Detail({ id }) {
     };
 
     useEffect(() => {
-        dispatch(loadComment(1));
-    }, [dispatch]);
+        getComment(id)
+            .then((res) => {
+                setComments(res);
+            })
+            .catch(() => {
+                setComments({});
+            });
+    }, [dispatch, id]);
 
-    useEffect(() => {
-        dispatch(getComment(1, page));
-    }, [dispatch, page, id]);
     return (
         <>
             <section className="p-detail">
@@ -54,8 +73,8 @@ function Detail({ id }) {
                             poster={movieInfo.posterPath}
                         />
                     ) : (
-                            <></>
-                        ))}
+                        <></>
+                    ))}
 
                 <div className="p-detail3 u-fade">
                     <div className="l-container">
@@ -68,41 +87,50 @@ function Detail({ id }) {
                                         id=""
                                         className=""
                                         placeholder="Enter your comment"
+                                        onChange={(e) => handleCommentValue(e)}
                                     ></textarea>
-                                    <button className="c-btn c-btn--primary">
+                                    <button
+                                        className="c-btn c-btn--primary"
+                                        onClick={() => handleSubmitComment()}
+                                    >
                                         POST COMMENT
                                     </button>
                                 </div>
                                 <div className="p-detail3__comments">
-                                    {comments.length &&
-                                        comments.map((item) => (
+                                    {comments.results &&
+                                        comments.results.length &&
+                                        comments.results.map((item) => (
                                             <React.Fragment key={item.id}>
                                                 <CommentItem
                                                     id={item.id}
                                                     avatar={item.avatar}
                                                     name={item.name}
                                                     content={item.content}
+                                                    date={item.date}
                                                 />
                                             </React.Fragment>
                                         ))}
                                 </div>
-
-                                <button
-                                    className="c-btn c-btn--loadmore"
-                                    onClick={() => loadMore()}
-                                >
-                                    Load more
-                                </button>
+                                {comments && page < comments.totalPages ? (
+                                    <button
+                                        className="c-btn c-btn--loadmore"
+                                        onClick={() => loadMore()}
+                                    >
+                                        Load more
+                                    </button>
+                                ) : (
+                                    <></>
+                                )}
                             </div>
                         )) || (
-                                <div className="p-detail3__notlogin">
-                                    <p>
-                                        You must be{" "}
-                                        <Link to="/login">logged in</Link> to see
+                            <div className="p-detail3__notlogin">
+                                <p>
+                                    You must be{" "}
+                                    <Link to="/login">logged in</Link> to see
                                     comment
                                 </p>
-                                </div>
-                            )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

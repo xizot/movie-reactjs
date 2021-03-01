@@ -600,19 +600,56 @@ $topHeight: 100px;
         flex-direction: column;
         width: 100%;
     }
+    &__slick {
+        margin-top: 20px;
+        margin-left: -5px;
+        margin-right: -5px;
+        .slick-arrow {
+            text-indent: -9999px;
+            white-space: nowrap;
+            background-color: rgba($color: #000000, $alpha: 0.3);
+            width: 15px;
+            height: 15px;
+        }
+        .slick-arrow.slick-prev {
+            left: 8px;
+            background: url("../img/icons/prev@2x.png") no-repeat center/cover;
+        }
+        .slick-arrow.slick-next {
+            right: 8px;
+            background: url("../img/icons/next@2x.png") no-repeat center/cover;
+        }
+    }
+    &__slick &__select--img {
+        height: 100px;
+        img {
+            padding: 0 5px;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
     &__img {
-        width: 300px;
+        width: 100%;
         height: 400px;
-        margin-right: 50px;
-        border-radius: 4px;
-        overflow: hidden;
         @include breakpoint(pro) {
-            width: 250px;
             height: 350px;
         }
         @include breakpoint(tab) {
-            width: 200px;
             height: 300px;
+        }
+    }
+    &__poster {
+        width: 300px;
+
+        margin-right: 50px;
+        border-radius: 4px;
+        // overflow: hidden;
+        @include breakpoint(pro) {
+            width: 250px;
+        }
+        @include breakpoint(tab) {
+            width: 200px;
             margin-right: 25px;
             margin-bottom: 25px;
         }
@@ -622,12 +659,6 @@ $topHeight: 100px;
             max-height: 100%;
             margin-right: unset;
             margin-bottom: 25px;
-        }
-
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
         }
     }
     &__info {

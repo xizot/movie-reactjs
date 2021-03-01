@@ -10,7 +10,7 @@ function BrowseItem({ imgSrc, title, cat, id, overview }) {
             </Link>
             <div className="c-browse-item__content">
                 <div className="c-browse-item__content__img">
-                    <img src={imgSrc} alt={title} />
+                    <img src={imgSrc} alt={title} loading="lazy" />
                     <span className="c-browse-item__cat">{cat}</span>
                 </div>
                 <div className="c-browse-item__info">

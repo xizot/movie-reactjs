@@ -6,11 +6,12 @@ import {
 } from "./../types/search.type";
 import axios from "./../axios";
 
-export const getSearch = (value) => (dispatch) => {
+export const getSearch = (value, page = 1) => (dispatch) => {
     if (!value) return;
     axios
-        .get(`/media/fetch?query=${value}`)
+        .get(`/media/fetch?query=${value}&limit=10&page=${page}`)
         .then((res) => {
+            console.log(res);
             dispatch({
                 type: GET_SEARCH,
                 payload: { ...res.data, searchKey: value },

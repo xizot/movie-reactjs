@@ -2,7 +2,17 @@ import { CloudUploadOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMovie } from "../actions/admin.action";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { getImageList } from "../helper/reusble";
+var settings = {
+    dots: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 3,
+    infinite: false,
+};
 function AddMovie({ nameClass, closePopUp }) {
     const movieDetailData = useSelector((state) => state.admin.movieDetailData);
     const [title, setTitle] = useState("");
@@ -11,6 +21,8 @@ function AddMovie({ nameClass, closePopUp }) {
     const [runtime, setRuntime] = useState("");
     const [genres, setGenres] = useState("");
     const [videoLink, setVideoLink] = useState("");
+    const [listImage, setListImage] = useState([]);
+    const [poster, setPoster] = useState(null);
     const dispatch = useDispatch();
     const handleClosePopUp = () => {
         closePopUp();
@@ -26,7 +38,8 @@ function AddMovie({ nameClass, closePopUp }) {
                 title: title,
                 originalTitle: title,
                 overview: description,
-                posterPath: movieDetailData && movieDetailData.posterPath,
+                posterPath:
+                    poster || (movieDetailData && movieDetailData.posterPath),
                 backdropPath: movieDetailData.backdropPath,
                 popularity: movieDetailData.popularity,
                 movie: {
@@ -56,6 +69,20 @@ function AddMovie({ nameClass, closePopUp }) {
                 process.env.REACT_APP_VIDEO_URL +
                     (movieDetailData && movieDetailData.streamPath) || ""
             );
+
+            setPoster((movieDetailData && movieDetailData.posterPath) || null);
+            getImageList(movieDetailData.imdbId, "movie")
+                .then((res) => {
+                    console.log(res);
+                    setListImage(res.data.posters);
+                    if (res.data.posters.length > 4) {
+                        settings.infinite = true;
+                    }
+                })
+                .catch(() => {
+                    setListImage([]);
+                });
+            // console.log(list)
         }
     }, [dispatch, movieDetailData]);
     return (
@@ -83,11 +110,24 @@ function AddMovie({ nameClass, closePopUp }) {
                         id="upload-image"
                         style={{ display: "none" }}
                     />
-                    <div className="c-addfilm__img">
-                        <img
-                            src={movieDetailData && movieDetailData.posterPath}
-                            alt=""
-                        />
+                    <div className="c-addfilm__poster">
+                        <img className="c-addfilm__img" src={poster} alt="" />
+
+                        {listImage.length ? (
+                            <Slider {...settings} className="c-addfilm__slick">
+                                {listImage.map((item, index) => (
+                                    <div
+                                        className="c-addfilm__select--img"
+                                        key={index}
+                                        onClick={() => setPoster(item)}
+                                    >
+                                        <img src={item} alt="" />
+                                    </div>
+                                ))}
+                            </Slider>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div className="c-addfilm__info">
                         <div className="c-form">

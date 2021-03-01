@@ -56,38 +56,40 @@ function Admin() {
         setDeleteAlertMsg("");
         setIsDeletedError(false);
         // ▲ Reset state ▲
-
-        deleteByID(mediaId, type)
-            .then((data) => {
-                setIsDeletedError(false);
-                setIsShowDeleteAlert(true);
-                setDeleteAlertMsg(data.message);
-                //▼ Reload data ▼
-                if (type === "movie") {
-                    axios
-                        .get(
-                            `/media/fetch?limit=10&type=movie&page=${currentMoviePage}`
-                        )
-                        .then((res) => {
-                            setMovieData(res.data);
-                        });
-                } else {
-                    axios
-                        .get(
-                            `/media/fetch?limit=10&type=tv&page=${currentTvPage}`
-                        )
-                        .then((res) => {
-                            setTvData(res.data);
-                        });
-                }
-                //▲ Reload data ▲
-            })
-            .catch((err) => {
-                const error = getErrorResponse(err);
-                setIsDeletedError(true);
-                setIsShowDeleteAlert(true);
-                setDeleteAlertMsg(error);
-            });
+        let result = window.confirm("Are you sure to delete this item?");
+        if (result) {
+            deleteByID(mediaId, type)
+                .then((data) => {
+                    setIsDeletedError(false);
+                    setIsShowDeleteAlert(true);
+                    setDeleteAlertMsg(data.message);
+                    //▼ Reload data ▼
+                    if (type === "movie") {
+                        axios
+                            .get(
+                                `/media/fetch?limit=10&type=movie&page=${currentMoviePage}`
+                            )
+                            .then((res) => {
+                                setMovieData(res.data);
+                            });
+                    } else {
+                        axios
+                            .get(
+                                `/media/fetch?limit=10&type=tv&page=${currentTvPage}`
+                            )
+                            .then((res) => {
+                                setTvData(res.data);
+                            });
+                    }
+                    //▲ Reload data ▲
+                })
+                .catch((err) => {
+                    const error = getErrorResponse(err);
+                    setIsDeletedError(true);
+                    setIsShowDeleteAlert(true);
+                    setDeleteAlertMsg(error);
+                });
+        }
     };
 
     const HandleOpenSearch = (type) => {
@@ -114,6 +116,7 @@ function Admin() {
             dispatch(searchMovieByQuery(value, 1));
         } else if (type === "tv") {
             dispatch(searchTvByQuery(value, 1));
+            console.log(tvData);
         }
     };
     const handleSubmitSearch = (e, page) => {
@@ -159,7 +162,13 @@ function Admin() {
         setIsLoading(true);
         dispatch({ type: ADD_RESET });
     }, [dispatch]);
-
+    useEffect(() => {
+        if (isAdded) {
+            setIsOpenTvPopUp(false);
+            setIsOpenMoviePopUp(false);
+            setOpenSearch(false);
+        }
+    }, [isAdded]);
     //▼ Fetch movie data ▼
     useEffect(() => {
         axios
@@ -167,7 +176,7 @@ function Admin() {
             .then((res) => {
                 setMovieData(res.data);
             });
-    }, [currentMoviePage]);
+    }, [currentMoviePage, isAdded]);
     //▲ Fetch movie data ▲
 
     //▼ Fetch tvshow data ▼
@@ -177,7 +186,7 @@ function Admin() {
             .then((res) => {
                 setTvData(res.data);
             });
-    }, [currentTvPage]);
+    }, [currentTvPage, isAdded]);
     //▲ Fetch tvshow data ▲
 
     return (
@@ -318,7 +327,7 @@ function Admin() {
                 nameClass={isOpenTvPopUp ? "is-open" : ""}
                 closePopUp={() => closePopUp()}
             />
-            <AddSeason />
+            <AddSeason nameClass={isAdded && type == "tv" ? "is-open" : ""} />
 
             <div className="p-admin ">
                 <div className="c-panel ">
