@@ -34,6 +34,8 @@ const initialState = {
     data: null,
     movieDetailData: null,
     tvDetailData: null,
+
+    addSuccessMessage: null,
 };
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -112,6 +114,7 @@ const adminReducer = (state = initialState, action) => {
                 isAdding: false,
                 isAdded: false,
                 addError: null,
+                addSuccessMessage: null,
             };
         case ADD_REQUEST:
             return {
@@ -119,6 +122,7 @@ const adminReducer = (state = initialState, action) => {
                 isAdding: true,
                 isAdded: false,
                 addError: null,
+                addSuccessMessage: null,
             };
         case ADD_REQUEST_SUCCESS:
             return {
@@ -126,6 +130,7 @@ const adminReducer = (state = initialState, action) => {
                 isAdding: false,
                 isAdded: true,
                 addError: null,
+                addSuccessMessage: action.payload,
             };
         case ADD_REQUEST_FAIL:
             return {
@@ -133,6 +138,7 @@ const adminReducer = (state = initialState, action) => {
                 isAdding: false,
                 isAdded: true,
                 addError: action.payload,
+                addSuccessMessage: null,
             };
         //▲ Add Media ▲
         default:

@@ -175,9 +175,9 @@ export const addMovie = (data) => (dispatch) => {
     axios
         .post("/media/movie", data, { headers: useAuthorization() })
         .then((res) => {
-            console.log(res);
             dispatch({
                 type: ADD_REQUEST_SUCCESS,
+                payload: res.data,
             });
         })
         .catch((err) => {
@@ -196,10 +196,9 @@ export const addTV = (data) => (dispatch) => {
     axios
         .post("/media/tv", data, { headers: useAuthorization() })
         .then((res) => {
-            console.log(res);
-
             dispatch({
                 type: ADD_REQUEST_SUCCESS,
+                payload: res.data,
             });
         })
         .catch((err) => {
@@ -211,4 +210,44 @@ export const addTV = (data) => (dispatch) => {
                 status: err.response.status,
             });
         });
+};
+export const addSeason = (data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`/media/tv/season`, data, { headers: useAuthorization() })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+export const updateSeason = (data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`/media/tv/season`, data, { headers: useAuthorization() })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+export const deleteSeason = (mediaId, season) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .patch(
+                "/media/tv/season",
+                { mediaId, season },
+                { headers: useAuthorization() }
+            )
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
 };

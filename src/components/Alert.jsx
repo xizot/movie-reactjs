@@ -5,6 +5,9 @@ function Alert({ msg, type = "" }) {
     const handleClose = () => {
         setIsHide(true);
     };
+    setTimeout(() => {
+        setIsHide(true);
+    }, 5000);
     return (
         <div className={`c-alert ${type} ${!isHide ? "is-show" : ""}`}>
             {msg}

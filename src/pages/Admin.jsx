@@ -20,6 +20,10 @@ import { ADD_RESET } from "../types/admin.type";
 
 function Admin() {
     const dispatch = useDispatch();
+    const addSuccessMessage = useSelector(
+        (state) => state.admin.addSuccessMessage
+    );
+
     const [isLoading, setIsLoading] = useState(false);
 
     const [openOption, setOpenOption] = useState(false);
@@ -37,6 +41,7 @@ function Admin() {
     const [currentTvPage, setCurrentTvPage] = useState(1);
     const [movieData, setMovieData] = useState({});
     const [tvData, setTvData] = useState({});
+    const [tvID, setTvID] = useState(null);
 
     const [isShowDeleteAlert, setIsShowDeleteAlert] = useState(false);
     const [deleteAlertMsg, setDeleteAlertMsg] = useState("");
@@ -163,12 +168,13 @@ function Admin() {
         dispatch({ type: ADD_RESET });
     }, [dispatch]);
     useEffect(() => {
-        if (isAdded) {
+        if (isAdded && !addError) {
             setIsOpenTvPopUp(false);
             setIsOpenMoviePopUp(false);
             setOpenSearch(false);
+            setTvID((addSuccessMessage && addSuccessMessage._id) || null);
         }
-    }, [isAdded]);
+    }, [isAdded, addSuccessMessage, addError]);
     //▼ Fetch movie data ▼
     useEffect(() => {
         axios
@@ -203,7 +209,7 @@ function Admin() {
             )}
             {isAdded ? (
                 <Alert
-                    msg={addError ? addError : "Added Successfully"}
+                    msg={addError ? addError : addSuccessMessage.message}
                     type={addError ? "c-alert--error" : "c-alert--success"}
                 />
             ) : (
@@ -327,7 +333,12 @@ function Admin() {
                 nameClass={isOpenTvPopUp ? "is-open" : ""}
                 closePopUp={() => closePopUp()}
             />
-            <AddSeason nameClass={isAdded && type == "tv" ? "is-open" : ""} />
+            <AddSeason
+                nameClass={
+                    !addError && isAdded && type == "tv" ? "is-open" : ""
+                }
+                mediaId={tvID}
+            />
 
             <div className="p-admin ">
                 <div className="c-panel ">

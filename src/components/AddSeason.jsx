@@ -1,32 +1,201 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import axios from "../axios";
+import {
+    addSeason,
+    updateSeason,
+    deleteSeason,
+} from "./../actions/admin.action";
 import { ADD_RESET } from "../types/admin.type";
+import { getErrorResponse } from "../helper";
+import Alert from "./Alert";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getTvDetail } from "../actions/admin.action";
 // import AddSeasonItem from "./AddSeasonItem";
 
 function AddSeason({ nameClass, mediaId }) {
-    // const tvDetailData = useSelector((state) => state.admin.tvDetailData);
-    // const [currentSeason, setCurrentSeason] = useState(null);
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(getTvDetail("118255"));
-    // }, [dispatch]);
-    console.log(mediaId);
     const dispatch = useDispatch();
     const resetState = () => dispatch({ type: ADD_RESET });
+    const [tvDetailData, setTvDetailData] = useState(null);
+    const [seasonNumber, setSeasonNumber] = useState("");
+    const [airDate, setAirDate] = useState("");
+    const [overview, setOverview] = useState("");
+    const [seasonName, setSeasonName] = useState("");
+    const [isAdded, setIsAdded] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [resMessage, setResMessage] = useState("");
+    const [currentSeason, setCurrentSeason] = useState(null);
+
+    const [type, setType] = useState("new");
+
+    const handleAddSeason = () => {
+        setIsAdded(false);
+        setIsError(false);
+        const data = {
+            mediaId: mediaId,
+            season: seasonNumber,
+            isPublic: true,
+            override: {
+                airDate: airDate,
+                name: seasonName,
+                overview: overview,
+                posterPath: "",
+            },
+        };
+        addSeason(data)
+            .then((res) => {
+                setIsAdded(true);
+                setResMessage(res.data.message);
+                axios
+                    .get(`media/details/${mediaId}`)
+                    .then((res) => {
+                        setTvDetailData(res.data);
+                    })
+                    .catch((err) => {
+                        setTvDetailData(null);
+                        console.log(err);
+                    });
+            })
+            .catch((err) => {
+                const error = getErrorResponse(err);
+                setResMessage(error);
+                setIsError(true);
+                setIsAdded(true);
+            });
+    };
+    const handleUpdateSeason = () => {
+        setIsAdded(false);
+        setIsError(false);
+        const data = {
+            mediaId: mediaId,
+            season: seasonNumber,
+            isPublic: true,
+            override: {
+                airDate: airDate,
+                name: seasonName,
+                overview: overview,
+                posterPath: "",
+            },
+        };
+        updateSeason(data)
+            .then((res) => {
+                setIsAdded(true);
+                setResMessage(res.data.message);
+                axios
+                    .get(`media/details/${mediaId}`)
+                    .then((res) => {
+                        setTvDetailData(res.data);
+                    })
+                    .catch((err) => {
+                        setTvDetailData(null);
+                        console.log(err);
+                    });
+            })
+            .catch((err) => {
+                const error = getErrorResponse(err);
+                setResMessage(error);
+                setIsError(true);
+                setIsAdded(true);
+            });
+    };
+    const handleDeleteSeason = () => {
+        if (currentSeason) {
+            setIsAdded(false);
+            setIsError(false);
+            deleteSeason(mediaId, currentSeason)
+                .then((res) => {
+                    setResMessage(res.data.message);
+                    setIsAdded(true);
+                    handleAddNew();
+
+                    axios
+                        .get(`media/details/${mediaId}`)
+                        .then((res) => {
+                            setTvDetailData(res.data);
+                        })
+                        .catch((err) => {
+                            setTvDetailData(null);
+                            console.log(err);
+                        });
+                })
+                .catch((err) => {
+                    setIsAdded(true);
+                    setIsError(true);
+                    const error = getErrorResponse(err);
+                    setResMessage(error);
+                });
+        }
+    };
+    const handleSeason = (season) => {
+        setCurrentSeason(season);
+        setType("update");
+        axios.get(`media/details/${mediaId}/season/${season}`).then((res) => {
+            setAirDate(res.data.airDate);
+            setOverview(res.data.overview);
+            setSeasonName(res.data.name);
+            setSeasonNumber(res.data.seasonNumber);
+        });
+    };
+    const handleAddNew = () => {
+        setType("new");
+        setCurrentSeason(null);
+        setAirDate("");
+        setOverview("");
+        setSeasonName("");
+        setSeasonNumber("");
+    };
+
+    useEffect(() => {
+        if (mediaId) {
+            axios
+                .get(`media/details/${mediaId}`)
+                .then((res) => {
+                    setTvDetailData(res.data);
+                })
+                .catch(() => setTvDetailData(null));
+        }
+    }, [dispatch, mediaId]);
     return (
         <>
+            {isAdded ? (
+                <Alert
+                    msg={resMessage}
+                    type={isError ? "c-alert--error" : "c-alert--success"}
+                />
+            ) : (
+                <></>
+            )}
             <div className={`c-popup2 c-popup2-season c-step2 ${nameClass}`}>
                 <div className="c-popup2-season__content">
                     <div className="c-popup2-season__left">
                         <h3 className="c-popup2-season__title">Seasons</h3>
                         <ul>
-                            <li>Season 1</li>
-                            <li>Season 2</li>
-                            <li>Season 3</li>
-                            <li>Season 4</li>
-                            <span className="c-popup2-season__addnew">
+                            {(tvDetailData &&
+                                tvDetailData.tvShow.seasons.length &&
+                                tvDetailData.tvShow.seasons.map(
+                                    (item, index) => (
+                                        <li
+                                            className={
+                                                item.seasonNumber ===
+                                                currentSeason
+                                                    ? "is-current"
+                                                    : ""
+                                            }
+                                            key={index}
+                                            onClick={() =>
+                                                handleSeason(item.seasonNumber)
+                                            }
+                                        >
+                                            {item.name}
+                                        </li>
+                                    )
+                                )) || <></>}
+                            <span
+                                className={`c-popup2-season__addnew ${
+                                    !currentSeason ? "is-current" : ""
+                                }`}
+                                onClick={() => handleAddNew()}
+                            >
                                 Add New
                             </span>
                         </ul>
@@ -42,13 +211,35 @@ function AddSeason({ nameClass, mediaId }) {
                                         <div className="col-lg-4">
                                             <div className="c-form__group ">
                                                 <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
+                                                    {type === "update" ? (
+                                                        <input
+                                                            className="c-form__input"
+                                                            type="text"
+                                                            value={seasonNumber}
+                                                            onChange={(e) =>
+                                                                setSeasonNumber(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }
+                                                            readOnly
+                                                        />
+                                                    ) : (
+                                                        <input
+                                                            className="c-form__input"
+                                                            type="text"
+                                                            value={seasonNumber}
+                                                            onChange={(e) =>
+                                                                setSeasonNumber(
+                                                                    e.target
+                                                                        .value
+                                                                )
+                                                            }
+                                                            required
+                                                        />
+                                                    )}
                                                     <label className="c-form__label">
-                                                        Title
+                                                        Season Number
                                                     </label>
                                                 </div>
                                             </div>
@@ -59,10 +250,16 @@ function AddSeason({ nameClass, mediaId }) {
                                                     <input
                                                         className="c-form__input"
                                                         type="text"
+                                                        value={airDate}
+                                                        onChange={(e) =>
+                                                            setAirDate(
+                                                                e.target.value
+                                                            )
+                                                        }
                                                         required
                                                     />
                                                     <label className="c-form__label">
-                                                        Title
+                                                        Air Date
                                                     </label>
                                                 </div>
                                             </div>
@@ -73,10 +270,16 @@ function AddSeason({ nameClass, mediaId }) {
                                                     <input
                                                         className="c-form__input"
                                                         type="text"
+                                                        value={seasonName}
+                                                        onChange={(e) =>
+                                                            setSeasonName(
+                                                                e.target.value
+                                                            )
+                                                        }
                                                         required
                                                     />
                                                     <label className="c-form__label">
-                                                        Title
+                                                        Name
                                                     </label>
                                                 </div>
                                             </div>
@@ -87,24 +290,16 @@ function AddSeason({ nameClass, mediaId }) {
                                                     <input
                                                         className="c-form__input"
                                                         type="text"
+                                                        value={overview}
+                                                        onChange={(e) =>
+                                                            setOverview(
+                                                                e.target.value
+                                                            )
+                                                        }
                                                         required
                                                     />
                                                     <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12">
-                                            <div className="c-form__group height-150">
-                                                <div className="gutter">
-                                                    <textarea
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
+                                                        Overview
                                                     </label>
                                                 </div>
                                             </div>
@@ -112,16 +307,41 @@ function AddSeason({ nameClass, mediaId }) {
                                     </div>
                                 </form>
                                 <div className="c-popup2-season__actions">
+                                    {type === "update" ? (
+                                        <>
+                                            <button
+                                                className="c-btn"
+                                                onClick={() =>
+                                                    handleUpdateSeason()
+                                                }
+                                            >
+                                                Update
+                                            </button>
+                                            <button
+                                                className="c-btn"
+                                                onClick={() =>
+                                                    handleDeleteSeason()
+                                                }
+                                            >
+                                                Delete
+                                            </button>
+                                            <button className="c-btn">
+                                                Show Episode
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <button
+                                            className="c-btn"
+                                            onClick={() => handleAddSeason()}
+                                        >
+                                            Add
+                                        </button>
+                                    )}
                                     <button
                                         className="c-btn"
                                         onClick={() => resetState()}
                                     >
                                         Cancel
-                                    </button>
-                                    <button className="c-btn">Update</button>
-                                    <button className="c-btn">Delete</button>
-                                    <button className="c-btn">
-                                        Show Episode
                                     </button>
                                 </div>
                             </div>
