@@ -2,6 +2,9 @@ import {
     GET_HISTORY_REQUEST,
     GET_HISTORY_SUCCESS,
     GET_HISTORY_FAIL,
+    ADD_HISTORY_REQUEST,
+    ADD_HISTORY_SUCCESS,
+    ADD_HISTORY_FAIL,
 } from "../types/history.type";
 
 const initialState = {
@@ -27,7 +30,21 @@ const historyReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false,
             };
- 
+        case ADD_HISTORY_REQUEST:
+            return {
+                ...state,
+                isAdding: true,
+            };
+        case ADD_HISTORY_SUCCESS:
+            return {
+                ...state,
+                isAdding: true,
+            };   
+        case ADD_HISTORY_FAIL:
+            return {
+                ...state,
+                isAdding: false,
+            };
         default:
             return state;
     }

@@ -3,6 +3,8 @@ import React from "react";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
 import { history } from "../helper";
+import { useDispatch } from "react-redux";
+import { addHistory } from "../actions/history.action";
 function Detail1({
     type,
     title,
@@ -13,7 +15,9 @@ function Detail1({
     year,
     id,
     movieInfo,
+    mediaId
 }) {
+    const dispath = useDispatch();
     const openPopUp = () => {
         if (type === "movie") {
             history.push(`/movie/${id}/watch`);
@@ -25,6 +29,7 @@ function Detail1({
         if (type === "tv") {
             $(".p-popup").fadeOut(500);
         }
+        dispath(addHistory(mediaId));
     };
     return (
         <div className="p-detail1 ">
