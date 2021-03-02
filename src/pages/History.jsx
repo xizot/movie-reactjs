@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import SearchItem from "../components/SearchItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../actions/history.action";
+import Paginate from "../components/Paginate";
 function History() {
     const dispath = useDispatch();
 
     let data = useSelector((state) => state.history.data);
-    
+
     const [page, setPage] = useState(0);
+
+    const onPageChange = (e, value) => {
+        e.preventDefault();
+        if (Number(value)) {
+            setPage(value);
+        }
+    };
 
     useEffect(() => {
         setPage(1);
         dispath(getHistory(page));
-    }, [dispath,page]);
+    }, [dispath, page]);
 
     return (
         <div className="p-search">
@@ -48,6 +56,15 @@ function History() {
                                 </React.Fragment>
                             ))}
                     </div>
+                </div>
+                <div className="p-search__paginate">
+                    <Paginate
+                        page={page}
+                        totalPage={data.totalPages || 0}
+                        onPageChange={(e, value) =>
+                            onPageChange(e, value)
+                        }
+                    />
                 </div>
             </div>
         </div>

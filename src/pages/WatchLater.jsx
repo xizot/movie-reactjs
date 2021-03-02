@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import SearchItem from "../components/SearchItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getWatchlist } from "../actions/watchlist.action";
-
+import Paginate from "../components/Paginate";
 function Watchlater() {
     const dispath = useDispatch();
     let data = useSelector((state) => state.watchlist.data);
 
     const [page, setPage] = useState(0);
+
+    const onPageChange = (e, value) => {
+        e.preventDefault();
+        if (Number(value)) {
+            setPage(value);
+        }
+    };
 
     useEffect(() => {
         setPage(1);
@@ -45,11 +52,20 @@ function Watchlater() {
                                                     ? "tvshow"
                                                     : "movie"
                                             }
-                                        />
+                                        />                                      
                                     </React.Fragment>
                                 ))}
                         </div>
                     </div>
+                    <div className="p-search__paginate">
+                            <Paginate
+                                page={page}
+                                totalPage={data.totalPages || 0}
+                                onPageChange={(e, value) =>
+                                    onPageChange(e, value)
+                                }
+                            />
+                        </div>
                 </div>
             </div>
         </div>
