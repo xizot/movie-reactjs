@@ -19,8 +19,7 @@ function Detail1({
 }) {
     const dispath = useDispatch();
     const openPopUp = () => {
-        const mediaInt = parseInt(mediaId);
-        dispath(addHistory(mediaInt));
+        dispath(addHistory(mediaId));
         if (type === "movie") {
             history.push(`/movie/${id}/watch`);
         } else {
