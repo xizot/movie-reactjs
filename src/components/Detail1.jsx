@@ -19,6 +19,8 @@ function Detail1({
 }) {
     const dispath = useDispatch();
     const openPopUp = () => {
+        const mediaInt = parseInt(mediaId);
+        dispath(addHistory(mediaInt));
         if (type === "movie") {
             history.push(`/movie/${id}/watch`);
         } else {
@@ -29,7 +31,7 @@ function Detail1({
         if (type === "tv") {
             $(".p-popup").fadeOut(500);
         }
-        dispath(addHistory(mediaId));
+        
     };
     return (
         <div className="p-detail1 ">
