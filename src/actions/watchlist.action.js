@@ -50,7 +50,7 @@ export const addWatchlist = (mediaId) => (dispatch) => {
     });
     if (token) {
         axios
-            .post('/watchlist',mediaId, { headers: useAuthorization() })
+            .post('/watchlist',{mediaId}, { headers: useAuthorization() })
             .then((res) => {
                 dispatch({
                     type: ADD_WATCHLIST_SUCCESS,

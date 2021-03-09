@@ -47,7 +47,7 @@ export const addHistory = (mediaId) => (dispatch) => {
     });
     if (token) {
         axios
-            .post("/history", mediaId, { headers: useAuthorization() })
+            .post("/history", {mediaId}, { headers: useAuthorization() })
             .then((res) => {
                 dispatch({
                     type: ADD_HISTORY_SUCCESS,

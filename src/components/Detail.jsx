@@ -51,7 +51,7 @@ function Detail({ id }) {
                 <Detail1
                     id={id}
                     type={type}
-                    mediaId={movieInfo.movie._id}
+                    mediaId={movieInfo._id}
                     title={movieInfo.title}
                     cat={movieInfo.genres && movieInfo.genres.join(", ")}
                     description={movieInfo.overview}
