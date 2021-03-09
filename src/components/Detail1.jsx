@@ -5,6 +5,7 @@ import $ from "jquery";
 import { history } from "../helper";
 import { useDispatch } from "react-redux";
 import { addHistory } from "../actions/history.action";
+import {addWatchlist} from "../actions/watchlist.action"
 function Detail1({
     type,
     title,
@@ -24,6 +25,9 @@ function Detail1({
         } else {
             $(".p-popup").fadeIn(500);
         }
+    };    
+    const addFavorite = () => {
+        dispath(addWatchlist(mediaId));
     };
     const closePopup = () => {
         if (type === "tv") {
@@ -54,7 +58,7 @@ function Detail1({
                             </p>
 
                             <div className="p-detail1__action ">
-                                <button className="c-icon is-hover">
+                                <button className="c-icon is-hover"  onClick={() => addFavorite()}>
                                     <PlusOutlined className="c-icon--plus" />
                                     <p>Add To Favourite</p>
                                 </button>
