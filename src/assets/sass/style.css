@@ -3831,6 +3831,20 @@ img {
   position: relative;
 }
 
+.c-search-item__delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: white;
+  z-index: 2;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.c-search-item__delete:hover {
+  color: #e90101;
+}
+
 .c-search-item__img {
   height: 145px;
   margin-bottom: 10px;
@@ -3878,6 +3892,7 @@ img {
   position: absolute;
   top: 10px;
   left: 10px;
+  margin-right: 35px;
   font-size: 1.2rem;
   background-color: rgba(255, 255, 255, 0.8);
   color: #e90101;

@@ -9,6 +9,18 @@
     .gutter {
         position: relative;
     }
+    &__delete {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: white;
+        z-index: 2;
+        font-size: 1.8rem;
+        cursor: pointer;
+        &:hover {
+            color: $mainColor;
+        }
+    }
     &__img {
         height: 145px;
         margin-bottom: 10px;
@@ -45,6 +57,7 @@
         position: absolute;
         top: 10px;
         left: 10px;
+        margin-right: 35px;
         font-size: 1.2rem;
         background-color: rgba($color: #fff, $alpha: 0.8);
         color: $mainColor;
