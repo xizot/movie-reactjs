@@ -1,6 +1,15 @@
 import axios from "../axios";
 import { useAuthorization } from "./useAuthorization";
 
+export const getAvatarURL = (id) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/user/${id}/avatar`)
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err));
+    });
+};
+
 export const getImageList = (id, type) => {
     let query = `/tmdb/movie/${id}/images`;
     if (type === "tv") {
@@ -16,7 +25,7 @@ export const getImageList = (id, type) => {
 export const getComment = (mediaId, page = 1) => {
     return new Promise((resolve, reject) => {
         axios
-            .get(`/comment/${mediaId}?page=${page}`)
+            .get(`/comment/${mediaId}?page=${page}&limit=10`)
             .then((res) => resolve(res))
             .catch((err) => reject(err));
     });
@@ -32,5 +41,45 @@ export const postComment = (mediaId, content) => {
             )
             .then((res) => resolve(res))
             .catch((err) => reject(err));
+    });
+};
+
+export const deleteComment = (commentId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .patch("/comment", { commentId }, { headers: useAuthorization() })
+            .then((res) => resolve(res))
+            .catch((err) => reject(err));
+    });
+};
+
+export const getRatingCount = (mediaId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/rating/${mediaId}/count`)
+            .then((res) => resolve(res.data.liked))
+            .catch((err) => reject(err));
+    });
+};
+
+export const checkLiked = (mediaId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/rating/${mediaId}/check`, { headers: useAuthorization() })
+            .then((res) => resolve(res.data))
+            .catch(() => reject(null));
+    });
+};
+
+export const rateMedia = (mediaId, rating = "none") => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(
+                `/rating`,
+                { mediaId, rating },
+                { headers: useAuthorization() }
+            )
+            .then((res) => resolve(res.data))
+            .catch(() => reject(null));
     });
 };

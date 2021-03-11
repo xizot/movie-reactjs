@@ -1,11 +1,12 @@
 import { DislikeOutlined, LikeOutlined, PlusOutlined } from "@ant-design/icons";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
 import { history } from "../helper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../actions/history.action";
-import {addWatchlist} from "../actions/watchlist.action"
+import { addWatchlist } from "../actions/watchlist.action";
+import { getRatingCount, checkLiked, rateMedia } from "../helper/reusble";
 function Detail1({
     type,
     title,
@@ -16,8 +17,13 @@ function Detail1({
     year,
     id,
     movieInfo,
-    mediaId
+    mediaId,
 }) {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const [ratingCount, setRatingCount] = useState(0);
+    const [isLiked, setIsLiked] = useState(null);
+    const [isDisliked, setIsDisliked] = useState(null);
+
     const dispath = useDispatch();
     const openPopUp = () => {
         dispath(addHistory(mediaId));
@@ -26,7 +32,7 @@ function Detail1({
         } else {
             $(".p-popup").fadeIn(500);
         }
-    };    
+    };
     const addFavorite = () => {
         dispath(addWatchlist(mediaId));
     };
@@ -34,8 +40,47 @@ function Detail1({
         if (type === "tv") {
             $(".p-popup").fadeOut(500);
         }
-        
     };
+    const handleLike = () => {
+        if (isLiked) {
+            rateMedia(id).then(() => {
+                reloadData();
+            });
+        } else {
+            rateMedia(id, "like").then(() => {
+                reloadData();
+            });
+        }
+    };
+    const handleDislike = () => {
+        if (isDisliked) {
+            rateMedia(id).then(() => {
+                reloadData();
+            });
+        } else {
+            rateMedia(id, "dislike").then(() => {
+                reloadData();
+            });
+        }
+    };
+    const reloadData = useCallback(() => {
+        getRatingCount(id).then((res) => setRatingCount(res));
+        checkLiked(id).then((res) => {
+            if (!res.message && res.liked) {
+                setIsLiked(true);
+                setIsDisliked(false);
+            } else if (!res.message && !res.liked && res.liked !== null) {
+                setIsLiked(false);
+                setIsDisliked(true);
+            } else {
+                setIsDisliked(false);
+                setIsLiked(false);
+            }
+        });
+    }, [id]);
+    useEffect(() => {
+        reloadData();
+    }, [reloadData]);
     return (
         <div className="p-detail1 ">
             <div className="l-container">
@@ -57,22 +102,41 @@ function Detail1({
                             <p className="p-detail1__des c-paragraph">
                                 {description}
                             </p>
+                            {isAuthenticated ? (
+                                <div className="p-detail1__action ">
+                                    <button
+                                        className="c-icon is-hover"
+                                        onClick={() => addFavorite()}
+                                    >
+                                        <PlusOutlined className="c-icon--plus" />
+                                        <p>Add To Favourite</p>
+                                    </button>
+                                    <button
+                                        className={`c-icon ${
+                                            isLiked ? "c-icon--active" : ""
+                                        }`}
+                                        onClick={() => handleLike()}
+                                    >
+                                        <LikeOutlined className="c-icon--like" />
+                                    </button>
+                                    <button
+                                        className={`c-icon ${
+                                            isDisliked ? "c-icon--active" : ""
+                                        }`}
+                                        onClick={() => handleDislike()}
+                                    >
+                                        <DislikeOutlined className="c-icon--dislike" />
+                                    </button>
+                                    <span className="p-detail1__txt">
+                                        {ratingCount}{" "}
+                                        {ratingCount > 1 ? "persons" : "person"}{" "}
+                                        liked this movie
+                                    </span>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
 
-                            <div className="p-detail1__action ">
-                                <button className="c-icon is-hover"  onClick={() => addFavorite()}>
-                                    <PlusOutlined className="c-icon--plus" />
-                                    <p>Add To Favourite</p>
-                                </button>
-                                <button className="c-icon">
-                                    <LikeOutlined className="c-icon--like" />
-                                </button>
-                                <button className="c-icon">
-                                    <DislikeOutlined className="c-icon--dislike" />
-                                </button>
-                                <span className="p-detail1__txt">
-                                    99% liked this movie
-                                </span>
-                            </div>
                             <button
                                 className="c-btn c-btn--primary"
                                 onClick={() => openPopUp()}

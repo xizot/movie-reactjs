@@ -1,13 +1,14 @@
 .c-comment {
     display: flex;
     margin-top: 50px;
-
+    position: relative;
     &__image {
         width: 80px;
         height: 80px;
         display: block;
         border-radius: 50%;
         overflow: hidden;
+        background-color: #ddd;
         @include breakpoint(tab) {
             width: 60px;
             height: 60px;
@@ -30,9 +31,26 @@
     &__name {
         font-size: 1.8rem;
         color: $mainColor;
+        padding-right: 15px;
         @include breakpoint(tab) {
             font-size: 1.6rem;
         }
+    }
+    &__delete {
+        position: absolute;
+        top: 5px;
+        right: 0px;
+        color: white;
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+    &__date {
+        display: block;
+        margin-top: 5px;
+        font-size: 1.3rem;
+        letter-spacing: 0.54px;
+        color: #ddd;
+        font-style: italic;
     }
     &__text {
         font-size: 1.6rem;

@@ -1,49 +1,81 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getComment, postComment } from "../helper/reusble";
+import { deleteComment, getComment, postComment } from "../helper/reusble";
 import CommentItem from "./CommentItem";
 import Detail1 from "./Detail1";
 import Detail2 from "./Detail2";
 
 function Detail({ id }) {
-    const [comments, setComments] = useState({});
+    const [currentComments, setCurrentComments] = useState(null);
+    const [comments, setComments] = useState(null);
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const movieInfo = useSelector((state) => state.movie.data);
     const type = useSelector((state) => state.movie.type);
     const [commentValue, setCommentValue] = useState("");
+    const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
     const handleCommentValue = (e) => {
         const value = e.target.value;
-        if (value && value.length < 1000) {
-            setCommentValue(value);
-        }
+        setCommentValue(value);
     };
     const handleSubmitComment = () => {
         postComment(id, commentValue)
-            .then((res) => {
+            .then(() => {
                 setCommentValue("");
-                console.log(res);
+                setPage(1);
+                reloadData();
             })
             .catch((err) => {
+                alert("Post comment failed. Try again");
                 console.log(err);
             });
     };
-    const dispatch = useDispatch();
-    const [page, setPage] = useState(1);
+
+    const handleDeleteComment = (commentID) => {
+        console.log(commentID);
+        let result = window.confirm("Are you sure to delete this item?");
+        if (result) {
+            deleteComment(commentID)
+                .then(() => {
+                    alert("Delete successfully");
+                    setPage(1);
+                    reloadData();
+                })
+                .catch((err) => {
+                    alert("Delete failed. Try again");
+                    console.log(err);
+                });
+        }
+    };
 
     const loadMore = () => {
+        getComment(id, page + 1)
+            .then((res) => {
+                setComments(res.data);
+                setCurrentComments((prev) => [...prev, ...res.data.results]);
+            })
+            .catch(() => {
+                setComments(null);
+                setCurrentComments(null);
+            });
         setPage((prevPage) => prevPage + 1);
     };
 
-    useEffect(() => {
+    const reloadData = useCallback(() => {
         getComment(id)
             .then((res) => {
-                setComments(res);
+                setComments(res.data);
+                setCurrentComments(res.data.results);
             })
             .catch(() => {
-                setComments({});
+                setComments(null);
+                setCurrentComments(null);
             });
-    }, [dispatch, id]);
+    }, [id]);
+    useEffect(() => {
+        reloadData();
+    }, [dispatch, reloadData]);
 
     return (
         <>
@@ -88,6 +120,7 @@ function Detail({ id }) {
                                         id=""
                                         className=""
                                         placeholder="Enter your comment"
+                                        value={commentValue}
                                         onChange={(e) => handleCommentValue(e)}
                                     ></textarea>
                                     <button
@@ -98,19 +131,25 @@ function Detail({ id }) {
                                     </button>
                                 </div>
                                 <div className="p-detail3__comments">
-                                    {comments.results &&
-                                        comments.results.length &&
-                                        comments.results.map((item) => (
-                                            <React.Fragment key={item.id}>
+                                    {currentComments &&
+                                    currentComments.length ? (
+                                        currentComments.map((item, index) => (
+                                            <React.Fragment key={index}>
                                                 <CommentItem
-                                                    id={item.id}
-                                                    avatar={item.avatar}
-                                                    name={item.name}
+                                                    id={item._id}
+                                                    userID={item.user._id}
+                                                    name={item.user.displayName}
                                                     content={item.content}
-                                                    date={item.date}
+                                                    date={item.createdAt}
+                                                    handleDeleteComment={(e) =>
+                                                        handleDeleteComment(e)
+                                                    }
                                                 />
                                             </React.Fragment>
-                                        ))}
+                                        ))
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                                 {comments && page < comments.totalPages ? (
                                     <button

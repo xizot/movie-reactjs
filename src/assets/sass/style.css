@@ -2186,6 +2186,11 @@ img {
   margin-right: 20px;
 }
 
+.p-detail1__action .c-icon.c-icon--active {
+  color: #fff;
+  background-color: #e90101;
+}
+
 .p-detail1__action button {
   -webkit-transition: all 0.6s;
   transition: all 0.6s;
@@ -3181,6 +3186,7 @@ img {
   display: -ms-flexbox;
   display: flex;
   margin-top: 50px;
+  position: relative;
 }
 
 .c-comment__image {
@@ -3189,6 +3195,7 @@ img {
   display: block;
   border-radius: 50%;
   overflow: hidden;
+  background-color: #ddd;
 }
 
 @media only screen and (max-width: 812px) {
@@ -3221,12 +3228,31 @@ img {
 .c-comment__name {
   font-size: 1.8rem;
   color: #e90101;
+  padding-right: 15px;
 }
 
 @media only screen and (max-width: 812px) {
   .c-comment__name {
     font-size: 1.6rem;
   }
+}
+
+.c-comment__delete {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.c-comment__date {
+  display: block;
+  margin-top: 5px;
+  font-size: 1.3rem;
+  letter-spacing: 0.54px;
+  color: #ddd;
+  font-style: italic;
 }
 
 .c-comment__text {

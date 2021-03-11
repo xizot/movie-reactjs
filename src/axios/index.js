@@ -22,7 +22,7 @@ axiosInstance.interceptors.response.use(
             history.push("/login");
             return Promise.reject(error);
         }
-        const headers = {}
+        const headers = {};
         headers.Authorization = `Bearer ${refreshToken}`;
         const newAxios = axios.create({
             baseURL: baseURL,
@@ -34,7 +34,9 @@ axiosInstance.interceptors.response.use(
                 localStorage.setItem("token", res.data.accessToken);
                 localStorage.setItem("refreshToken", res.data.accessToken);
                 localStorage.refreshToken = res.data.refreshToken;
-                error.config.headers['Authorization'] = `Bearer ${localStorage.token}`;
+                error.config.headers[
+                    "Authorization"
+                ] = `Bearer ${localStorage.token}`;
                 error.config.baseURL = baseURL;
                 return axiosInstance.request(error.config);
             })
@@ -42,7 +44,6 @@ axiosInstance.interceptors.response.use(
                 const newStatus = err.response ? err.response.status : null;
                 if (newStatus !== 401) {
                     return Promise.reject(err);
-
                 }
                 history.push("/login");
                 localStorage.removeItem("token");
