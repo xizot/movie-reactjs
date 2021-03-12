@@ -5,18 +5,18 @@ import Loading from "../components/Loading";
 import { truncateByLength } from "../helper";
 
 function Browse({ type = "movie" }) {
-    window.scrollTo(0, 0);
     const [isLoading, setIsLoading] = useState(false);
     const [movieData, setMovieData] = useState([]);
     const [currentMovieData, setCurrentMovieData] = useState([]);
     const [currentMoviePage, setCurrentMoviePage] = useState(1);
 
-    //▼ Fetch data ▼
-    useEffect(() => {
+    const loadMore = () => {
         if (type === "movie") {
             axios
                 .get(
-                    `/media/fetch?limit=10&type=movie&page=${currentMoviePage}`
+                    `/media/fetch?limit=10&type=movie&page=${
+                        currentMoviePage + 1
+                    }`
                 )
                 .then((res) => {
                     setCurrentMovieData((prev) => [
@@ -31,7 +31,9 @@ function Browse({ type = "movie" }) {
                 });
         } else {
             axios
-                .get(`/media/fetch?limit=10&type=tv&page=${currentMoviePage}`)
+                .get(
+                    `/media/fetch?limit=10&type=tv&page=${currentMoviePage + 1}`
+                )
                 .then((res) => {
                     setCurrentMovieData((prev) => [
                         ...prev,
@@ -44,7 +46,42 @@ function Browse({ type = "movie" }) {
                     setIsLoading(true);
                 });
         }
-    }, [currentMoviePage, type]);
+
+        setCurrentMoviePage((prev) => prev + 1);
+    };
+    //▼ Fetch data ▼
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (type === "movie") {
+            axios
+                .get(`/media/fetch?limit=10&type=movie&page=${1}`)
+                .then((res) => {
+                    setCurrentMovieData((prev) => [
+                        ...prev,
+                        ...res.data.results,
+                    ]);
+                    setMovieData(res.data);
+                    setIsLoading(true);
+                })
+                .catch(() => {
+                    setIsLoading(true);
+                });
+        } else {
+            axios
+                .get(`/media/fetch?limit=10&type=tv&page=${1}`)
+                .then((res) => {
+                    setCurrentMovieData((prev) => [
+                        ...prev,
+                        ...res.data.results,
+                    ]);
+                    setMovieData(res.data);
+                    setIsLoading(true);
+                })
+                .catch(() => {
+                    setIsLoading(true);
+                });
+        }
+    }, [type]);
     //▲ Fetch data ▲
     return (
         <div className="p-browse">
@@ -82,9 +119,7 @@ function Browse({ type = "movie" }) {
                     movieData.totalPages > currentMoviePage ? (
                         <span
                             className="c-btn c-btn--loadmore"
-                            onClick={() =>
-                                setCurrentMoviePage((prev) => prev + 1)
-                            }
+                            onClick={() => loadMore()}
                         >
                             Load more
                         </span>

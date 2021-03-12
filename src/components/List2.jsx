@@ -23,7 +23,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
     };
     var settings = {
         dots: true,
-        infinite: true,
+        infinite: list && list.length >= 6,
         speed: 500,
         slidesToShow: 6,
         slidesToScroll: 6,
@@ -35,7 +35,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 4,
-                    infinite: true,
+                    infinite: list && list.length >= 4,
                     dots: true,
                 },
             },
@@ -45,6 +45,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     initialSlide: 3,
+                    infinite: list && list.length >= 3,
                 },
             },
             {
@@ -52,6 +53,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
+                    infinite: list && list.length >= 2,
                 },
             },
         ],
@@ -70,7 +72,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
                                 <Item2
                                     key={idx}
                                     id={item._id}
-                                    image={item.posterPath}
+                                    image={item.backdropPath}
                                     cat={item.genres && item.genres.join(", ")}
                                     name={item.title}
                                     runtime={

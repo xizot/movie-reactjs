@@ -11,4 +11,29 @@
         backface-visibility: hidden;
         pointer-events: all;
     }
+    &__arrow {
+        @include breakpoint(tab) {
+            top: unset !important;
+            bottom: 10px !important;
+        }
+    }
+    &__arrow--next {
+        right: 20px !important;
+        @include breakpoint(tab) {
+            right: unset !important;
+            left: 100px;
+        }
+        @include breakpoint(sp) {
+            left: 75px;
+        }
+    }
+    &__arrow--prev {
+        left: 20px !important;
+        @include breakpoint(tab) {
+            left: 40px !important;
+        }
+        @include breakpoint(sp) {
+            left: 15px !important;
+        }
+    }
 }

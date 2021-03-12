@@ -83,3 +83,12 @@ export const rateMedia = (mediaId, rating = "none") => {
             .catch(() => reject(null));
     });
 };
+
+export const getPopular = () => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get("/media/fetch?sort=popularity:-1&limit=3&type=movie")
+            .then((res) => resolve(res))
+            .catch((err) => reject(err));
+    });
+};

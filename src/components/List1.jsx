@@ -23,7 +23,7 @@ function List1({ subtitle, title, list, browseLink, browseTitle }) {
 
     var settings = {
         dots: true,
-        infinite: true,
+        infinite: list && list.length >= 4,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 4,
@@ -35,7 +35,7 @@ function List1({ subtitle, title, list, browseLink, browseTitle }) {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
-                    infinite: true,
+                    infinite: list && list.length >= 3,
                     dots: true,
                 },
             },
@@ -45,13 +45,15 @@ function List1({ subtitle, title, list, browseLink, browseTitle }) {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     initialSlide: 3,
+                    infinite: list && list.length >= 3,
                 },
             },
             {
                 breakpoint: 450,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
+                    infinite: list && list.length >= 2,
                 },
             },
         ],

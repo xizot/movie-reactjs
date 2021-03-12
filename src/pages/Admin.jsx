@@ -17,6 +17,7 @@ import AddSeason from "../components/AddSeason";
 import axios from "../axios";
 import { deleteByID } from "../actions/common.action";
 import { ADD_RESET } from "../types/admin.type";
+import { Link } from "react-router-dom";
 
 function Admin() {
     const dispatch = useDispatch();
@@ -356,33 +357,33 @@ function Admin() {
                             </div>
                             <div className="c-option">
                                 <span className="c-option__number">1</span>
-                                <a
-                                    href="/"
+                                <Link
+                                    to="/"
                                     data-title="Home"
                                     className="c-option__text"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </div>
                             <div className="c-option">
                                 <span className="c-option__number">2</span>
-                                <a
-                                    href="/"
+                                <Link
+                                    to="/browse/movie"
                                     data-title="Movies"
                                     className="c-option__text"
                                 >
                                     Movies
-                                </a>
+                                </Link>
                             </div>
                             <div className="c-option">
                                 <span className="c-option__number">3</span>
-                                <a
-                                    href="/"
+                                <Link
+                                    to="/browse/tv"
                                     data-title="TV Shows"
                                     className="c-option__text"
                                 >
                                     TV Shows
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="c-panel__bg">
