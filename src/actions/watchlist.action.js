@@ -80,7 +80,7 @@ export const delWatchlist = (id) => (dispatch) => {
     });
     if (token) {
         axios
-            .delete(`/watchlist?id=${id}`, { headers: useAuthorization() })
+            .delete(`/watchlist/${id}`, { headers: useAuthorization() })
             .then((res) => {
                 dispatch({
                     type: DEL_WATCHLIST_SUCCESS,
