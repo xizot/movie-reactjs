@@ -251,3 +251,72 @@ export const deleteSeason = (mediaId, season) => {
             });
     });
 };
+
+// EPISODE
+export const addEpisode = (data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`/media/tv/episode`, data, { headers: useAuthorization() })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+export const updateEpisode = (data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`/media/tv/episode`, data, { headers: useAuthorization() })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+export const deleteEpisode = (mediaId, season, episode) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .patch(
+                "/media/tv/episode",
+                { mediaId, season, episode },
+                { headers: useAuthorization() }
+            )
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+// no redux
+export const getMovieInfo = (mediaId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/media/details/${mediaId}`)
+            .then((res) => {
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+export const updateMovie = (data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`/media/movie`, data, { headers: useAuthorization() })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};

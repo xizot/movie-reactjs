@@ -1,11 +1,13 @@
 import { CloudUploadOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addMovie } from "../actions/admin.action";
+import { useDispatch } from "react-redux";
+import { getMovieInfo, updateMovie } from "../actions/admin.action";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { getImageList } from "../helper/reusble";
+import Alert from "./Alert";
+import { getErrorResponse } from "../helper";
 var settings = {
     dots: true,
     speed: 500,
@@ -13,8 +15,8 @@ var settings = {
     slidesToScroll: 3,
     infinite: false,
 };
-function AddMovie({ nameClass, closePopUp }) {
-    const movieDetailData = useSelector((state) => state.admin.movieDetailData);
+function EditMovie({ mediaId, nameClass, closePopUp }) {
+    const [movieDetailData, setMovieDetailData] = useState({});
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
@@ -27,19 +29,25 @@ function AddMovie({ nameClass, closePopUp }) {
     const handleClosePopUp = () => {
         closePopUp();
     };
-    const handleAddMovie = () => {
+
+    const [isAdded, setIsAdded] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [resMessage, setResMessage] = useState("");
+
+    const handleUpdateMovie = () => {
+        setIsAdded(false);
+        setIsError(false);
         const data = {
-            imdbId: movieDetailData && movieDetailData.imdbId,
-            streamPath: videoLink,
+            mediaId,
+            streamPath: videoLink || "",
             isPublic: true,
             override: {
                 genres: genres.split("/"),
                 tagline: movieDetailData.tagline,
                 title: title,
-                originalTitle: title,
+                originalTitle: movieDetailData.originalTitle,
                 overview: description,
-                posterPath:
-                    poster || (movieDetailData && movieDetailData.posterPath),
+                posterPath: poster,
                 backdropPath: movieDetailData.backdropPath,
                 popularity: movieDetailData.popularity,
                 movie: {
@@ -50,43 +58,58 @@ function AddMovie({ nameClass, closePopUp }) {
                 },
             },
         };
-        dispatch(addMovie(data));
+
+        updateMovie(data)
+            .then((res) => {
+                setIsAdded(true);
+                setResMessage(res.data.message);
+            })
+            .catch((err) => {
+                const error = getErrorResponse(err);
+                setResMessage(error);
+                setIsError(true);
+                setIsAdded(true);
+            });
     };
 
     useEffect(() => {
-        if (movieDetailData) {
-            console.log(movieDetailData);
-            setTitle((movieDetailData && movieDetailData.title) || "");
-            setDescription((movieDetailData && movieDetailData.overview) || "");
-            setGenres(
-                (movieDetailData && movieDetailData.genres.join("/")) || ""
-            );
-            setReleaseDate(
-                (movieDetailData && movieDetailData.releaseDate) || ""
-            );
-            setRuntime((movieDetailData && movieDetailData.runtime) || "");
-            setVideoLink(
-                process.env.REACT_APP_VIDEO_URL +
-                    (movieDetailData && movieDetailData.streamPath) || ""
-            );
+        if (mediaId) {
+            getMovieInfo(mediaId).then((res) => {
+                setMovieDetailData(res);
+                setTitle(res.title);
+                setDescription(res.overview);
 
-            setPoster((movieDetailData && movieDetailData.posterPath) || null);
-            getImageList(movieDetailData.imdbId, "movie")
-                .then((res) => {
-                    console.log(res);
-                    setListImage(res.data.posters);
-                    if (res.data.posters.length > 4) {
-                        settings.infinite = true;
-                    }
-                })
-                .catch(() => {
-                    setListImage([]);
-                });
-            // console.log(list)
+                setGenres(res.genres ? res.genres.join("/") : "");
+                setReleaseDate(res.movie.releaseDate);
+                setRuntime(res.movie.runtime);
+                setVideoLink("");
+
+                setPoster(res.posterPath);
+                getImageList(res.movie._id, "movie")
+                    .then((res) => {
+                        console.log(res);
+                        setListImage(res.data.posters);
+                        if (res.data.posters.length > 4) {
+                            settings.infinite = true;
+                        }
+                    })
+                    .catch(() => {
+                        setListImage([]);
+                    });
+            });
         }
-    }, [dispatch, movieDetailData]);
+    }, [dispatch, mediaId]);
     return (
         <div className={`c-popup2 c-popup2-addfilm ${nameClass}`}>
+            {isAdded ? (
+                <Alert
+                    msg={resMessage}
+                    type={isError ? "c-alert--error" : "c-alert--success"}
+                />
+            ) : (
+                <></>
+            )}
+
             <div className="c-popup2__content">
                 <span
                     className="c-popup2__close"
@@ -231,7 +254,7 @@ function AddMovie({ nameClass, closePopUp }) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-8 col-md-12">
+                                    <div className="col-lg-12">
                                         <div className=" c-form__group  c-addfilm__upload">
                                             <div className="gutter">
                                                 <input
@@ -279,9 +302,9 @@ function AddMovie({ nameClass, closePopUp }) {
                         <div className="c-addfilm__handle">
                             <div
                                 className="c-btn c-addfilm__publish"
-                                onClick={() => handleAddMovie()}
+                                onClick={() => handleUpdateMovie()}
                             >
-                                Publish
+                                Update
                             </div>
                             <div
                                 className="c-btn c-addfilm__publish"
@@ -297,4 +320,4 @@ function AddMovie({ nameClass, closePopUp }) {
     );
 }
 
-export default AddMovie;
+export default EditMovie;

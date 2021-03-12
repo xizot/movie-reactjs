@@ -18,6 +18,7 @@ import axios from "../axios";
 import { deleteByID } from "../actions/common.action";
 import { ADD_RESET } from "../types/admin.type";
 import { Link } from "react-router-dom";
+import EditMovie from "../components/EditMovie";
 
 function Admin() {
     const dispatch = useDispatch();
@@ -154,6 +155,18 @@ function Admin() {
         setIsOpenTvPopUp(false);
         setIsOpenMoviePopUp(false);
     };
+
+    // ▼ VARIABLES FOR EDIT MOVIE & TV ▼
+    const [currentEditID, setCurrentEditID] = useState(null);
+    const [isOpenMovieEditPopUp, setIsOpenMovieEditPopUp] = useState(false);
+    const closeEditPopup = () => {
+        setIsOpenMovieEditPopUp(false);
+    };
+    const handleMovieEdit = (id) => {
+        setCurrentEditID(id);
+        setIsOpenMovieEditPopUp(true);
+    };
+    // ▲ VARIABLES FOR EDIT MOVIE & TV ▲
 
     useEffect(() => {
         // Event
@@ -326,6 +339,7 @@ function Admin() {
                 </div>
             </div>
 
+            {/* ▼ADD MOVIE & TV▼ */}
             <AddMovie
                 nameClass={isOpenMoviePopUp ? "is-open" : ""}
                 closePopUp={() => closePopUp()}
@@ -340,6 +354,7 @@ function Admin() {
                 }
                 mediaId={tvID}
             />
+            {/* ▲ADD MOVIE & TV▲ */}
 
             <div className="p-admin ">
                 <div className="c-panel ">
@@ -548,8 +563,15 @@ function Admin() {
                                                                 {item.updatedAt}
                                                             </td>
                                                             <td className="c-view__option">
-                                                                <button className="c-view__edit">
-                                                                    <EditOutlined />{" "}
+                                                                <button
+                                                                    className="c-view__edit"
+                                                                    onClick={() =>
+                                                                        handleMovieEdit(
+                                                                            item._id
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <EditOutlined />
                                                                     Edit
                                                                 </button>
                                                                 <button
@@ -756,6 +778,14 @@ function Admin() {
                     </div>
                 </div>
             </div>
+
+            {/* ▼EDIT MOVIE & TV▼ */}
+            <EditMovie
+                mediaId={currentEditID}
+                nameClass={isOpenMovieEditPopUp ? "is-open" : ""}
+                closePopUp={() => closeEditPopup()}
+            />
+            {/* ▲EDIT MOVIE & TV▲ */}
         </>
     );
 }

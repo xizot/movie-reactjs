@@ -49,7 +49,6 @@ function AddTv({ nameClass = 0, closePopUp }) {
                 },
             },
         };
-        console.log(tvDetailData);
         dispatch(addTV(data));
     };
 

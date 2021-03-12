@@ -70,6 +70,7 @@ function Browse({ type = "movie" }) {
             axios
                 .get(`/media/fetch?limit=10&type=tv&page=${1}`)
                 .then((res) => {
+                    console.log(res.data);
                     setCurrentMovieData((prev) => [
                         ...prev,
                         ...res.data.results,
@@ -99,7 +100,7 @@ function Browse({ type = "movie" }) {
                                 key={index}
                             >
                                 <BrowseItem
-                                    imgSrc={item.backdropPath}
+                                    imgSrc={item.posterPath}
                                     title={item.title}
                                     overview={truncateByLength(
                                         item.overview,

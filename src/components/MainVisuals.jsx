@@ -57,52 +57,50 @@ function Mainvisuals() {
                 <Slider className="c-slide" {...settings}>
                     {popularList ? (
                         popularList.map((item, index) => (
-                            <>
-                                <div className="c-slide__item" key={index}>
-                                    <img
-                                        className="c-slide__image"
-                                        src={item.backdropPath}
-                                        alt=""
-                                        loading="lazy"
-                                    />
-                                    <div className="c-slide__info">
-                                        <div className="c-slide__info__content">
-                                            <span className="c-slide__label">
-                                                POPULARITY
-                                            </span>
-                                            <h3 className="c-title1">
-                                                {item.title}
-                                            </h3>
-                                            <div className="c-slide__cat">
-                                                <span>
-                                                    {item.genres
-                                                        ? item.genres.join(", ")
-                                                        : ""}
-                                                </span>
-                                            </div>
-                                            <p className="c-slide__description">
-                                                {item.overview
-                                                    ? truncateByLength(
-                                                          item.overview,
-                                                          150
-                                                      )
+                            <div className="c-slide__item" key={index}>
+                                <img
+                                    className="c-slide__image"
+                                    src={item.backdropPath}
+                                    alt=""
+                                    loading="lazy"
+                                />
+                                <div className="c-slide__info">
+                                    <div className="c-slide__info__content">
+                                        <span className="c-slide__label">
+                                            POPULARITY
+                                        </span>
+                                        <h3 className="c-title1">
+                                            {item.title}
+                                        </h3>
+                                        <div className="c-slide__cat">
+                                            <span>
+                                                {item.genres
+                                                    ? item.genres.join(", ")
                                                     : ""}
-                                            </p>
-                                            <div className="c-slide__actions">
-                                                {/* <button className="c-btn c-btn--primary">
+                                            </span>
+                                        </div>
+                                        <p className="c-slide__description">
+                                            {item.overview
+                                                ? truncateByLength(
+                                                      item.overview,
+                                                      150
+                                                  )
+                                                : ""}
+                                        </p>
+                                        <div className="c-slide__actions">
+                                            {/* <button className="c-btn c-btn--primary">
                                                 PLAY TRAILER
                                             </button> */}
-                                                <Link
-                                                    to={`/movie/${item._id}`}
-                                                    className="c-btn"
-                                                >
-                                                    PLAY FILM
-                                                </Link>
-                                            </div>
+                                            <Link
+                                                to={`/movie/${item._id}`}
+                                                className="c-btn"
+                                            >
+                                                PLAY FILM
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
-                            </>
+                            </div>
                         ))
                     ) : (
                         <></>

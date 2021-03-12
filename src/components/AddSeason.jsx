@@ -9,6 +9,7 @@ import {
 import { ADD_RESET } from "../types/admin.type";
 import { getErrorResponse } from "../helper";
 import Alert from "./Alert";
+import AddEpisode from "./AddEpisode";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getTvDetail } from "../actions/admin.action";
 // import AddSeasonItem from "./AddSeasonItem";
@@ -25,6 +26,7 @@ function AddSeason({ nameClass, mediaId }) {
     const [isError, setIsError] = useState(false);
     const [resMessage, setResMessage] = useState("");
     const [currentSeason, setCurrentSeason] = useState(null);
+    const [isOpenEpisode, setIsOpenEpisode] = useState(false);
 
     const [type, setType] = useState("new");
 
@@ -50,6 +52,7 @@ function AddSeason({ nameClass, mediaId }) {
                     .get(`media/details/${mediaId}`)
                     .then((res) => {
                         setTvDetailData(res.data);
+                        handleAddNew();
                     })
                     .catch((err) => {
                         setTvDetailData(null);
@@ -144,7 +147,9 @@ function AddSeason({ nameClass, mediaId }) {
         setSeasonName("");
         setSeasonNumber("");
     };
-
+    const handleCloseEpisodePopup = () => {
+        setIsOpenEpisode(false);
+    };
     useEffect(() => {
         if (mediaId) {
             axios
@@ -202,13 +207,15 @@ function AddSeason({ nameClass, mediaId }) {
                     </div>
                     <div className="c-popup2-season__right">
                         <h3 className="c-popup2-season__title">
-                            Season Infomation/ Add New
+                            {type === "update"
+                                ? "Season Infomation"
+                                : "Add New"}
                         </h3>
                         <div className="c-popup2-season__info">
                             <div className="c-form">
                                 <form>
                                     <div className="row">
-                                        <div className="col-lg-4">
+                                        <div className="col-lg-4 col-xs-12">
                                             <div className="c-form__group ">
                                                 <div className="gutter">
                                                     {type === "update" ? (
@@ -244,7 +251,7 @@ function AddSeason({ nameClass, mediaId }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-lg-4">
+                                        <div className="col-lg-4 col-xs-12">
                                             <div className="c-form__group ">
                                                 <div className="gutter">
                                                     <input
@@ -264,7 +271,7 @@ function AddSeason({ nameClass, mediaId }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-lg-4">
+                                        <div className="col-lg-4 col-xs-12">
                                             <div className="c-form__group ">
                                                 <div className="gutter">
                                                     <input
@@ -279,15 +286,15 @@ function AddSeason({ nameClass, mediaId }) {
                                                         required
                                                     />
                                                     <label className="c-form__label">
-                                                        Name
+                                                        Season Name
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-lg-12">
-                                            <div className="c-form__group ">
+                                            <div className="c-form__group height-150">
                                                 <div className="gutter">
-                                                    <input
+                                                    <textarea
                                                         className="c-form__input"
                                                         type="text"
                                                         value={overview}
@@ -325,7 +332,12 @@ function AddSeason({ nameClass, mediaId }) {
                                             >
                                                 Delete
                                             </button>
-                                            <button className="c-btn">
+                                            <button
+                                                className="c-btn"
+                                                onClick={() =>
+                                                    setIsOpenEpisode(true)
+                                                }
+                                            >
                                                 Show Episode
                                             </button>
                                         </>
@@ -349,112 +361,12 @@ function AddSeason({ nameClass, mediaId }) {
                     </div>
                 </div>
             </div>
-            <div className="c-popup2 c-popup2-season c-popup2-episode">
-                <div className="c-popup2-season__content">
-                    <div className="c-popup2-season__left">
-                        <h3 className="c-popup2-season__title">Seasons 1</h3>
-                        <ul>
-                            <li className="is-active">Episode 1</li>
-                            <li>Episode 2</li>
-                            <li>Episode 3</li>
-                            <li>Episode 4</li>
-                            <span className="c-popup2-season__addnew">
-                                Add New
-                            </span>
-                        </ul>
-                    </div>
-                    <div className="c-popup2-season__right">
-                        <h3 className="c-popup2-season__title">
-                            Season Infomation/ Add New
-                        </h3>
-                        <div className="c-popup2-season__info">
-                            <div className="c-form">
-                                <form>
-                                    <div className="row">
-                                        <div className="col-lg-4">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12">
-                                            <div className="c-form__group ">
-                                                <div className="gutter">
-                                                    <input
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12">
-                                            <div className="c-form__group height-150">
-                                                <div className="gutter">
-                                                    <textarea
-                                                        className="c-form__input"
-                                                        type="text"
-                                                        required
-                                                    />
-                                                    <label className="c-form__label">
-                                                        Title
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div className="c-popup2-season__actions">
-                                    <button className="c-btn">Update</button>
-                                    <button className="c-btn">Delete</button>
-                                    <button className="c-btn">
-                                        Back To Season
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <AddEpisode
+                mediaId={mediaId}
+                currentSeason={currentSeason}
+                isOpen={isOpenEpisode}
+                closePopup={() => handleCloseEpisodePopup()}
+            />
         </>
     );
 }

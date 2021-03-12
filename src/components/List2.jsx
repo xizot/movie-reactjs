@@ -72,7 +72,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
                                 <Item2
                                     key={idx}
                                     id={item._id}
-                                    image={item.backdropPath}
+                                    image={item.posterPath}
                                     cat={item.genres && item.genres.join(", ")}
                                     name={item.title}
                                     runtime={
