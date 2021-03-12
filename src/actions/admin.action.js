@@ -17,6 +17,7 @@ import {
     ADD_REQUEST,
     ADD_REQUEST_SUCCESS,
     ADD_REQUEST_FAIL,
+    ADD_TV_REQUEST_SUCCESS,
 } from "./../types/admin.type";
 import axios from "./../axios";
 import { getErrorResponse, useAuthorization } from "../helper";
@@ -196,6 +197,9 @@ export const addTV = (data) => (dispatch) => {
     axios
         .post("/media/tv", data, { headers: useAuthorization() })
         .then((res) => {
+            dispatch({
+                type: ADD_TV_REQUEST_SUCCESS,
+            });
             dispatch({
                 type: ADD_REQUEST_SUCCESS,
                 payload: res.data,

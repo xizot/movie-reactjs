@@ -15,6 +15,7 @@ var settings = {
 };
 function AddTv({ nameClass = 0, closePopUp }) {
     const tvDetailData = useSelector((state) => state.admin.tvDetailData);
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [firstAirDate, setFirstAirDate] = useState("");
@@ -23,7 +24,7 @@ function AddTv({ nameClass = 0, closePopUp }) {
     const [listImage, setListImage] = useState([]);
 
     const [poster, setPoster] = useState(null);
-    // const [episodeCount, setEpisodeCount] = useState(0);
+    // const [episodeCount, setpisodeCount] = useState(0);
     const dispatch = useDispatch();
     const handleClosePopUp = () => {
         closePopUp();
@@ -53,7 +54,7 @@ function AddTv({ nameClass = 0, closePopUp }) {
     };
 
     useEffect(() => {
-        if (tvDetailData) {
+        if (tvDetailData && !tvDetailData.movie) {
             console.log(tvDetailData);
             setTitle((tvDetailData && tvDetailData.title) || "");
             setDescription((tvDetailData && tvDetailData.overview) || "");

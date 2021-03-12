@@ -13,6 +13,7 @@ import {
     ADD_REQUEST,
     ADD_REQUEST_FAIL,
     ADD_REQUEST_SUCCESS,
+    ADD_TV_REQUEST_SUCCESS,
 } from "./../types/admin.type";
 const initialState = {
     searchError: null,
@@ -36,6 +37,7 @@ const initialState = {
     tvDetailData: null,
 
     addSuccessMessage: null,
+    tv: false,
 };
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -115,6 +117,7 @@ const adminReducer = (state = initialState, action) => {
                 isAdded: false,
                 addError: null,
                 addSuccessMessage: null,
+                tv: false,
             };
         case ADD_REQUEST:
             return {
@@ -132,6 +135,12 @@ const adminReducer = (state = initialState, action) => {
                 addError: null,
                 addSuccessMessage: action.payload,
             };
+        case ADD_TV_REQUEST_SUCCESS: {
+            return {
+                ...state,
+                tv: true,
+            };
+        }
         case ADD_REQUEST_FAIL:
             return {
                 ...state,

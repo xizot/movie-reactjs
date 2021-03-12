@@ -26,14 +26,14 @@ function Admin() {
     const addSuccessMessage = useSelector(
         (state) => state.admin.addSuccessMessage
     );
-
+    const isTv = useSelector((state) => state.admin.tv);
     const [isLoading, setIsLoading] = useState(false);
 
     const [openOption, setOpenOption] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     // const [searchPage, setSearchPage] = useState(1);
     const [openSearch, setOpenSearch] = useState(false);
-    const [type, setType] = useState("");
+    const [type, setType] = useState(null);
 
     //▼ Popup flags ▼
     const [isOpenMoviePopUp, setIsOpenMoviePopUp] = useState(false);
@@ -115,7 +115,7 @@ function Admin() {
     };
     const closeSearch = () => {
         setOpenSearch(false);
-        setType("");
+        setType(null);
     };
     const handleSearchValue = (e) => {
         const value = e.target.value;
@@ -199,9 +199,12 @@ function Admin() {
             setIsOpenTvPopUp(false);
             setIsOpenMoviePopUp(false);
             setOpenSearch(false);
-            setTvID((addSuccessMessage && addSuccessMessage._id) || null);
+            if (isTv) {
+                setTvID((addSuccessMessage && addSuccessMessage._id) || null);
+            }
         }
-    }, [isAdded, addSuccessMessage, addError]);
+    }, [isAdded, addSuccessMessage, addError, isTv]);
+
     //▼ Fetch movie data ▼
     useEffect(() => {
         axios
@@ -353,20 +356,34 @@ function Admin() {
             </div>
 
             {/* ▼ADD MOVIE & TV▼ */}
-            <AddMovie
-                nameClass={isOpenMoviePopUp ? "is-open" : ""}
-                closePopUp={() => closePopUp()}
-            />
-            <AddTv
-                nameClass={isOpenTvPopUp ? "is-open" : ""}
-                closePopUp={() => closePopUp()}
-            />
-            <AddSeason
-                nameClass={
-                    !addError && isAdded && type == "tv" ? "is-open" : ""
-                }
-                mediaId={tvID}
-            />
+
+            {type && type === "movie" ? (
+                <AddMovie
+                    nameClass={isOpenMoviePopUp ? "is-open" : ""}
+                    closePopUp={() => closePopUp()}
+                />
+            ) : (
+                <></>
+            )}
+            {type && type === "tv" ? (
+                <>
+                    <AddTv
+                        nameClass={isOpenTvPopUp ? "is-open" : ""}
+                        closePopUp={() => closePopUp()}
+                    />
+                    <AddSeason
+                        nameClass={
+                            isTv && !addError && isAdded && type == "tv"
+                                ? "is-open"
+                                : ""
+                        }
+                        mediaId={tvID}
+                    />
+                </>
+            ) : (
+                <></>
+            )}
+
             {/* ▲ADD MOVIE & TV▲ */}
 
             <div className="p-admin ">
