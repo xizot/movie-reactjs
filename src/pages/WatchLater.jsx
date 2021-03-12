@@ -3,16 +3,15 @@ import SearchItem from "../components/SearchItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getWatchlist } from "../actions/watchlist.action";
 import Paginate from "../components/Paginate";
+import Loading from "../components/Loading";
 function Watchlater() {
     const dispath = useDispatch();
     let data = useSelector((state) => state.watchlist.data);
+    let isLoading = useSelector((state) => state.watchlist.isLoading);
+    let isDeleting = useSelector((state) => state.watchlist.isDeleting);
 
     const [page, setPage] = useState(1);
 
-    // const loadMore = () => {
-    //     dispath(getWatchlist(page + 1));
-    //     setPage((prev) => prev + 1);
-    // };
     const onPageChange = (e, value) => {
         e.preventDefault();
         if (Number(value)) {
@@ -20,12 +19,17 @@ function Watchlater() {
         }
     };
 
+  
     useEffect(() => {
-        dispath(getWatchlist(page));
-    }, [dispath, page]);
+        dispath(getWatchlist(page)); 
+        if(isDeleting === true){
+            dispath(getWatchlist(1));
+        }
+    }, [dispath, page,isDeleting]);
 
     return (
         <div className="p-search">
+            <Loading nameClass={isLoading ? "" : "is-fadeout"} />
             <div className="l-container">
                 <div className="p-search__content">
                     {/* <div className="p-search__left"></div> */}
@@ -40,6 +44,7 @@ function Watchlater() {
                                     <React.Fragment key={index}>
                                         <SearchItem
                                             haveDeleteIcon={true}
+                                            idDel={item._id}
                                             id={item.media._id}
                                             image={item.media.posterPath}
                                             name={item.media.title}

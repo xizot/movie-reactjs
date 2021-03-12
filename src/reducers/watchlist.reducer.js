@@ -54,7 +54,7 @@ const watchlistReducer = (state = initialState, action) => {
         case DEL_WATCHLIST_REQUEST: {
             return {
                 ...state,
-                isDeleting: true,
+                isDeleting: false,
             };
         }
         case DEL_WATCHLIST_SUCCESS:

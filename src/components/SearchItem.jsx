@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
+import { delWatchlist,getWatchlist } from "../actions/watchlist.action";
 function SearchItem({
     id,
+    idDel,
     image,
     name,
     overview,
@@ -14,12 +17,15 @@ function SearchItem({
     xs = 12,
     haveDeleteIcon = false,
 }) {
+    const dispath = useDispatch();
     const handleDelete = (e) => {
         e.stopPropagation();
         let rs = window.confirm("Are you sure to want to delete this item ?");
         if (rs) {
-            alert("action");
+            alert("delete success!");
         }
+        dispath(delWatchlist(idDel));
+        dispath(getWatchlist(1));
     };
     return (
         <div
