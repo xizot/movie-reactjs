@@ -320,3 +320,15 @@ export const updateMovie = (data) => {
             });
     });
 };
+export const updateTv = (data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`/media/tv`, data, { headers: useAuthorization() })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};

@@ -19,6 +19,7 @@ import { deleteByID } from "../actions/common.action";
 import { ADD_RESET } from "../types/admin.type";
 import { Link } from "react-router-dom";
 import EditMovie from "../components/EditMovie";
+import EditTv from "../components/EditTv";
 
 function Admin() {
     const dispatch = useDispatch();
@@ -159,12 +160,24 @@ function Admin() {
     // ▼ VARIABLES FOR EDIT MOVIE & TV ▼
     const [currentEditID, setCurrentEditID] = useState(null);
     const [isOpenMovieEditPopUp, setIsOpenMovieEditPopUp] = useState(false);
+    const [isOpenTvEditPopUp, setIsOpenTvEditPopUp] = useState(false);
+    const [editType, setEditType] = useState(null);
     const closeEditPopup = () => {
         setIsOpenMovieEditPopUp(false);
+        setIsOpenTvEditPopUp(false);
+        setEditType(null);
+    };
+
+    const handleTvEdit = (id) => {
+        setCurrentEditID(id);
+        setIsOpenTvEditPopUp(true);
+        setEditType("tv");
     };
     const handleMovieEdit = (id) => {
         setCurrentEditID(id);
         setIsOpenMovieEditPopUp(true);
+        setIsOpenTvEditPopUp(false);
+        setEditType("movie");
     };
     // ▲ VARIABLES FOR EDIT MOVIE & TV ▲
 
@@ -196,7 +209,7 @@ function Admin() {
             .then((res) => {
                 setMovieData(res.data);
             });
-    }, [currentMoviePage, isAdded]);
+    }, [currentMoviePage, isAdded, editType]);
     //▲ Fetch movie data ▲
 
     //▼ Fetch tvshow data ▼
@@ -206,7 +219,7 @@ function Admin() {
             .then((res) => {
                 setTvData(res.data);
             });
-    }, [currentTvPage, isAdded]);
+    }, [currentTvPage, isAdded, editType]);
     //▲ Fetch tvshow data ▲
 
     return (
@@ -709,7 +722,14 @@ function Admin() {
                                                                 {item.updatedAt}
                                                             </td>
                                                             <td className="c-view__option">
-                                                                <button className="c-view__edit">
+                                                                <button
+                                                                    className="c-view__edit"
+                                                                    onClick={() =>
+                                                                        handleTvEdit(
+                                                                            item._id
+                                                                        )
+                                                                    }
+                                                                >
                                                                     <EditOutlined />
                                                                     Edit
                                                                 </button>
@@ -780,11 +800,25 @@ function Admin() {
             </div>
 
             {/* ▼EDIT MOVIE & TV▼ */}
-            <EditMovie
-                mediaId={currentEditID}
-                nameClass={isOpenMovieEditPopUp ? "is-open" : ""}
-                closePopUp={() => closeEditPopup()}
-            />
+            {editType && editType === "tv" ? (
+                <EditTv
+                    mediaId={currentEditID}
+                    nameClass={isOpenTvEditPopUp ? "is-open" : ""}
+                    closePopUp={() => closeEditPopup()}
+                />
+            ) : (
+                <></>
+            )}
+            {editType && editType === "movie" ? (
+                <EditMovie
+                    mediaId={currentEditID}
+                    nameClass={isOpenMovieEditPopUp ? "is-open" : ""}
+                    closePopUp={() => closeEditPopup()}
+                />
+            ) : (
+                <></>
+            )}
+
             {/* ▲EDIT MOVIE & TV▲ */}
         </>
     );
