@@ -130,18 +130,12 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
         }
     };
     const resetState = () => {
-        setType("new");
-        setEpisode("");
-        setCurrentEpisode(null);
-        setStreamPath("");
-        setAirDate("");
-        setOverview("");
-        setName("");
-        setStillPath("");
+        handleAddNew();
         closePopup();
     };
     const handleEpisodeTablet = (e) => {
         const value = e.target.value;
+        console.log(value);
         if (value === "new") {
             setType("new");
             handleAddNew();
@@ -167,6 +161,7 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
     };
     const handleAddNew = () => {
         setType("new");
+        setCurrentEpisode(null);
         setAirDate("");
         setOverview("");
         setName("");
@@ -174,6 +169,7 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
         setStillPath("");
         setStreamPath("");
     };
+
     //▼Fetch data▼
     useEffect(() => {
         if (mediaId) {
@@ -247,7 +243,7 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                         Episodes
                     </h3>
                     <select
-                        value={currentEpisode}
+                        value={currentEpisode || "new"}
                         onChange={(e) => handleEpisodeTablet(e)}
                     >
                         {(episodes &&
@@ -257,9 +253,7 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                                     {item.name}
                                 </option>
                             ))) || <></>}
-                        <option value="new" onClick={() => handleAddNew()}>
-                            Add New
-                        </option>
+                        <option value="new">Add New</option>
                     </select>
                 </div>
 

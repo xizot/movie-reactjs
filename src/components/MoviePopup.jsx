@@ -56,7 +56,8 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
                                 Episode
                             </h4>
                             <div className="p-popup__episode">
-                                {episodes &&
+                                {(episodes &&
+                                    episodes.length &&
                                     episodes.map((item, index) => (
                                         <Episode
                                             key={index}
@@ -68,7 +69,11 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
                                             image={item.stillPath}
                                             overview={item.overview}
                                         />
-                                    ))}
+                                    ))) || (
+                                    <p className="c-message">
+                                        No data available
+                                    </p>
+                                )}
                             </div>
                         </React.Fragment>
                     ) : (
