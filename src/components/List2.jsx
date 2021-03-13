@@ -5,6 +5,7 @@ import Slider2 from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 function List2({ subtitle, title, list, browseLink, browseTitle }) {
+    console.log(list);
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
         return (
@@ -75,6 +76,7 @@ function List2({ subtitle, title, list, browseLink, browseTitle }) {
                                     image={item.posterPath}
                                     cat={item.genres && item.genres.join(", ")}
                                     name={item.title}
+                                    releaseDate={item.releaseDate}
                                     runtime={
                                         (item.movie && item.movie.runtime) ||
                                         (item.tvShow && item.tvShow.seasonCount)

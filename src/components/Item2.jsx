@@ -1,6 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Item2({ id, image, resolution = [], runtime, cat, age, name, type }) {
+function Item2({
+    id,
+    image,
+    resolution = [],
+    runtime,
+    cat,
+    age,
+    name,
+    type,
+    releaseDate,
+}) {
     return (
         <div className="c-item2 u-fade">
             <div className="gutter">
@@ -10,7 +20,7 @@ function Item2({ id, image, resolution = [], runtime, cat, age, name, type }) {
                             src={
                                 image
                                     ? image
-                                    : `${process.env.PUBLIC_URL}/assets/img/no-img.jpg`
+                                    : `${process.env.PUBLIC_URL}/assets/img/no-image.png`
                             }
                             alt=""
                             loading="lazy"
@@ -20,9 +30,11 @@ function Item2({ id, image, resolution = [], runtime, cat, age, name, type }) {
 
                             <div className="c-item2__hover u-flex u-a-center u-between">
                                 <div className="c-resolution">
-                                    {resolution[0] ? resolution[0] : "720"}
+                                    {resolution[0] ? resolution[0] : "1080"}
                                     <span>
-                                        {resolution[1] ? resolution[1] : "HD"}
+                                        {resolution[1]
+                                            ? resolution[1]
+                                            : "Full HD"}
                                     </span>
                                 </div>
                                 <div></div>
@@ -37,7 +49,7 @@ function Item2({ id, image, resolution = [], runtime, cat, age, name, type }) {
                             </span>
                         ) : (
                             <span className="c-item2__minute">
-                                Season number: {runtime}
+                                Release: {releaseDate}
                             </span>
                         )}
                         {age ? (

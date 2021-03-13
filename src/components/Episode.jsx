@@ -23,7 +23,14 @@ function Episode({ season, ep, epName, id, image, overview, index }) {
                     <p className="c-btn--play">
                         <CaretRightOutlined />
                     </p>
-                    <img src={image} alt="" />
+                    <img
+                        src={
+                            image ||
+                            `${process.env.PUBLIC_URL}/assets/img/no-image.png`
+                        }
+                        alt=""
+                        loading="lazy"
+                    />
                 </div>
             </div>
             <div className="c-popup__item__right">

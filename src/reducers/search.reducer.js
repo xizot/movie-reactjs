@@ -21,8 +21,7 @@ const searchReducer = (state = initialState, action) => {
                 searchKey: action.payload.searchKey,
             };
         case FILTER:
-            console.log("filter", state.data.results);
-            let filter =
+            let rs =
                 action.payload.cat !== "all" && state.data.results
                     ? state.data.results.filter((item) =>
                           item.genres.some(
@@ -35,7 +34,7 @@ const searchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filter: {
-                    results: filter,
+                    results: rs,
                 },
                 isFilter: action.payload.cat !== "all" ? true : false,
             };

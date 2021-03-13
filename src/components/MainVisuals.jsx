@@ -61,7 +61,10 @@ function Mainvisuals() {
                                 <span className="c-slide__item__blur"></span>
                                 <img
                                     className="c-slide__image"
-                                    src={item.backdropPath}
+                                    src={
+                                        item.backdropPath ||
+                                        `${process.env.PUBLIC_URL}/assets/img/no-image.png`
+                                    }
                                     alt=""
                                     loading="lazy"
                                 />

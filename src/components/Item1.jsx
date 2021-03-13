@@ -10,7 +10,7 @@ function Item1({ id, image, cat, name, chapter }) {
                     src={
                         image
                             ? image
-                            : `${process.env.PUBLIC_URL}/assets/img/no-img.jpg`
+                            : `${process.env.PUBLIC_URL}/assets/img/no-image.png`
                     }
                     alt=""
                     loading="lazy"

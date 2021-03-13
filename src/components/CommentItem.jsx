@@ -27,7 +27,16 @@ function CommentItem({ id, content, name, date, userID, handleDeleteComment }) {
                 <></>
             )}
             <div className="c-comment__image">
-                <img src={avatarUrl ? avatarUrl : ""} alt="" />
+                <img
+                    src={
+                        avatarUrl
+                            ? avatarUrl
+                            : process.env.PUBLIC_URL +
+                              "/assets/img/no-avatar.png"
+                    }
+                    alt=""
+                    loading="lazy"
+                />
             </div>
             <div className="c-comment__info">
                 <span className="c-comment__name">{name}</span>
