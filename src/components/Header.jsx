@@ -62,9 +62,7 @@ function Header({ isDark = null }) {
                             {isAuthenticated ? (
                                 <>
                                     <li>
-                                        <Link to="/mylist">
-                                            MY LIST
-                                        </Link>
+                                        <Link to="/mylist">MY LIST</Link>
                                     </li>
                                     <li>
                                         <Link to="/history">HISTORY</Link>
@@ -163,7 +161,7 @@ function Header({ isDark = null }) {
                                         <>
                                             <li>
                                                 <Link to="/watcher-later">
-                                                    WATCH LATER
+                                                    MY LIST
                                                 </Link>
                                             </li>
                                             <li>
@@ -214,18 +212,6 @@ function Header({ isDark = null }) {
                                     )}
                                 </div>
                                 <div className="c-menusp__footer u-flex u-a-center">
-                                    <Link to="/">
-                                        <img
-                                            src="./assets/img/icons/instagram@2x.png"
-                                            alt=""
-                                        />
-                                    </Link>
-                                    <Link to="/">
-                                        <img
-                                            src="./assets/img/icons/instagram@2x.png"
-                                            alt=""
-                                        />
-                                    </Link>
                                     <p>@hambuger </p>
                                 </div>
                             </div>

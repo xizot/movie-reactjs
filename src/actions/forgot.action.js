@@ -1,14 +1,18 @@
-import { history, useAuthorization } from "../helper";
+import { getErrorResponse, history, useAuthorization } from "../helper";
 import {
     FORGOT_SUCCESS,
     FORGOT_FAIL,
     SENDPASSWORD_SUCCESS,
     SENDPASSWORD_FAIL,
+    FORGOT_REQUEST,
 } from "../types/forgot.type";
 import axios from "./../axios";
-import { clearError, getError } from "./error.action";
+import { clearError } from "./error.action";
 
 export const recoveryEmail = (email) => (dispatch) => {
+    dispatch({
+        type: FORGOT_REQUEST,
+    });
     axios
         .post(
             "/auth/sendrecoveryemail/",
@@ -23,22 +27,10 @@ export const recoveryEmail = (email) => (dispatch) => {
             dispatch(clearError());
         })
         .catch((err) => {
-            if (err.response) {
-                dispatch(
-                    getError(
-                        err.response.data.error || err.response.data.errors,
-                        err.response.status,
-                        FORGOT_FAIL
-                    )
-                );
-            }
+            const error = getErrorResponse(err);
             dispatch({
-                payload: {
-                    msg: "Server error!!!",
-                    status: 500,
-                    id: FORGOT_FAIL,
-                },
                 type: FORGOT_FAIL,
+                payload: error,
             });
         });
 };
@@ -61,13 +53,11 @@ export const forgotPassword = (recoveryCode, password, confirmPassword) => (
         })
         .catch((err) => {
             if (err.response) {
-                dispatch(
-                    getError(
-                        err.response.data.error || err.response.data.errors,
-                        err.response.status,
-                        SENDPASSWORD_FAIL
-                    )
-                );
+                const error = getErrorResponse(err);
+                dispatch({
+                    type: SENDPASSWORD_FAIL,
+                    payload: error,
+                });
             }
             dispatch({
                 payload: {
