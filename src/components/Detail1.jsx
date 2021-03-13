@@ -6,7 +6,7 @@ import { getErrorResponseString, history } from "../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../actions/history.action";
 import { addWatchlist } from "../actions/watchlist.action";
-import { getRatingCount, checkLiked, rateMedia,checkAdd } from "../helper/reusble";
+import { getRatingCount, checkLiked, rateMedia,checkAdd ,addMedia} from "../helper/reusble";
 
 function Detail1({
     type,
@@ -38,7 +38,22 @@ function Detail1({
     };
     const addFavorite = () => {
         dispath(addWatchlist(mediaId));
+         if (isAdd) {
+            addMedia(id)
+                .then(() => {
+                    reloadData();
+                })
+                .catch((err) => {
+                    try {
+                        const error = getErrorResponseString(err);
+                        alert(error);
+                    } catch (error) {
+                        alert("Add failed. Please try again later!!!");
+                    }
+                });
+        }
     };
+
     const closePopup = () => {
         if (type === "tv") {
             $(".p-popup").fadeOut(500);

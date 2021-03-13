@@ -80,6 +80,18 @@ export const checkAdd = (mediaId) => {
     });
 };
 
+export const addMedia = (mediaId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(
+                `/watchlist`,
+                { mediaId, rating },
+                { headers: useAuthorization() }
+            )
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err));
+    });
+};
 export const rateMedia = (mediaId, rating = "none") => {
     return new Promise((resolve, reject) => {
         axios
