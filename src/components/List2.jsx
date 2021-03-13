@@ -5,7 +5,6 @@ import Slider2 from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 
 function List2({ subtitle, title, list, browseLink, browseTitle }) {
-    console.log(list);
     const SampleNextArrow = (props) => {
         const { className, onClick } = props;
         return (

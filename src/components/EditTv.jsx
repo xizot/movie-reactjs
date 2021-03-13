@@ -92,7 +92,6 @@ function EditTv({ mediaId, nameClass = 0, closePopUp }) {
                 getImageList(res.tmdbId, "tv")
                     .then((res) => {
                         setListImage(res.data.posters);
-                        console.log(res.data.posters.length);
                         if (res.data.posters.length >= 4) {
                             settings.infinite = true;
                         }

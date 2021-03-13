@@ -54,9 +54,8 @@ function AddSeason({ nameClass, mediaId }) {
                         setTvDetailData(res.data);
                         handleAddNew();
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         setTvDetailData(null);
-                        console.log(err);
                     });
             })
             .catch((err) => {
@@ -89,9 +88,8 @@ function AddSeason({ nameClass, mediaId }) {
                     .then((res) => {
                         setTvDetailData(res.data);
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         setTvDetailData(null);
-                        console.log(err);
                     });
             })
             .catch((err) => {
@@ -116,9 +114,8 @@ function AddSeason({ nameClass, mediaId }) {
                         .then((res) => {
                             setTvDetailData(res.data);
                         })
-                        .catch((err) => {
+                        .catch(() => {
                             setTvDetailData(null);
-                            console.log(err);
                         });
                 })
                 .catch((err) => {

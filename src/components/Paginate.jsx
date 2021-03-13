@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 function Paginate({ page, totalPage, onPageChange }) {
-    console.log(totalPage);
     const handlePageChange = (e, value) => {
         onPageChange(e, value);
     };
