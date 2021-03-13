@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../actions/history.action";
 import { addWatchlist } from "../actions/watchlist.action";
 import { getRatingCount, checkLiked, rateMedia } from "../helper/reusble";
+
 function Detail1({
     type,
     title,
@@ -20,6 +21,7 @@ function Detail1({
     mediaId,
 }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    
     const [ratingCount, setRatingCount] = useState(0);
     const [isLiked, setIsLiked] = useState(null);
     const [isDisliked, setIsDisliked] = useState(null);
@@ -120,6 +122,7 @@ function Detail1({
         reloadData();
     }, [reloadData]);
     return (
+       
         <div className="p-detail1 ">
             <div className="l-container">
                 <MoviePopup
@@ -128,7 +131,6 @@ function Detail1({
                     handlePopup={() => closePopup()}
                     seasons={movieInfo.tvShow && movieInfo.tvShow.seasons}
                 />
-
                 <div className="p-detail1__content js-dark-here">
                     <div className="row row-reverse">
                         <div className="col-sm-12 col-lg-8 p-detail1__left">
@@ -147,7 +149,7 @@ function Detail1({
                                         onClick={() => addFavorite()}
                                     >
                                         <PlusOutlined className="c-icon--plus" />
-                                        <p>Add To Favourite</p>
+                                        <p>Add To Watch List</p>
                                     </button>
                                     <button
                                         className={`c-icon ${

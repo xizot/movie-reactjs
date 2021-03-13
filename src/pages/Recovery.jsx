@@ -5,9 +5,12 @@ import FormError from "../components/FormError";
 import { clearError } from "../actions/error.action";
 import queryString from "query-string";
 import { validateConfirmPassword, validatePassword } from "../helper/validator";
-
+import Alert from "../components/Alert";
 function Recovery() {
     const dispath = useDispatch();
+
+    const resMessage = useSelector((state) => state.forgot.resMessageReco);
+    const isSendFailed = useSelector((state) => state.forgot.isSendFailedReco);
 
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -63,6 +66,15 @@ function Recovery() {
     },[dispath]);
 
     return (
+        <>
+        {isSendFailed !== null ? (
+            <Alert
+                msg={resMessage}
+                type={isSendFailed ? "c-alert--error" : "c-alert--success"}
+            />
+        ) : (
+            <></>
+        )}
         <div className="login">
             <div className="c-overlayer"> </div>
             <div className="login__content js-dark-here">
@@ -111,6 +123,7 @@ function Recovery() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 
