@@ -1,4 +1,4 @@
-import { DislikeOutlined, LikeOutlined, PlusOutlined } from "@ant-design/icons";
+import { DislikeOutlined, LikeOutlined, PlusOutlined ,DeleteOutlined} from "@ant-design/icons";
 import React, { useCallback, useEffect, useState } from "react";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
@@ -6,7 +6,7 @@ import { getErrorResponseString, history } from "../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../actions/history.action";
 import { addWatchlist } from "../actions/watchlist.action";
-import { getRatingCount, checkLiked, rateMedia } from "../helper/reusble";
+import { getRatingCount, checkLiked, rateMedia,checkAdd } from "../helper/reusble";
 
 function Detail1({
     type,
@@ -25,6 +25,7 @@ function Detail1({
     const [ratingCount, setRatingCount] = useState(0);
     const [isLiked, setIsLiked] = useState(null);
     const [isDisliked, setIsDisliked] = useState(null);
+    const [isAdd, setIsAdd] = useState(null);
 
     const dispath = useDispatch();
     const openPopUp = () => {
@@ -116,6 +117,15 @@ function Detail1({
                     setIsLiked(false);
                 }
             });
+            checkAdd(id).then((res) => {
+                if (!res.message && res.isAdded) {
+                    setIsAdd(true);
+                } else if (!res.message && !res.isAdded && res.isAdded !== null) {
+                    setIsAdd(false);
+                } else {
+                    setIsAdd(false);
+                }
+            });
         }
     }, [id, isAuthenticated]);
     useEffect(() => {
@@ -148,8 +158,8 @@ function Detail1({
                                         className="c-icon is-hover"
                                         onClick={() => addFavorite()}
                                     >
-                                        <PlusOutlined className="c-icon--plus" />
-                                        <p>Add To Watch List</p>
+                                        {isAdd ?<DeleteOutlined className="c-icon--trash"/>:<PlusOutlined className="c-icon--plus" />}
+                                        {isAdd ?<p>Remove to Watch List</p> :<p>Add To Watch List</p> }
                                     </button>
                                     <button
                                         className={`c-icon ${

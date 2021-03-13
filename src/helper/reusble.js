@@ -71,6 +71,15 @@ export const checkLiked = (mediaId) => {
     });
 };
 
+export const checkAdd = (mediaId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/watchlist/${mediaId}`, { headers: useAuthorization() })
+            .then((res) => resolve(res.data))
+            .catch(() => reject(null));
+    });
+};
+
 export const rateMedia = (mediaId, rating = "none") => {
     return new Promise((resolve, reject) => {
         axios
