@@ -101,3 +101,12 @@ export const getPopular = () => {
             .catch((err) => reject(err));
     });
 };
+
+export const sendVerify = () => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`/auth/sendconfirmemail/`, { headers: useAuthorization() })
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err));
+    });
+};

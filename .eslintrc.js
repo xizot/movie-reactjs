@@ -15,7 +15,7 @@ module.exports = {
     },
     plugins: ["react", "react-hooks"],
     rules: {
-        "no-console": "warn",
+        "no-console": "off",
         // suppress errors for missing 'import React' in files
         "react/react-in-jsx-scope": "off",
         // allow jsx syntax in js files (for next.js project)
@@ -23,7 +23,7 @@ module.exports = {
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
         "no-case-declarations": "warn",
-        "no-unused-vars": "error",
+        "no-unused-vars": "warn",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
     },
