@@ -17,7 +17,7 @@ function Movie({ match }) {
     const { id = null } = match.params;
     const error = useSelector((state) => state.movie.error);
     const [isLoading, setIsLoading] = useState(false);
-
+    let isAdding = useSelector((state) => state.watchlist.isAdding);
     useEffect(() => {
         window.scrollTo(0, 0);
 
@@ -41,7 +41,6 @@ function Movie({ match }) {
                 type: RESET_ERROR,
             });
         }
-
     }, [dispatch, error]);
 
     return (
