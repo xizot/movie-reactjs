@@ -6,6 +6,7 @@ import { clearError } from "../actions/error.action";
 import queryString from "query-string";
 import { validateConfirmPassword, validatePassword } from "../helper/validator";
 import Alert from "../components/Alert";
+import { SENDPASSWORD_RESET } from "../types/forgot.type";
 function Recovery() {
     const dispath = useDispatch();
 
@@ -60,6 +61,9 @@ function Recovery() {
     useEffect(() => {
         let code = getCode();
         setCodeRecovery(code);
+        dispath({
+            type: SENDPASSWORD_RESET,
+        });
         if (!code) {
             dispath(customRedirect("/"));
         }

@@ -5,6 +5,7 @@ import {
     SENDPASSWORD_SUCCESS,
     SENDPASSWORD_FAIL,
     FORGOT_REQUEST,
+    SENDPASSWORD_REQUEST,
 } from "../types/forgot.type";
 import axios from "./../axios";
 import { clearError } from "./error.action";
@@ -42,6 +43,10 @@ export const forgotPassword = (recoveryCode, password, confirmPassword) => (
         password,
         confirmPassword,
     };
+    dispatch({
+        type: SENDPASSWORD_REQUEST,
+    });
+
     axios
         .post("/auth/resetpassword/", body, { headers: useAuthorization() })
         .then((res) => {

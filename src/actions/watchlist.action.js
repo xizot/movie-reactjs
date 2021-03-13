@@ -45,12 +45,14 @@ export const getWatchlist = (page) => (dispatch) => {
 
 export const addWatchlist = (mediaId) => (dispatch) => {
     const token = localStorage.getItem("token");
+
+  
     dispatch({
         type: ADD_WATCHLIST_REQUEST,
     });
     if (token) {
         axios
-            .post('/watchlist',{mediaId}, { headers: useAuthorization() })
+            .post('/watchlist', { mediaId }, { headers: useAuthorization() })
             .then((res) => {
                 dispatch({
                     type: ADD_WATCHLIST_SUCCESS,
@@ -58,18 +60,16 @@ export const addWatchlist = (mediaId) => (dispatch) => {
                 });
             })
             .catch((err) => {
-                if (err) {
-                    const error = getErrorResponse(err);
-                    dispatch({
-                        type: ADD_WATCHLIST_FAIL,
-                        paload: error,
-                        status: err.response.status,
-                    });
-                }
+                const error = getErrorResponse(err);
+                dispatch({
+                    type: ADD_WATCHLIST_FAIL, // day laf ADD
+                    payload: error,
+                });
             });
     } else {
         dispatch({
             type: ADD_WATCHLIST_FAIL,
+            payload: "Please try again later!!!",
         });
     }
 };

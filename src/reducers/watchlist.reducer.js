@@ -8,6 +8,7 @@ import {
     DEL_WATCHLIST_REQUEST,
     DEL_WATCHLIST_SUCCESS,
     DEL_WATCHLIST_FAIL,
+    GET_WATCHLIST_RESET,
 } from "../types/watchlist.type";
 
 const initialState = {
@@ -20,13 +21,15 @@ const initialState = {
 };
 const watchlistReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_WATCHLIST_REQUEST: {
+        case GET_WATCHLIST_REQUEST:
+        case GET_WATCHLIST_RESET: 
             return {
                 ...state,
-                isLoading: true,
-            };
-        }
+                resMessage: null,
+                isSendFailed: null,
+            };       
         case GET_WATCHLIST_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
                 data: action.payload,
@@ -34,7 +37,8 @@ const watchlistReducer = (state = initialState, action) => {
                 resMessage: action.payload.message,
                 isSendFailed: false,
             };
-        case GET_WATCHLIST_FAIL:
+        case GET_WATCHLIST_FAIL: // moa sao xu li o day
+            console.log(action.payload)
             return {
                 ...state,
                 isLoading: false,
@@ -45,17 +49,23 @@ const watchlistReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAdding: true,
+                resMessage: null,
+                isSendFailed: null,
             };
         }
         case ADD_WATCHLIST_SUCCESS:
             return {
                 ...state,
                 isAddding: true,
+                resMessage: action.payload.message,
+                isSendFailed: false,
             };
         case ADD_WATCHLIST_FAIL:
             return {
                 ...state,
                 isAddding: false,
+                resMessage: action.payload,
+                isSendFailed: true,
             };
         case DEL_WATCHLIST_REQUEST: {
             return {
