@@ -24,6 +24,8 @@ import {
 } from "../helper/validator";
 import Loading from "../components/Loading";
 import Alert from "../components/Alert";
+import { sendVerify } from "../helper/reusble";
+import { getErrorResponse } from "../helper";
 
 function Info() {
     const dispath = useDispatch();
@@ -42,8 +44,8 @@ function Info() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
-    const [checkField,setNewField] = useState(false);
-    const [checkPassword,setCheckPassword] = useState(false);
+    const [checkField, setNewField] = useState(false);
+    const [checkPassword, setCheckPassword] = useState(false);
     //error
     const [errorUsername, setErrorUsername] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
@@ -53,10 +55,34 @@ function Info() {
     const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
     const [errorNewPassword, setErrorNewPassword] = useState(false);
 
+    // ▼ Send Verify ▼
+    const [resSendVerifyMessage, setResSendVerifyMessage] = useState(null);
+    const [isSendVerifyFailed, setIsSendVerifyFailed] = useState(null);
+    // ▲ Send Verify ▲
+    const handleSendVerify = () => {
+        setResSendVerifyMessage(null);
+        setIsSendVerifyFailed(null);
+        sendVerify()
+            .then((res) => {
+                setResSendVerifyMessage(res.message);
+                setIsSendVerifyFailed(false);
+            })
+            .catch((err) => {
+                try {
+                    const error = getErrorResponse(err);
+                    setResSendVerifyMessage(error);
+                } catch (error) {
+                    setResSendVerifyMessage(
+                        "Send confirm email failed. Please try it later!!!"
+                    );
+                }
+
+                setIsSendVerifyFailed(true);
+            });
+    };
     if (!avatar) {
         console.log("handleError");
-        avatar={};
-        // eslint-disable-next-line no-undef
+        avatar = {};
         avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
     }
 
@@ -80,7 +106,7 @@ function Info() {
                         confirmPassword,
                         newPassword,
                         checkPassword,
-                        checkField,
+                        checkField
                     )
                 );
             }
@@ -117,7 +143,7 @@ function Info() {
         let value = e.target.value;
         setUsername((user && user.username) || "");
         if (value.length >= 0) {
-            if(value !== user.username){
+            if (value !== user.username) {
                 setNewField(true);
             }
             setUsername(value);
@@ -137,7 +163,7 @@ function Info() {
         let value = e.target.value;
         setEmail((user && user.email) || "");
         if (value.length >= 0) {
-            if(value !== user.email){
+            if (value !== user.email) {
                 setNewField(true);
             }
             setEmail(value);
@@ -242,6 +268,18 @@ function Info() {
 
     return (
         <div className="infouser">
+            {isSendVerifyFailed !== null ? (
+                <Alert
+                    msg={resSendVerifyMessage}
+                    type={
+                        isSendVerifyFailed
+                            ? "c-alert--error"
+                            : "c-alert--success"
+                    }
+                />
+            ) : (
+                <></>
+            )}
             {isUploaded && isDeleted && (
                 <Alert msg="Upload success" type="c-alert--success" />
             )}
@@ -283,7 +321,10 @@ function Info() {
                                         )}
 
                                         <img
-                                            src={avatar.uri || `${process.env.PUBLIC_URL}/assets/img/avata.jpg`}
+                                            src={
+                                                avatar.uri ||
+                                                `${process.env.PUBLIC_URL}/assets/img/avata.jpg`
+                                            }
                                             alt=""
                                         />
                                         <div className="is-hover">
@@ -455,6 +496,23 @@ function Info() {
                                             {errorConfirmPassword && (
                                                 <FormError text="Passwords and confirm passwords do not match" />
                                             )}
+                                            {(user.new && (
+                                                <p
+                                                    style={{
+                                                        fontSize: "1.6rem",
+                                                        textDecoration:
+                                                            "underline",
+                                                        color: "#fff",
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onClick={() =>
+                                                        handleSendVerify()
+                                                    }
+                                                >
+                                                    Send Verify
+                                                </p>
+                                            )) || <></>}
+
                                             <button
                                                 className="c-btn c-btn"
                                                 type="button"
