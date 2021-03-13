@@ -8,8 +8,8 @@ import List2 from "../components/List2";
 import { getTvShow } from "../actions/film.action";
 import { RESET_ERROR } from "../types/movie.type";
 import Alert from "../components/Alert";
+import { GET_WATCHLIST_RESET } from "../types/watchlist.type";
 function Movie({ match }) {
-    window.scrollTo(0, 0);
     const resMessage = useSelector((state) => state.watchlist.resMessage);
     const isSendFailed = useSelector((state) => state.watchlist.isSendFailed);
     const dispatch = useDispatch();
@@ -19,6 +19,11 @@ function Movie({ match }) {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
+        dispatch({
+            type: GET_WATCHLIST_RESET,
+        });
         document.title = `Movie Details | ${process.env.REACT_APP_WEB_NAME}`;
         if (id) {
             dispatch(getMovieInfo(id));
@@ -36,18 +41,19 @@ function Movie({ match }) {
                 type: RESET_ERROR,
             });
         }
+
     }, [dispatch, error]);
 
     return (
         <>
-         {isSendFailed !== null ? (
-            <Alert
-                msg={resMessage}
-                type={isSendFailed ? "c-alert--error" : "c-alert--success"}
-            />
-        ) : (
-            <></>
-        )}
+            {isSendFailed !== null ? (
+                <Alert
+                    msg={resMessage}
+                    type={isSendFailed ? "c-alert--error" : "c-alert--success"}
+                />
+            ) : (
+                <></>
+            )}
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
             <div className="pages-movie">
                 <Detail id={id} />

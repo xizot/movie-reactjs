@@ -5,6 +5,8 @@ import {
     SENDPASSWORD_FAIL,
     FORGOT_REQUEST,
     FORGOT_RESET,
+    SENDPASSWORD_RESET,
+    SENDPASSWORD_REQUEST,
 } from "../types/forgot.type";
 
 const initialState = {
@@ -25,6 +27,13 @@ const forgotReducer = (state = initialState, action) => {
                 ...state,
                 resMessage: null,
                 isSendFailed: null,
+            };
+        case SENDPASSWORD_RESET:
+        case SENDPASSWORD_REQUEST:
+        return{
+                ...state,
+                resMessageReco: null,
+                isSendFailedReco: null,
             };
         case FORGOT_SUCCESS:
             return {
