@@ -15,7 +15,11 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
     const handleSeason = (e) => {
         const value = e.target.value;
         setCurrentSeason(value);
-        setEpisodes(findSeasonByValue(Number(value)));
+        if (value === "default") {
+            setEpisodes([]);
+        } else {
+            setEpisodes(findSeasonByValue(Number(value)));
+        }
     };
     useEffect(() => {
         if (seasons && seasons.length) {
@@ -40,9 +44,10 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
                                 name=""
                                 id=""
                                 className="p-popup__season"
-                                value={currentSeason || 1}
+                                value={currentSeason || 5}
                                 onChange={(e) => handleSeason(e)}
                             >
+                                <option value="default">Default</option>
                                 {seasons.map((item, idx) => (
                                     <React.Fragment key={idx}>
                                         <option value={item.seasonNumber}>
@@ -57,7 +62,6 @@ function MoviePopup({ id, title, handlePopup, seasons }) {
                             </h4>
                             <div className="p-popup__episode">
                                 {(episodes &&
-                                    episodes.length &&
                                     episodes.map((item, index) => (
                                         <Episode
                                             key={index}
