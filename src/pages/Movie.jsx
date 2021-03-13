@@ -17,6 +17,7 @@ function Movie({ match }) {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        document.title = `Movie Details | ${process.env.REACT_APP_WEB_NAME}`;
         if (id) {
             dispatch(getMovieInfo(id));
         } else {

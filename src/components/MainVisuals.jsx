@@ -58,6 +58,7 @@ function Mainvisuals() {
                     {popularList ? (
                         popularList.map((item, index) => (
                             <div className="c-slide__item" key={index}>
+                                <span className="c-slide__item__blur"></span>
                                 <img
                                     className="c-slide__image"
                                     src={item.backdropPath}

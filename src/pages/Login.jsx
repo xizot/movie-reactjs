@@ -61,6 +61,7 @@ function Login() {
         }
     };
     useEffect(() => {
+        document.title = `Login | ${process.env.REACT_APP_WEB_NAME}`;
         dispath(logout());
         setIsLoading(true);
     }, [dispath, errorServer, isLoading]);

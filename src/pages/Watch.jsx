@@ -19,6 +19,7 @@ function Watch({ match, location }) {
     const error = useSelector((state) => state.stream.error);
     const movieInfo = useSelector((state) => state.movie.data);
     useEffect(() => {
+        document.title = `Stream | ${process.env.REACT_APP_WEB_NAME}`;
         if (!id) {
             history.push(`/movie/${id}`);
         } else {

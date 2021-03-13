@@ -182,6 +182,7 @@ function Admin() {
     // ▲ VARIABLES FOR EDIT MOVIE & TV ▲
 
     useEffect(() => {
+        document.title = `Admin | ${process.env.REACT_APP_WEB_NAME}`;
         // Event
         $(".js-toggle-option").click(function (e) {
             e.preventDefault();

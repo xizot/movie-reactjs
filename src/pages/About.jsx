@@ -58,6 +58,7 @@ function About() {
             instagramLink: "/",
         },
     ];
+    document.title = `About | ${process.env.REACT_APP_WEB_NAME}`;
     return (
         <div className="p-about">
             <div className="l-container">

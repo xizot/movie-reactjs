@@ -6,6 +6,7 @@ import PTop from "../components/PTop";
 function Home() {
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
+        document.title = `${process.env.REACT_APP_WEB_NAME}`;
         setIsLoading(true);
     }, [isLoading]);
     return (

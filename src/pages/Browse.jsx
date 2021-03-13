@@ -52,6 +52,7 @@ function Browse({ type = "movie" }) {
     //▼ Fetch data ▼
     useEffect(() => {
         window.scrollTo(0, 0);
+        document.title = `Browse | ${process.env.REACT_APP_WEB_NAME}`;
         if (type === "movie") {
             axios
                 .get(`/media/fetch?limit=10&type=movie&page=${1}`)

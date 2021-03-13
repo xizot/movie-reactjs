@@ -57,6 +57,7 @@ function Search({ location }) {
         setSlideToggle((prev) => !prev);
     };
     useEffect(() => {
+        document.title = `Search | ${process.env.REACT_APP_WEB_NAME}`;
         if (search && search.length) {
             const searchVal = queryString.parse(search).q;
             dispatch(changeSearchKey(searchVal));
@@ -127,13 +128,6 @@ function Search({ location }) {
                                     <></>
                                 )}
                             </div>
-
-                            <select className="p-search__sort">
-                                <option value="">Sort by: Latest</option>
-                                <option value="">Sort by: Top Rate</option>
-                                <option value="">Sort by: A-Z</option>
-                                <option value="">Sort by: Z-A</option>
-                            </select>
                         </div>
 
                         <div className="p-search__list row">
