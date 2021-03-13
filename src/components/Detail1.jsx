@@ -39,7 +39,7 @@ function Detail1({
     const addFavorite = () => {
         dispath(addWatchlist(mediaId));
          if (isAdd) {
-            addMedia(id)
+            addMedia(mediaId)
                 .then(() => {
                     reloadData();
                 })

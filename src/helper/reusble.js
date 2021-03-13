@@ -85,7 +85,7 @@ export const addMedia = (mediaId) => {
         axios
             .post(
                 `/watchlist`,
-                { mediaId, rating },
+                { mediaId },
                 { headers: useAuthorization() }
             )
             .then((res) => resolve(res.data))
