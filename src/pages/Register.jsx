@@ -284,7 +284,17 @@ function Register() {
                         )}
                         <div className="c-form__actions">
                             <button
-                                className="c-btn c-btn--primary"
+                                className={`c-btn ${
+                                    errorUsername ||
+                                    errorPassword ||
+                                    errorConfirmPassword ||
+                                    errorDateOfBirth ||
+                                    errorDisplayName ||
+                                    errorEmail ||
+                                    username.length <= 0
+                                        ? "c-btn--disabled "
+                                        : ""
+                                } c-btn--primary`}
                                 type="button"
                                 onClick={() => handleRegister()}
                             >

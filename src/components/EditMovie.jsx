@@ -75,6 +75,7 @@ function EditMovie({ mediaId, nameClass, closePopUp }) {
     useEffect(() => {
         if (mediaId) {
             getMovieInfo(mediaId).then((res) => {
+                console.log(res);
                 setMovieDetailData(res);
                 setTitle(res.title);
                 setDescription(res.overview);
@@ -82,12 +83,11 @@ function EditMovie({ mediaId, nameClass, closePopUp }) {
                 setGenres(res.genres ? res.genres.join("/") : "");
                 setReleaseDate(res.movie.releaseDate);
                 setRuntime(res.movie.runtime);
-                setVideoLink("");
+                setVideoLink(res.movie.stream.path);
 
                 setPoster(res.posterPath);
-                getImageList(res.movie._id, "movie")
+                getImageList(res.movie.tmdbId, "movie")
                     .then((res) => {
-                        console.log(res);
                         setListImage(res.data.posters);
                         if (res.data.posters.length > 4) {
                             settings.infinite = true;
