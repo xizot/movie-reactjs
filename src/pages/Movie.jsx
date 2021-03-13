@@ -19,11 +19,11 @@ function Movie({ match }) {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-    window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
 
         dispatch({
-            type:  GET_WATCHLIST_RESET,
-        }); 
+            type: GET_WATCHLIST_RESET,
+        });
         document.title = `Movie Details | ${process.env.REACT_APP_WEB_NAME}`;
         if (id) {
             dispatch(getMovieInfo(id));
@@ -34,26 +34,26 @@ function Movie({ match }) {
         setIsLoading(true);
     }, [dispatch, id]);
 
-    useEffect(() => {           
+    useEffect(() => {
         if (error !== null) {
             history.push("/");
             dispatch({
                 type: RESET_ERROR,
             });
         }
-         
+
     }, [dispatch, error]);
 
     return (
         <>
-         {isSendFailed !== null ? (
-            <Alert
-                msg={resMessage}
-                type={isSendFailed ? "c-alert--error" : "c-alert--success"}
-            />
-        ) : (
-            <></>
-        )}
+            {isSendFailed !== null ? (
+                <Alert
+                    msg={resMessage}
+                    type={isSendFailed ? "c-alert--error" : "c-alert--success"}
+                />
+            ) : (
+                <></>
+            )}
             <Loading nameClass={isLoading ? "is-fadeout" : ""} />
             <div className="pages-movie">
                 <Detail id={id} />

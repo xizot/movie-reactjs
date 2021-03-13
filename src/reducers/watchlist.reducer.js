@@ -29,21 +29,15 @@ const watchlistReducer = (state = initialState, action) => {
                 isSendFailed: null,
             };       
         case GET_WATCHLIST_SUCCESS:
-            console.log(action.payload)
             return {
                 ...state,
                 data: action.payload,
                 isLoading: false,
-                resMessage: action.payload.message,
-                isSendFailed: false,
             };
-        case GET_WATCHLIST_FAIL: // moa sao xu li o day
-            console.log(action.payload)
+        case GET_WATCHLIST_FAIL: 
             return {
                 ...state,
                 isLoading: false,
-                resMessage: action.payload,
-                isSendFailed: true,
             };         
         case ADD_WATCHLIST_REQUEST: {
             return {
