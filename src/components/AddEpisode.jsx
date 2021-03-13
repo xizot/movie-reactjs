@@ -152,11 +152,13 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                 `/media/details/${mediaId}/season/${currentSeason}/episode/${ep}`
             )
             .then((res) => {
+                console.log(res);
                 setAirDate(res.data.airDate);
                 setOverview(res.data.overview);
                 setName(res.data.name);
                 setEpisode(res.data.episodeNumber);
                 setStillPath(res.data.stillPath);
+                setStreamPath(res.data.stream.path);
             });
     };
     const handleAddNew = () => {

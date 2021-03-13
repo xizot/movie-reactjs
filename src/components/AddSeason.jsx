@@ -224,7 +224,7 @@ function AddSeason({ nameClass, mediaId }) {
                     <div className="c-popup2-season__top show-tab-only">
                         <h3 className="c-popup2-season__title">Seasons</h3>
                         <select
-                            value={currentSeason}
+                            value={currentSeason || "new"}
                             onChange={(e) => handleSeasonTabLet(e)}
                         >
                             {(tvDetailData &&

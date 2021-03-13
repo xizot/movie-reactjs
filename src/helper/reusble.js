@@ -80,7 +80,7 @@ export const rateMedia = (mediaId, rating = "none") => {
                 { headers: useAuthorization() }
             )
             .then((res) => resolve(res.data))
-            .catch(() => reject(null));
+            .catch((err) => reject(err));
     });
 };
 

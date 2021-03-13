@@ -44,7 +44,10 @@ function Header({ isDark = null }) {
                     <div className="p-header__content u-flex u-a-center u-between">
                         <Link to="/" className="p-header__logo">
                             <img
-                                src="https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png"
+                                src={
+                                    process.env.PUBLIC_URL +
+                                    "/assets/img/logo.png"
+                                }
                                 alt=""
                             />
                         </Link>

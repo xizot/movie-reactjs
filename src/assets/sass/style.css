@@ -396,7 +396,7 @@ img {
      object-fit: cover;
 }
 
-@media only screen and (max-width: 812px) {
+@media only screen and (max-width: 1200px) {
   .p-header__cgnav {
     display: none !important;
   }
@@ -439,7 +439,7 @@ img {
   pointer-events: all;
 }
 
-@media only screen and (max-width: 812px) {
+@media only screen and (max-width: 1200px) {
   .p-header__actions {
     display: none !important;
   }
@@ -1971,7 +1971,7 @@ img {
   pointer-events: all;
 }
 
-@media only screen and (max-width: 812px) {
+@media only screen and (max-width: 1200px) {
   .c-menusp__controller {
     display: block;
     right: 15px;

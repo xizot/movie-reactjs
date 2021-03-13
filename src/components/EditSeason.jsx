@@ -144,12 +144,16 @@ function EditSeason({ mediaId, nameClass, closePopup }) {
     const handleSeason = (season) => {
         setCurrentSeason(season);
         setType("update");
-        axios.get(`media/details/${mediaId}/season/${season}`).then((res) => {
-            setAirDate(res.data.airDate);
-            setOverview(res.data.overview);
-            setSeasonName(res.data.name);
-            setSeasonNumber(res.data.seasonNumber);
-        });
+        if (season) {
+            axios
+                .get(`media/details/${mediaId}/season/${season}`)
+                .then((res) => {
+                    setAirDate(res.data.airDate);
+                    setOverview(res.data.overview);
+                    setSeasonName(res.data.name);
+                    setSeasonNumber(res.data.seasonNumber);
+                });
+        }
     };
     const handleAddNew = () => {
         setType("new");

@@ -9,3 +9,10 @@ export const getErrorResponse = (err) => {
         </>
     );
 };
+export const getErrorResponseString = (err) => {
+    let rs = "";
+    rs += err.response.data.error
+        ? err.response.data.error
+        : err.response.data.errors.map((item) => item.msg + "; ");
+    return rs;
+};

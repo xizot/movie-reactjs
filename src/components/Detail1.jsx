@@ -2,7 +2,7 @@ import { DislikeOutlined, LikeOutlined, PlusOutlined } from "@ant-design/icons";
 import React, { useCallback, useEffect, useState } from "react";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
-import { history } from "../helper";
+import { getErrorResponseString, history } from "../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../actions/history.action";
 import { addWatchlist } from "../actions/watchlist.action";
@@ -43,24 +43,60 @@ function Detail1({
     };
     const handleLike = () => {
         if (isLiked) {
-            rateMedia(id).then(() => {
-                reloadData();
-            });
+            rateMedia(id)
+                .then(() => {
+                    reloadData();
+                })
+                .catch((err) => {
+                    try {
+                        const error = getErrorResponseString(err);
+                        alert(error);
+                    } catch (error) {
+                        alert("Rating failed. Please try again later!!!");
+                    }
+                });
         } else {
-            rateMedia(id, "like").then(() => {
-                reloadData();
-            });
+            rateMedia(id, "like")
+                .then(() => {
+                    reloadData();
+                })
+                .catch((err) => {
+                    try {
+                        const error = getErrorResponseString(err);
+                        alert(error);
+                    } catch (error) {
+                        alert("Rating failed. Please try again later!!!");
+                    }
+                });
         }
     };
     const handleDislike = () => {
         if (isDisliked) {
-            rateMedia(id).then(() => {
-                reloadData();
-            });
+            rateMedia(id)
+                .then(() => {
+                    reloadData();
+                })
+                .catch((err) => {
+                    try {
+                        const error = getErrorResponseString(err);
+                        alert(error);
+                    } catch (error) {
+                        alert("Rating failed. Please try again later!!!");
+                    }
+                });
         } else {
-            rateMedia(id, "dislike").then(() => {
-                reloadData();
-            });
+            rateMedia(id, "dislike")
+                .then(() => {
+                    reloadData();
+                })
+                .catch((err) => {
+                    try {
+                        const error = getErrorResponseString(err);
+                        alert(error);
+                    } catch (error) {
+                        alert("Rating failed. Please try again later!!!");
+                    }
+                });
         }
     };
     const reloadData = useCallback(() => {

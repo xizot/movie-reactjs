@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getErrorResponseString } from "../helper";
 import { deleteComment, getComment, postComment } from "../helper/reusble";
 import CommentItem from "./CommentItem";
 import Detail1 from "./Detail1";
@@ -27,8 +28,12 @@ function Detail({ id }) {
                 reloadData();
             })
             .catch((err) => {
-                alert("Post comment failed. Try again");
-                console.log(err);
+                try {
+                    const error = getErrorResponseString(err);
+                    alert(error);
+                } catch (error) {
+                    alert("Post comment failed. Please try again later!!!");
+                }
             });
     };
 

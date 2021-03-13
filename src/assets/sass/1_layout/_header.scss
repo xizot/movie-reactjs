@@ -32,7 +32,7 @@
         }
     }
     &__cgnav {
-        @include breakpoint(tab) {
+        @include breakpoint(pro) {
             display: none !important;
         }
         li {
@@ -64,7 +64,7 @@
     }
     &__actions {
         pointer-events: all;
-        @include breakpoint(tab) {
+        @include breakpoint(pro) {
             display: none !important;
         }
         p {
