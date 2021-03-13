@@ -71,6 +71,7 @@ function EditTv({ mediaId, nameClass = 0, closePopUp }) {
     };
 
     useEffect(() => {
+        settings.infinite = false;
         if (mediaId) {
             getMovieInfo(mediaId).then((res) => {
                 setTvDetail(res);
@@ -83,9 +84,9 @@ function EditTv({ mediaId, nameClass = 0, closePopUp }) {
                 setPoster(res.posterPath);
                 getImageList(res.tmdbId, "tv")
                     .then((res) => {
-                        console.log(res);
                         setListImage(res.data.posters);
-                        if (res.data.posters.length > 4) {
+                        console.log(res.data.posters.length);
+                        if (res.data.posters.length >= 4) {
                             settings.infinite = true;
                         }
                     })
@@ -96,16 +97,22 @@ function EditTv({ mediaId, nameClass = 0, closePopUp }) {
         }
     }, [dispatch, mediaId]);
     return (
-        <div className={`c-popup2 c-popup2-addfilm ${nameClass}`}>
-            {isAdded ? (
-                <Alert
-                    msg={resMessage}
-                    type={isError ? "c-alert--error" : "c-alert--success"}
-                />
-            ) : (
-                <></>
-            )}
-            <div className="c-popup2__content">
+        <div
+            className={`c-popup2 c-popup2-addfilm ${nameClass}`}
+            onClick={() => closePopUp()}
+        >
+            <div
+                className="c-popup2__content"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {isAdded ? (
+                    <Alert
+                        msg={resMessage}
+                        type={isError ? "c-alert--error" : "c-alert--success"}
+                    />
+                ) : (
+                    <></>
+                )}
                 <span
                     className="c-popup2__close"
                     onClick={() => handleClosePopUp()}
@@ -264,6 +271,12 @@ function EditTv({ mediaId, nameClass = 0, closePopUp }) {
                                 onClick={() => handleUpdate()}
                             >
                                 Update
+                            </div>
+                            <div
+                                className="c-btn c-addfilm__publish c-btn-2"
+                                // onClick={() => handleOpenEditSeason()}
+                            >
+                                Show Season
                             </div>
                             <div
                                 className="c-btn c-addfilm__publish"

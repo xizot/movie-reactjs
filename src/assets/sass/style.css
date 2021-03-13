@@ -4372,6 +4372,16 @@ img {
   margin-bottom: 5px;
 }
 
+.show-tab-only {
+  display: none;
+}
+
+@media only screen and (max-width: 812px) {
+  .show-tab-only {
+    display: block;
+  }
+}
+
 .c-popup2-season {
   position: fixed;
   top: 0;
@@ -4417,10 +4427,23 @@ img {
   }
 }
 
+@media only screen and (max-width: 812px) {
+  .c-popup2-season__content {
+    display: block;
+    overflow-y: auto;
+  }
+}
+
 .c-popup2-season__left {
   width: 150px;
   padding: 50px 0 35px;
   overflow: hidden auto;
+}
+
+@media only screen and (max-width: 812px) {
+  .c-popup2-season__left {
+    display: none;
+  }
 }
 
 .c-popup2-season__left ul {
@@ -4472,16 +4495,41 @@ img {
   margin-bottom: 20px;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-popup2-season__title {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+}
+
+.c-popup2-season__top {
+  margin-bottom: 30px;
+}
+
 .c-popup2-season__right {
   padding: 50px 35px 40px 10px;
   overflow: auto;
   width: calc(100% - 150px);
 }
 
+@media only screen and (max-width: 812px) {
+  .c-popup2-season__right {
+    width: 100%;
+    padding: unset;
+  }
+}
+
 .c-popup2-season__right .c-form {
   margin: unset;
   padding: unset;
   width: 100%;
+}
+
+@media only screen and (max-width: 450px) {
+  .c-popup2-season__right .c-form .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .c-popup2-season__right .c-form textarea {
@@ -4495,12 +4543,30 @@ img {
   display: flex;
 }
 
+@media only screen and (max-width: 812px) {
+  .c-popup2-season__actions {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
 .c-popup2-season__actions .c-btn {
   min-width: 80px;
   width: auto;
   margin-right: 20px;
   padding: 0 20px;
   margin-top: unset;
+}
+
+@media only screen and (max-width: 812px) {
+  .c-popup2-season__actions .c-btn {
+    width: 45%;
+    margin-right: unset;
+    margin-bottom: 20px;
+  }
 }
 
 .c-episode__img {
@@ -6140,6 +6206,16 @@ img {
 
 .c-addfilm .c-btn:hover {
   opacity: 0.7;
+}
+
+.c-addfilm .c-btn-2 {
+  margin-right: 20px;
+}
+
+@media only screen and (max-width: 450px) {
+  .c-addfilm .c-btn-2 {
+    margin-right: unset;
+  }
 }
 
 .c-addfilm__type {

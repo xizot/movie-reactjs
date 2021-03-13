@@ -65,19 +65,21 @@ function Detail1({
     };
     const reloadData = useCallback(() => {
         getRatingCount(id).then((res) => setRatingCount(res));
-        checkLiked(id).then((res) => {
-            if (!res.message && res.liked) {
-                setIsLiked(true);
-                setIsDisliked(false);
-            } else if (!res.message && !res.liked && res.liked !== null) {
-                setIsLiked(false);
-                setIsDisliked(true);
-            } else {
-                setIsDisliked(false);
-                setIsLiked(false);
-            }
-        });
-    }, [id]);
+        if (isAuthenticated) {
+            checkLiked(id).then((res) => {
+                if (!res.message && res.liked) {
+                    setIsLiked(true);
+                    setIsDisliked(false);
+                } else if (!res.message && !res.liked && res.liked !== null) {
+                    setIsLiked(false);
+                    setIsDisliked(true);
+                } else {
+                    setIsDisliked(false);
+                    setIsLiked(false);
+                }
+            });
+        }
+    }, [id, isAuthenticated]);
     useEffect(() => {
         reloadData();
     }, [reloadData]);

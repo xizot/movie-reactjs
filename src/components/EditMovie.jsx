@@ -100,17 +100,22 @@ function EditMovie({ mediaId, nameClass, closePopUp }) {
         }
     }, [dispatch, mediaId]);
     return (
-        <div className={`c-popup2 c-popup2-addfilm ${nameClass}`}>
-            {isAdded ? (
-                <Alert
-                    msg={resMessage}
-                    type={isError ? "c-alert--error" : "c-alert--success"}
-                />
-            ) : (
-                <></>
-            )}
-
-            <div className="c-popup2__content">
+        <div
+            className={`c-popup2 c-popup2-addfilm ${nameClass}`}
+            onClick={() => closePopUp()}
+        >
+            <div
+                className="c-popup2__content"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {isAdded ? (
+                    <Alert
+                        msg={resMessage}
+                        type={isError ? "c-alert--error" : "c-alert--success"}
+                    />
+                ) : (
+                    <></>
+                )}
                 <span
                     className="c-popup2__close"
                     onClick={() => handleClosePopUp()}

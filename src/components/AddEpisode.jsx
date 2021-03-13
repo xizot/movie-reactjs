@@ -140,6 +140,16 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
         setStillPath("");
         closePopup();
     };
+    const handleEpisodeTablet = (e) => {
+        const value = e.target.value;
+        if (value === "new") {
+            setType("new");
+            handleAddNew();
+            return;
+        } else {
+            handleEpisode(value);
+        }
+    };
     const handleEpisode = (ep) => {
         setCurrentEpisode(ep);
         setType("update");
@@ -182,6 +192,7 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
             className={`c-popup2 c-popup2-season c-step2 ${
                 isOpen ? "is-open" : ""
             }`}
+            onClick={() => resetState()}
         >
             {isAdded ? (
                 <Alert
@@ -191,7 +202,10 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
             ) : (
                 <></>
             )}
-            <div className="c-popup2-season__content">
+            <div
+                className="c-popup2-season__content"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <div className="c-popup2-season__left">
                     <h3 className="c-popup2-season__title">
                         Season: {currentSeason} <br />
@@ -225,6 +239,30 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                         </span>
                     </ul>
                 </div>
+
+                <div className="c-popup2-season__top show-tab-only">
+                    <h3 className="c-popup2-season__title">
+                        Season: {currentSeason} <br />
+                        <br />
+                        Episodes
+                    </h3>
+                    <select
+                        value={currentEpisode}
+                        onChange={(e) => handleEpisodeTablet(e)}
+                    >
+                        {(episodes &&
+                            episodes.length &&
+                            episodes.map((item, index) => (
+                                <option value={item.episodeNumber} key={index}>
+                                    {item.name}
+                                </option>
+                            ))) || <></>}
+                        <option value="new" onClick={() => handleAddNew()}>
+                            Add New
+                        </option>
+                    </select>
+                </div>
+
                 <div className="c-popup2-season__right">
                     <h3 className="c-popup2-season__title">
                         {type === "update" ? "Episode Infomations" : "Add New"}

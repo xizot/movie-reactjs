@@ -251,8 +251,12 @@ function Admin() {
                 className={`c-popup2 c-popup2-search ${
                     openSearch ? "is-open" : ""
                 }`}
+                onClick={() => setOpenSearch(false)}
             >
-                <div className="c-popup2__content">
+                <div
+                    className="c-popup2__content"
+                    onClick={(e) => e.stopPropagation()}
+                >
                     <span
                         className="c-popup2__close"
                         onClick={() => closeSearch()}

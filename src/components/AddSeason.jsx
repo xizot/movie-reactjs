@@ -129,6 +129,16 @@ function AddSeason({ nameClass, mediaId }) {
                 });
         }
     };
+    const handleSeasonTabLet = (e) => {
+        const value = e.target.value;
+        if (value === "new") {
+            setType("new");
+            handleAddNew();
+            return;
+        } else {
+            handleSeason(value);
+        }
+    };
     const handleSeason = (season) => {
         setCurrentSeason(season);
         setType("update");
@@ -170,8 +180,14 @@ function AddSeason({ nameClass, mediaId }) {
             ) : (
                 <></>
             )}
-            <div className={`c-popup2 c-popup2-season c-step2 ${nameClass}`}>
-                <div className="c-popup2-season__content">
+            <div
+                className={`c-popup2 c-popup2-season c-step2 ${nameClass} `}
+                onClick={() => resetState()}
+            >
+                <div
+                    className="c-popup2-season__content"
+                    onClick={(e) => e.stopPropagation()}
+                >
                     <div className="c-popup2-season__left">
                         <h3 className="c-popup2-season__title">Seasons</h3>
                         <ul>
@@ -204,6 +220,27 @@ function AddSeason({ nameClass, mediaId }) {
                                 Add New
                             </span>
                         </ul>
+                    </div>
+                    <div className="c-popup2-season__top show-tab-only">
+                        <h3 className="c-popup2-season__title">Seasons</h3>
+                        <select
+                            value={currentSeason}
+                            onChange={(e) => handleSeasonTabLet(e)}
+                        >
+                            {(tvDetailData &&
+                                tvDetailData.tvShow.seasons.length &&
+                                tvDetailData.tvShow.seasons.map(
+                                    (item, index) => (
+                                        <option
+                                            value={item.seasonNumber}
+                                            key={index}
+                                        >
+                                            {item.name}
+                                        </option>
+                                    )
+                                )) || <></>}
+                            <option value="new">Add New</option>
+                        </select>
                     </div>
                     <div className="c-popup2-season__right">
                         <h3 className="c-popup2-season__title">

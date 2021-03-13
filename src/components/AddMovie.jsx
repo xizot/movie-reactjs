@@ -86,8 +86,14 @@ function AddMovie({ nameClass, closePopUp }) {
         }
     }, [dispatch, movieDetailData]);
     return (
-        <div className={`c-popup2 c-popup2-addfilm ${nameClass}`}>
-            <div className="c-popup2__content">
+        <div
+            className={`c-popup2 c-popup2-addfilm ${nameClass}`}
+            onClick={() => closePopUp()}
+        >
+            <div
+                className="c-popup2__content"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <span
                     className="c-popup2__close"
                     onClick={() => handleClosePopUp()}

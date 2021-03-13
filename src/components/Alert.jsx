@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Alert({ msg, type = "" }) {
     const [isHide, setIsHide] = useState(false);
-    const handleClose = () => {
+    const handleClose = (e) => {
+        e.stopPropagation();
         setIsHide(true);
     };
-    setTimeout(() => {
-        setIsHide(true);
-    }, 5000);
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setIsHide(true);
+        }, 5000);
+        return () => clearTimeout(timeout);
+    }, []);
+
     return (
         <div className={`c-alert ${type} ${!isHide ? "is-show" : ""}`}>
             {msg}
-            <span className="c-alert__close" onClick={() => handleClose()}>
+            <span className="c-alert__close" onClick={(e) => handleClose(e)}>
                 &#10006;
             </span>
         </div>

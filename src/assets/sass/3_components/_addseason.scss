@@ -43,6 +43,12 @@
         }
     }
 }
+.show-tab-only {
+    display: none;
+    @include breakpoint(tab) {
+        display: block;
+    }
+}
 .c-popup2-season {
     position: fixed;
     top: 0;
@@ -69,13 +75,21 @@
         color: white;
         display: flex;
         max-width: 1200px;
+
         @include breakpoint(pro) {
             max-width: unset;
+        }
+        @include breakpoint(tab) {
+            display: block;
+            overflow-y: auto;
         }
     }
     &__left {
         width: 150px;
         padding: 50px 0 35px;
+        @include breakpoint(tab) {
+            display: none;
+        }
         ul {
             font-size: 1.6rem;
             li {
@@ -114,15 +128,32 @@
     &__title {
         font-size: 1.8rem;
         margin-bottom: 20px;
+        @include breakpoint(tab) {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+    }
+    &__top {
+        margin-bottom: 30px;
     }
     &__right {
         padding: 50px 35px 40px 10px;
         overflow: auto;
         width: calc(100% - 150px);
+        @include breakpoint(tab) {
+            width: 100%;
+            padding: unset;
+        }
         .c-form {
             margin: unset;
             padding: unset;
             width: 100%;
+            @include breakpoint(sp) {
+                .row {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+            }
             textarea {
                 height: 150px;
                 resize: none;
@@ -131,12 +162,21 @@
     }
     &__actions {
         display: flex;
+        @include breakpoint(tab) {
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
         .c-btn {
             min-width: 80px;
             width: auto;
             margin-right: 20px;
             padding: 0 20px;
             margin-top: unset;
+            @include breakpoint(tab) {
+                width: 45%;
+                margin-right: unset;
+                margin-bottom: 20px;
+            }
         }
     }
 }
