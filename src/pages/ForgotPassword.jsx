@@ -9,6 +9,8 @@ import { FORGOT_RESET } from "../types/forgot.type";
 function ForgotPassword() {
     const resMessage = useSelector((state) => state.forgot.resMessage);
     const isSendFailed = useSelector((state) => state.forgot.isSendFailed);
+
+    
     const [email, setEmail] = useState("");
     const dispath = useDispatch();
     const [errorEmail, setErrorEmail] = useState(false);

@@ -14,6 +14,8 @@ const initialState = {
     code: localStorage.getItem("code"),
     resMessage: null,
     isSendFailed: null,
+    isSendFailedReco:null,
+    resMessageReco:null,
 };
 const forgotReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -45,12 +47,16 @@ const forgotReducer = (state = initialState, action) => {
                 ...state,
                 sendPassword: false,
                 isLoading: false,
+                resMessageReco: action.payload.message,
+                isSendFailedReco: false,
             };
         case SENDPASSWORD_FAIL:
             return {
                 ...state,
                 sendPassword: false,
                 isLoading: false,
+                resMessageReco: action.payload,
+                isSendFailedReco: true,
             };
         default:
             return state;

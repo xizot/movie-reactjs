@@ -15,6 +15,8 @@ const initialState = {
     data: "",
     isAdding:false,
     isDeleting:false,
+    resMessage: null,
+    isSendFailed: null,
 };
 const watchlistReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -29,11 +31,15 @@ const watchlistReducer = (state = initialState, action) => {
                 ...state,
                 data: action.payload,
                 isLoading: false,
+                resMessage: action.payload.message,
+                isSendFailed: false,
             };
         case GET_WATCHLIST_FAIL:
             return {
                 ...state,
                 isLoading: false,
+                resMessage: action.payload,
+                isSendFailed: true,
             };         
         case ADD_WATCHLIST_REQUEST: {
             return {
