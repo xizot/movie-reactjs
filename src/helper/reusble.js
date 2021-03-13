@@ -83,11 +83,15 @@ export const checkAdd = (mediaId) => {
 export const addMedia = (mediaId) => {
     return new Promise((resolve, reject) => {
         axios
-            .post(
-                `/watchlist`,
-                { mediaId },
-                { headers: useAuthorization() }
-            )
+            .post(`/watchlist`, { mediaId }, { headers: useAuthorization() })
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err));
+    });
+};
+export const removeWatchList = (mediaId) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .delete(`/watchlist/${mediaId}`, { headers: useAuthorization() })
             .then((res) => resolve(res.data))
             .catch((err) => reject(err));
     });
