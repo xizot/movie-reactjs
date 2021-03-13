@@ -28,7 +28,7 @@ function Detail1({
     mediaId,
 }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+    const isSendFailed = useSelector((state) => state.watchlist.isSendFailed);
     const [ratingCount, setRatingCount] = useState(0);
     const [isLiked, setIsLiked] = useState(null);
     const [isDisliked, setIsDisliked] = useState(null);
@@ -47,18 +47,6 @@ function Detail1({
     const addFavorite = () => {
         if (!isAdd) {
             dispath(addWatchlist(mediaId));
-            addMedia(mediaId)
-                .then(() => {
-                    setIsAdd(true);
-                })
-                .catch((err) => {
-                    try {
-                        const error = getErrorResponseString(err);
-                        alert(error);
-                    } catch (error) {
-                        alert("Add failed. Please try again later!!!");
-                    }
-                });
         } else {
             removeWatchList(id).then(() => {
                 setIsAdd(false);
@@ -172,7 +160,7 @@ function Detail1({
 
     useEffect(() => {
         handleCheckAdd();
-    }, [handleCheckAdd]);
+    }, [handleCheckAdd, isSendFailed]);
 
     useEffect(() => {
         reloadData();
