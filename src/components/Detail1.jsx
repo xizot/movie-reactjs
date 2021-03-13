@@ -21,7 +21,7 @@ function Detail1({
     mediaId,
 }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    
+
     const [ratingCount, setRatingCount] = useState(0);
     const [isLiked, setIsLiked] = useState(null);
     const [isDisliked, setIsDisliked] = useState(null);
@@ -147,7 +147,7 @@ function Detail1({
         reloadData();
     }, [reloadData]);
     return (
-       
+
         <div className="p-detail1 ">
             <div className="l-container">
                 <MoviePopup
@@ -215,9 +215,10 @@ function Detail1({
                                 <div className="p-detail1__image">
                                     <img src={poster} alt="" />
                                 </div>
-                                <p className="p-detail1__item">
+                                {actors && <p className="p-detail1__item" >
                                     <b>Actor:</b> <span> {actors}</span>
-                                </p>
+                                </p> || <></> }
+
                                 <p className="p-detail1__item">
                                     <b>Year:</b> <span>{year}</span>
                                 </p>
