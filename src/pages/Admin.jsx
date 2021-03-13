@@ -124,7 +124,6 @@ function Admin() {
             dispatch(searchMovieByQuery(value, 1));
         } else if (type === "tv") {
             dispatch(searchTvByQuery(value, 1));
-            console.log(tvData);
         }
     };
     const handleSubmitSearch = (e, page) => {

@@ -53,9 +53,8 @@ function EditSeason({ mediaId, nameClass, closePopup }) {
                         setTvDetailData(res.data);
                         handleAddNew();
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         setTvDetailData(null);
-                        console.log(err);
                     });
             })
             .catch((err) => {
@@ -91,9 +90,8 @@ function EditSeason({ mediaId, nameClass, closePopup }) {
                     .then((res) => {
                         setTvDetailData(res.data);
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         setTvDetailData(null);
-                        console.log(err);
                     });
             })
             .catch((err) => {
@@ -118,9 +116,8 @@ function EditSeason({ mediaId, nameClass, closePopup }) {
                         .then((res) => {
                             setTvDetailData(res.data);
                         })
-                        .catch((err) => {
+                        .catch(() => {
                             setTvDetailData(null);
-                            console.log(err);
                         });
                 })
                 .catch((err) => {
@@ -171,6 +168,7 @@ function EditSeason({ mediaId, nameClass, closePopup }) {
             axios
                 .get(`media/details/${mediaId}`)
                 .then((res) => {
+                    console.log(res.data);
                     setTvDetailData(res.data);
                 })
                 .catch(() => setTvDetailData(null));

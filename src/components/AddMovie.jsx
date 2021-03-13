@@ -55,7 +55,6 @@ function AddMovie({ nameClass, closePopUp }) {
 
     useEffect(() => {
         if (movieDetailData) {
-            console.log(movieDetailData);
             setTitle((movieDetailData && movieDetailData.title) || "");
             setDescription((movieDetailData && movieDetailData.overview) || "");
             setGenres(
@@ -73,7 +72,6 @@ function AddMovie({ nameClass, closePopUp }) {
             setPoster((movieDetailData && movieDetailData.posterPath) || null);
             getImageList(movieDetailData.imdbId, "movie")
                 .then((res) => {
-                    console.log(res);
                     setListImage(res.data.posters);
                     if (res.data.posters.length > 4) {
                         settings.infinite = true;
@@ -82,7 +80,6 @@ function AddMovie({ nameClass, closePopUp }) {
                 .catch(() => {
                     setListImage([]);
                 });
-            // console.log(list)
         }
     }, [dispatch, movieDetailData]);
     return (

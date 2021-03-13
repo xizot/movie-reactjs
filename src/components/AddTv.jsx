@@ -55,7 +55,6 @@ function AddTv({ nameClass = 0, closePopUp }) {
 
     useEffect(() => {
         if (tvDetailData && !tvDetailData.movie) {
-            console.log(tvDetailData);
             setTitle((tvDetailData && tvDetailData.title) || "");
             setDescription((tvDetailData && tvDetailData.overview) || "");
             setGenres((tvDetailData && tvDetailData.genres.join("/")) || "");
@@ -64,7 +63,6 @@ function AddTv({ nameClass = 0, closePopUp }) {
             setPoster((tvDetailData && tvDetailData.posterPath) || null);
             getImageList(tvDetailData.tmdbId, "tv")
                 .then((res) => {
-                    console.log(res);
                     setListImage(res.data.posters);
                     if (res.data.posters.length > 4) {
                         settings.infinite = true;

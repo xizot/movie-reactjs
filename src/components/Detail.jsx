@@ -38,7 +38,6 @@ function Detail({ id }) {
     };
 
     const handleDeleteComment = (commentID) => {
-        console.log(commentID);
         let result = window.confirm("Are you sure to delete this item?");
         if (result) {
             deleteComment(commentID)
@@ -47,9 +46,8 @@ function Detail({ id }) {
                     setPage(1);
                     reloadData();
                 })
-                .catch((err) => {
+                .catch(() => {
                     alert("Delete failed. Try again");
-                    console.log(err);
                 });
         }
     };

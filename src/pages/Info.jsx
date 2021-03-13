@@ -81,7 +81,6 @@ function Info() {
             });
     };
     if (!avatar) {
-        console.log("handleError");
         avatar = {};
         avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
     }
@@ -132,7 +131,6 @@ function Info() {
             dispath(clearError());
         }
         dispath(delAvatar());
-        console.log(avatar.uri);
     };
 
     const handleUsername = (e) => {

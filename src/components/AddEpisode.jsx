@@ -51,9 +51,8 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                         setEpisodes(res.data.episodes);
                         handleAddNew();
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         setEpisodes(null);
-                        console.log(err);
                     });
             })
             .catch((err) => {
@@ -89,9 +88,8 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                     .then((res) => {
                         setEpisodes(res.data.episodes);
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         setEpisodes(null);
-                        console.log(err);
                     });
             })
             .catch((err) => {
@@ -116,9 +114,8 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                         .then((res) => {
                             setEpisodes(res.data.episodes);
                         })
-                        .catch((err) => {
+                        .catch(() => {
                             setEpisodes(null);
-                            console.log(err);
                         });
                 })
                 .catch((err) => {
@@ -135,7 +132,6 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
     };
     const handleEpisodeTablet = (e) => {
         const value = e.target.value;
-        console.log(value);
         if (value === "new") {
             setType("new");
             handleAddNew();
@@ -152,7 +148,6 @@ function AddEpisode({ isOpen = false, currentSeason, mediaId, closePopup }) {
                 `/media/details/${mediaId}/season/${currentSeason}/episode/${ep}`
             )
             .then((res) => {
-                console.log(res);
                 setAirDate(res.data.airDate);
                 setOverview(res.data.overview);
                 setName(res.data.name);

@@ -71,7 +71,6 @@ function Browse({ type = "movie" }) {
             axios
                 .get(`/media/fetch?limit=10&type=tv&page=${1}`)
                 .then((res) => {
-                    console.log(res.data);
                     setCurrentMovieData((prev) => [
                         ...prev,
                         ...res.data.results,
