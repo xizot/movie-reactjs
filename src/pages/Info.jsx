@@ -82,7 +82,7 @@ function Info() {
     };
     if (!avatar) {
         avatar = {};
-        avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
+        avatar.uri = `${process.env.PUBLIC_URL}/assets/img/no-avatar.png`;
     }
 
     const handleUpdate = () => {
@@ -321,7 +321,7 @@ function Info() {
                                         <img
                                             src={
                                                 avatar.uri ||
-                                                `${process.env.PUBLIC_URL}/assets/img/avata.jpg`
+                                                `${process.env.PUBLIC_URL}/assets/img/no-avatar.png`
                                             }
                                             alt=""
                                         />
