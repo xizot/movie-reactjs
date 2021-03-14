@@ -275,6 +275,9 @@ function Info() {
         }
     }, [dispath, user]);
 
+    useEffect(() => {
+        dispath(getAvatar());
+    }, [dispath, isUploaded]);
     return (
         <div className="infouser">
             {isUpdateFailed !== null ? (
