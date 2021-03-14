@@ -86,6 +86,11 @@ function Info() {
     }
 
     const handleUpdate = () => {
+        let newDateOfBirth = convertDateTime(
+            dateOfBirth,
+            "YYYY-MM-DD",
+            "DD-MM-YYYY"
+        );
         if (
             !errorUsername &&
             !errorEmail &&
@@ -100,7 +105,7 @@ function Info() {
                         username,
                         displayName,
                         email,
-                        dateOfBirth,
+                        newDateOfBirth,
                         currentPassword,
                         confirmPassword,
                         newPassword,
