@@ -1,4 +1,4 @@
-import { useAuthorization } from "../helper";
+import { getErrorResponse, useAuthorization } from "../helper";
 import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
@@ -142,7 +142,7 @@ export const update = (
     confirmPassword,
     newPassword,
     checkPassword,
-    checkField,
+    checkField
 ) => (dispatch) => {
     let body = {
         username,
@@ -197,27 +197,16 @@ export const update = (
                 dispatch(clearError());
             })
             .catch((err) => {
-                if (err.response) {
-                    dispatch(
-                        getError(
-                            err.response.data.error || err.response.data.errors,
-                            err.response.status,
-                            UPDATE_USER_FAIL
-                        )
-                    );
-                }
+                const error = getErrorResponse(err);
                 dispatch({
-                    payload: {
-                        msg: "Server error!!!",
-                        status: 500,
-                        id: UPDATE_USER_FAIL,
-                    },
+                    payload: error,
                     type: UPDATE_USER_FAIL,
                 });
             });
     } else {
         dispatch({
             type: UPDATE_USER_FAIL,
+            payload: "Update failed. Please try again later !!!",
         });
     }
 };

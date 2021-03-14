@@ -26,6 +26,9 @@ const initialState = {
     avatar: false,
     urlAvatar: localStorage.getItem("avatar") || {},
     code: localStorage.getItem("code"),
+
+    resMessage: null,
+    isUpdateFailed: null,
 };
 const inforReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -104,18 +107,25 @@ const inforReducer = (state = initialState, action) => {
                 isDeleted: false,
             };
         case UPDATE_USER_REQUEST:
+        case "UPDATE_USER_RESET":
             return {
                 ...state,
                 update: true,
+                resMessage: null,
+                isUpdateFailed: null,
             };
         case UPDATE_USER_FAIL:
             return {
                 ...state,
                 update: false,
+                isUpdateFailed: true,
+                resMessage: action.payload,
             };
         case UPDATE_USER_SUCCESS:
             return {
                 update: true,
+                isUpdateFailed: false,
+                resMessage: "Updated successfully",
             };
         default:
             return state;

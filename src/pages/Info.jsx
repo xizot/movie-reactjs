@@ -29,6 +29,9 @@ import { getErrorResponse } from "../helper";
 
 function Info() {
     const dispath = useDispatch();
+
+    const isUpdateFailed = useSelector((state) => state.infor.isUpdateFailed);
+    const updateResMessage = useSelector((state) => state.infor.resMessage);
     let user = useSelector((state) => state.auth.user);
     let avatar = useSelector((state) => state.infor.urlAvatar);
     const isUploading = useSelector((state) => state.infor.isUploading);
@@ -260,6 +263,9 @@ function Info() {
     };
 
     useEffect(() => {
+        dispath({
+            type: "UPDATE_USER_RESET",
+        });
         dispath(getAvatar());
         if (user) {
             setUsername((user && user.username) || "");
@@ -271,6 +277,16 @@ function Info() {
 
     return (
         <div className="infouser">
+            {isUpdateFailed !== null ? (
+                <Alert
+                    msg={updateResMessage}
+                    type={
+                        isUpdateFailed ? "c-alert--error" : "c-alert--success"
+                    }
+                />
+            ) : (
+                <></>
+            )}
             {isSendVerifyFailed !== null ? (
                 <Alert
                     msg={resSendVerifyMessage}
@@ -283,6 +299,7 @@ function Info() {
             ) : (
                 <></>
             )}
+
             {isUploaded && isDeleted && (
                 <Alert msg="Upload success" type="c-alert--success" />
             )}
@@ -301,7 +318,10 @@ function Info() {
                                         Your Profile
                                     </p>
                                     <h5 className="content_form__son">
-                                        Edit your profile, You must type current password to change your email or username. When change email, you have to re-active it.
+                                        Edit your profile, You must type current
+                                        password to change your email or
+                                        username. When change email, you have to
+                                        re-active it.
                                     </h5>
                                 </div>
                                 <div className="title_form__right">
