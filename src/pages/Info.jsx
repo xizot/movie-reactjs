@@ -82,7 +82,7 @@ function Info() {
     };
     if (!avatar) {
         avatar = {};
-        avatar.uri = `${process.env.PUBLIC_URL}/assets/img/avata.jpg`;
+        avatar.uri = `${process.env.PUBLIC_URL}/assets/img/no-avatar.png`;
     }
 
     const handleUpdate = () => {
@@ -301,7 +301,7 @@ function Info() {
                                         Your Profile
                                     </p>
                                     <h5 className="content_form__son">
-                                        Edit your profile
+                                        Edit your profile, You must type current password to change your email or username. When change email, you have to re-active it.
                                     </h5>
                                 </div>
                                 <div className="title_form__right">
@@ -326,7 +326,7 @@ function Info() {
                                         <img
                                             src={
                                                 avatar.uri ||
-                                                `${process.env.PUBLIC_URL}/assets/img/avata.jpg`
+                                                `${process.env.PUBLIC_URL}/assets/img/no-avatar.png`
                                             }
                                             alt=""
                                         />

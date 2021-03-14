@@ -1,12 +1,19 @@
-import { DislikeOutlined, LikeOutlined, PlusOutlined ,DeleteOutlined} from "@ant-design/icons";
+import { DislikeOutlined, LikeOutlined, PlusOutlined } from "@ant-design/icons";
 import React, { useCallback, useEffect, useState } from "react";
 import MoviePopup from "./MoviePopup";
 import $ from "jquery";
 import { getErrorResponseString, history } from "../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { addHistory } from "../actions/history.action";
+import {
+    getRatingCount,
+    checkLiked,
+    rateMedia,
+    checkAdd,
+    addMedia,
+    removeWatchList,
+} from "../helper/reusble";
 import { addWatchlist } from "../actions/watchlist.action";
-import { getRatingCount, checkLiked, rateMedia,checkAdd ,addMedia} from "../helper/reusble";
 
 function Detail1({
     type,
@@ -21,11 +28,11 @@ function Detail1({
     mediaId,
 }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+    const isSendFailed = useSelector((state) => state.watchlist.isSendFailed);
     const [ratingCount, setRatingCount] = useState(0);
     const [isLiked, setIsLiked] = useState(null);
     const [isDisliked, setIsDisliked] = useState(null);
-    const [isAdd, setIsAdd] = useState(null);
+    const [isAdd, setIsAdd] = useState(false);
 
     const dispath = useDispatch();
     const openPopUp = () => {
@@ -36,21 +43,14 @@ function Detail1({
             $(".p-popup").fadeIn(500);
         }
     };
+
     const addFavorite = () => {
-        dispath(addWatchlist(mediaId));
-         if (isAdd) {
-            addMedia(mediaId)
-                .then(() => {
-                    reloadData();
-                })
-                .catch((err) => {
-                    try {
-                        const error = getErrorResponseString(err);
-                        alert(error);
-                    } catch (error) {
-                        alert("Add failed. Please try again later!!!");
-                    }
-                });
+        if (!isAdd) {
+            dispath(addWatchlist(mediaId));
+        } else {
+            removeWatchList(id).then(() => {
+                setIsAdd(false);
+            });
         }
     };
 
@@ -135,7 +135,11 @@ function Detail1({
             checkAdd(id).then((res) => {
                 if (!res.message && res.isAdded) {
                     setIsAdd(true);
-                } else if (!res.message && !res.isAdded && res.isAdded !== null) {
+                } else if (
+                    !res.message &&
+                    !res.isAdded &&
+                    res.isAdded !== null
+                ) {
                     setIsAdd(false);
                 } else {
                     setIsAdd(false);
@@ -143,11 +147,25 @@ function Detail1({
             });
         }
     }, [id, isAuthenticated]);
+
+    const handleCheckAdd = useCallback(() => {
+        checkAdd(id).then((res) => {
+            if (res.isAdded) {
+                setIsAdd(true);
+            } else {
+                setIsAdd(false);
+            }
+        });
+    }, [id]);
+
+    useEffect(() => {
+        handleCheckAdd();
+    }, [handleCheckAdd, isSendFailed]);
+
     useEffect(() => {
         reloadData();
     }, [reloadData]);
     return (
-
         <div className="p-detail1 ">
             <div className="l-container">
                 <MoviePopup
@@ -169,13 +187,15 @@ function Detail1({
                             </p>
                             {isAuthenticated ? (
                                 <div className="p-detail1__action ">
-                                    <button
-                                        className="c-icon is-hover"
-                                        onClick={() => addFavorite()}
-                                    >
-                                        {isAdd ?<DeleteOutlined className="c-icon--trash"/>:<PlusOutlined className="c-icon--plus" />}
-                                        {isAdd ?<p>Remove to Watch List</p> :<p>Add To Watch List</p> }
-                                    </button>
+                                    {(!isAdd && (
+                                        <button
+                                            className="c-icon is-hover"
+                                            onClick={() => addFavorite()}
+                                        >
+                                            <PlusOutlined className="c-icon--plus" />
+                                            <p>Add To Watch List</p>
+                                        </button>
+                                    )) || <></>}
                                     <button
                                         className={`c-icon ${
                                             isLiked ? "c-icon--active" : ""
@@ -215,9 +235,11 @@ function Detail1({
                                 <div className="p-detail1__image">
                                     <img src={poster} alt="" />
                                 </div>
-                                {actors && <p className="p-detail1__item" >
-                                    <b>Actor:</b> <span> {actors}</span>
-                                </p> || <></> }
+                                {(actors && (
+                                    <p className="p-detail1__item">
+                                        <b>Actor:</b> <span> {actors}</span>
+                                    </p>
+                                )) || <></>}
 
                                 <p className="p-detail1__item">
                                     <b>Year:</b> <span>{year}</span>
