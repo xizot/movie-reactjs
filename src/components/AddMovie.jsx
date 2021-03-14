@@ -64,10 +64,7 @@ function AddMovie({ nameClass, closePopUp }) {
                 (movieDetailData && movieDetailData.releaseDate) || ""
             );
             setRuntime((movieDetailData && movieDetailData.runtime) || "");
-            setVideoLink(
-                process.env.REACT_APP_VIDEO_URL +
-                    (movieDetailData && movieDetailData.streamPath) || ""
-            );
+            setVideoLink((movieDetailData && movieDetailData.streamPath) || "");
 
             setPoster((movieDetailData && movieDetailData.posterPath) || null);
             getImageList(movieDetailData.imdbId, "movie")
