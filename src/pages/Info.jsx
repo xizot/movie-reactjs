@@ -321,7 +321,7 @@ function Info() {
                                         <img
                                             src={
                                                 avatar.uri ||
-                                                `${process.env.PUBLIC_URL}/assets/img/avata.jpg`
+                                                `${process.env.PUBLIC_URL}/assets/img/avatar.jpg`
                                             }
                                             alt=""
                                         />
