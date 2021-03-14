@@ -66,15 +66,17 @@ function Detail({ id }) {
     };
 
     const reloadData = useCallback(() => {
-        getComment(id)
-            .then((res) => {
-                setComments(res.data);
-                setCurrentComments(res.data.results);
-            })
-            .catch(() => {
-                setComments(null);
-                setCurrentComments(null);
-            });
+        if (id) {
+            getComment(id)
+                .then((res) => {
+                    setComments(res.data);
+                    setCurrentComments(res.data.results);
+                })
+                .catch(() => {
+                    setComments(null);
+                    setCurrentComments(null);
+                });
+        }
     }, [id]);
     useEffect(() => {
         reloadData();

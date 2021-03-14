@@ -149,14 +149,16 @@ function Detail1({
     }, [id, isAuthenticated]);
 
     const handleCheckAdd = useCallback(() => {
-        checkAdd(id).then((res) => {
-            if (res.isAdded) {
-                setIsAdd(true);
-            } else {
-                setIsAdd(false);
-            }
-        });
-    }, [id]);
+        if (isAuthenticated) {
+            checkAdd(id).then((res) => {
+                if (res.isAdded) {
+                    setIsAdd(true);
+                } else {
+                    setIsAdd(false);
+                }
+            });
+        }
+    }, [id, isAuthenticated]);
 
     useEffect(() => {
         handleCheckAdd();

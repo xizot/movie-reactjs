@@ -80,10 +80,13 @@ const authenReducer = (state = initialState, action) => {
             localStorage.removeItem("refreshToken");
             localStorage.removeItem("user");
             return {
+                ...state,
                 token: null,
                 refreshToken: null,
                 isAuthenticated: false,
                 isLoading: false,
+                user: null,
+                register: false,
             };
 
         default:
