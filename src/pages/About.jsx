@@ -17,7 +17,7 @@ function About() {
             id: 2,
             name: "Phạm Thị Minh Hậu",
             mail: "minhaupham666@gmail",
-            position: "Designer & Tester",
+            position: "Designer",
             imgSrc:
                 "https://scontent.fsgn2-6.fna.fbcdn.net/v/t1.0-9/123800075_1641736349333789_7510025565333738858_o.jpg?_nc_cat=110&ccb=3&_nc_sid=09cbfe&_nc_ohc=SDj9tCK5oUoAX_ETfrL&_nc_ht=scontent.fsgn2-6.fna&oh=595ad0a2d805d3136ddd30873b1cbea0&oe=605AC560",
             facebookLink: "minhhau280311",
@@ -27,10 +27,10 @@ function About() {
         {
             id: 3,
             name: "Nguyễn Thế Ngọc",
-            mail: "timchideyeu1998@gmail",
-            position: "Leader",
+            mail: "ngoc.sotn@gmail.com",
+            position: "Project manager",
             imgSrc:
-                "https://avatars.githubusercontent.com/u/49614078?s=460&u=41c8d8f067c80a220ead59308ec5ec7751a08c5c&v=4",
+                "https://scontent.fvca1-1.fna.fbcdn.net/v/t1.0-9/135279851_1828526527285902_5279063572669817371_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=RFGK5pVl8JEAX-zRnvB&_nc_ht=scontent.fvca1-1.fna&oh=e122fd45661817d22755df87190296cd&oe=6073C93E",
             facebookLink: "ngocsotn",
             githubLink: "ngocsotn",
             instagramLink: "xizott",
@@ -50,7 +50,7 @@ function About() {
             id: 5,
             name: "Đặng Trung Hiếu",
             mail: "dangtrunghieu2304@gmail.com",
-            position: "Frontend Developer & Backend Developer",
+            position: "Tester",
             imgSrc:
                 "https://scontent.fsgn2-3.fna.fbcdn.net/v/t31.0-8/26232938_989549821207514_1561633291190164776_o.jpg?_nc_cat=106&ccb=3&_nc_sid=174925&_nc_ohc=s3R3sgeP5uQAX_Rm1XJ&_nc_ht=scontent.fsgn2-3.fna&oh=ba454e69ed1c0570fbf65e3f4d44b033&oe=60587663",
             facebookLink: "trunghieu.dang.2304",
